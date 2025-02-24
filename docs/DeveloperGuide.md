@@ -290,30 +290,213 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+### **Use Case 1: Add a New Student**
 
-**MSS**
+**System**: TutorTrack
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+**Actor**: Tutor
 
-    Use case ends.
+**Use Case**: UC01 - Add a New Student
 
-**Extensions**
+**MSS**:
 
-* 2a. The list is empty.
+1. Tutor chooses to add a new student.
+2. TutorTrack prompts for student details (name, contact, subjects).
+3. Tutor enters the required details.
+4. TutorTrack saves the student details and confirms the addition.
 
-  Use case ends.
+   Use case ends.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+**Extensions**:
 
-      Use case resumes at step 2.
+- **3a**: TutorTrack detects a duplicate student name.
+    - 3a1: TutorTrack warns the tutor about the duplicate.
+    - 3a2: Tutor confirms whether to proceed or cancel.
+    - 3a3: If tutor confirms, TutorTrack saves the student details.
+    - 3a4: If tutor cancels, TutorTrack discards the input.
+    - Use case resumes from step 4 or ends.
 
-*{More to be added}*
+### **Use Case 2: View Lesson History for a Student**
+
+**System**: TutorTrack
+
+**Actor**: Tutor
+
+**Use Case**: UC02 - View Lesson History
+
+**MSS**:
+
+1. Tutor chooses to view lesson history.
+2. TutorTrack prompts for the student’s name.
+3. Tutor enters the student’s name.
+4. TutorTrack displays the lesson history for the student.
+
+   Use case ends.
+
+
+**Extensions**:
+
+- **3a**: TutorTrack cannot find the student.
+    - 3a1: TutorTrack informs the tutor that the student does not exist.
+    - 3a2: Tutor chooses to add the student or retry the search.
+    - Use case resumes from step 2 or ends.
+- **4a**: Tutor chooses to filter the lesson history by date range or subject.
+    - 4a1: TutorTrack prompts for the filter criteria.
+    - 4a2: Tutor enters the filter criteria.
+    - 4a3: TutorTrack displays the filtered lesson history.
+    - Use case ends.
+
+### **Use Case 3: Assign Homework to a Student**
+
+**System**: TutorTrack
+
+**Actor**: Tutor
+
+**Use Case**: UC03 - Assign Homework
+
+**MSS**:
+
+1. Tutor chooses to assign homework.
+2. TutorTrack prompts for the student’s name.
+3. Tutor enters the student’s name.
+4. TutorTrack prompts for homework details (task name, due date, description).
+5. Tutor enters the homework details.
+6. TutorTrack saves the homework assignment and confirms the assignment.
+
+   Use case ends.
+
+
+**Extensions**:
+
+- **3a**: TutorTrack cannot find the student.
+    - 3a1: TutorTrack informs the tutor that the student does not exist.
+    - 3a2: Tutor chooses to add the student or retry the search.
+    - Use case resumes from step 2 or ends.
+- **5a**: Tutor enters an invalid due date (e.g., past date).
+    - 5a1: TutorTrack warns the tutor about the invalid date.
+    - 5a2: Tutor enters a valid date.
+    - Use case resumes from step 6.
+
+### **Use Case 4: Update Student Progress After a Lesson**
+
+**System**: TutorTrack
+
+**Actor**: Tutor
+
+**Use Case**: UC04 - Update Student Progress
+
+**MSS**:
+
+1. Tutor chooses to update student progress.
+2. TutorTrack prompts for the student’s name.
+3. Tutor enters the student’s name.
+4. TutorTrack prompts for progress details (e.g., understanding level, quiz scores, notes).
+5. Tutor enters the progress details.
+6. TutorTrack saves the progress update and confirms the update.
+
+   Use case ends.
+
+
+**Extensions**:
+
+- **3a**: TutorTrack cannot find the student.
+    - 3a1: TutorTrack informs the tutor that the student does not exist.
+    - 3a2: Tutor chooses to add the student or retry the search.
+    - Use case resumes from step 2 or ends.
+- **5a**: Tutor enters invalid data (e.g., quiz score out of range).
+    - 5a1: TutorTrack warns the tutor about the invalid data.
+    - 5a2: Tutor enters valid data.
+    - Use case resumes from step 6.
+
+### **Use Case 5: Delete a Student**
+
+**System**: TutorTrack
+
+**Actor**: Tutor
+
+**Use Case**: UC05 - Delete a Student
+
+**MSS**:
+
+1. Tutor chooses to delete a student.
+2. TutorTrack prompts for the student’s name.
+3. Tutor enters the student’s name.
+4. TutorTrack confirms the deletion.
+5. Tutor confirms the deletion.
+6. TutorTrack deletes the student and confirms the deletion.
+
+   Use case ends.
+
+**Extensions**:
+
+- **3a**: TutorTrack cannot find the student.
+    - 3a1: TutorTrack informs the tutor that the student does not exist.
+    - 3a2: Tutor chooses to retry the search or cancel.
+    - Use case resumes from step 2 or ends.
+- **5a**: Tutor cancels the deletion.
+    - 5a1: TutorTrack discards the deletion request.
+    - Use case ends.
+
+### **Use Case 6: Track Assignment Completion**
+
+**System**: TutorTrack
+
+**Actor**: Tutor
+
+**Use Case**: UC06 - Track Assignment Completion
+
+**MSS**:
+
+1. Tutor chooses to track assignment completion.
+2. TutorTrack prompts for the student’s name.
+3. Tutor enters the student’s name.
+4. TutorTrack displays the list of assignments for the student.
+5. Tutor marks an assignment as completed.
+6. TutorTrack updates the assignment status and confirms the update.
+
+   Use case ends.
+
+
+**Extensions**:
+
+- **3a**: TutorTrack cannot find the student.
+    - 3a1: TutorTrack informs the tutor that the student does not exist.
+    - 3a2: Tutor chooses to add the student or retry the search.
+    - Use case resumes from step 2 or ends.
+- **5a**: Tutor marks an assignment as incomplete.
+    - 5a1: TutorTrack updates the assignment status and confirms the update.
+    - Use case ends.
+
+### **Use Case 7: Access Historical Logs**
+
+**System**: TutorTrack
+
+**Actor**: Tutor
+
+**Use Case**: UC07 - Access Historical Logs
+
+**MSS**:
+
+1. Tutor chooses to access historical logs.
+2. TutorTrack prompts for the student’s name.
+3. Tutor enters the student’s name.
+4. TutorTrack displays the historical logs for the student.
+
+   Use case ends.
+
+
+**Extensions**:
+
+- **3a**: TutorTrack cannot find the student.
+    - 3a1: TutorTrack informs the tutor that the student does not exist.
+    - 3a2: Tutor chooses to add the student or retry the search.
+    - Use case resumes from step 2 or ends.
+- **4a**: Tutor chooses to filter logs by date range or type (e.g., lessons, assignments).
+    - 4a1: TutorTrack prompts for the filter criteria.
+    - 4a2: Tutor enters the filter criteria.
+    - 4a3: TutorTrack displays the filtered logs.
+    - Use case ends.
 
 ### Non-Functional Requirements
 
