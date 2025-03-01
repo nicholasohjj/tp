@@ -9,15 +9,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Nicholas Oh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nicholasohjj.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](http://www.comp.nus.edu.sg/~nohjj)]
+[[github](https://github.com/nicholasohjj)]
+[[portfolio](team/nicholasohjj.md)]
 
-* Role: Project Advisor
+* Role: Team Lead
+* Responsibilities: Documentation, deliverables and deadlines
 
 ### Jane Doe
 
