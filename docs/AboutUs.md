@@ -20,15 +20,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: Documentation, deliverables and deadlines
 
-### Jane Doe
+### Guan Zhong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gztan23.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/gztan23)]
+[[portfolio](team/gztan23.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Code quality
 
 ### Johnny Doe
 
