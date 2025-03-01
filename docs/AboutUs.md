@@ -9,6 +9,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Charles
+
+<img src="images/charlesl12.png" width="200px">
+
+[[github](https://github.com/charlesl12)]
+[[portfolio](team/charlesl12.md)]
+
+* Role: Developer
+* Responsibilities: Code quality + Testing
+
 ### Nicholas Oh
 
 <img src="images/nicholasohjj.png" width="200px">
