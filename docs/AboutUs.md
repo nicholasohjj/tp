@@ -9,6 +9,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Nicholas Oh
+
+<img src="images/nicholasohjj.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/~nohjj)]
+[[github](https://github.com/nicholasohjj)]
+[[portfolio](team/nicholasohjj.md)]
+
+* Role: Team Lead
+* Responsibilities: Documentation, deliverables and deadlines
+
 ### Guan Zhong
 
 <img src="images/gztan23.png" width="200px">
@@ -18,16 +29,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Code quality
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
 
 ### Johnny Doe
 
