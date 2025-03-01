@@ -9,6 +9,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Charles
+
+<img src="images/charlesl12.png" width="200px">
+
+[[github](https://github.com/charlesl12)]
+[[portfolio](team/charlesl12.md)]
+
+* Role: Developer
+* Responsibilities: Code quality + Testing
+
 ### Nicholas Oh
 
 <img src="images/nicholasohjj.png" width="200px">
@@ -20,21 +30,21 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: Documentation, deliverables and deadlines
 
-### Jane Doe
+### Guan Zhong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gztan23.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/gztan23)]
+[[portfolio](team/gztan23.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Code quality
 
-### Johnny Doe
+### Yan Andong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/andong0909.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/andong0909)] [[portfolio](team/andong.md)]
 
 * Role: Developer
 * Responsibilities: Data
