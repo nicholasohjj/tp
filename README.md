@@ -1,14 +1,17 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S2-CS2103T-T13-4/tp/actions)
 
 ![Ui](docs/images/Ui.png)
+The product is designed for freelance tutors who teach small groups or individual students. These tutors often manage multiple students across different subjects and require an efficient way to track student progress, lesson schedules, and important notes. The user is proficient in typing and prefers CLI over mouse-based interactions.
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
+### Value Propositions:
+
+Freelance tutors often struggle with managing student records efficiently using scattered documents, spreadsheets, or manual note-taking. Existing software may be too complex, designed for large institutions, or require unnecessary overhead.
+
+Our product provides a CLI-based, lightweight tutor management system that allows tutors to:
+* Quickly organise student contact details.
+* Track lesson schedules. 
+* Log student progress.
+
+The project is built upon an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
   * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
