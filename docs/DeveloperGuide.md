@@ -275,16 +275,31 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​         | I want to …​                                                    | So that I can…​                                                                           |
+|----------|-----------------|-----------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| `* * *`  | tutor           | add a new student                                               | keep track of their details                                                               |
+| `* * *`  | tutor           | add lessons for each student                                    | make a lesson plan suited for my students                                                 |
+| `* * *`  | tutor           | view lessons for each student                                   | have an overview of the students' learning curriculum                                     |
+| `* * *`  | tutor           | assign tasks to students                                        | track student's workload and assignments                                                  |
+| `* * *`  | tutor           | view list of all students                                       | view all students that I am teaching                                                      |
+| `* * *`  | tutor           | delete a student                                                | remove students that I am no longer tutoring                                              |
+| `* * *`  | tutor           | track completion status of assignments                          | know if my students have completed them and their past performances                       |
+| `* * *`  | long-term user  | access historical logs and previous versions of student records | track and recover information when needed                                                 |
+| `* *`    | tutor           | reschedule lessons                                              | make changes to lesson plans to better fit mine or my student's schedule                  |
+| `* *`    | tutor           | mark lessons as complete                                        | review session history and track my students' lesson progress                             |
+| `* *`    | tutor           | set personalized reminders for students                         | address individual needs effectively                                                      |
+| `* *`    | tutor           | set reminders for my own tasks                                  | keep up with what I need to do                                                            |
+| `* *`    | user            | add custom tags to contacts                                     | organise my contacts better                                                               |
+| `* *`    | tutor           | filter students by status (e.g. active or inactive)             | manage my student's long-term engagements                                                 |
+| `* *`    | tutor           | filter students by keywords and tags                            | easily find a student                                                                     |
+| `* *`    | tutor           | search for a student by name                                    | quickly find their records                                                                |
+| `* *`    | tutor           | update student details                                          | keep their information accurate                                                           |
+| `* *`    | new user        | view help documentation                                         | understand how to interact with the application effectively                               |
+| `* *`    | long-time user  | add shortcuts to commands                                       | personalize my use of the app                                                             |
+| `*`      | tutor           | export schedules to my personal calendar                        | manage the tutoring schedule with my other commitments                                    |
+| `*`      | new user        | import data from a spreadsheet                                  | start to keep track of my students                                                        |
+| `*`      | first time user | use commands with contextual help                               | learn proper command syntax and options without having to refer to external documentation |
+| `*`      | tutor           | get a timeline overview of all events within a period of time   | view the overall structure of the schedule for said period of time                        |
 
 ### Use cases
 
@@ -509,7 +524,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Tutor**: A person who does free-lance tutoring
+* **Student**: A person that is being or has been tutored by the current user of the application 
+* **Spreadsheet**: An Excel spreadsheet
+* **Assignment**: A homework assignment or task that has been given by the tutor to the student
+* **Historical logs**: The records of students' details and the changes that have been made during the lifetime use of the app
 
 --------------------------------------------------------------------------------------------------------------------
 
