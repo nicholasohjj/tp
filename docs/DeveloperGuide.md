@@ -501,10 +501,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Any command should respond in 10 seconds or less.
+5.  System should be usable by a user who is comfortable with typing and using a CLI.
+6.  System should be able to store data for at least 1 year without data loss.
+7.  Project is expected to adhere to the [Java Code Quality Guide](https://se-education.org/guides/contributing/javaCodeQualityGuide.html).
+8.  Project is expected to adhere to a schedule that delivers a feature set every week.
+9.  This project is not expected to connect to the internet or any external services (email, cloud storage, telegram, etc).
 
 ### Glossary
 
