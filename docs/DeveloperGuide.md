@@ -290,7 +290,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-### **Use Case 1: Add a New Student**
+#### Use Case 1: Add a New Student
 
 **System**: TutorTrack
 
@@ -317,7 +317,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 3a4: If tutor cancels, TutorTrack discards the input.
     - Use case resumes from step 4 or ends.
 
-### **Use Case 2: View Lesson History for a Student**
+#### Use Case 2: View Lesson History for a Student
 
 **System**: TutorTrack
 
@@ -347,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 4a3: TutorTrack displays the filtered lesson history.
     - Use case ends.
 
-### **Use Case 3: Assign Homework to a Student**
+#### Use Case 3: Assign Homework to a Student
 
 **System**: TutorTrack
 
@@ -378,7 +378,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 5a2: Tutor enters a valid date.
     - Use case resumes from step 6.
 
-### **Use Case 4: Update Student Progress After a Lesson**
+#### Use Case 4: Update Student Progress After a Lesson
 
 **System**: TutorTrack
 
@@ -409,7 +409,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 5a2: Tutor enters valid data.
     - Use case resumes from step 6.
 
-### **Use Case 5: Delete a Student**
+#### Use Case 5: Delete a Student
 
 **System**: TutorTrack
 
@@ -438,7 +438,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 5a1: TutorTrack discards the deletion request.
     - Use case ends.
 
-### **Use Case 6: Track Assignment Completion**
+#### Use Case 6: Track Assignment Completion
 
 **System**: TutorTrack
 
@@ -468,7 +468,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 5a1: TutorTrack updates the assignment status and confirms the update.
     - Use case ends.
 
-### **Use Case 7: Access Historical Logs**
+#### Use Case 7: Access Historical Logs
 
 **System**: TutorTrack
 
