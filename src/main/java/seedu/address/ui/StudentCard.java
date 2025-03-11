@@ -39,6 +39,8 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label subject;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -50,10 +52,11 @@ public class StudentCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().value);
-        address.setText(student.getAddress().value);
+//        address.setText(student.getAddress().value);
         email.setText(student.getEmail().value);
-        student.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        subject.setText(student.getSubject().subject);
+//        student.getTags().stream()
+//                .sorted(Comparator.comparing(tag -> tag.tagName))
+//                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
