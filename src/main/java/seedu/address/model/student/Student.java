@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.student.Address;
 
 /**
  * Represents a Student in the address book.
@@ -20,6 +21,7 @@ public class Student {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Subject subject;
 
     // Data fields
     private final Address address;
@@ -35,6 +37,16 @@ public class Student {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.subject = new Subject("NA");
+    }
+
+    public Student(Name name, Phone phone, Email email, Subject subject) {
+        requireAllNonNull(name, phone, email, subject);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.subject = subject;
+        this.address = new Address("N/A");
     }
 
     public Name getName() {
@@ -51,6 +63,10 @@ public class Student {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Subject getSubject() {
+        return subject;
     }
 
     /**

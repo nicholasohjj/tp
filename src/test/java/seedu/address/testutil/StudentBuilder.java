@@ -8,6 +8,7 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.Subject;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -24,6 +25,7 @@ public class StudentBuilder {
     private Name name;
     private Phone phone;
     private Email email;
+    private Subject subject;
     private Address address;
     private Set<Tag> tags;
 
@@ -82,6 +84,14 @@ public class StudentBuilder {
     }
 
     /**
+     * Sets the {@code Subject} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withSubject(String subject) {
+        this.subject = new Subject(subject);
+        return this;
+    }
+
+    /**
      * Sets the {@code Email} of the {@code Student} that we are building.
      */
     public StudentBuilder withEmail(String email) {
@@ -90,7 +100,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, phone, email, address, tags);
+        return new Student(name, phone, email, subject);
     }
 
 }
