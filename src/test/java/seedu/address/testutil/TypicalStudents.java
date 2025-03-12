@@ -42,6 +42,9 @@ public class TypicalStudents {
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").build();
 
+    public static final Student HARRY = new StudentBuilder().withName("Harry Potter").withPhone("9482442")
+            .withEmail("harry@gmail.com").withSubject("CS2103T").build();
+
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").withAddress("little india").build();
