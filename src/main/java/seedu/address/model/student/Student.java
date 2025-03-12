@@ -56,6 +56,17 @@ public class Student {
         this.address = new Address("N/A");
     }
 
+    public Student(Name name, Phone phone, Email email, Address address, Subject subject,
+                   Set<Assignment> assignments) {
+        requireAllNonNull(name, phone, email, address, subject, assignments);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.subject = subject;
+        this.assignments.addAll(assignments);
+    }
+
     public Name getName() {
         return name;
     }
@@ -82,6 +93,10 @@ public class Student {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Set<Assignment> getAssignments() {
+        return Collections.unmodifiableSet(assignments);
     }
 
     /**
@@ -116,13 +131,14 @@ public class Student {
         return name.equals(otherStudent.name)
                 && phone.equals(otherStudent.phone)
                 && email.equals(otherStudent.email)
-                && subject.equals(otherStudent.subject);
+                && subject.equals(otherStudent.subject)
+                && assignments.equals(otherStudent.assignments);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, assignments);
     }
 
     @Override
@@ -133,6 +149,7 @@ public class Student {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("assignments", assignments)
                 .toString();
     }
 

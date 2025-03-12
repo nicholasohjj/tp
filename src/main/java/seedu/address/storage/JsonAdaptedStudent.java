@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.student.Assignment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -26,6 +27,7 @@ class JsonAdaptedStudent {
     private final String email;
     private final String subject;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedAssignment> assignments = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -56,8 +58,13 @@ class JsonAdaptedStudent {
      */
     public Student toModelType() throws IllegalValueException {
         final List<Tag> studentTags = new ArrayList<>();
+        final List<Assignment> studentAssignments = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             studentTags.add(tag.toModelType());
+        }
+
+        for (JsonAdaptedAssignment assignment : assignments) {
+            studentAssignments.add(assignment.toModelType());
         }
 
         if (name == null) {

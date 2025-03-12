@@ -7,10 +7,12 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.student.Address;
+import seedu.address.model.student.Assignment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.Subject;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,7 +38,11 @@ public class SampleDataUtil {
                 getTagSet("classmates")),
             new Student(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+                getTagSet("colleagues")),
+            new Student(new Name("Zoy White"), new Phone("94351253"), new Email("zoyw@gnail.com"),
+                new Address("Blk 45 Aljunied Street 85, #11-31"), new Subject("CS2103T"),
+                    getAssignmentSet("Math Exercise 1")
+                ),
         };
     }
 
@@ -54,6 +60,12 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    public static Set<Assignment> getAssignmentSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Assignment::new)
                 .collect(Collectors.toSet());
     }
 

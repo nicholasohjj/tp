@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.Set;
 
 import seedu.address.model.student.Address;
+import seedu.address.model.student.Assignment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -28,6 +29,7 @@ public class StudentBuilder {
     private Subject subject;
     private Address address;
     private Set<Tag> tags;
+    private Set<Assignment> assignments;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
