@@ -9,7 +9,6 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.student.Address;
 
 /**
  * Represents a Student in the address book.
@@ -29,6 +28,7 @@ public class Student {
 
     /**
      * Every field must be present and not null.
+     * This is the original constructor for student from AB3
      */
     public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -40,12 +40,18 @@ public class Student {
         this.subject = new Subject("NA");
     }
 
+    /**
+     * Every field must be present and not null.
+     * New constructor for student to include subject
+     */
     public Student(Name name, Phone phone, Email email, Subject subject) {
         requireAllNonNull(name, phone, email, subject);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.subject = subject;
+
+        // address should be removed in the future
         this.address = new Address("N/A");
     }
 

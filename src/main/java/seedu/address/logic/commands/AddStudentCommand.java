@@ -7,6 +7,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 
+/**
+ * Adds a student to the address book.
+ */
 public class AddStudentCommand extends Command {
     public static final String COMMAND_WORD = "add_student";
 
@@ -21,6 +24,9 @@ public class AddStudentCommand extends Command {
 
     private final Student toAdd;
 
+    /**
+     * Creates an AddStudentCommand to add the specified {@code Student}
+     */
     public AddStudentCommand(Student student) {
         requireNonNull(student);
         toAdd = student;
