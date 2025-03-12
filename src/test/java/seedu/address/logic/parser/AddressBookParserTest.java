@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddAssignmentCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -38,6 +39,11 @@ public class AddressBookParserTest {
         Student student = new StudentBuilder().build();
         AddStudentCommand command = (AddStudentCommand) parser.parseCommand(StudentUtil.getAddStudentCommand(student));
         assertEquals(new AddStudentCommand(student), command);
+    }
+
+    @Test
+    public void parseCommand_addAssignment() throws Exception {
+        assertTrue(parser.parseCommand(AddAssignmentCommand.COMMAND_WORD) instanceof AddAssignmentCommand);
     }
 
     @Test
