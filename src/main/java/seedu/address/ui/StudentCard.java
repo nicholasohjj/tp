@@ -40,6 +40,8 @@ public class StudentCard extends UiPart<Region> {
     private Label subject;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane assignments;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
