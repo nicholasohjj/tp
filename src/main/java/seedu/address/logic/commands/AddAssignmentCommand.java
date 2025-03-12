@@ -2,11 +2,16 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+
+import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Assignment;
+import seedu.address.model.student.Student;
 
 public class AddAssignmentCommand extends Command {
 
@@ -33,9 +38,29 @@ public class AddAssignmentCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(
-                String.format(MESSAGE_ARGUMENTS, index.getOneBased(), assignment)
-        );
+        List<Student> lastShownList = model.getFilteredStudentList();
+
+        // Check if the index is valid
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        }
+
+        // Get the student to edit
+        Student studentToEdit = lastShownList.get(index.getZeroBased());
+
+        // Add the new assignment to the student
+        Student editedStudent = studentToEdit.addAssignment(assignment);
+
+        // Update the model with the edited student
+        model.setStudent(studentToEdit, editedStudent);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+
+        // Return a success message
+        return new CommandResult(generateSuccessMessage(editedStudent));
+    }
+
+    private String generateSuccessMessage(Student editedStudent) {
+        return String.format(Messages.MESSAGE_ADD_ASSIGNMENT_SUCCESS, editedStudent.getName(), assignment);
     }
 
     @Override

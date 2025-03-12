@@ -1,5 +1,6 @@
 package seedu.address.model.student;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -113,6 +114,13 @@ public class Student {
 
     public Set<Assignment> getAssignments() {
         return Collections.unmodifiableSet(assignments);
+    }
+
+    public Student addAssignment(Assignment assignment) {
+        requireNonNull(assignment);
+        Set<Assignment> updatedAssignments = new HashSet<>(this.assignments);
+        updatedAssignments.add(assignment);
+        return new Student(this.name, this.phone, this.email, this.address, this.subject, this.tags, updatedAssignments);
     }
 
     /**
