@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.student.Address;
@@ -48,9 +49,10 @@ public class StudentBuilder {
         name = studentToCopy.getName();
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
-        //        address = studentToCopy.getAddress();
-        //        tags = new HashSet<>(studentToCopy.getTags());
+        address = studentToCopy.getAddress();
+        tags = new HashSet<>(studentToCopy.getTags());
         subject = studentToCopy.getSubject();
+        assignments = new HashSet<>(studentToCopy.getAssignments());
     }
 
     /**
@@ -98,6 +100,14 @@ public class StudentBuilder {
      */
     public StudentBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Parses the {@code assignments} into a {@code Set<Assignment>} and set it to the {@code Student} that we are building.
+     */
+    public StudentBuilder withAssignments(String ... assignments) {
+        this.assignments = SampleDataUtil.getAssignmentSet(assignments);
         return this;
     }
 

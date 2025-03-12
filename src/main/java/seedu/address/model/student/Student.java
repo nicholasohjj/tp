@@ -50,22 +50,38 @@ public class Student {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.address = new Address("NA");
         this.subject = subject;
-
-        // address should be removed in the future
-        this.address = new Address("N/A");
     }
 
-    public Student(Name name, Phone phone, Email email, Address address, Subject subject,
+    public Student(Name name, Phone phone, Email email, Address address,
+                   Set<Tag> tags,
                    Set<Assignment> assignments) {
-        requireAllNonNull(name, phone, email, address, subject, assignments);
+        requireAllNonNull(name, phone, email, address, assignments);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.subject = new Subject("NA");
+        this.tags.addAll(tags);
+        this.assignments.addAll(assignments);
+    }
+
+    public Student(Name name, Phone phone, Email email, Address address,
+                   Subject subject,
+                   Set<Tag> tags,
+                   Set<Assignment> assignments) {
+        requireAllNonNull(name, phone, email, address, subject, tags, assignments);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.subject = subject;
+        this.tags.addAll(tags);
         this.assignments.addAll(assignments);
     }
+
+
 
     public Name getName() {
         return name;
@@ -131,8 +147,7 @@ public class Student {
         return name.equals(otherStudent.name)
                 && phone.equals(otherStudent.phone)
                 && email.equals(otherStudent.email)
-                && subject.equals(otherStudent.subject)
-                && assignments.equals(otherStudent.assignments);
+                && subject.equals(otherStudent.subject);
     }
 
     @Override

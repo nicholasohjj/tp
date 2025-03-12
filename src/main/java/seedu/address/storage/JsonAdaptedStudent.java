@@ -34,11 +34,19 @@ class JsonAdaptedStudent {
      */
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                              @JsonProperty("email") String email, @JsonProperty("subject") String subject) {
+                              @JsonProperty("email") String email, @JsonProperty("subject") String subject,
+                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                              @JsonProperty("assignments") List<JsonAdaptedAssignment> assignments) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.subject = subject;
+        if (tags != null) {
+            this.tags.addAll(tags);
+        }
+        if (assignments != null) {
+            this.assignments.addAll(assignments);
+        }
     }
 
     /**
@@ -49,6 +57,12 @@ class JsonAdaptedStudent {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         subject = source.getSubject().subject;
+        tags.addAll(source.getTags().stream()
+                .map(JsonAdaptedTag::new)
+                .collect(java.util.stream.Collectors.toList()));
+        assignments.addAll(source.getAssignments().stream()
+                .map(JsonAdaptedAssignment::new)
+                .collect(java.util.stream.Collectors.toList()));
     }
 
     /**
@@ -94,9 +108,11 @@ class JsonAdaptedStudent {
         if (subject == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName()));
         }
+
         if (!Subject.isValidSubject(subject)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
+
         final Subject modelSubject = new Subject(subject);
 
         return new Student(modelName, modelPhone, modelEmail, modelSubject);

@@ -43,4 +43,5 @@ public class Assignment {
     public static boolean isValidAssignmentValue(String value) {
         return value.matches(VALIDATION_REGEX);
     }
+
 }

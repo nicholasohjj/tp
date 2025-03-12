@@ -34,7 +34,7 @@ class JsonAdaptedAssignment {
     }
 
     /**
-     * Converts this Jackson-friendly adapted assignment object into the model's {@code Assignment} object.
+     * Converts this Json-friendly adapted assignment object into the model's {@code Assignment} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted assignment.
      */

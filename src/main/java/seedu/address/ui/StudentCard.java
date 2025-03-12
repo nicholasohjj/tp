@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -41,7 +43,7 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label assignments;
+    private FlowPane assignments;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -52,8 +54,14 @@ public class StudentCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().value);
+        // address.setText(student.getAddress().value);
         email.setText(student.getEmail().value);
         subject.setText(student.getSubject().subject);
-        assignments.setText("$assignments");
+        student.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        student.getAssignments().stream()
+                .sorted(Comparator.comparing(assignment -> assignment.value))
+                .forEach(assignment -> assignments.getChildren().add(new Label(assignment.value)));
     }
 }
