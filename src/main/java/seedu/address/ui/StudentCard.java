@@ -41,7 +41,7 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private FlowPane assignments;
+    private Label assignments;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -54,5 +54,6 @@ public class StudentCard extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         email.setText(student.getEmail().value);
         subject.setText(student.getSubject().subject);
+        assignments.setText("$assignments");
     }
 }
