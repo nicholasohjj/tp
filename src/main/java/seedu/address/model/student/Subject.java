@@ -36,4 +36,19 @@ public class Subject {
     public static boolean isValidSubject(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Subject)) {
+            return false;
+        }
+
+        Subject otherSubject = (Subject) other;
+        return subject.equals(otherSubject.subject);
+    }
 }

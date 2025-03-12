@@ -115,8 +115,7 @@ public class Student {
         return name.equals(otherStudent.name)
                 && phone.equals(otherStudent.phone)
                 && email.equals(otherStudent.email)
-                && address.equals(otherStudent.address)
-                && tags.equals(otherStudent.tags);
+                && subject.equals(otherStudent.subject);
     }
 
     @Override
