@@ -20,6 +20,7 @@ public class Student {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Subject subject;
 
     // Data fields
     private final Address address;
@@ -27,6 +28,7 @@ public class Student {
 
     /**
      * Every field must be present and not null.
+     * This is the original constructor for student from AB3
      */
     public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -35,6 +37,22 @@ public class Student {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.subject = new Subject("NA");
+    }
+
+    /**
+     * Every field must be present and not null.
+     * New constructor for student to include subject
+     */
+    public Student(Name name, Phone phone, Email email, Subject subject) {
+        requireAllNonNull(name, phone, email, subject);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.subject = subject;
+
+        // address should be removed in the future
+        this.address = new Address("N/A");
     }
 
     public Name getName() {
@@ -51,6 +69,10 @@ public class Student {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Subject getSubject() {
+        return subject;
     }
 
     /**
@@ -93,8 +115,7 @@ public class Student {
         return name.equals(otherStudent.name)
                 && phone.equals(otherStudent.phone)
                 && email.equals(otherStudent.email)
-                && address.equals(otherStudent.address)
-                && tags.equals(otherStudent.tags);
+                && subject.equals(otherStudent.subject);
     }
 
     @Override

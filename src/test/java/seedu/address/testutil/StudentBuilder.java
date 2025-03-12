@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.student.Address;
@@ -8,6 +7,7 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.Subject;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,10 +20,12 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_SUBJECT = "CS2103T";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private Subject subject;
     private Address address;
     private Set<Tag> tags;
 
@@ -34,8 +36,7 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        subject = new Subject(DEFAULT_SUBJECT);
     }
 
     /**
@@ -45,8 +46,9 @@ public class StudentBuilder {
         name = studentToCopy.getName();
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
-        address = studentToCopy.getAddress();
-        tags = new HashSet<>(studentToCopy.getTags());
+        //        address = studentToCopy.getAddress();
+        //        tags = new HashSet<>(studentToCopy.getTags());
+        subject = studentToCopy.getSubject();
     }
 
     /**
@@ -82,6 +84,14 @@ public class StudentBuilder {
     }
 
     /**
+     * Sets the {@code Subject} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withSubject(String subject) {
+        this.subject = new Subject(subject);
+        return this;
+    }
+
+    /**
      * Sets the {@code Email} of the {@code Student} that we are building.
      */
     public StudentBuilder withEmail(String email) {
@@ -90,7 +100,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, phone, email, address, tags);
+        return new Student(name, phone, email, subject);
     }
 
 }
