@@ -24,6 +24,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.Assignment;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
@@ -43,12 +44,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addAssignment() throws Exception {
-        final String assignment = "an assignment";
+        final Assignment assignment = new Assignment("an assignment");
 
         AddAssignmentCommand command = (AddAssignmentCommand) parser.parseCommand(
                 AddAssignmentCommand.COMMAND_WORD + " "
                         + INDEX_FIRST_STUDENT.getOneBased() + " "
-                        + assignment);
+                        + assignment.value);
         assertEquals(new AddAssignmentCommand(INDEX_FIRST_STUDENT, assignment), command);
     }
 

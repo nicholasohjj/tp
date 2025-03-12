@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.student.Assignment;
 
 public class AddAssignmentCommand extends Command {
 
@@ -13,9 +14,9 @@ public class AddAssignmentCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Assignment: %2$s";
 
     private final Index index;
-    private final String assignment;
+    private final Assignment assignment;
 
-    public AddAssignmentCommand(Index index, String assignment) {
+    public AddAssignmentCommand(Index index, Assignment assignment) {
         requireAllNonNull(index, assignment);
 
         this.index = index;

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddAssignmentCommand;
+import seedu.address.model.student.Assignment;
 
 public class AddAssignmentCommandParserTest {
     private AddAssignmentCommandParser parser = new AddAssignmentCommandParser();
@@ -20,12 +21,12 @@ public class AddAssignmentCommandParserTest {
         // have assignment
         Index targetIndex = INDEX_FIRST_STUDENT;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_ASSIGNMENT + nonEmptyAssignment;
-        AddAssignmentCommand expectedCommand = new AddAssignmentCommand(targetIndex, nonEmptyAssignment);
+        AddAssignmentCommand expectedCommand = new AddAssignmentCommand(targetIndex, new Assignment(nonEmptyAssignment));
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // no assignment
         userInput = targetIndex.getOneBased() + " " + PREFIX_ASSIGNMENT;
-        expectedCommand = new AddAssignmentCommand(targetIndex, "");
+        expectedCommand = new AddAssignmentCommand(targetIndex, new Assignment(""));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

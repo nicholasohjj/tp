@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddAssignmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.Assignment;
 
 public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> {
     /**
@@ -27,8 +28,8 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssignmentCommand.MESSAGE_USAGE), ive);
         }
 
-        String remark = argMultimap.getValue(PREFIX_ASSIGNMENT).orElse("");
+        String assignment = argMultimap.getValue(PREFIX_ASSIGNMENT).orElse("");
 
-        return new AddAssignmentCommand(index, remark);
+        return new AddAssignmentCommand(index, new Assignment(assignment));
     }
 }
