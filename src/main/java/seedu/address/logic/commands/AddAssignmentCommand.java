@@ -20,6 +20,14 @@ public class AddAssignmentCommand extends Command {
 
     public static final String COMMAND_WORD = "add_assignment";
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Assignment: %2$s";
+    /**
+     * Returns a success message for the assignment addition.
+     */
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns an assignment to a student. "
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_ASSIGNMENT + "[REMARK]\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_ASSIGNMENT + "Math Exercise 1";
 
     private final Index index;
     private final Assignment assignment;
@@ -33,15 +41,6 @@ public class AddAssignmentCommand extends Command {
         this.index = index;
         this.assignment = assignment;
     }
-
-    /**
-     * Returns a success message for the assignment addition.
-     */
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns an assignment to a student. "
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_ASSIGNMENT + "[REMARK]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_ASSIGNMENT + "Math Exercise 1";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
