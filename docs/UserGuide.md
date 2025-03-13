@@ -5,6 +5,20 @@ title: User Guide
 
 AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
+### Target Users
+
+AB3 is designed for:
+
+- **Tech-savvy individuals** who prefer keyboard commands over mouse interactions.
+- **Users who need to manage a large number of contacts** and require quick access to contact information.
+- **Students, professionals, and administrators** who need a simple yet powerful tool for contact management.
+
+### Assumptions about Users
+
+- Users are familiar with basic CLI commands.
+- Users have a basic understanding of file management (e.g., creating folders, moving files).
+- Users are comfortable with Java-based applications.
+
 * Table of Contents
 {:toc}
 
@@ -13,30 +27,28 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   **Mac users:** Follow the installation guide [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from the [releases page](https://github.com/se-edu/addressbook-level3/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Open a command terminal, navigate to the folder containing the `.jar` file in using the `cd` command, and run the application with the following command:
+    ```bash
+    java -jar addressbook.jar
+    ```
+   A GUI similar to the below should appear in a few seconds. The app comes preloaded with some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+1. Type commands in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   - `help`: Opens the help window.
+   - `list`: Lists all contacts.
+   - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds a new contact.
+   - `delete 3`: Deletes the 3rd contact in the list.
+   - `clear`: Deletes all contacts.
+   - `exit`: Exits the app.
 
-   * `list` : Lists all contacts.
-
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) section below for detailed instructions on each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -46,32 +58,35 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+- **Parameters in `UPPER_CASE`** are to be supplied by the user.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  Example: In `add n/NAME`, `NAME` can be replaced with `John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+- **Optional fields** are enclosed in square brackets `[]`.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  Example: `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or `n/John Doe`.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+- **Multiple uses** of a field are indicated by `…`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+  Example: `[t/TAG]…` can be used as `t/friend`, `t/friend t/family`, or omitted entirely.
+
+- **Parameters can be in any order**.
+
+  Example: `n/NAME p/PHONE_NUMBER` is equivalent to `p/PHONE_NUMBER n/NAME`.
+
+- **Extraneous parameters** for commands like `help`, `list`, `exit`, and `clear` will be ignored.
+
+  Example: `help 123` is interpreted as `help`.
+- If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
 
+![help message](images/helpMessage.png)
 
 ### Adding a student: `add`
 
@@ -175,16 +190,16 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q:** How do I transfer my data to another computer?
 
+**A:**
+Install the app on the new computer and replace the empty data file with the one from your previous AddressBook folder.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
+1. **Multiple Screens Issue:** If you move the app to a secondary screen and later switch to a single screen, the GUI may open off-screen. To fix, delete the `preferences.json` file before running the app again.
+2. **Help Window Issue:** Minimizing the Help Window and running `help` again may not open a new window. Restore the minimized window manually.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
