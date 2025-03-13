@@ -137,7 +137,7 @@ public class ParserUtil {
     public static Time parseTime(String time) throws ParseException {
         requireNonNull(time);
         String trimmedTime = time.trim();
-        if (!Date.isValidTime(trimmedTime)) {
+        if (!Time.isValidTime(trimmedTime)) {
             throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
         return new Time(trimmedTime);
