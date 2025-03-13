@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddLessonCommand;
@@ -46,12 +45,10 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
 
         //TODO: Remove temporary stubs
-        //Need to find a way to obtain Student object with the name
         Phone phone = new Phone("12345678");
         Email email = new Email("john@gmail.com");
 
-        Student student = new Student(name, phone, email, subject);
-        Lesson lesson = new Lesson(student, date, time);
+        Lesson lesson = new Lesson(subject, name, date, time);
 
         return new AddLessonCommand(lesson);
     }

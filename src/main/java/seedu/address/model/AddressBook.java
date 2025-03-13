@@ -7,18 +7,19 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.UniqueLessonList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameStudent comparison)
+ * Duplicates are not allowed (by .isSameStudent and .isSameLesson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueStudentList students;
-    //TODO: Implement view lessons
-    //private final UniqueLessonList lessons;
+    private final UniqueLessonList lessons;
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -27,6 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
+        lessons = new UniqueLessonList();
         students = new UniqueStudentList();
     }
 
@@ -104,9 +106,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasLesson(Lesson lesson) {
         requireNonNull(lesson);
-        return true;
-        //TODO: Implement view lessons
-        //return lessons.contains(lesson);
+        return lessons.contains(lesson);
     }
 
     /**
@@ -114,8 +114,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The lesson must not already exist in the address book.
      */
     public void addLesson(Lesson lesson) {
-        //TODO: Implement view lessons
-        //lessons.add(lesson);
+        lessons.add(lesson);
     }
 
     //// util methods
@@ -130,6 +129,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Lesson> getLessonList() {
+        return lessons.asUnmodifiableObservableList();
     }
 
     @Override

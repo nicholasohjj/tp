@@ -6,7 +6,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Subject;
-import seedu.address.model.student.Student;
 
 /**
  * Represents a Lesson in the address book.
@@ -15,11 +14,10 @@ import seedu.address.model.student.Student;
 public class Lesson {
 
     // Identity fields
-    private final Name name;
+    private final Name studentName;
     private final Subject subject;
 
     // Data fields
-    private final Student student;
     private final Date date;
     private final Time time;
 
@@ -27,21 +25,16 @@ public class Lesson {
      * Every field must be present and not null.
      * This is the original constructor for student from AB3
      */
-    public Lesson(Student student, Date date, Time time) {
-        requireAllNonNull(student, date, time);
-        this.student = student;
-        this.name = student.getName();
+    public Lesson(Subject subject, Name studentName, Date date, Time time) {
+        requireAllNonNull(subject, date, time);
+        this.subject = subject;
+        this.studentName = studentName;
         this.date = date;
         this.time = time;
-        this.subject = student.getSubject();
-    }
-
-    public Student getStudent() {
-        return student;
     }
 
     public Name getName() {
-        return name;
+        return studentName;
     }
 
     public Date getDate() {
@@ -86,8 +79,7 @@ public class Lesson {
             return false;
         }
 
-        return name.equals(otherLesson.name)
-                && student.equals(otherLesson.student)
+        return studentName.equals(otherLesson.studentName)
                 && date.equals(otherLesson.date)
                 && time.equals(otherLesson.time)
                 && subject.equals(otherLesson.subject);
@@ -96,13 +88,13 @@ public class Lesson {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, student, date, time, subject);
+        return Objects.hash(studentName, date, time, subject);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
+                .add("name", studentName)
                 .add("date", date)
                 .add("time", time)
                 .add("subject", subject)
