@@ -21,7 +21,8 @@ public class AddAssignmentCommandParserTest {
         // have assignment
         Index targetIndex = INDEX_FIRST_STUDENT;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_ASSIGNMENT + nonEmptyAssignment;
-        AddAssignmentCommand expectedCommand = new AddAssignmentCommand(targetIndex, new Assignment(nonEmptyAssignment));
+        AddAssignmentCommand expectedCommand =
+                new AddAssignmentCommand(targetIndex, new Assignment(nonEmptyAssignment));
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // no assignment
@@ -38,7 +39,7 @@ public class AddAssignmentCommandParserTest {
         assertParseFailure(parser, AddAssignmentCommand.COMMAND_WORD, expectedMessage);
 
         // no index
-        assertParseFailure(parser, AddAssignmentCommand.COMMAND_WORD +  " " + nonEmptyAssignment,
+        assertParseFailure(parser, AddAssignmentCommand.COMMAND_WORD + " " + nonEmptyAssignment,
                 expectedMessage);
     }
 }

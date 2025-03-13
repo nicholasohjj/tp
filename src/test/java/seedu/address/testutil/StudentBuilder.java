@@ -107,7 +107,8 @@ public class StudentBuilder {
     }
 
     /**
-     * Parses the {@code assignments} into a {@code Set<Assignment>} and set it to the {@code Student} that we are building.
+     * Parses the {@code assignments} into a {@code Set<Assignment>} and
+     * set it to the {@code Student} that we are building.
      */
     public StudentBuilder withAssignments(String ... assignments) {
         this.assignments = SampleDataUtil.getAssignmentSet(assignments);
