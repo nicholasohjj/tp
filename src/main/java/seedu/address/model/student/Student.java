@@ -28,49 +28,49 @@ public class Student {
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Assignment> assignments = new HashSet<>();
 
-    /**
-     * Every field must be present and not null.
-     * This is the original constructor for student from AB3
-     */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.subject = new Subject("NA");
-    }
-
-    /**
-     * Every field must be present and not null.
-     * New constructor for student to include subject
-     */
-    public Student(Name name, Phone phone, Email email, Subject subject) {
-        requireAllNonNull(name, phone, email, subject);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = new Address("NA");
-        this.subject = subject;
-    }
-
-    /**
-     * Every field must be present and not null.
-     * New constructor for student to include subject
-     */
-    public Student(Name name, Phone phone, Email email, Address address,
-                   Set<Tag> tags,
-                   Set<Assignment> assignments) {
-        requireAllNonNull(name, phone, email, address, assignments);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.subject = new Subject("NA");
-        this.tags.addAll(tags);
-        this.assignments.addAll(assignments);
-    }
+//    /**
+//     * Every field must be present and not null.
+//     * This is the original constructor for student from AB3
+//     */
+//    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+//        requireAllNonNull(name, phone, email, address, tags);
+//        this.name = name;
+//        this.phone = phone;
+//        this.email = email;
+//        this.address = address;
+//        this.tags.addAll(tags);
+//        this.subject = new Subject("NA");
+//    }
+//
+//    /**
+//     * Every field must be present and not null.
+//     * New constructor for student to include subject
+//     */
+//    public Student(Name name, Phone phone, Email email, Subject subject) {
+//        requireAllNonNull(name, phone, email, subject);
+//        this.name = name;
+//        this.phone = phone;
+//        this.email = email;
+//        this.address = new Address("NA");
+//        this.subject = subject;
+//    }
+//
+//    /**
+//     * Every field must be present and not null.
+//     * New constructor for student to include subject
+//     */
+//    public Student(Name name, Phone phone, Email email, Address address,
+//                   Set<Tag> tags,
+//                   Set<Assignment> assignments) {
+//        requireAllNonNull(name, phone, email, address, assignments);
+//        this.name = name;
+//        this.phone = phone;
+//        this.email = email;
+//        this.address = address;
+//        this.subject = new Subject("NA");
+//        this.tags.addAll(tags);
+//        this.assignments.addAll(assignments);
+//    }
 
     /**
      * Every field must be present and not null.
