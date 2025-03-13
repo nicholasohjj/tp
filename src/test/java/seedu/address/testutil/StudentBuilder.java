@@ -120,5 +120,4 @@ public class StudentBuilder {
     public Student build() {
         return new Student(name, phone, email, address, subject, tags, assignments);
     }
-
 }
