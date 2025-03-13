@@ -1,11 +1,5 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.AddAssignmentCommand.MESSAGE_ARGUMENTS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSIGNMENT_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSIGNMENT_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
