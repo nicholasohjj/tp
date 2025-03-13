@@ -34,8 +34,6 @@ public class AddAssignmentCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ASSIGNMENT + "Math Exercise 1";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Assign command has not been implemented yet";
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Student> lastShownList = model.getFilteredStudentList();
