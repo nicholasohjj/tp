@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
 /**
@@ -13,6 +14,9 @@ import seedu.address.model.student.Student;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Lesson> PREDICATE_SHOW_ALL_LESSSONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -76,6 +80,17 @@ public interface Model {
      * as another existing student in the address book.
      */
     void setStudent(Student target, Student editedStudent);
+
+    /**
+     * Adds the given lesson
+     * {@code lesson} must not already exist in the address book
+     */
+    void addLesson(Lesson lesson);
+
+    /**
+     * Returns true if a lesson with the same identity as {@code lesson} exists in the address book
+     */
+    boolean hasLesson(Lesson lesson);
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();

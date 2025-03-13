@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
@@ -16,7 +17,8 @@ import seedu.address.model.student.UniqueStudentList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueStudentList students;
-
+    //TODO: Implement view lessons
+    //private final UniqueLessonList lessons;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -93,6 +95,27 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeStudent(Student key) {
         students.remove(key);
+    }
+
+    //// lesson-level methods
+
+    /**
+     * Returns true if a lesson with the same identity as {@code lesson} exists in the address book.
+     */
+    public boolean hasLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return true;
+        //TODO: Implement view lessons
+        //return lessons.contains(lesson);
+    }
+
+    /**
+     * Adds a lesson to the address book.
+     * The lesson must not already exist in the address book.
+     */
+    public void addLesson(Lesson lesson) {
+        //TODO: Implement view lessons
+        //lessons.add(lesson);
     }
 
     //// util methods
