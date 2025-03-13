@@ -13,6 +13,9 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Assignment;
 import seedu.address.model.student.Student;
 
+/**
+ * Adds an assignment to a student.
+ */
 public class AddAssignmentCommand extends Command {
 
     public static final String COMMAND_WORD = "add_assignment";
@@ -21,6 +24,9 @@ public class AddAssignmentCommand extends Command {
     private final Index index;
     private final Assignment assignment;
 
+    /**
+     * Creates an AddAssignmentCommand to add the specified {@code Assignment} to the student at the specified index.
+     */
     public AddAssignmentCommand(Index index, Assignment assignment) {
         requireAllNonNull(index, assignment);
 
@@ -28,6 +34,9 @@ public class AddAssignmentCommand extends Command {
         this.assignment = assignment;
     }
 
+    /**
+     * Returns a success message for the assignment addition.
+     */
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns an assignment to a student. "
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_ASSIGNMENT + "[REMARK]\n"

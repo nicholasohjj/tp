@@ -55,6 +55,10 @@ public class Student {
         this.subject = subject;
     }
 
+    /**
+     * Every field must be present and not null.
+     * New constructor for student to include subject
+     */
     public Student(Name name, Phone phone, Email email, Address address,
                    Set<Tag> tags,
                    Set<Assignment> assignments) {
@@ -68,6 +72,10 @@ public class Student {
         this.assignments.addAll(assignments);
     }
 
+    /**
+     * Every field must be present and not null.
+     * New constructor for student to include subject
+     */
     public Student(Name name, Phone phone, Email email, Address address,
                    Subject subject,
                    Set<Tag> tags,
@@ -116,11 +124,16 @@ public class Student {
         return Collections.unmodifiableSet(assignments);
     }
 
+    /**
+     * Returns true if both students have the same identity and data fields.
+     * This defines a stronger notion of equality between two students.
+     */
     public Student addAssignment(Assignment assignment) {
         requireNonNull(assignment);
         Set<Assignment> updatedAssignments = new HashSet<>(this.assignments);
         updatedAssignments.add(assignment);
-        return new Student(this.name, this.phone, this.email, this.address, this.subject, this.tags, updatedAssignments);
+        return new Student(this.name, this.phone, this.email, this.address,
+                this.subject, this.tags, updatedAssignments);
     }
 
     /**
