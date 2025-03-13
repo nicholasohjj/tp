@@ -115,6 +115,10 @@ public class StudentBuilder {
         return this;
     }
 
+    public StudentBuilder setAssignment(Student student, String assignment) {
+        return new StudentBuilder(student.addAssignment(new Assignment(assignment)));
+    }
+
     /**
      * Builds the {@code Student} object with the provided details.
      */

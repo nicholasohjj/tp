@@ -29,6 +29,8 @@ public class AddAssignmentCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ASSIGNMENT + "Math Exercise 1";
 
+    public static final String MESSAGE_SUCCESS = "New assignment added: %1$s";
+
     private final Index index;
     private final Assignment assignment;
 

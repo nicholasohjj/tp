@@ -2,11 +2,13 @@
   "students": [ {
     "name": "Alice Pauline",
     "phone": "94351253",
+    "address": "123, Jurong West Ave 6, #08-111",
     "email": "alice@example.com",
     "subject": "CS2109S"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
+    "address": "123, Jurong West Ave 6, #08-111",
     "email": "pauline@example.com",
     "subject": "CS2109S"
   } ]

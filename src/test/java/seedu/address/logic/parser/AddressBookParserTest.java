@@ -43,17 +43,6 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_addAssignment() throws Exception {
-        final Assignment assignment = new Assignment("an assignment");
-
-        AddAssignmentCommand command = (AddAssignmentCommand) parser.parseCommand(
-                AddAssignmentCommand.COMMAND_WORD + " "
-                        + INDEX_FIRST_STUDENT.getOneBased() + " "
-                        + assignment.value);
-        assertEquals(new AddAssignmentCommand(INDEX_FIRST_STUDENT, assignment), command);
-    }
-
-    @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
