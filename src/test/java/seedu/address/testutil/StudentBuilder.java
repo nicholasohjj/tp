@@ -40,6 +40,9 @@ public class StudentBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         subject = new Subject(DEFAULT_SUBJECT);
+        address = new Address(DEFAULT_ADDRESS);
+        tags = new HashSet<>();
+        assignments = new HashSet<>();
     }
 
     /**
@@ -111,8 +114,10 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Builds the {@code Student} object with the provided details.
+     */
     public Student build() {
-        return new Student(name, phone, email, subject);
+        return new Student(name, phone, email, address, subject, tags, assignments);
     }
-
 }
