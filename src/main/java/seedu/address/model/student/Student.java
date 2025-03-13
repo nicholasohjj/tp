@@ -81,8 +81,7 @@ public class Student {
     }
 
     /**
-     * Returns true if both students have the same identity and data fields.
-     * This defines a stronger notion of equality between two students.
+     * Returns a new student with the assignment added.
      */
     public Student addAssignment(Assignment assignment) {
         requireNonNull(assignment);
