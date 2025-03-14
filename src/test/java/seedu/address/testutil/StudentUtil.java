@@ -35,6 +35,7 @@ public class StudentUtil {
         sb.append(PREFIX_PHONE + student.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + student.getEmail().value + " ");
         sb.append(PREFIX_SUBJECT + student.getSubject().subject + " ");
+        sb.append(PREFIX_ADDRESS + student.getAddress().value + " ");
         return sb.toString();
     }
 
