@@ -10,6 +10,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.UniqueStudentList;
+import seedu.address.model.student.exceptions.DuplicateStudentException;
 
 /**
  * A list of lessons that enforces uniqueness between its elements and does not allow nulls.
@@ -79,6 +81,24 @@ public class UniqueLessonList implements Iterable<Lesson> {
         if (!internalList.remove(toRemove)) {
             throw new LessonNotFoundException();
         }
+    }
+
+    public void setLessons(UniqueLessonList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code lessons}.
+     * {@code lessons} must not contain duplicate lessons.
+     */
+    public void setLessons(List<Lesson> lessons) {
+        requireAllNonNull(lessons);
+        if (!lessonsAreUnique(lessons)) {
+            throw new DuplicateLessonException();
+        }
+
+        internalList.setAll(lessons);
     }
 
     /**

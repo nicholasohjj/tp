@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -53,11 +54,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the lesson list with {@code students}.
+     * {@code lessons} must not contain duplicate students.
+     */
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons.setLessons(lessons);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
+        setLessons(newData.getLessonList());
         setStudents(newData.getStudentList());
     }
 
@@ -117,12 +127,25 @@ public class AddressBook implements ReadOnlyAddressBook {
         lessons.add(lesson);
     }
 
+    /**
+     * Replaces the given lesson {@code target} in the list with {@code editedLesson}.
+     * {@code target} must exist in the address book.
+     * The lesson identity of {@code editedLesson} must not be the same as
+     * another existing lesson in the address book.
+     */
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        requireNonNull(editedLesson);
+
+        lessons.setLesson(target, editedLesson);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("students", students)
+                .add("lessons", lessons)
                 .toString();
     }
 
@@ -148,11 +171,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return students.equals(otherAddressBook.students);
+        return students.equals(otherAddressBook.students)
+                && lessons.equals(otherAddressBook.lessons);
     }
 
     @Override
     public int hashCode() {
-        return students.hashCode();
+        return Objects.hash(students, lessons);
     }
 }
