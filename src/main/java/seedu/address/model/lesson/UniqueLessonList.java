@@ -1,23 +1,21 @@
 package seedu.address.model.lesson;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Iterator;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
-import seedu.address.model.student.Student;
-import seedu.address.model.student.UniqueStudentList;
-import seedu.address.model.student.exceptions.DuplicateStudentException;
 
 /**
  * A list of lessons that enforces uniqueness between its elements and does not allow nulls.
  * A lesson is considered unique by comparing using {@code Lesson#isSameLesson(Lesson)}.
  * As such, adding of
- * lessons uses Lesson#isSameStudent(Student) for equality to ensure that the
+ * lessons uses Lesson#isSameLesson(Lesson) for equality to ensure that the
  * lesson being added is
  * unique in terms of identity in the UniqueLessonList.
  * However, the removal of a lesson uses Lesson#equals(Object)
