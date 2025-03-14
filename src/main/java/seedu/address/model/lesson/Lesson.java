@@ -95,10 +95,10 @@ public class Lesson {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("subject", subject)
                 .add("name", studentName)
                 .add("date", date)
                 .add("time", time)
-                .add("subject", subject)
                 .toString();
     }
 }
