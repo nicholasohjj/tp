@@ -530,9 +530,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Tutor**: A person who does free-lance tutoring
-* **Student**: A person that is being or has been tutored by the current user of the application 
+* **Student**: A person that is being or has been tutored by the current user of the application
 * **Spreadsheet**: An Excel spreadsheet
 * **Assignment**: A homework assignment or task that has been given by the tutor to the student
 * **Historical logs**: The records of students' details and the changes that have been made during the lifetime use of the app
