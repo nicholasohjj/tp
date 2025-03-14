@@ -9,13 +9,15 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+- JavaFX Tutorial adapted from [Oracle JavaFX documentation](https://openjfx.io/)
+- PlantUML diagrams adapted from [se-edu PlantUML Guide](https://se-education.org/guides/tutorials/plantUml.html)
+- Command parsing approach adapted from [AddressBook-Level3](https://github.com/se-edu/addressbook-level3)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the [_Setting up and Getting Started Guide_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -587,3 +589,48 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## Appendix: Effort
+
+**Team size**: 5
+
+**Difficulty level**: Moderate to High
+
+**Challenges faced**:
+
+1. **Complexity of Features**: Implementing features such as lessons and assignments required a deep understanding of the existing codebase and careful planning to ensure seamless integration.
+2. **Data Management**: Handling multiple entity types (students, lessons, assignments) added complexity to the data management and storage components.
+3. **User Interface**: Ensuring the CLI-based interface remains user-friendly while accommodating new features was challenging.
+4. **Testing**: Writing comprehensive tests for new features required significant effort.
+
+**Effort required**:
+
+- **Planning and Design**: Approximately 20 hours were spent on planning and designing the new features and their integration with the existing system.
+- **Implementation**: Around 80 hours were dedicated to coding, debugging, and refining the new features.
+- **Testing**: About 30 hours were spent on writing and executing test cases to ensure the reliability of the new features.
+- **Documentation**: Approximately 10 hours were used to update the Developer Guide and User Guide to reflect the new features and changes.
+
+**Achievements**:
+
+- Successfully implemented the lessons and assignments feature, allowing users to add lessons and assignments to students with ease.
+- Enhanced data management capabilities to handle multiple entity types efficiently.
+- Improved the user interface to provide better feedback and usability.
+- Maintained high code quality and adherence to coding standards throughout the project.
+
+**Reuse**:
+
+- The lessons/assignments feature was inspired by similar implementations in other projects, but our implementation was tailored to fit the specific needs of TutorTrack.
+- Some utility functions and classes were reused from the AddressBook-Level3 project, with minimal modifications to suit our requirements.
+
+## Planned Enhancements
+
+1. **Enhanced Error Messages**: Improve error messages to be more specific and actionable. For example, instead of showing "Operation failed!", the message could indicate the exact reason for the failure, such as "The student 'John Doe' could not be added because the name already exists."
+2. **Data Validation**: Implement more robust data validation to prevent invalid inputs from being processed. For instance, validate email formats, phone numbers, and date formats before saving them.
+3. **Batch Operations**: Add support for batch operations, such as adding multiple students or assignments at once, to improve efficiency for users managing large datasets.
+4. **Improved Search Functionality**: Enhance the search feature to support more complex queries, such as searching by multiple criteria (e.g., name, subject, and status) simultaneously.
+5. **Export Functionality**: Allow users to export data to external formats (e.g., CSV, Excel) for easier sharing and analysis outside the application.
+6. **Customizable Reminders**: Enable users to set customizable reminders for lessons and assignments, with options for recurring reminders and notifications.
+7. **User Profiles**: Implement user profiles to allow multiple tutors to use the application with personalized settings and data separation.
+8. **Performance Optimization**: Optimize the application's performance to handle larger datasets more efficiently, ensuring smooth operation even with thousands of entries.
+9. **Enhanced Reporting**: Add reporting features to generate summaries and insights, such as student progress reports, lesson attendance, and assignment completion rates.
+10. **Integration with Calendars**: Allow users to integrate their lesson schedules with external calendar applications (e.g., Google Calendar) for better schedule management.
