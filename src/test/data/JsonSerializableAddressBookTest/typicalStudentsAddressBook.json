@@ -40,5 +40,6 @@
     "phone" : "9482442",
     "email" : "harry@gmail.com",
     "subject" : "CS2103T"
-  } ]
+  } ],
+  "lessons": []
 }

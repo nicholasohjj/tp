@@ -3,11 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -23,8 +25,7 @@ import seedu.address.model.student.Student;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 /**
- * Contains helper methods for testing commands.
- */
+ * Contains helper methods for testing commands. */
 public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
@@ -39,6 +40,10 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_SUBJECT_AMY = "CS2103T";
     public static final String VALID_SUBJECT_BOB = "CS2101";
+    public static final String VALID_DATE_AMY = "31-02-2024";
+    public static final String VALID_DATE_BOB = "26-09-2026";
+    public static final String VALID_TIME_AMY = "12:00";
+    public static final String VALID_TIME_BOB = "15:00";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -52,6 +57,10 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String SUBJECT_DESC_AMY = " " + PREFIX_SUBJECT + VALID_SUBJECT_AMY;
     public static final String SUBJECT_DESC_BOB = " " + PREFIX_SUBJECT + VALID_SUBJECT_BOB;
+    public static final String DATE_DESC_AMY = " " + PREFIX_DATE + VALID_DATE_AMY;
+    public static final String DATE_DESC_BOB = " " + PREFIX_DATE + VALID_DATE_BOB;
+    public static final String TIME_DESC_AMY = " " + PREFIX_TIME + VALID_TIME_AMY;
+    public static final String TIME_DESC_BOB = " " + PREFIX_TIME + VALID_TIME_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -60,6 +69,8 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     // empty string not allowed for subjects
     public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT + " ";
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "17-19-2024"; // month must be within 0-12
+    public static final String INVALID_TIME_DESC = " " + PREFIX_TIME + "27:00"; // time must be within 0-24
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
