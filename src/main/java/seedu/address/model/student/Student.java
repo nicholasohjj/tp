@@ -1,5 +1,6 @@
 package seedu.address.model.student;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -25,35 +26,27 @@ public class Student {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-
-    /**
-     * Every field must be present and not null.
-     * This is the original constructor for student from AB3
-     */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.subject = new Subject("NA");
-    }
+    private final Set<Assignment> assignments = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      * New constructor for student to include subject
      */
-    public Student(Name name, Phone phone, Email email, Subject subject) {
-        requireAllNonNull(name, phone, email, subject);
+    public Student(Name name, Phone phone, Email email, Address address,
+                   Subject subject,
+                   Set<Tag> tags,
+                   Set<Assignment> assignments) {
+        requireAllNonNull(name, phone, email, address, subject, tags, assignments);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.address = address;
         this.subject = subject;
-
-        // address should be removed in the future
-        this.address = new Address("N/A");
+        this.tags.addAll(tags);
+        this.assignments.addAll(assignments);
     }
+
+
 
     public Name getName() {
         return name;
@@ -81,6 +74,21 @@ public class Student {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Set<Assignment> getAssignments() {
+        return Collections.unmodifiableSet(assignments);
+    }
+
+    /**
+     * Returns a new student with the assignment added.
+     */
+    public Student addAssignment(Assignment assignment) {
+        requireNonNull(assignment);
+        Set<Assignment> updatedAssignments = new HashSet<>(this.assignments);
+        updatedAssignments.add(assignment);
+        return new Student(this.name, this.phone, this.email, this.address,
+                this.subject, this.tags, updatedAssignments);
     }
 
     /**
@@ -121,7 +129,7 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, assignments);
     }
 
     @Override
@@ -132,6 +140,7 @@ public class Student {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("assignments", assignments)
                 .toString();
     }
 

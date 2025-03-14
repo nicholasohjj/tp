@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddAssignmentCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.AddStudentCommand;
@@ -64,6 +65,9 @@ public class AddressBookParser {
 
         case AddLessonCommand.COMMAND_WORD:
             return new AddLessonCommandParser().parse(arguments);
+
+        case AddAssignmentCommand.COMMAND_WORD:
+            return new AddAssignmentCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);

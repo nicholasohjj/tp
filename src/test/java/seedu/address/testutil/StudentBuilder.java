@@ -1,8 +1,10 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.student.Address;
+import seedu.address.model.student.Assignment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -28,6 +30,7 @@ public class StudentBuilder {
     private Subject subject;
     private Address address;
     private Set<Tag> tags;
+    private Set<Assignment> assignments;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -37,6 +40,9 @@ public class StudentBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         subject = new Subject(DEFAULT_SUBJECT);
+        address = new Address(DEFAULT_ADDRESS);
+        tags = new HashSet<>();
+        assignments = new HashSet<>();
     }
 
     /**
@@ -46,9 +52,10 @@ public class StudentBuilder {
         name = studentToCopy.getName();
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
-        //        address = studentToCopy.getAddress();
-        //        tags = new HashSet<>(studentToCopy.getTags());
+        address = studentToCopy.getAddress();
+        tags = new HashSet<>(studentToCopy.getTags());
         subject = studentToCopy.getSubject();
+        assignments = new HashSet<>(studentToCopy.getAssignments());
     }
 
     /**
@@ -99,8 +106,23 @@ public class StudentBuilder {
         return this;
     }
 
-    public Student build() {
-        return new Student(name, phone, email, subject);
+    /**
+     * Parses the {@code assignments} into a {@code Set<Assignment>} and
+     * set it to the {@code Student} that we are building.
+     */
+    public StudentBuilder withAssignments(String ... assignments) {
+        this.assignments = SampleDataUtil.getAssignmentSet(assignments);
+        return this;
     }
 
+    public StudentBuilder setAssignment(Student student, String assignment) {
+        return new StudentBuilder(student.addAssignment(new Assignment(assignment)));
+    }
+
+    /**
+     * Builds the {@code Student} object with the provided details.
+     */
+    public Student build() {
+        return new Student(name, phone, email, address, subject, tags, assignments);
+    }
 }
