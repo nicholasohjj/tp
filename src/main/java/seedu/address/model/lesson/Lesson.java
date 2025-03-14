@@ -51,21 +51,6 @@ public class Lesson {
     }
 
     /**
-     * Returns true if both Lessons have the same student name, date and time.
-     * This defines a weaker notion of equality between two lessons.
-     */
-    public boolean isSameLesson(Lesson otherLesson) {
-        if (otherLesson == this) {
-            return true;
-        }
-
-        return otherLesson != null
-                && otherLesson.getName().equals(getName())
-                && otherLesson.getDate().equals(getDate())
-                && otherLesson.getTime().equals(getTime());
-    }
-
-    /**
      * Returns true if both lessons have the same identity and data fields.
      * This defines a stronger notion of equality between two lessons.
      */

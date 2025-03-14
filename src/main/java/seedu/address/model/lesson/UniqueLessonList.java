@@ -22,7 +22,7 @@ import seedu.address.model.lesson.exceptions.LessonNotFoundException;
  * to ensure that the lesson with exactly the same fields will be removed.
  * Supports a minimal set of list operations.
  *
- * @see Lesson#isSameLesson(Lesson)
+ * @see Lesson#equals(Object)
  */
 public class UniqueLessonList implements Iterable<Lesson> {
 
@@ -35,7 +35,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
      */
     public boolean contains(Lesson toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameLesson);
+        return internalList.stream().anyMatch(toCheck::equals);
     }
 
     /**
@@ -63,7 +63,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
             throw new LessonNotFoundException();
         }
 
-        if (!target.isSameLesson(editedLesson) && contains(editedLesson)) {
+        if (!target.equals(editedLesson) && contains(editedLesson)) {
             throw new DuplicateLessonException();
         }
 
@@ -141,7 +141,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
     private boolean lessonsAreUnique(List<Lesson> lessons) {
         for (int i = 0; i < lessons.size() - 1; i++) {
             for (int j = i + 1; j < lessons.size(); j++) {
-                if (lessons.get(i).isSameLesson(lessons.get(j))) {
+                if (lessons.get(i).equals(lessons.get(j))) {
                     return false;
                 }
             }
