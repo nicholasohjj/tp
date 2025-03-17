@@ -17,8 +17,11 @@ public class AddStudentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book. "
             + "Parameters: "
             + "Example: " + COMMAND_WORD + " "
-            + "John Doe "
-            + "98765432 ";
+            + "n/ John Doe "
+            + "p/ 98765432 "
+            + "e/ johnd@gmail.com"
+            + "a/ 311, Clementi Ave 2, #02-25"
+            + "s/ Math";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
