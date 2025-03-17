@@ -1,38 +1,46 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
+import java.util.List;
+import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
-import seedu.address.model.student.Student;
+
+import static java.util.Objects.requireNonNull;
 
 /**
- * Finds and lists all students in address book whose name contains any of the argument keywords.
+ * Finds and lists all lessons in address book whose student name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindCommand extends Command {
+public class ListLessonsCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = "list_lessons";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all lessons whose student name contains any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final NameContainsKeywordsPredicate<Student> predicate;
+    private final NameContainsKeywordsPredicate<Lesson> predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate<Student> predicate) {
+    /**
+     * Constructor for the ListLessonsCommand
+     * @param predicate Predicate to filter the UniqueLessonList with
+     */
+    public ListLessonsCommand(NameContainsKeywordsPredicate<Lesson> predicate) {
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredStudentList(predicate);
+        model.updateFilteredLessonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, model.getFilteredStudentList().size()), true);
+                String.format(Messages.MESSAGE_LESSONS_LISTED_OVERVIEW, model.getFilteredLessonList().size()), true);
     }
 
     @Override
@@ -42,11 +50,11 @@ public class FindCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof ListLessonsCommand)) {
             return false;
         }
 
-        FindCommand otherFindCommand = (FindCommand) other;
+        ListLessonsCommand otherFindCommand = (ListLessonsCommand) other;
         return predicate.equals(otherFindCommand.predicate);
     }
 

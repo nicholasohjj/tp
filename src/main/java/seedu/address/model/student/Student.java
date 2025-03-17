@@ -9,13 +9,14 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.Nameable;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Student in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Student {
+public class Student implements Nameable {
 
     // Identity fields
     private final Name name;

@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.Nameable;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Subject;
 
@@ -12,7 +13,7 @@ import seedu.address.model.student.Subject;
  * Represents a Lesson in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Lesson {
+public class Lesson implements Nameable {
 
     // Identity fields
     private final Name studentName;
