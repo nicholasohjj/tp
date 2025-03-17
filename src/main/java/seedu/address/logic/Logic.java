@@ -37,6 +37,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of lessons */
     ObservableList<Lesson> getFilteredLessonList();
 
+    /** Returns the current list on display */
+    ObservableList<?> getFilteredCurrList();
+
     /**
      * Returns the user prefs' address book file path.
      */
