@@ -26,25 +26,25 @@
     "subject" : "CS"
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
+    "phone" : "94823224",
     "address" : "michegan ave",
     "email" : "werner@example.com",
     "subject" : "BZA"
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
+    "phone" : "94832427",
     "address" : "little tokyo",
     "email" : "lydia@example.com",
     "subject" : "CS2100"
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
+    "phone" : "94820442",
     "address" : "4th street",
     "email" : "anna@example.com",
     "subject" : "CS2105"
   }, {
     "name" : "Harry Potter",
-    "phone" : "9482442",
+    "phone" : "94824420",
     "address" : "4th street",
     "email" : "harry@gmail.com",
     "subject" : "CS2103T"

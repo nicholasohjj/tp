@@ -35,24 +35,24 @@ public class TypicalStudents {
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("321, Clementi Ave 3, #02-15")
             .withSubject("CS").build();
-    public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
+    public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("94823224")
             .withEmail("werner@example.com").withAddress("654, Tampines Street 62, #07-12")
             .withSubject("BZA").build();
-    public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
+    public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("94832427")
             .withEmail("lydia@example.com").withAddress("987, Pasir Ris Drive, #03-21")
             .withSubject("CS2100").build();
-    public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")
+    public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("94820442")
             .withEmail("anna@example.com").withAddress("555, Bedok North Ave 1, #11-22")
             .withSubject("CS2105").build();
-    public static final Student HARRY = new StudentBuilder().withName("Harry Potter").withPhone("9482442")
+    public static final Student HARRY = new StudentBuilder().withName("Harry Potter").withPhone("94824420")
             .withEmail("harry@gmail.com").withAddress("777, Changi Road, #09-33")
             .withSubject("CS2103T").build();
 
     // Manually added
-    public static final Student HOON = new StudentBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Student HOON = new StudentBuilder().withName("Hoon Meier").withPhone("84823424")
             .withEmail("stefan@example.com").withAddress("888, Serangoon Ave 2, #04-44")
             .withSubject("MA2104").build();
-    public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("8482131")
+    public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("84821310")
             .withEmail("hans@example.com").withAddress("999, Yishun Ring Road, #05-55")
             .withSubject("CS2030").build();
 
