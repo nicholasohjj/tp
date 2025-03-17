@@ -11,7 +11,7 @@ public class Date {
 
     public static final String MESSAGE_CONSTRAINTS = "Dates should be in the format: DD-MM-YYYY";
     public static final String VALIDATION_REGEX = "\\d{1,2}-\\d{1,2}-\\d{4}";
-    public final String date;
+    public final String value;
 
     /**
      * Constructs a {@code Date}.
@@ -21,7 +21,7 @@ public class Date {
     public Date(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        this.date = date;
+        this.value = date;
     }
 
     /**
@@ -33,7 +33,7 @@ public class Date {
 
     @Override
     public String toString() {
-        return date;
+        return value;
     }
 
     @Override
@@ -47,12 +47,12 @@ public class Date {
             return false;
         }
 
-        return date.equals(otherDate.date);
+        return value.equals(otherDate.value);
     }
 
     @Override
     public int hashCode() {
-        return date.hashCode();
+        return value.hashCode();
     }
 
 }

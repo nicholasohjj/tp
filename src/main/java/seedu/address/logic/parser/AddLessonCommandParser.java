@@ -43,10 +43,6 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
 
-        //TODO: Remove temporary stubs
-        Phone phone = new Phone("12345678");
-        Email email = new Email("john@gmail.com");
-
         Lesson lesson = new Lesson(subject, name, date, time);
 
         return new AddLessonCommand(lesson);
