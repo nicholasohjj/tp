@@ -4,10 +4,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.student.Address;
+import seedu.address.model.student.Assignment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.Subject;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,12 +22,15 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_SUBJECT = "CS2103T";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private Subject subject;
     private Address address;
     private Set<Tag> tags;
+    private Set<Assignment> assignments;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -34,8 +39,10 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        subject = new Subject(DEFAULT_SUBJECT);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        assignments = new HashSet<>();
     }
 
     /**
@@ -47,6 +54,8 @@ public class StudentBuilder {
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
+        subject = studentToCopy.getSubject();
+        assignments = new HashSet<>(studentToCopy.getAssignments());
     }
 
     /**
@@ -82,6 +91,14 @@ public class StudentBuilder {
     }
 
     /**
+     * Sets the {@code Subject} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withSubject(String subject) {
+        this.subject = new Subject(subject);
+        return this;
+    }
+
+    /**
      * Sets the {@code Email} of the {@code Student} that we are building.
      */
     public StudentBuilder withEmail(String email) {
@@ -89,8 +106,23 @@ public class StudentBuilder {
         return this;
     }
 
-    public Student build() {
-        return new Student(name, phone, email, address, tags);
+    /**
+     * Parses the {@code assignments} into a {@code Set<Assignment>} and
+     * set it to the {@code Student} that we are building.
+     */
+    public StudentBuilder withAssignments(String ... assignments) {
+        this.assignments = SampleDataUtil.getAssignmentSet(assignments);
+        return this;
     }
 
+    public StudentBuilder setAssignment(Student student, String assignment) {
+        return new StudentBuilder(student.addAssignment(new Assignment(assignment)));
+    }
+
+    /**
+     * Builds the {@code Student} object with the provided details.
+     */
+    public Student build() {
+        return new Student(name, phone, email, address, subject, tags, assignments);
+    }
 }

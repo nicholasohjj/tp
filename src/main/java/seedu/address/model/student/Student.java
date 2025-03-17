@@ -1,5 +1,6 @@
 package seedu.address.model.student;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -20,22 +21,32 @@ public class Student {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Subject subject;
 
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Assignment> assignments = new HashSet<>();
 
     /**
      * Every field must be present and not null.
+     * New constructor for student to include subject
      */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Student(Name name, Phone phone, Email email, Address address,
+                   Subject subject,
+                   Set<Tag> tags,
+                   Set<Assignment> assignments) {
+        requireAllNonNull(name, phone, email, address, subject, tags, assignments);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.subject = subject;
         this.tags.addAll(tags);
+        this.assignments.addAll(assignments);
     }
+
+
 
     public Name getName() {
         return name;
@@ -53,12 +64,31 @@ public class Student {
         return address;
     }
 
+    public Subject getSubject() {
+        return subject;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Set<Assignment> getAssignments() {
+        return Collections.unmodifiableSet(assignments);
+    }
+
+    /**
+     * Returns a new student with the assignment added.
+     */
+    public Student addAssignment(Assignment assignment) {
+        requireNonNull(assignment);
+        Set<Assignment> updatedAssignments = new HashSet<>(this.assignments);
+        updatedAssignments.add(assignment);
+        return new Student(this.name, this.phone, this.email, this.address,
+                this.subject, this.tags, updatedAssignments);
     }
 
     /**
@@ -93,14 +123,13 @@ public class Student {
         return name.equals(otherStudent.name)
                 && phone.equals(otherStudent.phone)
                 && email.equals(otherStudent.email)
-                && address.equals(otherStudent.address)
-                && tags.equals(otherStudent.tags);
+                && subject.equals(otherStudent.subject);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, assignments);
     }
 
     @Override
@@ -111,6 +140,7 @@ public class Student {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("assignments", assignments)
                 .toString();
     }
 
