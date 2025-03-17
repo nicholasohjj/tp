@@ -19,8 +19,8 @@ public class AddStudentCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + "n/ John Doe "
             + "p/ 98765432 "
-            + "e/ johnd@gmail.com"
-            + "a/ 311, Clementi Ave 2, #02-25"
+            + "e/ johndoe@gmail.com "
+            + "a/ 311, Clementi Ave 2, #02-25 "
             + "s/ Math";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
