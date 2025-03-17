@@ -23,7 +23,9 @@ public class DeleteStudentCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
+    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Student %1$s\ndeleted successfully.";
+
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "Student not found";
 
     private final Index targetIndex;
 
@@ -37,7 +39,7 @@ public class DeleteStudentCommand extends Command {
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_STUDENT_NOT_FOUND + ". " + Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
