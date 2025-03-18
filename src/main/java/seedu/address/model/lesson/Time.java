@@ -3,6 +3,10 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents a Lesson's time in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
@@ -10,8 +14,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Time {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Time should be of format: HH:MM, and be in 24 hour format";
-    public static final String VALIDATION_REGEX = "([01][0-9]|2[0-3]):([0-5][0-9])";
+            "Time should be of format: HH:MM, be in 24 hour format, and within hours of 8am-9pm";
+    public static final DateTimeFormatter VALID_FORMAT = DateTimeFormatter.ofPattern("H:m");
     public final String time;
 
     /**
@@ -29,7 +33,15 @@ public class Time {
      * Returns true if a given string is a valid time.
      */
     public static boolean isValidTime(String test) {
-        return test.matches(VALIDATION_REGEX);
+        LocalTime parsedTime;
+        try {
+            parsedTime = LocalTime.parse(test, VALID_FORMAT);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        LocalTime afterTime = LocalTime.of(7, 59);
+        LocalTime beforeTime = LocalTime.of(21, 1);
+        return parsedTime.isBefore(beforeTime) && parsedTime.isAfter(afterTime);
     }
 
     @Override
