@@ -3,15 +3,15 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+TutorTrack is a **desktop app designed for freelance tutors to manage students, lessons, and assignments efficiently**. It is optimized for use via a **Command Line Interface (CLI)** while still providing the benefits of a **Graphical User Interface (GUI)**. If you can type fast, TutorTrack can help you manage your tutoring tasks faster than traditional GUI apps.
 
 ### Target Users
 
-AB3 is designed for:
+TutorTrack is designed for:
 
+- **Freelance tutors** who need to manage multiple students, lessons, and assignments.
 - **Tech-savvy individuals** who prefer keyboard commands over mouse interactions.
-- **Users who need to manage a large number of contacts** and require quick access to contact information.
-- **Students, professionals, and administrators** who need a simple yet powerful tool for contact management.
+- **Users who need a simple yet powerful tool** for tracking tutoring-related tasks.
 
 ### Assumptions about Users
 
@@ -42,10 +42,10 @@ AB3 is designed for:
 
 1. Type commands in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    - `help`: Opens the help window.
-   - `list`: Lists all contacts.
-   - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds a new contact.
-   - `delete 3`: Deletes the 3rd contact in the list.
-   - `clear`: Deletes all contacts.
+   - `list_students`: Lists all students.
+   - `add_student n/John Doe p/91234567 e/johndoe@email.com s/Math`: Adds a new student.
+   - `delete_student 1`: Deletes the 1st student in the list.
+   - `clear`: Deletes all students.
    - `exit`: Exits the app.
 
 1. Refer to the [Features](#features) section below for detailed instructions on each command.
@@ -58,21 +58,16 @@ AB3 is designed for:
 
 **:information_source: Notes about the command format:**<br>
 
-- **Parameters in `UPPER_CASE`** are to be supplied by the user.
+- **Parameters in `UPPER_CASE`** are to be supplied by the user. Example: In `add_student n/STUDENT_NAME`, `STUDENT_NAME` can be replaced with `John Doe`.
 
-  Example: In `add n/NAME`, `NAME` can be replaced with `John Doe`.
-
-- **Optional fields** are enclosed in square brackets `[]`.
-
-  Example: `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or `n/John Doe`.
-
+- **Optional fields** are enclosed in square brackets `[]`. Example: `add_student n/NAME p/PHONE [s/SUBJECT]` can be used as `add_student n/John Doe p/91234567 s/Math` or `add_student n/John Doe p/91234567`.
 - **Multiple uses** of a field are indicated by `…`.
 
-  Example: `[t/TAG]…` can be used as `t/friend`, `t/friend t/family`, or omitted entirely.
+  Example: `[s/SUBJECT]…` can be used as `s/Math`, `s/Math s/Science`, or omitted entirely.
 
 - **Parameters can be in any order**.
 
-  Example: `n/NAME p/PHONE_NUMBER` is equivalent to `p/PHONE_NUMBER n/NAME`.
+  Example: `n/STUDENT_NAME p/PHONE_NUMBER` is equivalent to `p/PHONE_NUMBER n/STUDENT_NAME`.
 
 - **Extraneous parameters** for commands like `help`, `list`, `exit`, and `clear` will be ignored.
 
@@ -206,10 +201,11 @@ Install the app on the new computer and replace the empty data file with the one
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Student** | `add_student n/NAME p/PHONE_NUMBER e/EMAIL s/SUBJECT​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com s/Math`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete Students** | `delete_students INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**List Students** | `list_students`
+**List Lessons** | `list_lessons`
 **Help** | `help`
