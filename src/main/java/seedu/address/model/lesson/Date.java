@@ -15,7 +15,7 @@ public class Date {
 
     public static final String MESSAGE_CONSTRAINTS = "Dates should be in the format: D-M-YYYY and "
             + "after the current date";
-    public static final DateTimeFormatter PARSE_FORMAT = DateTimeFormatter.ofPattern("d-M-yyyy");
+    public static final DateTimeFormatter VALID_FORMAT = DateTimeFormatter.ofPattern("d-M-yyyy");
     public final String date;
 
     /**
@@ -35,12 +35,13 @@ public class Date {
     public static boolean isValidDate(String test) {
         LocalDate parsedDate;
         try {
-            parsedDate = LocalDate.parse(test, PARSE_FORMAT);
+            parsedDate = LocalDate.parse(test, VALID_FORMAT);
         } catch (DateTimeParseException e) {
             return false;
         }
-
-        return !parsedDate.isBefore(LocalDate.now());
+        boolean isBeforeCurrDate = parsedDate.isBefore(LocalDate.now());
+        boolean isEqualCurrDate = parsedDate.isEqual(LocalDate.now());
+        return !(isBeforeCurrDate || isEqualCurrDate);
     }
 
     @Override

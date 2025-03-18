@@ -21,7 +21,7 @@ class DateTest {
         assertFalse(Date.isValidDate("12-07-2021")); // date cannot be in the past
 
         LocalDate now = LocalDate.now();
-        assertTrue(Date.isValidDate(now.format(formatter))); //date can be current date
+        assertFalse(Date.isValidDate(now.format(formatter))); // date cannot be today
 
         now = now.plusDays(1);
         assertTrue(Date.isValidDate(now.format(formatter))); //date is valid if its in the future
