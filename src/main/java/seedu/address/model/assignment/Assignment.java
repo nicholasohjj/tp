@@ -66,4 +66,16 @@ public class Assignment {
     public boolean isSameAssignment(Assignment assignment) {
         return assignment.equals(this);
     }
+
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public int compareTo(Assignment o2) {
+        if (this.dueDate.equals(o2.dueDate)) {
+            return this.value.compareTo(o2.value);
+        } else {
+            return this.dueDate.compareTo(o2.dueDate);
+        }
+    }
 }

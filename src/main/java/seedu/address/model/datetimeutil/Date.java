@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
  * Represents a Lesson's date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class Date {
+public class Date implements Comparable<Date> {
 
     public static final String MESSAGE_CONSTRAINTS = "Dates should be in the format: D-M-YYYY and "
             + "after the current date";
@@ -68,4 +68,7 @@ public class Date {
         return date.hashCode();
     }
 
+    public int compareTo(Date dueDate) {
+        return this.date.compareTo(dueDate.date);
+    }
 }

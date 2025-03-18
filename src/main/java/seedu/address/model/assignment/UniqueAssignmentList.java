@@ -2,6 +2,7 @@ package seedu.address.model.assignment;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.assignment.expections.DuplicateAssignmentException;
 
-public class UniqueAssignmentList implements Iterable<Assignment> {
+public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<Assignment> {
 
     private final ObservableList<Assignment> internalList = FXCollections.observableArrayList();
     private final ObservableList<Assignment> internalUnmodifiableList =
@@ -80,5 +81,10 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
             }
         }
         return true;
+    }
+
+    @Override
+    public int compare(Assignment o1, Assignment o2) {
+        return o1.compareTo(o2);
     }
 }
