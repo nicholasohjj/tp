@@ -1,7 +1,20 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalStudents.ALICE;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -13,18 +26,6 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalStudents.ALICE;
-
 public class AddStudentCommandTest {
     @Test
     public void constructor_nullStudent_throwsNullPointerException() {
@@ -33,7 +34,8 @@ public class AddStudentCommandTest {
 
     @Test
     public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
-        AddStudentCommandTest.ModelStubAcceptingStudentAdded modelStub = new AddStudentCommandTest.ModelStubAcceptingStudentAdded();
+        AddStudentCommandTest.ModelStubAcceptingStudentAdded modelStub =
+                new AddStudentCommandTest.ModelStubAcceptingStudentAdded();
         Student validStudent = new StudentBuilder().build();
 
         CommandResult commandResult = new AddCommand(validStudent).execute(modelStub);
