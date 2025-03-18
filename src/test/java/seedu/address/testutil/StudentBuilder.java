@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.student.Address;
-import seedu.address.model.student.Assignment;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;

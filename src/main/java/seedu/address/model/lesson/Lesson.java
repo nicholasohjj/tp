@@ -5,6 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.datetimeutil.Date;
+import seedu.address.model.datetimeutil.Time;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Subject;
 
