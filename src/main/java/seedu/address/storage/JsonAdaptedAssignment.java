@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.datetimeutil.Date;
 
 /**
  * Jackson-friendly version of {@link Assignment}.
@@ -12,13 +13,15 @@ import seedu.address.model.assignment.Assignment;
 class JsonAdaptedAssignment {
 
     private final String assignmentName;
+    private final String dueDate;
 
     /**
      * Constructs a {@code JsonAdaptedAssignment} with the given {@code assignmentName}.
      */
     @JsonCreator
-    public JsonAdaptedAssignment(String assignmentName) {
+    public JsonAdaptedAssignment(String assignmentName, String dueDate) {
         this.assignmentName = assignmentName;
+        this.dueDate = dueDate;
     }
 
     /**
@@ -26,11 +29,17 @@ class JsonAdaptedAssignment {
      */
     public JsonAdaptedAssignment(Assignment source) {
         assignmentName = source.value;
+        dueDate = source.dueDate.date;
     }
 
     @JsonValue
     public String getAssignmentName() {
         return assignmentName;
+    }
+
+    @JsonValue
+    public String getDueDate() {
+        return dueDate;
     }
 
     /**
@@ -42,7 +51,10 @@ class JsonAdaptedAssignment {
         if (!Assignment.isValidAssignmentValue(assignmentName)) {
             throw new IllegalValueException(Assignment.MESSAGE_CONSTRAINTS);
         }
-        return new Assignment(assignmentName);
+        if (!Assignment.isValidAssignmentDate(dueDate)) {
+            throw new IllegalValueException(Assignment.MESSAGE_CONSTRAINTS);
+        }
+        return new Assignment(assignmentName, new Date(dueDate));
     }
 
 }

@@ -63,6 +63,10 @@ public class Assignment {
         return value.matches(VALIDATION_REGEX);
     }
 
+    public static boolean isValidAssignmentDate(String date) {
+        return Date.isValidDate(date);
+    }
+
     public boolean isSameAssignment(Assignment assignment) {
         return assignment.equals(this);
     }
