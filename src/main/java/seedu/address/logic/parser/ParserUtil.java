@@ -123,7 +123,7 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
         if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
         return new Date(trimmedDate);
     }
@@ -138,7 +138,7 @@ public class ParserUtil {
         requireNonNull(time);
         String trimmedTime = time.trim();
         if (!Time.isValidTime(trimmedTime)) {
-            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
         return new Time(trimmedTime);
 

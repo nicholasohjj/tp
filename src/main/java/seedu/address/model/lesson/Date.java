@@ -3,15 +3,20 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents a Lesson's date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date {
 
-    public static final String MESSAGE_CONSTRAINTS = "Dates should be in the format: DD-MM-YYYY";
-    public static final String VALIDATION_REGEX = "\\d{1,2}-\\d{1,2}-\\d{4}";
-    public final String value;
+    public static final String MESSAGE_CONSTRAINTS = "Dates should be in the format: D-M-YYYY and "
+            + "after the current date";
+    public static final DateTimeFormatter VALID_FORMAT = DateTimeFormatter.ofPattern("d-M-yyyy");
+    public final String date;
 
     /**
      * Constructs a {@code Date}.
@@ -21,19 +26,27 @@ public class Date {
     public Date(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        this.value = date;
+        this.date = date;
     }
 
     /**
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String test) {
-        return test.matches(VALIDATION_REGEX);
+        LocalDate parsedDate;
+        try {
+            parsedDate = LocalDate.parse(test, VALID_FORMAT);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        boolean isBeforeCurrDate = parsedDate.isBefore(LocalDate.now());
+        boolean isEqualCurrDate = parsedDate.isEqual(LocalDate.now());
+        return !(isBeforeCurrDate || isEqualCurrDate);
     }
 
     @Override
     public String toString() {
-        return value;
+        return date;
     }
 
     @Override
@@ -47,12 +60,12 @@ public class Date {
             return false;
         }
 
-        return value.equals(otherDate.value);
+        return date.equals(otherDate.date);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return date.hashCode();
     }
 
 }

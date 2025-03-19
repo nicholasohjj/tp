@@ -9,13 +9,15 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+- JavaFX Tutorial adapted from [Oracle JavaFX documentation](https://openjfx.io/)
+- PlantUML diagrams adapted from [se-edu PlantUML Guide](https://se-education.org/guides/tutorials/plantUml.html)
+- Command parsing approach adapted from [AddressBook-Level3](https://github.com/se-edu/addressbook-level3)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the [_Setting up and Getting Started Guide_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -51,7 +53,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete_student 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -91,17 +93,17 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete_student 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete_student 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteStudentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteStudentCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteStudentCommandParser`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -111,8 +113,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddStudentCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddStudentCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddStudentCommandParser`, `DeleteStudentCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -173,11 +175,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete_student 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete_student 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add_student n/David …​` to add a new student. The `add_student` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -216,7 +218,7 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add_student n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -528,9 +530,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Tutor**: A person who does free-lance tutoring
-* **Student**: A person that is being or has been tutored by the current user of the application 
+* **Student**: A person that is being or has been tutored by the current user of the application
 * **Spreadsheet**: An Excel spreadsheet
 * **Assignment**: A homework assignment or task that has been given by the tutor to the student
 * **Historical logs**: The records of students' details and the changes that have been made during the lifetime use of the app
@@ -567,15 +569,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+   1. Prerequisites: List all students using the `list_students` command. Multiple students in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `delete_student 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `delete_student 0`<br>
       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete_student`, `delete_student x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
@@ -587,3 +589,48 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## Appendix: Effort
+
+**Team size**: 5
+
+**Difficulty level**: Moderate to High
+
+**Challenges faced**:
+
+1. **Complexity of Features**: Implementing features such as lessons and assignments required a deep understanding of the existing codebase and careful planning to ensure seamless integration.
+2. **Data Management**: Handling multiple entity types (students, lessons, assignments) added complexity to the data management and storage components.
+3. **User Interface**: Ensuring the CLI-based interface remains user-friendly while accommodating new features was challenging.
+4. **Testing**: Writing comprehensive tests for new features required significant effort.
+
+**Effort required**:
+
+- **Planning and Design**: Approximately 20 hours were spent on planning and designing the new features and their integration with the existing system.
+- **Implementation**: Around 80 hours were dedicated to coding, debugging, and refining the new features.
+- **Testing**: About 30 hours were spent on writing and executing test cases to ensure the reliability of the new features.
+- **Documentation**: Approximately 10 hours were used to update the Developer Guide and User Guide to reflect the new features and changes.
+
+**Achievements**:
+
+- Successfully implemented the lessons and assignments feature, allowing users to add lessons and assignments to students with ease.
+- Enhanced data management capabilities to handle multiple entity types efficiently.
+- Improved the user interface to provide better feedback and usability.
+- Maintained high code quality and adherence to coding standards throughout the project.
+
+**Reuse**:
+
+- The lessons/assignments feature was inspired by similar implementations in other projects, but our implementation was tailored to fit the specific needs of TutorTrack.
+- Some utility functions and classes were reused from the AddressBook-Level3 project, with minimal modifications to suit our requirements.
+
+## Planned Enhancements
+
+1. **Enhanced Error Messages**: Improve error messages to be more specific and actionable. For example, instead of showing "Operation failed!", the message could indicate the exact reason for the failure, such as "The student 'John Doe' could not be added because the name already exists."
+2. **Data Validation**: Implement more robust data validation to prevent invalid inputs from being processed. For instance, validate email formats, phone numbers, and date formats before saving them.
+3. **Batch Operations**: Add support for batch operations, such as adding multiple students or assignments at once, to improve efficiency for users managing large datasets.
+4. **Improved Search Functionality**: Enhance the search feature to support more complex queries, such as searching by multiple criteria (e.g., name, subject, and status) simultaneously.
+5. **Export Functionality**: Allow users to export data to external formats (e.g., CSV, Excel) for easier sharing and analysis outside the application.
+6. **Customizable Reminders**: Enable users to set customizable reminders for lessons and assignments, with options for recurring reminders and notifications.
+7. **User Profiles**: Implement user profiles to allow multiple tutors to use the application with personalized settings and data separation.
+8. **Performance Optimization**: Optimize the application's performance to handle larger datasets more efficiently, ensuring smooth operation even with thousands of entries.
+9. **Enhanced Reporting**: Add reporting features to generate summaries and insights, such as student progress reports, lesson attendance, and assignment completion rates.
+10. **Integration with Calendars**: Allow users to integrate their lesson schedules with external calendar applications (e.g., Google Calendar) for better schedule management.
