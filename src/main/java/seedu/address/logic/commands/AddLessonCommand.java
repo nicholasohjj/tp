@@ -37,7 +37,7 @@ public class AddLessonCommand extends Command {
             + PREFIX_SUBJECT + "SUBJECT "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_DATE + "17/03/2025 "
+            + PREFIX_DATE + "17/09/2027 "
             + PREFIX_TIME + "14:00 "
             + PREFIX_SUBJECT + "Science";
 
