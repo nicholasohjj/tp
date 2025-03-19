@@ -12,7 +12,6 @@ import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.concurrent.ConcurrentMap;
 
 import org.junit.jupiter.api.Test;
 

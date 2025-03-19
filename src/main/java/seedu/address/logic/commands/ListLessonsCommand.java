@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -37,7 +39,7 @@ public class ListLessonsCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredLessonList(predicate);
+        model.updateFilteredLessonList(Optional.of(predicate).orElse(PREDICATE_SHOW_ALL_LESSONS));
         return new CommandResult(
                 String.format(Messages.MESSAGE_LESSONS_LISTED_OVERVIEW, model.getFilteredLessonList().size()), true);
     }
