@@ -21,6 +21,7 @@ public class Assignment implements Comparable<Assignment> {
 
     // Data fields
     public final Date dueDate;
+    public boolean isDone = false;
 
     /**
      * Constructs a {@code Assignment}.
@@ -50,8 +51,7 @@ public class Assignment implements Comparable<Assignment> {
         }
 
         Assignment otherAssignment = (Assignment) other;
-        return assignmentName.equals(otherAssignment.assignmentName)
-                && dueDate.equals(otherAssignment.dueDate);
+        return assignmentName.equals(otherAssignment.assignmentName);
     }
 
     @Override
@@ -77,6 +77,14 @@ public class Assignment implements Comparable<Assignment> {
 
     public Date getDueDate() {
         return dueDate;
+    }
+
+    public void setDone() {
+        isDone = true;
+    }
+
+    public void setUndone() {
+        isDone = false;
     }
 
     /**

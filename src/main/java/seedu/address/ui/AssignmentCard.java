@@ -18,6 +18,9 @@ public class AssignmentCard extends UiPart<HBox> {
     @FXML
     private Label dueDate;
 
+    @FXML
+    private HBox cardPane;
+
     /**
      * Creates a {@code AssignmentCard} with the given {@code Assignment}.
      */
@@ -25,5 +28,11 @@ public class AssignmentCard extends UiPart<HBox> {
         super(FXML);
         assignmentName.setText(assignment.getAssignmentName());
         dueDate.setText("Due: " + assignment.getDueDate().toString());
+
+        if (assignment.isDone) {
+            cardPane.setStyle("-fx-background-color: #4CAF50;");
+        } else {
+            cardPane.setStyle("-fx-background-color: #f44336;");
+        }
     }
 }

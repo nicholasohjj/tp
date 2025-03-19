@@ -16,15 +16,18 @@ class JsonAdaptedAssignment {
 
     private final String assignmentName;
     private final String dueDate;
+    private final int isCompleted;
 
     /**
      * Constructs a {@code JsonAdaptedAssignment} with the given {@code assignmentName}.
      */
     @JsonCreator
     public JsonAdaptedAssignment(@JsonProperty("assignment name") String assignmentName,
-                                 @JsonProperty("due date") String dueDate) {
+                                 @JsonProperty("due date") String dueDate,
+                                 @JsonProperty("is done") boolean isDone) {
         this.assignmentName = assignmentName;
         this.dueDate = dueDate;
+        this.isCompleted = isDone ? 1 : 0;
     }
 
     /**
@@ -33,6 +36,7 @@ class JsonAdaptedAssignment {
     public JsonAdaptedAssignment(Assignment source) {
         assignmentName = source.assignmentName;
         dueDate = source.dueDate.date;
+        isCompleted = source.isDone ? 1 : 0;
     }
 
     /**
