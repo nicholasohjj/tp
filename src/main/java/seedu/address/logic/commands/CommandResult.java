@@ -18,6 +18,8 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
+    /** Flag to update the list */
+    private final boolean updateList;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -26,6 +28,18 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.updateList = false;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     * Specifically to flag whether the list needs to be updated after command execution
+     */
+    public CommandResult(String feedbackToUser, boolean updateList) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.updateList = updateList;
     }
 
     /**
@@ -48,6 +62,9 @@ public class CommandResult {
         return exit;
     }
 
+    public boolean isUpdateList() {
+        return updateList;
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -62,12 +79,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && updateList == otherCommandResult.updateList;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, updateList);
     }
 
     @Override
@@ -76,6 +94,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("updateList", updateList)
                 .toString();
     }
 

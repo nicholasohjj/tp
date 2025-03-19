@@ -27,8 +27,8 @@ class JsonAdaptedLesson {
      * Constructs a {@code JsonAdaptedLesson} with the given lesson details.
      */
     @JsonCreator
-    public JsonAdaptedLesson(@JsonProperty("subject") String subject, @JsonProperty("date") String date,
-                             @JsonProperty("time") String time, @JsonProperty("name") String name) {
+    public JsonAdaptedLesson(@JsonProperty("subject") String subject, @JsonProperty("name") String name,
+                             @JsonProperty("date") String date, @JsonProperty("time") String time) {
         this.name = name;
         this.date = date;
         this.time = time;

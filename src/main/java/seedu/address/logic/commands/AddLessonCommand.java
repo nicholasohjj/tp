@@ -6,17 +6,28 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.util.HashSet;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.Assignment;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
+import seedu.address.model.tag.Tag;
 
 /**
  * Adds lesson to the addressbook
  */
 public class AddLessonCommand extends Command {
     public static final String COMMAND_WORD = "add_lesson";
+    public static final Address VALID_ADDRESS = new Address("123 Main Street");
+    public static final Phone VALID_PHONE = new Phone("12345678");
+    public static final Email VALID_EMAIL = new Email("john@example.com");
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the address book. "
             + "Parameters: "
@@ -32,6 +43,7 @@ public class AddLessonCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in the address book";
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "The specified student does not exist in the address book";
 
 
     private final Lesson toAdd;
@@ -50,9 +62,13 @@ public class AddLessonCommand extends Command {
         if (model.hasLesson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
+        if (!model.hasStudent(new Student(toAdd.getName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, toAdd.getSubject(),
+                new HashSet<Tag>(), new HashSet<Assignment>()))) {
+            throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
+        }
 
         model.addLesson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), true);
     }
 
     @Override

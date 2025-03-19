@@ -26,8 +26,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
-public class AddCommandTest {
-
+public class AddStudentCommandTest {
     @Test
     public void constructor_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
@@ -35,7 +34,8 @@ public class AddCommandTest {
 
     @Test
     public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
+        AddStudentCommandTest.ModelStubAcceptingStudentAdded modelStub =
+                new AddStudentCommandTest.ModelStubAcceptingStudentAdded();
         Student validStudent = new StudentBuilder().build();
 
         CommandResult commandResult = new AddCommand(validStudent).execute(modelStub);
@@ -48,8 +48,8 @@ public class AddCommandTest {
     @Test
     public void execute_duplicateStudent_throwsCommandException() {
         Student validStudent = new StudentBuilder().build();
-        AddCommand addCommand = new AddCommand(validStudent);
-        ModelStub modelStub = new ModelStubWithStudent(validStudent);
+        AddStudentCommand addCommand = new AddStudentCommand(validStudent);
+        AddStudentCommandTest.ModelStub modelStub = new AddStudentCommandTest.ModelStubWithStudent(validStudent);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT, () -> addCommand.execute(modelStub));
     }
@@ -58,14 +58,14 @@ public class AddCommandTest {
     public void equals() {
         Student alice = new StudentBuilder().withName("Alice").build();
         Student bob = new StudentBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        AddStudentCommand addAliceCommand = new AddStudentCommand(alice);
+        AddStudentCommand addBobCommand = new AddStudentCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        AddStudentCommand addAliceCommandCopy = new AddStudentCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -80,8 +80,8 @@ public class AddCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        AddStudentCommand addCommand = new AddStudentCommand(ALICE);
+        String expected = AddStudentCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
         assertEquals(expected, addCommand.toString());
     }
 
@@ -167,11 +167,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Lesson> getFilteredCurrList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -184,7 +179,7 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single student.
      */
-    private class ModelStubWithStudent extends ModelStub {
+    private class ModelStubWithStudent extends AddStudentCommandTest.ModelStub {
         private final Student student;
 
         ModelStubWithStudent(Student student) {
@@ -202,7 +197,7 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the student being added.
      */
-    private class ModelStubAcceptingStudentAdded extends ModelStub {
+    private class ModelStubAcceptingStudentAdded extends AddStudentCommandTest.ModelStub {
         final ArrayList<Student> studentsAdded = new ArrayList<>();
 
         @Override

@@ -19,8 +19,6 @@ public class Lesson {
     // Identity fields
     private final Name studentName;
     private final Subject subject;
-
-    // Data fields
     private final Date date;
     private final Time time;
 
@@ -53,8 +51,7 @@ public class Lesson {
     }
 
     /**
-     * Returns true if both lessons have the same identity and data fields.
-     * This defines a stronger notion of equality between two lessons.
+     * Returns true if both lessons have the same identity fields.
      */
     @Override
     public boolean equals(Object other) {

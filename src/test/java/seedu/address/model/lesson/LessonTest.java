@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_BOB;
 import static seedu.address.testutil.TypicalLessons.ALICE;
-import static seedu.address.testutil.TypicalLessons.BOB;
+import static seedu.address.testutil.TypicalLessons.BENNY;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +30,7 @@ public class LessonTest {
         assertFalse(ALICE.equals(5));
 
         // different lesson -> returns false
-        assertFalse(ALICE.equals(BOB));
+        assertFalse(ALICE.equals(BENNY));
 
         // different name -> returns false
         Lesson editedAlice = new LessonBuilder(ALICE).withName(VALID_NAME_BOB).build();

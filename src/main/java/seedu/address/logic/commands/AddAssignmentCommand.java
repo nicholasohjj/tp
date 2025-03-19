@@ -68,7 +68,7 @@ public class AddAssignmentCommand extends Command {
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
         // Return a success message
-        return new CommandResult(generateSuccessMessage(editedStudent));
+        return new CommandResult(generateSuccessMessage(editedStudent), true);
     }
 
     private String generateSuccessMessage(Student editedStudent) {
