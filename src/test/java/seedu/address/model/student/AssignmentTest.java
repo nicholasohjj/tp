@@ -6,13 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.datetimeutil.Date;
 
 public class AssignmentTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Assignment assignment = new Assignment("some assignment");
-        Assignment assignmentCopy = new Assignment(assignment.assignmentName);
+        Assignment assignment = new Assignment("some assignment", new Date("10-04-2025"));
+        Assignment assignmentCopy = new Assignment(assignment.assignmentName, assignment.dueDate);
         assertTrue(assignment.equals(assignmentCopy));
 
         // same object -> returns true
@@ -25,7 +26,7 @@ public class AssignmentTest {
         assertFalse(assignment.equals(null));
 
         // different assignment -> returns false
-        Assignment differentAssignment = new Assignment("another assignment");
+        Assignment differentAssignment = new Assignment("another assignment", new Date("19-04-2025"));
         assertFalse(assignment.equals(differentAssignment));
     }
 

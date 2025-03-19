@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
 import seedu.address.model.datetimeutil.Date;
-import seedu.address.model.lesson.Lesson;
 import seedu.address.model.datetimeutil.Time;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Subject;
 

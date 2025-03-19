@@ -7,6 +7,6 @@ package seedu.address.model.assignment.expections;
  */
 public class DuplicateAssignmentException extends RuntimeException {
     public DuplicateAssignmentException() {
-        super("Operation would result in duplicate assignments");
+        super("This assignment already exists in the student");
     }
 }

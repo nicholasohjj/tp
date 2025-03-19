@@ -84,8 +84,10 @@ class JsonAdaptedStudent {
 
         // model type for assignments
         final UniqueAssignmentList studentAssignments = new UniqueAssignmentList();
-        for (JsonAdaptedAssignment assignment : assignments) {
-            studentAssignments.add(assignment.toModelType());
+        if (assignments != null) {
+            for (JsonAdaptedAssignment assignment : assignments) {
+                studentAssignments.add(assignment.toModelType());
+            }
         }
 
         // model type for name
