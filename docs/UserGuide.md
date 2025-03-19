@@ -97,20 +97,36 @@ Examples:
 * `add_student n/John Doe p/98765432 e/johndoe@email.com s/Math`
 * `add_student n/Mary Jane p/12345678 e/maryjane@email.com s/Math s/Science`
 
+### Adding a lesson: `add_lesson`
+
+Adds a lesson to the lesson list.
+
+Format: `add_lesson n/STUDENT_NAME s/SUBJECT d/DATE t/TIME​`
+
+Example:
+* `add_lesson n/Alice Chan d/17-09-2025 t/15:00 s/Math`
+
 ### Listing all students : `list_students`
 
 Shows a list of all students in the student list.
 
 Format: `list_students`
 
-### Editing a student : `edit_student`
+### Listing lessons : `list_lessons`
 
+Shows a list of all lessons under a student in the lesson list. If no student is specified, shows all lessons in the list.
+
+Format: `list_lessons n/STUDENT_NAME`
+
+Example:
+* `list_lessons n/John Lee`
+* `list_lessons`
+
+### Editing a student : `edit_student`
 
 Edits an existing student in the student list.
 
-
 Format: `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [s/SUBJECT]…​`
-
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 
