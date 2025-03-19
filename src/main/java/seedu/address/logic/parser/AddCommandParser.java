@@ -7,14 +7,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.student.Address;
-import seedu.address.model.student.Assignment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -51,7 +50,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Student student = new Student(name, phone, email, address,
                 new Subject("NA"),
                 tagList,
-                new HashSet<Assignment>());
+                new UniqueAssignmentList());
 
         return new AddCommand(student);
     }

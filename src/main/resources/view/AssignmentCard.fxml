@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox fx:id="assignmentCard" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="assignment-card">
+    <VBox spacing="2">
+        <Label fx:id="assignmentName" styleClass="assignment-name" />
+        <Label fx:id="dueDate" styleClass="due-date" />
+    </VBox>
+</HBox>

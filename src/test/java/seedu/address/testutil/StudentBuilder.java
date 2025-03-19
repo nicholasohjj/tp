@@ -3,8 +3,10 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.UniqueAssignmentList;
+import seedu.address.model.datetimeutil.Date;
 import seedu.address.model.student.Address;
-import seedu.address.model.student.Assignment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -30,7 +32,7 @@ public class StudentBuilder {
     private Subject subject;
     private Address address;
     private Set<Tag> tags;
-    private Set<Assignment> assignments;
+    private UniqueAssignmentList assignments;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -42,7 +44,7 @@ public class StudentBuilder {
         subject = new Subject(DEFAULT_SUBJECT);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        assignments = new HashSet<>();
+        assignments = new UniqueAssignmentList();
     }
 
     /**
@@ -55,7 +57,7 @@ public class StudentBuilder {
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
         subject = studentToCopy.getSubject();
-        assignments = new HashSet<>(studentToCopy.getAssignments());
+        assignments = studentToCopy.getAssignments();
     }
 
     /**
@@ -110,13 +112,16 @@ public class StudentBuilder {
      * Parses the {@code assignments} into a {@code Set<Assignment>} and
      * set it to the {@code Student} that we are building.
      */
-    public StudentBuilder withAssignments(String ... assignments) {
-        this.assignments = SampleDataUtil.getAssignmentSet(assignments);
+    public StudentBuilder withAssignment(String assignment, String dueDate) {
+        this.assignments.add(new Assignment(assignment, new Date(dueDate)));
         return this;
     }
 
-    public StudentBuilder setAssignment(Student student, String assignment) {
-        return new StudentBuilder(student.addAssignment(new Assignment(assignment)));
+    /**
+     * Sets the {@code UniqueAssignmentList} of the {@code Student} that we are building.
+     */
+    public StudentBuilder setAssignment(Student student, String assignment, String dueDate) {
+        return new StudentBuilder(student.addAssignment(new Assignment(assignment, new Date(dueDate))));
     }
 
     /**

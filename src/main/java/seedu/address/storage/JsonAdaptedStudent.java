@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.student.Address;
-import seedu.address.model.student.Assignment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -31,7 +31,7 @@ class JsonAdaptedStudent {
     private final String email;
     private final String subject;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final List<JsonAdaptedAssignment> assignments = new ArrayList<>();
+    private final List<JsonAdaptedAssignment> assignments;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -49,9 +49,7 @@ class JsonAdaptedStudent {
         if (tags != null) {
             this.tags.addAll(tags);
         }
-        if (assignments != null) {
-            this.assignments.addAll(assignments);
-        }
+        this.assignments = assignments;
     }
 
     /**
@@ -66,9 +64,9 @@ class JsonAdaptedStudent {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(java.util.stream.Collectors.toList()));
-        assignments.addAll(source.getAssignments().stream()
+        assignments = source.getAssignments().asUnmodifiableObservableList().stream()
                 .map(JsonAdaptedAssignment::new)
-                .collect(java.util.stream.Collectors.toList()));
+                .collect(java.util.stream.Collectors.toList());
     }
 
     /**
@@ -85,10 +83,11 @@ class JsonAdaptedStudent {
         }
 
         // model type for assignments
-        final Set<Assignment> studentAssignments = new HashSet<>();
-
-        for (JsonAdaptedAssignment assignment : assignments) {
-            studentAssignments.add(assignment.toModelType());
+        final UniqueAssignmentList studentAssignments = new UniqueAssignmentList();
+        if (assignments != null) {
+            for (JsonAdaptedAssignment assignment : assignments) {
+                studentAssignments.add(assignment.toModelType());
+            }
         }
 
         // model type for name

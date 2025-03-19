@@ -1,4 +1,4 @@
-package seedu.address.model.lesson;
+package seedu.address.model.datetimeutil;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
  * Represents a Lesson's date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class Date {
+public class Date implements Comparable<Date> {
 
     public static final String MESSAGE_CONSTRAINTS = "Dates should be in the format: D-M-YYYY and "
             + "after the current date";
@@ -46,7 +46,7 @@ public class Date {
 
     @Override
     public String toString() {
-        return date;
+        return DateTimeFormatter.ofPattern("dd MMM yyyy").format(LocalDate.parse(date, VALID_FORMAT));
     }
 
     @Override
@@ -68,4 +68,7 @@ public class Date {
         return date.hashCode();
     }
 
+    public int compareTo(Date dueDate) {
+        return this.date.compareTo(dueDate.date);
+    }
 }

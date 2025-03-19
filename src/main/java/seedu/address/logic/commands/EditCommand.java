@@ -21,8 +21,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.student.Address;
-import seedu.address.model.student.Assignment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -102,7 +102,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
-        Set<Assignment> updatedAssignments = editStudentDescriptor.getAssignments()
+        UniqueAssignmentList updatedAssignments = editStudentDescriptor.getAssignments()
                 .orElse(studentToEdit.getAssignments());
 
         return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, new Subject("NA"),
@@ -134,8 +134,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the student with. Each non-empty field value will replace the
-     * corresponding field value of the student.
+     * Stores the details to edit the student with. Each non-empty field assignmentName will replace the
+     * corresponding field assignmentName of the student.
      */
     public static class EditStudentDescriptor {
         private Name name;
@@ -143,7 +143,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-        private Set<Assignment> assignments;
+        private UniqueAssignmentList assignments;
 
         public EditStudentDescriptor() {}
 
@@ -218,12 +218,12 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        private void setAssignments(Set<Assignment> assignments) {
-            this.assignments = (assignments != null) ? new HashSet<>(assignments) : null;
+        private void setAssignments(UniqueAssignmentList assignments) {
+            this.assignments = assignments;
         }
 
-        public Optional<Set<Assignment>> getAssignments() {
-            return (assignments != null) ? Optional.of(Collections.unmodifiableSet(assignments)) : Optional.empty();
+        public Optional<UniqueAssignmentList> getAssignments() {
+            return Optional.ofNullable(assignments);
         }
 
         @Override

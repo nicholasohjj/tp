@@ -9,6 +9,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,21 +23,39 @@ public class Student {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Address address;
     private final Subject subject;
 
     // Data fields
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<Assignment> assignments = new HashSet<>();
+    private final UniqueAssignmentList assignments;
+
+    /**
+     * Constructing a basic Student object with only the identity fields, such as name, phone, email,
+     * address and subject.
+     * @param name
+     * @param phone
+     * @param email
+     * @param address
+     * @param subject
+     */
+    public Student(Name name, Phone phone, Email email, Address address, Subject subject) {
+        requireAllNonNull(name, phone, email, address, subject);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.subject = subject;
+        this.assignments = new UniqueAssignmentList();
+    }
 
     /**
      * Every field must be present and not null.
-     * New constructor for student to include subject
+     * Additional constructor for student to include subject, tags and assignments.
      */
-    public Student(Name name, Phone phone, Email email, Address address,
-                   Subject subject,
+    public Student(Name name, Phone phone, Email email, Address address, Subject subject,
                    Set<Tag> tags,
-                   Set<Assignment> assignments) {
+                   UniqueAssignmentList assignments) {
         requireAllNonNull(name, phone, email, address, subject, tags, assignments);
         this.name = name;
         this.phone = phone;
@@ -43,7 +63,7 @@ public class Student {
         this.address = address;
         this.subject = subject;
         this.tags.addAll(tags);
-        this.assignments.addAll(assignments);
+        this.assignments = assignments;
     }
 
 
@@ -76,8 +96,8 @@ public class Student {
         return Collections.unmodifiableSet(tags);
     }
 
-    public Set<Assignment> getAssignments() {
-        return Collections.unmodifiableSet(assignments);
+    public UniqueAssignmentList getAssignments() {
+        return assignments;
     }
 
     /**
@@ -85,10 +105,9 @@ public class Student {
      */
     public Student addAssignment(Assignment assignment) {
         requireNonNull(assignment);
-        Set<Assignment> updatedAssignments = new HashSet<>(this.assignments);
-        updatedAssignments.add(assignment);
-        return new Student(this.name, this.phone, this.email, this.address,
-                this.subject, this.tags, updatedAssignments);
+        UniqueAssignmentList newAssignments = this.assignments;
+        newAssignments.add(assignment);
+        return new Student(name, phone, email, address, subject, tags, newAssignments);
     }
 
     /**
