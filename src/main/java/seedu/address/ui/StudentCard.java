@@ -60,8 +60,10 @@ public class StudentCard extends UiPart<Region> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        student.getAssignments().stream()
-                .sorted(Comparator.comparing(assignment -> assignment.value))
-                .forEach(assignment -> assignments.getChildren().add(new Label(assignment.value)));
+        student.getAssignments().asUnmodifiableObservableList().stream()
+                .sorted(Comparator.comparing(assignment -> assignment.dueDate))
+                .forEach(assignment -> assignments.getChildren()
+                        .add(new Label(assignment.assignmentName
+                                + " (Due: " + assignment.dueDate + ")")));
     }
 }

@@ -1,7 +1,7 @@
 package seedu.address.commons.util;
 
 /**
- * Builds a string representation of an object that is suitable as the return value of {@link Object#toString()}.
+ * Builds a string representation of an object that is suitable as the return assignmentName of {@link Object#toString()}.
  */
 public class ToStringBuilder {
     private static final String OBJECT_PREFIX = "{";
@@ -28,10 +28,10 @@ public class ToStringBuilder {
     }
 
     /**
-     * Adds a field name/value pair to the output string.
+     * Adds a field name/assignmentName pair to the output string.
      *
      * @param fieldName The name of the field.
-     * @param fieldValue The value of the field.
+     * @param fieldValue The assignmentName of the field.
      * @return A reference to this {@code ToStringBuilder} object, allowing method calls to be chained.
      */
     public ToStringBuilder add(String fieldName, Object fieldValue) {

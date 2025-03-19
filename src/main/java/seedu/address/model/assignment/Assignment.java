@@ -17,7 +17,7 @@ public class Assignment {
     public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
 
     // Identity fields
-    public final String value;
+    public final String assignmentName;
 
     // Data fields
     public final Date dueDate;
@@ -30,13 +30,13 @@ public class Assignment {
     public Assignment(String assignment, Date dueDate) {
         requireAllNonNull(assignment, dueDate);
         checkArgument(isValidAssignmentValue(assignment), MESSAGE_CONSTRAINTS);
-        this.value = assignment;
+        this.assignmentName = assignment;
         this.dueDate = dueDate;
     }
 
     @Override
     public String toString() {
-        return value;
+        return assignmentName;
     }
 
     @Override
@@ -50,13 +50,13 @@ public class Assignment {
         }
 
         Assignment otherAssignment = (Assignment) other;
-        return value.equals(otherAssignment.value)
+        return assignmentName.equals(otherAssignment.assignmentName)
                 && dueDate.equals(otherAssignment.dueDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, dueDate);
+        return Objects.hash(assignmentName, dueDate);
     }
 
     public static boolean isValidAssignmentValue(String value) {
@@ -77,7 +77,7 @@ public class Assignment {
 
     public int compareTo(Assignment o2) {
         if (this.dueDate.equals(o2.dueDate)) {
-            return this.value.compareTo(o2.value);
+            return this.assignmentName.compareTo(o2.assignmentName);
         } else {
             return this.dueDate.compareTo(o2.dueDate);
         }

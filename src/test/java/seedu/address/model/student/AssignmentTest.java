@@ -12,7 +12,7 @@ public class AssignmentTest {
     public void equals() {
         // same values -> returns true
         Assignment assignment = new Assignment("some assignment");
-        Assignment assignmentCopy = new Assignment(assignment.value);
+        Assignment assignmentCopy = new Assignment(assignment.assignmentName);
         assertTrue(assignment.equals(assignmentCopy));
 
         // same object -> returns true

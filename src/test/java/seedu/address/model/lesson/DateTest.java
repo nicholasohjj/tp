@@ -32,7 +32,7 @@ class DateTest {
 
     @Test
     void testToString() {
-        assertEquals("10-12-2027", new Date("10-12-2027").toString()); //no change in the value
+        assertEquals("10-12-2027", new Date("10-12-2027").toString()); //no change in the assignmentName
     }
 
     @Test

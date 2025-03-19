@@ -23,7 +23,7 @@ class TimeTest {
 
     @Test
     void testToString() {
-        assertEquals("10:15", new Time("10:15").toString()); //no change in the value
+        assertEquals("10:15", new Time("10:15").toString()); //no change in the assignmentName
     }
 
     @Test

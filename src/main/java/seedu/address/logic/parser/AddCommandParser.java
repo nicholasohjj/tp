@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.student.Address;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Email;
@@ -51,7 +52,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Student student = new Student(name, phone, email, address,
                 new Subject("NA"),
                 tagList,
-                new HashSet<Assignment>());
+                new UniqueAssignmentList());
 
         return new AddCommand(student);
     }

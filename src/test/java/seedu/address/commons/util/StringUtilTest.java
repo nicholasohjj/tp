@@ -16,7 +16,7 @@ public class StringUtilTest {
     public void isNonZeroUnsignedInteger() {
 
         // EP: empty strings
-        assertFalse(StringUtil.isNonZeroUnsignedInteger("")); // Boundary value
+        assertFalse(StringUtil.isNonZeroUnsignedInteger("")); // Boundary assignmentName
         assertFalse(StringUtil.isNonZeroUnsignedInteger("  "));
 
         // EP: not a number
@@ -41,7 +41,7 @@ public class StringUtilTest {
         assertFalse(StringUtil.isNonZeroUnsignedInteger(Long.toString(Integer.MAX_VALUE + 1)));
 
         // EP: valid numbers, should return true
-        assertTrue(StringUtil.isNonZeroUnsignedInteger("1")); // Boundary value
+        assertTrue(StringUtil.isNonZeroUnsignedInteger("1")); // Boundary assignmentName
         assertTrue(StringUtil.isNonZeroUnsignedInteger("10"));
     }
 
