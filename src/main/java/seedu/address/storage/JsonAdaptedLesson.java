@@ -40,7 +40,7 @@ class JsonAdaptedLesson {
      */
     public JsonAdaptedLesson(Lesson source) {
         name = source.getName().fullName;
-        date = source.getDate().value;
+        date = source.getDate().date;
         time = source.getTime().time;
         subject = source.getSubject().subject;
     }
