@@ -6,12 +6,18 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.assignment.expections.DuplicateAssignmentException;
 
+/**
+ * A list of assignments that enforces uniqueness between its elements and does not allow nulls.
+ * An assignment is considered unique by comparing using {@code Assignment#isSameAssignment(Assignment)}. As such, adding
+ * and updating of assignments uses Assignment
+ * #isSameAssignment(Assignment) for equality to ensure that the assignment being added or updated is
+ * unique in terms of identity in the UniqueAssignmentList.
+ *
+ **/
 public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<Assignment> {
 
     private final ObservableList<Assignment> internalList = FXCollections.observableArrayList();

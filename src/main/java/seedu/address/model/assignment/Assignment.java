@@ -11,7 +11,7 @@ import seedu.address.model.datetimeutil.Date;
  * Represents an Assignment in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAssignmentValue(String)}
  */
-public class Assignment {
+public class Assignment implements Comparable<Assignment> {
 
     public static final String MESSAGE_CONSTRAINTS = "Assignment names should be alphanumeric";
     public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
@@ -79,6 +79,10 @@ public class Assignment {
         return dueDate;
     }
 
+    /**
+     * Compares the assignment based on due date and assignment name.
+     */
+    @Override
     public int compareTo(Assignment o2) {
         if (this.dueDate.equals(o2.dueDate)) {
             return this.assignmentName.compareTo(o2.assignmentName);

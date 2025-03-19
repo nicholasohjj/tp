@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.datetimeutil.Date;
-import seedu.address.model.lesson.Lesson;
 import seedu.address.model.datetimeutil.Time;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Subject;
