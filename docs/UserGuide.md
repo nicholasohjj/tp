@@ -43,7 +43,10 @@ TutorTrack is designed for:
 1. Type commands in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    - `help`: Opens the help window.
    - `list_students`: Lists all students.
+   - `list_lessons n/Jackie` : Lists all lessons under a student or all lessons in the data
    - `add_student n/John Doe p/91234567 e/johndoe@email.com s/Math`: Adds a new student.
+   - `add_lesson n/Johnson Kit d/15-09-2026 t/17:00 s/CS2103T` : Adds a lesson.
+   - `add_assignment 2 as/CS2103T tP increment d/19-04-2025` : Adds an assignment to a student in the list.
    - `delete_student 1`: Deletes the 1st student in the list.
    - `clear`: Deletes all students.
    - `exit`: Exits the app.
@@ -254,7 +257,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete Student** | `delete_students INDEX`<br> e.g., `delete 3`
 **Edit** | `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [s/SUBJECT]…​`<br> e.g.,`edit_student 2 n/James Lee e/jameslee@example.com`
-**Find** | `find_student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_student James Jake`
+**Find Student** | `find_student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_student James Jake`
 **List Students** | `list_students`
 **List Lessons** | `list_lessons [n/NAME]` <br> e.g. `list_lessons`, `list_lessons n/Sally Mood`
 **Help** | `help`
