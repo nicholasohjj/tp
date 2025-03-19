@@ -46,7 +46,7 @@ public class Date implements Comparable<Date> {
 
     @Override
     public String toString() {
-        return date;
+        return DateTimeFormatter.ofPattern("dd MMM yyyy").format(LocalDate.parse(date, VALID_FORMAT));
     }
 
     @Override

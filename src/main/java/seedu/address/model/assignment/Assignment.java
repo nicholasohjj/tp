@@ -71,6 +71,10 @@ public class Assignment {
         return assignment.equals(this);
     }
 
+    public String getAssignmentName() {
+        return assignmentName;
+    }
+
     public Date getDueDate() {
         return dueDate;
     }

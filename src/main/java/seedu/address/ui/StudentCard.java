@@ -63,7 +63,6 @@ public class StudentCard extends UiPart<Region> {
         student.getAssignments().asUnmodifiableObservableList().stream()
                 .sorted(Comparator.comparing(assignment -> assignment.dueDate))
                 .forEach(assignment -> assignments.getChildren()
-                        .add(new Label(assignment.assignmentName
-                                + " (Due: " + assignment.dueDate + ")")));
+                        .add(new AssignmentCard(assignment).getRoot()));
     }
 }
