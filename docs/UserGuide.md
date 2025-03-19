@@ -92,11 +92,11 @@ Format: `add_student n/STUDENT_NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL s/SUBJECT â
 <!--
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student can have any number of subjects (including 0)
-</div> 
+</div>
 -->
 
 Examples:
-* `add_student n/John Doe p/98765432 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math` 
+* `add_student n/John Doe p/98765432 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`
 
 * `add_student n/Mary Jane p/12345678 e/maryjane@email.com a/Blk 47 Tampines Street 20, #17-35 s/Math Science`
 
@@ -170,7 +170,7 @@ Format: `delete_student INDEX`
 
 Examples:
 * `list_students` followed by `delete_student 2` deletes the 2nd student in the student list.
-<!-- 
+<!--
 * `find_student Betsy` followed by `delete_student 1` deletes the 1st student in the results of the `find` command.
 -->
 
