@@ -7,7 +7,6 @@ import java.util.Arrays;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
-import seedu.address.model.student.Student;
 
 /**
  * Parses input arguments and creates a new FindCommand object

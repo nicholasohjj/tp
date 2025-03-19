@@ -11,7 +11,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
 /**
- * An UI component that displays information of a {@code Lesson}.
+ * An UI component that displays information of a {@code Lesson} or {@code Student}.
  */
 public class ListCard extends UiPart<Region> {
 
@@ -50,7 +50,7 @@ public class ListCard extends UiPart<Region> {
     private FlowPane assignments;
 
     /**
-     * Creates a {@code LessonCode} with the given {@code Lesson} and index to display.
+     * Creates a {@code LessonCard} with the given {@code Lesson} and index to display.
      */
     public ListCard(Lesson lesson, int displayedIndex) {
         super("LessonListCard.fxml");
@@ -63,6 +63,9 @@ public class ListCard extends UiPart<Region> {
         subject.setText(lesson.getSubject().subject);
     }
 
+    /**
+     * Creates a {@code StudentCard} with the given {@code Student} and index to display.
+     */
     public ListCard(Student student, int displayedIndex) {
         super("StudentListCard.fxml");
         this.student = student;
