@@ -27,10 +27,11 @@ public class AddAssignmentCommandTest {
 
         String expectedMessage = String.format(Messages.MESSAGE_ADD_ASSIGNMENT_SUCCESS,
                 studentWithAssignment.getName(), assignment);
+        CommandResult expectedResult = new CommandResult(expectedMessage, true);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setStudent(studentToAddAssignment, studentWithAssignment);
 
-        assertCommandSuccess(addAssignmentCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(addAssignmentCommand, model, expectedResult, expectedModel);
     }
 }

@@ -24,7 +24,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<Lesson> filteredLessons;
-
+    private FilteredList<?> filteredCurr;
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -37,6 +37,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
         filteredLessons = new FilteredList<>(this.addressBook.getLessonList());
+        filteredCurr = filteredStudents;
     }
 
     public ModelManager() {
@@ -142,6 +143,7 @@ public class ModelManager implements Model {
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
+        filteredCurr = filteredStudents;
     }
     //=========== Filtered Lesson List Acessors ===============================================================
     /**
@@ -157,6 +159,12 @@ public class ModelManager implements Model {
     public void updateFilteredLessonList(Predicate<Lesson> predicate) {
         requireNonNull(predicate);
         filteredLessons.setPredicate(predicate);
+        filteredCurr = filteredLessons;
+    }
+
+    @Override
+    public ObservableList<?> getFilteredCurrList() {
+        return filteredCurr;
     }
 
     @Override
