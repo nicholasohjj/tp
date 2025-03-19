@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -10,8 +13,6 @@ import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 
-import static java.util.Objects.requireNonNull;
-
 /**
  * Finds and lists all lessons in address book whose student name contains any of the argument keywords.
  * Keyword matching is case insensitive.
@@ -20,18 +21,19 @@ public class ListLessonsCommand extends Command {
 
     public static final String COMMAND_WORD = "list_lessons";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all lessons whose student name contains any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all lessons whose student name contains"
+            + "the specified keyword (case-insensitive) and displays them as a list with index numbers.\n"
+            + "If no keywords are specified, displays all lessons.\n"
+            + "Parameters: KEYWORD + " + PREFIX_NAME + "[KEYWORD]...\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice";
 
-    private final NameContainsKeywordsPredicate<Lesson> predicate;
+    private final Predicate<Lesson> predicate;
 
     /**
      * Constructor for the ListLessonsCommand
      * @param predicate Predicate to filter the UniqueLessonList with
      */
-    public ListLessonsCommand(NameContainsKeywordsPredicate<Lesson> predicate) {
+    public ListLessonsCommand(Predicate<Lesson> predicate) {
         this.predicate = predicate;
     }
 
