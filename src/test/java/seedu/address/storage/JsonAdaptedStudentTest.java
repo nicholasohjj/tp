@@ -26,7 +26,8 @@ public class JsonAdaptedStudentTest {
     private static final String INVALID_EMAIL = "example@.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_SUBJECT = " ";
-    private static final String INVALID_ASSIGNMENT = " ";
+    private static final String INVALID_ASSIGNMENT_NAME = " ";
+    private static final String INVALID_DUE_DATE = "22-1-2023";
 
     private static final String VALID_NAME = HARRY.getName().toString();
     private static final String VALID_PHONE = HARRY.getPhone().toString();
@@ -146,7 +147,7 @@ public class JsonAdaptedStudentTest {
     @Test
     public void toModelType_invalidAssignments_throwsIllegalValueException() {
         List<JsonAdaptedAssignment> invalidAssignments = new ArrayList<>(VALID_ASSIGNMENTS);
-        invalidAssignments.add(new JsonAdaptedAssignment(INVALID_ASSIGNMENT));
+        invalidAssignments.add(new JsonAdaptedAssignment(INVALID_ASSIGNMENT_NAME, INVALID_DUE_DATE, false));
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_EMAIL,
                         VALID_SUBJECT, VALID_TAGS, invalidAssignments);

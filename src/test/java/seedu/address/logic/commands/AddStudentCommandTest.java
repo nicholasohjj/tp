@@ -179,11 +179,6 @@ public class AddStudentCommandTest {
         public void updateFilteredLessonList(Predicate<Lesson> predicate) {
             throw new AssertionError("This method should not be called.");
         }
-
-        @Override
-        public ObservableList<Object> getFilteredCurrList() {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**
