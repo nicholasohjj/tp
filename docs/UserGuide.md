@@ -44,9 +44,11 @@ TutorTrack is designed for:
    - `help`: Opens the help window.
    - `list_students`: Lists all students.
    - `list_lessons n/Jackie` : Lists all lessons under a student or all lessons in the data
-   - `add_student n/John Doe p/91234567 e/johndoe@email.com s/Math`: Adds a new student.
+   - `add_student n/John Doe p/91234567 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`: Adds a new student.
    - `add_lesson n/Johnson Kit d/15-09-2026 t/17:00 s/CS2103T` : Adds a lesson.
    - `add_assignment 2 as/CS2103T tP increment d/19-04-2025` : Adds an assignment to a student in the list.
+   - `mark_assignment 2 as/CS2101 CA2` : Marks the assignment under the student as complete
+   - `unmark_assignment 3 as/Science CA2` : Marks the assignment under the student as incomplete
    - `delete_student 1`: Deletes the 1st student in the list.
    - `clear`: Deletes all students.
    - `exit`: Exits the app.
@@ -80,7 +82,7 @@ TutorTrack is designed for:
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
@@ -90,15 +92,47 @@ Format: `help`
 
 Adds a student to the student list.
 
-Format: `add_student n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL [s/SUBJECT]…​`
+Format: `add_student n/STUDENT_NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL s/SUBJECT ​`
 
+<!--
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student can have any number of subjects (including 0)
 </div>
+-->
 
 Examples:
-* `add_student n/John Doe p/98765432 e/johndoe@email.com s/Math`
-* `add_student n/Mary Jane p/12345678 e/maryjane@email.com s/Math s/Science`
+* `add_student n/John Doe p/98765432 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`
+
+* `add_student n/Mary Jane p/12345678 e/maryjane@email.com a/Blk 47 Tampines Street 20, #17-35 s/Math Science`
+
+### Marking an assignment: `mark_assignment`
+
+Marks the assignment identified by the index number in the displayed assignment list. Marking an assignment will change its status to "completed" (e.g., displayed in green).
+
+
+Format: `mark_assignment INDEX as/ASSIGNMENT_NAME​`
+- `INDEX` must be a positive integer corresponding to the assignment in the displayed list.
+- `ASSIGNMENT_NAME` is the name of the assignment to mark.
+
+**Example:**
+
+- `mark_assignment 1 as/Assignment 1` marks the first assignment in the list as completed.
+
+---
+
+### Unmarking an Assignment: `unmark_assignment`
+
+Unmarks the assignment identified by the index number in the displayed assignment list. Unmarking an assignment will change its status to "incomplete" (e.g., displayed in red).
+
+**Format:**
+
+`unmark_assignment INDEX as/ASSIGNMENT_NAME`
+
+- `INDEX` must be a positive integer corresponding to the assignment in the displayed list.
+- `ASSIGNMENT_NAME` is the name of the assignment to unmark.
+
+**Example:**
+- `unmark_assignment 1 as/Assignment 1` unmarks the first assignment in the list, setting it to incomplete.
 
 ### Adding a lesson: `add_lesson`
 
@@ -133,6 +167,7 @@ Example:
 * `list_lessons n/John Lee`
 * `list_lessons`
 
+<!--
 ### Editing a student : `edit_student`
 
 Edits an existing student in the student list.
@@ -151,7 +186,6 @@ Format: `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [s/SUBJECT]…�
 
     specifying any subjects after it.
 
-
 Examples:
 
 *  `edit_student 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
@@ -160,12 +194,9 @@ Examples:
 
 ### Locating students by name: `find_student`
 
-
 Finds students whose names contain any of the given keywords.
 
-
 Format: `find_student KEYWORD [MORE_KEYWORDS]`
-
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 
@@ -179,7 +210,6 @@ Format: `find_student KEYWORD [MORE_KEYWORDS]`
 
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-
 Examples:
 
 * `find_student John` returns `john` and `John Doe`
@@ -187,8 +217,9 @@ Examples:
 * `find_student alex david` returns `Alex Yeoh`, `David Li`<br>
 
   ![result for 'find_student alex david'](images/findAlexDavidResult.png)
+-->
 
-### Deleting a student : `delete`
+### Deleting a student : `delete_student`
 
 Deletes the specified student from the student list.
 
@@ -200,7 +231,9 @@ Format: `delete_student INDEX`
 
 Examples:
 * `list_students` followed by `delete_student 2` deletes the 2nd student in the student list.
+<!--
 * `find_student Betsy` followed by `delete_student 1` deletes the 1st student in the results of the `find` command.
+-->
 
 ### Clearing all entries : `clear`
 
@@ -251,13 +284,19 @@ Install the app on the new computer and replace the empty data file with the one
 
 Action | Format, Examples
 --------|------------------
-**Add Student** | `add_student n/NAME p/PHONE_NUMBER e/EMAIL s/SUBJECT​` <br> e.g., `add_student n/James Ho p/22224444 e/jamesho@example.com s/Math`
+**Add Student** | `add_student n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT​` <br> e.g., `add_student n/John Doe p/91234567 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`
 **Add Lesson** | `add_lesson n/NAME d/DATE t/TIME s/SUBJECT`<br> e.g. `add_lesson n/Jack d/16-10-2025 t/15:00 s/CS2103T`
 **Add Assignment** | `add_assignment STUDENT_INDEX as/ASSIGNMENT d/DATE` <br> e.g. `add_assignment 1 as/Math Homework d/23-07-2025
 **Clear** | `clear`
-**Delete Student** | `delete_students INDEX`<br> e.g., `delete 3`
-**Edit** | `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [s/SUBJECT]…​`<br> e.g.,`edit_student 2 n/James Lee e/jameslee@example.com`
-**Find Student** | `find_student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_student James Jake`
+**Delete Student** | `delete_student INDEX`<br> e.g., `delete_student 3`
 **List Students** | `list_students`
 **List Lessons** | `list_lessons [n/NAME]` <br> e.g. `list_lessons`, `list_lessons n/Sally Mood`
+**Mark Assignment** | `mark_assignment INDEX as/ASSIGNMENT_NAME` e.g., `mark_assignment 1 as/Assignment 1`
+**Unmark Assignment** | `unmark_assignment INDEX as/ASSIGNMENT_NAME` e.g., `mark_assignment 1 as/Assignment 1`
 **Help** | `help`
+**Exit** | `exit`
+
+<!--
+**Edit** | `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [s/SUBJECT]…​`<br> e.g.,`edit_student 2 n/James Lee e/jameslee@example.com`
+**Find** | `find_student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_student James Jake`
+-->
