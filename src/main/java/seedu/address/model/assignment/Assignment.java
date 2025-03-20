@@ -24,9 +24,10 @@ public class Assignment implements Comparable<Assignment> {
     private boolean isDone;
 
     /**
-     * Constructs a {@code Assignment}.
+     * Constructs a {@code Assignment} that is not done.
      *
      * @param assignment A valid assignment name.
+     * @param dueDate    A valid due date.
      */
     public Assignment(String assignment, Date dueDate) {
         requireAllNonNull(assignment, dueDate);
@@ -36,6 +37,12 @@ public class Assignment implements Comparable<Assignment> {
         this.isDone = false;
     }
 
+    /**
+     * Constructs a {@code Assignment} given if it is done via {@code isDone}.
+     *
+     * @param assignment A valid assignment name.
+     * @param dueDate    A valid due date.
+     */
     public Assignment(String assignment, Date dueDate, boolean isDone) {
         requireAllNonNull(assignment, dueDate);
         checkArgument(isValidAssignmentValue(assignment), MESSAGE_CONSTRAINTS);
