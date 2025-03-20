@@ -29,7 +29,8 @@ public class SampleDataUtil {
                     new Address("Blk 30 Geylang Street 29, #06-40"),
                     new Subject("CS2103T"),
                     getTagSet("friends"),
-                    getAssignmentSet(getAssignment("Assignment 1", "30-05-2025"))),
+                    getAssignmentSet(getAssignment("Assignment 1", "30-05-2025"),
+                            getAssignment("Assignment 2", "31-05-2025", true))),
             new Student(new Name("Bernice Yu"),
                     new Phone("99272758"),
                     new Email("berniceyu@example.com"),
@@ -92,6 +93,10 @@ public class SampleDataUtil {
 
     public static Assignment getAssignment(String assignment, String dueDate) {
         return new Assignment(assignment, new Date(dueDate));
+    }
+
+    public static Assignment getAssignment(String assignment, String dueDate, boolean isDone) {
+        return new Assignment(assignment, new Date(dueDate), isDone);
     }
 
 }

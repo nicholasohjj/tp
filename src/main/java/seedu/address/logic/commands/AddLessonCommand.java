@@ -34,10 +34,10 @@ public class AddLessonCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME "
-            + PREFIX_SUBJECT + "SUBJECT "
+            + PREFIX_SUBJECT + "SUBJECT\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_DATE + "17/09/2027 "
+            + PREFIX_NAME + "Alex Yeoh "
+            + PREFIX_DATE + "17-09-2027 "
             + PREFIX_TIME + "14:00 "
             + PREFIX_SUBJECT + "Science";
 

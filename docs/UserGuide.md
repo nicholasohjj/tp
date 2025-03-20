@@ -118,8 +118,6 @@ Format: `mark_assignment INDEX as/ASSIGNMENT_NAME​`
 
 - `mark_assignment 1 as/Assignment 1` marks the first assignment in the list as completed.
 
----
-
 ### Unmarking an Assignment: `unmark_assignment`
 
 Unmarks the assignment identified by the index number in the displayed assignment list. Unmarking an assignment will change its status to "incomplete" (e.g., displayed in red).
@@ -151,6 +149,7 @@ Format: `add_assignment STUDENT_INDEX as/ASSIGNMENT d/DATE`
 
 Example:
 * `add_assignment 2 as/Science 101 d/27-09-2026`
+
 ### Listing all students : `list_students`
 
 Shows a list of all students in the student list.
@@ -278,6 +277,7 @@ Install the app on the new computer and replace the empty data file with the one
 
 1. **Multiple Screens Issue:** If you move the app to a secondary screen and later switch to a single screen, the GUI may open off-screen. To fix, delete the `preferences.json` file before running the app again.
 2. **Help Window Issue:** Minimizing the Help Window and running `help` again may not open a new window. Restore the minimized window manually.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
