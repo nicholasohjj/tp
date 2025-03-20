@@ -81,7 +81,7 @@ public class AddStudentCommandParserTest {
     //                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME,
     //                PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE));
     //
-    //        // invalid value followed by valid value
+    //        // invalid assignmentName followed by valid assignmentName
     //
     //        // invalid name
     //        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedStudentString,
@@ -99,7 +99,7 @@ public class AddStudentCommandParserTest {
     //        assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedStudentString,
     //                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
     //
-    //        // valid value followed by invalid value
+    //        // valid assignmentName followed by invalid assignmentName
     //
     //        // invalid name
     //        assertParseFailure(parser, validExpectedStudentString + INVALID_NAME_DESC,
@@ -181,7 +181,7 @@ public class AddStudentCommandParserTest {
         //        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
         //                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
-        // two invalid values, only first invalid value reported
+        // two invalid values, only first invalid assignmentName reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_SUBJECT_DESC
                         + ADDRESS_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS);

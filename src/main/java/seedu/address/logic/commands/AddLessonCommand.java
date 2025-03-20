@@ -12,9 +12,9 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Address;
-import seedu.address.model.student.Assignment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
@@ -63,7 +63,7 @@ public class AddLessonCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
         if (!model.hasStudent(new Student(toAdd.getName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, toAdd.getSubject(),
-                new HashSet<Tag>(), new HashSet<Assignment>()))) {
+                new HashSet<Tag>(), new UniqueAssignmentList()))) {
             throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
         }
 

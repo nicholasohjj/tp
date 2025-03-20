@@ -22,9 +22,9 @@ import static seedu.address.testutil.TypicalLessons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddLessonCommand;
-import seedu.address.model.lesson.Date;
+import seedu.address.model.datetimeutil.Date;
+import seedu.address.model.datetimeutil.Time;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.Time;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Subject;
 import seedu.address.testutil.LessonBuilder;

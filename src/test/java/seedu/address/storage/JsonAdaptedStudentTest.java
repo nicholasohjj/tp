@@ -36,7 +36,8 @@ public class JsonAdaptedStudentTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = HARRY.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedAssignment> VALID_ASSIGNMENTS = HARRY.getAssignments().stream()
+    private static final List<JsonAdaptedAssignment> VALID_ASSIGNMENTS = HARRY.getAssignments()
+            .asUnmodifiableObservableList().stream()
             .map(JsonAdaptedAssignment::new)
             .collect(Collectors.toList());
 

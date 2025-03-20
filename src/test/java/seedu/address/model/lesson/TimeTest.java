@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.datetimeutil.Time;
+
 class TimeTest {
 
     @Test
@@ -21,7 +23,7 @@ class TimeTest {
 
     @Test
     void testToString() {
-        assertEquals("10:15", new Time("10:15").toString()); //no change in the value
+        assertEquals("10:15", new Time("10:15").toString()); //no change in the assignmentName
     }
 
     @Test
