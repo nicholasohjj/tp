@@ -43,7 +43,12 @@ TutorTrack is designed for:
 1. Type commands in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    - `help`: Opens the help window.
    - `list_students`: Lists all students.
+   - `list_lessons n/Jackie` : Lists all lessons under a student or all lessons in the data
    - `add_student n/John Doe p/91234567 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`: Adds a new student.
+   - `add_lesson n/Johnson Kit d/15-09-2026 t/17:00 s/CS2103T` : Adds a lesson.
+   - `add_assignment 2 as/CS2103T tP increment d/19-04-2025` : Adds an assignment to a student in the list.
+   - `mark_assignment 2 as/CS2101 CA2` : Marks the assignment under the student as complete
+   - `unmark_assignment 3 as/Science CA2` : Marks the assignment under the student as incomplete
    - `delete_student 1`: Deletes the 1st student in the list.
    - `clear`: Deletes all students.
    - `exit`: Exits the app.
@@ -69,7 +74,7 @@ TutorTrack is designed for:
 
   Example: `n/STUDENT_NAME p/PHONE_NUMBER` is equivalent to `p/PHONE_NUMBER n/STUDENT_NAME`.
 
-- **Extraneous parameters** for commands like `help`, `list`, `exit`, and `clear` will be ignored.
+- **Extraneous parameters** for commands like `help`, `list_students`, `exit`, and `clear` will be ignored.
 
   Example: `help 123` is interpreted as `help`.
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -127,13 +132,40 @@ Unmarks the assignment identified by the index number in the displayed assignmen
 - `ASSIGNMENT_NAME` is the name of the assignment to unmark.
 
 **Example:**
-
 - `unmark_assignment 1 as/Assignment 1` unmarks the first assignment in the list, setting it to incomplete.
+
+### Adding a lesson: `add_lesson`
+
+Adds a lesson to the lesson list.
+
+Format: `add_lesson n/NAME s/SUBJECT d/DATE t/TIME​`
+
+Example:
+* `add_lesson n/Alice Chan d/17-09-2025 t/15:00 s/Math`
+
+### Adding an assignment: `add_assignment`
+
+Adds an assignment to a student in the student list
+
+Format: `add_assignment STUDENT_INDEX as/ASSIGNMENT d/DATE`
+
+Example:
+* `add_assignment 2 as/Science 101 d/27-09-2026`
 ### Listing all students : `list_students`
 
 Shows a list of all students in the student list.
 
 Format: `list_students`
+
+### Listing lessons : `list_lessons`
+
+Shows a list of all lessons under a student in the lesson list. If no student is specified, shows all lessons in the list.
+
+Format: `list_lessons n/STUDENT_NAME`
+
+Example:
+* `list_lessons n/John Lee`
+* `list_lessons`
 
 <!--
 ### Editing a student : `edit_student`
@@ -221,7 +253,7 @@ TutorTrack data are saved in the hard disk automatically after any command that 
 
 ### Editing the data file
 
-TutorTrack data are saved automatically as a JSON file `[JAR file location]/data/TutorTrack.json`. Advanced users are welcome to update data directly by editing that data file.
+TutorTrack data is saved automatically as a JSON file `[JAR file location]/data/TutorTrack.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TutorTrack will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -253,13 +285,16 @@ Install the app on the new computer and replace the empty data file with the one
 Action | Format, Examples
 --------|------------------
 **Add Student** | `add_student n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT​` <br> e.g., `add_student n/John Doe p/91234567 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`
+**Add Lesson** | `add_lesson n/NAME d/DATE t/TIME s/SUBJECT`<br> e.g. `add_lesson n/Jack d/16-10-2025 t/15:00 s/CS2103T`
+**Add Assignment** | `add_assignment STUDENT_INDEX as/ASSIGNMENT d/DATE` <br> e.g. `add_assignment 1 as/Math Homework d/23-07-2025
 **Clear** | `clear`
 **Delete Student** | `delete_student INDEX`<br> e.g., `delete_student 3`
 **List Students** | `list_students`
-**List Lessons** | `list_lessons`
+**List Lessons** | `list_lessons [n/NAME]` <br> e.g. `list_lessons`, `list_lessons n/Sally Mood`
 **Mark Assignment** | `mark_assignment INDEX as/ASSIGNMENT_NAME` e.g., `mark_assignment 1 as/Assignment 1`
 **Unmark Assignment** | `unmark_assignment INDEX as/ASSIGNMENT_NAME` e.g., `mark_assignment 1 as/Assignment 1`
 **Help** | `help`
+**Exit** | `exit`
 
 <!--
 **Edit** | `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [s/SUBJECT]…​`<br> e.g.,`edit_student 2 n/James Lee e/jameslee@example.com`
