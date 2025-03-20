@@ -21,7 +21,7 @@ public class Assignment implements Comparable<Assignment> {
 
     // Data fields
     public final Date dueDate;
-    private boolean isDone = false;
+    private boolean isDone;
 
     /**
      * Constructs a {@code Assignment}.
@@ -33,6 +33,15 @@ public class Assignment implements Comparable<Assignment> {
         checkArgument(isValidAssignmentValue(assignment), MESSAGE_CONSTRAINTS);
         this.assignmentName = assignment;
         this.dueDate = dueDate;
+        this.isDone = false;
+    }
+
+    public Assignment(String assignment, Date dueDate, boolean isDone) {
+        requireAllNonNull(assignment, dueDate);
+        checkArgument(isValidAssignmentValue(assignment), MESSAGE_CONSTRAINTS);
+        this.assignmentName = assignment;
+        this.dueDate = dueDate;
+        this.isDone = isDone;
     }
 
     @Override

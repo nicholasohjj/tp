@@ -61,7 +61,7 @@ class JsonAdaptedAssignment {
         }
         final Date modelDate = new Date(dueDate);
 
-        return new Assignment(assignmentName, modelDate);
+        return new Assignment(assignmentName, modelDate, isCompleted == 1);
     }
 
 }
