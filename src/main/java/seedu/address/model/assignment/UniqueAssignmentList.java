@@ -47,7 +47,8 @@ public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<As
     /**
      * Replaces the assignment {@code target} in the list with {@code editedAssignment}.
      * {@code target} must exist in the list.
-     * The assignment identity of {@code editedAssignment} must not be the same as another existing assignment in the list.
+     * The assignment identity of {@code editedAssignment} must not be the same as another
+     * existing assignment in the list.
      */
     public void setAssignment(Assignment target, Assignment editedAssignment) {
         requireNonNull(editedAssignment);
@@ -114,6 +115,9 @@ public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<As
         return o1.compareTo(o2);
     }
 
+    /**
+     * Marks an assignment as done.
+     */
     public void markAssignment(String assignmentName) {
         for (Assignment assignment : internalList) {
             if (assignment.getAssignmentName().equals(assignmentName)) {
@@ -122,6 +126,9 @@ public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<As
         }
     }
 
+    /**
+     * Marks an assignment as undone.
+     */
     public void unmarkAssignment(String assignmentName) {
         for (Assignment assignment : internalList) {
             if (assignment.getAssignmentName().equals(assignmentName)) {

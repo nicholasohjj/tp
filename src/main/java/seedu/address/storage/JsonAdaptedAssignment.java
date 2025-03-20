@@ -36,7 +36,7 @@ class JsonAdaptedAssignment {
     public JsonAdaptedAssignment(Assignment source) {
         assignmentName = source.assignmentName;
         dueDate = source.dueDate.date;
-        isCompleted = source.isDone ? 1 : 0;
+        isCompleted = source.isDone() ? 1 : 0;
     }
 
     /**

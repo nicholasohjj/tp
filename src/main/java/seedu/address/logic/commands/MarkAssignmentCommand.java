@@ -13,6 +13,9 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.datetimeutil.Date;
 import seedu.address.model.student.Student;
 
+/**
+ * Marks an assignment of a student identified using it's displayed index from the address book.
+ */
 public class MarkAssignmentCommand extends Command {
 
     public static final String COMMAND_WORD = "mark_assignment";
@@ -30,6 +33,9 @@ public class MarkAssignmentCommand extends Command {
     private final Index index;
     private final String assignmentName;
 
+    /**
+     * Creates a MarkAssignmentCommand to mark the specified {@code Assignment}
+     */
     public MarkAssignmentCommand(Index index, String assignmentName) {
         requireAllNonNull(index, assignmentName);
 

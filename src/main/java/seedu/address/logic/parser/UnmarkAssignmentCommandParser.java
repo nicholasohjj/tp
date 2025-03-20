@@ -9,6 +9,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.UnmarkAssignmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new UnmarkAssignmentCommand object
+ */
 public class UnmarkAssignmentCommandParser implements Parser<UnmarkAssignmentCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the UnmarkAssignmentCommand

@@ -29,7 +29,7 @@ public class AssignmentCard extends UiPart<HBox> {
         assignmentName.setText(assignment.getAssignmentName());
         dueDate.setText("Due: " + assignment.getDueDate().toString());
 
-        if (assignment.isDone) {
+        if (assignment.isDone()) {
             cardPane.setStyle("-fx-background-color: #4CAF50;");
         } else {
             cardPane.setStyle("-fx-background-color: #f44336;");

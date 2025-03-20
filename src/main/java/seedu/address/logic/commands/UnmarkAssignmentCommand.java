@@ -13,6 +13,9 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.datetimeutil.Date;
 import seedu.address.model.student.Student;
 
+/**
+ * Unmarks an assignment of a student identified using it's displayed index from the address book.
+ */
 public class UnmarkAssignmentCommand extends Command {
 
     public static final String COMMAND_WORD = "unmark_assignment";
@@ -30,6 +33,9 @@ public class UnmarkAssignmentCommand extends Command {
     private final Index index;
     private final String assignmentName;
 
+    /**
+     * Creates a UnmarkAssignmentCommand to unmark the specified {@code Assignment}
+     */
     public UnmarkAssignmentCommand(Index index, String assignmentName) {
         requireAllNonNull(index, assignmentName);
 
