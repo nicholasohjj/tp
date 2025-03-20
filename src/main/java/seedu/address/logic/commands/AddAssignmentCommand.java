@@ -24,7 +24,7 @@ public class AddAssignmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns an assignment to a student. "
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_ASSIGNMENT + "[ASSIGNMENT_NAME]"
+            + PREFIX_ASSIGNMENT + "[ASSIGNMENT_NAME] "
             + PREFIX_DATE + "[DUE_DATE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ASSIGNMENT + "Math Exercise 1 "

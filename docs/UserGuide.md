@@ -118,8 +118,6 @@ Format: `mark_assignment INDEX as/ASSIGNMENT_NAME​`
 
 - `mark_assignment 1 as/Assignment 1` marks the first assignment in the list as completed.
 
----
-
 ### Unmarking an Assignment: `unmark_assignment`
 
 Unmarks the assignment identified by the index number in the displayed assignment list. Unmarking an assignment will change its status to "incomplete" (e.g., displayed in red).
