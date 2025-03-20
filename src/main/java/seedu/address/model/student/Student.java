@@ -163,4 +163,11 @@ public class Student {
                 .toString();
     }
 
+    public void markAssignment(String assignmentName) {
+        assignments.markAssignment(assignmentName);
+    }
+
+    public void unmarkAssignment(String assignmentName) {
+        assignments.unmarkAssignment(assignmentName);
+    }
 }

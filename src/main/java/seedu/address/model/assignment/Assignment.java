@@ -21,17 +21,34 @@ public class Assignment implements Comparable<Assignment> {
 
     // Data fields
     public final Date dueDate;
+    private boolean isDone;
 
     /**
-     * Constructs a {@code Assignment}.
+     * Constructs a {@code Assignment} that is not done.
      *
      * @param assignment A valid assignment name.
+     * @param dueDate    A valid due date.
      */
     public Assignment(String assignment, Date dueDate) {
         requireAllNonNull(assignment, dueDate);
         checkArgument(isValidAssignmentValue(assignment), MESSAGE_CONSTRAINTS);
         this.assignmentName = assignment;
         this.dueDate = dueDate;
+        this.isDone = false;
+    }
+
+    /**
+     * Constructs a {@code Assignment} given if it is done via {@code isDone}.
+     *
+     * @param assignment A valid assignment name.
+     * @param dueDate    A valid due date.
+     */
+    public Assignment(String assignment, Date dueDate, boolean isDone) {
+        requireAllNonNull(assignment, dueDate);
+        checkArgument(isValidAssignmentValue(assignment), MESSAGE_CONSTRAINTS);
+        this.assignmentName = assignment;
+        this.dueDate = dueDate;
+        this.isDone = isDone;
     }
 
     @Override
@@ -50,8 +67,7 @@ public class Assignment implements Comparable<Assignment> {
         }
 
         Assignment otherAssignment = (Assignment) other;
-        return assignmentName.equals(otherAssignment.assignmentName)
-                && dueDate.equals(otherAssignment.dueDate);
+        return assignmentName.equals(otherAssignment.assignmentName);
     }
 
     @Override
@@ -77,6 +93,18 @@ public class Assignment implements Comparable<Assignment> {
 
     public Date getDueDate() {
         return dueDate;
+    }
+
+    public void setDone() {
+        isDone = true;
+    }
+
+    public void setUndone() {
+        isDone = false;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     /**

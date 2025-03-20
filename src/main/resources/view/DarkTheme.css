@@ -357,7 +357,6 @@
 }
 
 .assignment-card {
-    -fx-background-color: #F70D1A;
     -fx-text-fill: white;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
