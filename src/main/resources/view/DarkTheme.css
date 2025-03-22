@@ -1,6 +1,5 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    -fx-background-color: #383838; /* Dark background */
 }
 
 .label {
@@ -27,6 +26,14 @@
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #a0a0a0;
+    -fx-border-radius: 3;
+    -fx-border-color: #4d4d4d;
+}
+
+.text-field:focused {
+    -fx-border-color: #3e7b91;
 }
 
 .tab-pane {
@@ -40,16 +47,16 @@
 }
 
 .table-view {
-    -fx-base: #1d1d1d;
-    -fx-control-inner-background: #1d1d1d;
-    -fx-background-color: #1d1d1d;
+    -fx-base: #2d2d2d;
+    -fx-control-inner-background: #2d2d2d;
+    -fx-background-color: #2d2d2d;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
 }
 
 .table-view .column-header-background {
-    -fx-background-color: transparent;
+    -fx-background-color: #383838;
 }
 
 .table-view .column-header, .table-view .filler {
@@ -65,11 +72,10 @@
 }
 
 .table-view .column-header .label {
-    -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
     -fx-alignment: center-left;
-    -fx-opacity: 1;
 }
 
 .table-view:focused .table-row-cell:filled:focused:selected {
@@ -88,15 +94,13 @@
 }
 
 .list-view {
-    -fx-background-insets: 0;
-    -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #2d2d2d;
+    -fx-border-color: #4d4d4d;
 }
-
 .list-cell {
-    -fx-label-padding: 0 0 0 0;
-    -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
+    -fx-background-color: #2d2d2d;
+    -fx-text-fill: white;
+    -fx-padding: 5;
 }
 
 .list-cell:filled:even {
@@ -108,7 +112,12 @@
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: #3e7b91;
+    -fx-text-fill: white;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #4d4d4d;
 }
 
 .list-cell:filled:selected #cardPane {
@@ -123,13 +132,13 @@
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: white;
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: #a0a0a0;
 }
 
 .stack-pane {
@@ -214,13 +223,13 @@
  */
 .button {
     -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: #4d4d4d;
     -fx-border-width: 2;
-    -fx-background-radius: 0;
-    -fx-background-color: #1d1d1d;
+    -fx-background-radius: 3;
+    -fx-background-color: #2d2d2d;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
-    -fx-text-fill: #d8d8d8;
+    -fx-text-fill: #e0e0e0;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
@@ -229,8 +238,8 @@
 }
 
 .button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
+    -fx-background-color: #4d4d4d;
+    -fx-text-fill: white;
 }
 
 .button:focused {
@@ -242,9 +251,9 @@
 }
 
 .button:disabled, .button:default:disabled {
-    -fx-opacity: 0.4;
-    -fx-background-color: #1d1d1d;
-    -fx-text-fill: white;
+    -fx-opacity: 0.6;
+    -fx-background-color: #2d2d2d;
+    -fx-text-fill: #a0a0a0;
 }
 
 .button:default {
@@ -282,18 +291,18 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #2d2d2d;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: #4d4d4d;
     -fx-background-insets: 3;
 }
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
     -fx-background-color: transparent;
-    -fx-padding: 0 0 0 0;
 }
+
 
 .scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
     -fx-shape: " ";
@@ -308,8 +317,10 @@
 }
 
 #cardPane {
-    -fx-background-color: transparent;
-    -fx-border-width: 0;
+    -fx-background-color: #2d2d2d;
+    -fx-border-color: #4d4d4d;
+    -fx-border-radius: 5;
+    -fx-padding: 10;
 }
 
 #commandTypeLabel {
