@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.Collections;
@@ -27,8 +27,7 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.Subject;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.subject.Subject;
 
 /**
  * Edits the details of an existing student in the address book.
@@ -45,7 +44,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_SUBJECT + "SUBJECT]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -101,12 +100,12 @@ public class EditCommand extends Command {
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
-        Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
+        Set<Subject> updatedSubjects = editStudentDescriptor.getSubjects().orElse(studentToEdit.getSubjects());
         UniqueAssignmentList updatedAssignments = editStudentDescriptor.getAssignments()
                 .orElse(studentToEdit.getAssignments());
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, new Subject("NA"),
-                updatedTags, updatedAssignments);
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedSubjects, updatedAssignments);
     }
 
     @Override
@@ -142,21 +141,21 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Set<Tag> tags;
+        private Set<Subject> subjects;
         private UniqueAssignmentList assignments;
 
         public EditStudentDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code subjects} is used internally.
          */
         public EditStudentDescriptor(EditStudentDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setSubjects(toCopy.subjects);
             setAssignments(toCopy.assignments);
         }
 
@@ -166,7 +165,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, subjects);
         }
 
         public void setName(Name name) {
@@ -202,20 +201,20 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code subjects} to this object's {@code subjects}.
+         * A defensive copy of {@code subjects} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setSubjects(Set<Subject> subjects) {
+            this.subjects = (subjects != null) ? new HashSet<>(subjects) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable subject set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code subjects} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Subject>> getSubjects() {
+            return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
         }
 
         private void setAssignments(UniqueAssignmentList assignments) {
@@ -242,7 +241,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditStudentDescriptor.phone)
                     && Objects.equals(email, otherEditStudentDescriptor.email)
                     && Objects.equals(address, otherEditStudentDescriptor.address)
-                    && Objects.equals(tags, otherEditStudentDescriptor.tags)
+                    && Objects.equals(subjects, otherEditStudentDescriptor.subjects)
                     && Objects.equals(assignments, otherEditStudentDescriptor.assignments);
         }
 
@@ -253,7 +252,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("tags", tags)
+                    .add("subjects", subjects)
                     .add("assignments", assignments)
                     .toString();
         }

@@ -11,8 +11,7 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.Subject;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.subject.Subject;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -29,9 +28,8 @@ public class StudentBuilder {
     private Name name;
     private Phone phone;
     private Email email;
-    private Subject subject;
     private Address address;
-    private Set<Tag> tags;
+    private Set<Subject> subjects;
     private UniqueAssignmentList assignments;
 
     /**
@@ -41,9 +39,8 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        subject = new Subject(DEFAULT_SUBJECT);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        subjects = new HashSet<>();
         assignments = new UniqueAssignmentList();
     }
 
@@ -55,8 +52,7 @@ public class StudentBuilder {
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
-        tags = new HashSet<>(studentToCopy.getTags());
-        subject = studentToCopy.getSubject();
+        subjects = new HashSet<>(studentToCopy.getSubjects());
         assignments = studentToCopy.getAssignments();
     }
 
@@ -69,10 +65,10 @@ public class StudentBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Student} that we are building.
+     * Parses the {@code subjects} into a {@code Set<Subject>} and set it to the {@code Student} that we are building.
      */
-    public StudentBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public StudentBuilder withSubjects(String ... subjects) {
+        this.subjects = SampleDataUtil.getSubjectSet(subjects);
         return this;
     }
 
@@ -89,14 +85,6 @@ public class StudentBuilder {
      */
     public StudentBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Subject} of the {@code Student} that we are building.
-     */
-    public StudentBuilder withSubject(String subject) {
-        this.subject = new Subject(subject);
         return this;
     }
 
@@ -128,6 +116,6 @@ public class StudentBuilder {
      * Builds the {@code Student} object with the provided details.
      */
     public Student build() {
-        return new Student(name, phone, email, address, subject, tags, assignments);
+        return new Student(name, phone, email, address, subjects, assignments);
     }
 }

@@ -19,31 +19,31 @@ public class TypicalLessons {
 
     public static final Lesson ALICE = new LessonBuilder().withName("Alice Johnson")
             .withDate("14-03-2028").withTime("10:00")
-            .withSubject("Calculus").build();
+            .withSubjects("Calculus").build();
     public static final Lesson BENNY = new LessonBuilder().withName("Benny Lee")
             .withDate("20-03-2027").withTime("14:30")
-            .withSubject("Quantum Mechanics").build();
+            .withSubjects("Quantum Mechanics").build();
     public static final Lesson CAROL = new LessonBuilder().withName("Carol Smith")
             .withDate("25-03-2026").withTime("09:15")
-            .withSubject("Organic Chemistry").build();
+            .withSubjects("Organic Chemistry").build();
     public static final Lesson DANIEL = new LessonBuilder().withName("Daniel Kim")
             .withDate("30-03-2026").withTime("13:00")
-            .withSubject("Modern History").build();
+            .withSubjects("Modern History").build();
     public static final Lesson EMILY = new LessonBuilder().withName("Emily Wong")
             .withDate("05-04-2027").withTime("11:45")
-            .withSubject("Algorithms").build();
+            .withSubjects("Algorithms").build();
     public static final Lesson FRANK = new LessonBuilder().withName("Frank Garcia")
             .withDate("12-04-2026").withTime("16:20")
-            .withSubject("Literature").build();
+            .withSubjects("Literature").build();
     public static final Lesson GRACE = new LessonBuilder().withName("Grace Miller")
             .withDate("18-10-2025").withTime("08:30")
-            .withSubject("Genetics").build();
+            .withSubjects("Genetics").build();
     public static final Lesson HARRY = new LessonBuilder().withName("Harry Thompson")
             .withDate("22-9-2025").withTime("12:15")
-            .withSubject("Macroeconomics").build();
+            .withSubjects("Macroeconomics").build();
 
     //manually added - details are in {@code CommandTestUtil}
-    public static final Lesson BOB = new LessonBuilder().withSubject(VALID_SUBJECT_BOB).withName(VALID_NAME_BOB)
+    public static final Lesson BOB = new LessonBuilder().withSubjects(VALID_SUBJECT_BOB).withName(VALID_NAME_BOB)
             .withDate(VALID_DATE_BOB).withTime(VALID_TIME_BOB).build();
 
     private TypicalLessons() {} // prevents instantiation

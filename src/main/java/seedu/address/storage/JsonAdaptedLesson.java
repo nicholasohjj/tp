@@ -1,5 +1,10 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -7,9 +12,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.datetimeutil.Date;
 import seedu.address.model.datetimeutil.Time;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Subject;
+import seedu.address.model.subject.Subject;
 
 /**
  * Jackson-friendly version of {@link Lesson}.
@@ -21,18 +25,21 @@ class JsonAdaptedLesson {
     private final String name;
     private final String date;
     private final String time;
-    private final String subject;
+    private final List<JsonAdaptedSubject> subjects = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedLesson} with the given lesson details.
      */
     @JsonCreator
-    public JsonAdaptedLesson(@JsonProperty("subject") String subject, @JsonProperty("name") String name,
+    public JsonAdaptedLesson(@JsonProperty("subjects") List<JsonAdaptedSubject> subjects,
+                             @JsonProperty("name") String name,
                              @JsonProperty("date") String date, @JsonProperty("time") String time) {
         this.name = name;
         this.date = date;
         this.time = time;
-        this.subject = subject;
+        if (subjects != null) {
+            this.subjects.addAll(subjects);
+        }
     }
 
     /**
@@ -42,7 +49,9 @@ class JsonAdaptedLesson {
         name = source.getName().fullName;
         date = source.getDate().date;
         time = source.getTime().time;
-        subject = source.getSubject().subject;
+        subjects.addAll(source.getSubjects().stream()
+                .map(JsonAdaptedSubject::new)
+                .toList());
     }
 
     /**
@@ -75,14 +84,14 @@ class JsonAdaptedLesson {
         }
         final Time modelTime = new Time(time);
 
-        if (subject == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName()));
-        }
-        if (!Subject.isValidSubject(subject)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Subject modelSubject = new Subject(subject);
+        final Set<Subject> studentSubjects = new HashSet<>();
 
-        return new Lesson(modelSubject, modelName, modelDate, modelTime);
+        for (JsonAdaptedSubject subject : subjects) {
+            studentSubjects.add(subject.toModelType());
+        }
+        final Set<Subject> modelSubjects = new HashSet<>(studentSubjects);
+
+
+        return new Lesson(modelSubjects, modelName, modelDate, modelTime);
     }
 }

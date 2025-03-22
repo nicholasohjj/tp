@@ -6,6 +6,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.subject.Subject;
+
 public class SubjectTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -19,22 +21,22 @@ public class SubjectTest {
     }
 
     @Test
-    public void isValidSubject() {
+    public void isValidSubjectName() {
         // null name
         assertThrows(NullPointerException.class, () -> Name.isValidName(null));
 
         // invalid name
-        assertFalse(Subject.isValidSubject("")); // empty string
-        assertFalse(Subject.isValidSubject(" ")); // spaces only
-        assertFalse(Subject.isValidSubject("&")); // only non-alphanumeric characters
-        assertFalse(Subject.isValidSubject(" Math")); // leading space
+        assertFalse(Subject.isValidSubjectName("")); // empty string
+        assertFalse(Subject.isValidSubjectName(" ")); // spaces only
+        assertFalse(Subject.isValidSubjectName("&")); // only non-alphanumeric characters
+        assertFalse(Subject.isValidSubjectName(" Math")); // leading space
 
         // valid name
-        assertTrue(Subject.isValidSubject("computer science")); // alphabets only
-        assertTrue(Subject.isValidSubject("2103")); // numbers only
-        assertTrue(Subject.isValidSubject("cs2103t")); // alphanumeric characters
-        assertTrue(Subject.isValidSubject("Math")); // with capital letters
-        assertTrue(Subject.isValidSubject("Introduction to AI & Machine Learning")); // long names
+        assertTrue(Subject.isValidSubjectName("computer science")); // alphabets only
+        assertTrue(Subject.isValidSubjectName("2103")); // numbers only
+        assertTrue(Subject.isValidSubjectName("cs2103t")); // alphanumeric characters
+        assertTrue(Subject.isValidSubjectName("Math")); // with capital letters
+        assertTrue(Subject.isValidSubjectName("Introduction to AI & Machine Learning")); // long names
     }
     @Test
     public void equals() {

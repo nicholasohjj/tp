@@ -14,8 +14,8 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.Subject;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.subject.Subject;
+
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -23,48 +23,58 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Student[] getSampleStudents() {
         return new Student[] {
-            new Student(new Name("Alex Yeoh"),
-                    new Phone("87438807"),
-                    new Email("alexyeoh@example.com"),
-                    new Address("Blk 30 Geylang Street 29, #06-40"),
-                    new Subject("CS2103T"),
-                    getTagSet("friends"),
-                    getAssignmentSet(getAssignment("Assignment 1", "30-05-2025"),
-                            getAssignment("Assignment 2", "31-05-2025", true))),
-            new Student(new Name("Bernice Yu"),
-                    new Phone("99272758"),
-                    new Email("berniceyu@example.com"),
-                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                    new Subject("CS2100"),
-                    getTagSet("colleagues"),
-                    getAssignmentSet(getAssignment("English Essay", "15-07-2025"))),
-            new Student(new Name("Charlotte Oliveiro"),
-                    new Phone("93210283"),
-                    new Email("charlotte@example.com"),
-                    new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                    new Subject("Additional Maths")),
-            new Student(new Name("David Li"),
-                    new Phone("91031282"),
-                    new Email("lidavid@example.com"),
-                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                    new Subject("Chemistry")),
-            new Student(new Name("Irfan Ibrahim"),
-                    new Phone("92492021"),
-                    new Email("irfan@example.com"),
-                    new Address("Blk 47 Tampines Street 20, #17-35"),
-                    new Subject("Sec 1 Physics")),
-            new Student(new Name("Roy Balakrishnan"),
-                    new Phone("92624417"),
-                    new Email("royb@example.com"),
-                    new Address("Blk 45 Aljunied Street 85, #11-31"),
-                    new Subject("CS2103T")),
-            new Student(new Name("Zoy White"),
-                    new Phone("94351253"),
-                    new Email("zoyw@gnail.com"),
-                    new Address("Blk 45 Aljunied Street 85, #11-31"),
-                    new Subject("H2 Computing"))
+                new Student(new Name("Alex Yeoh"),
+                        new Phone("87438807"),
+                        new Email("alexyeoh@example.com"),
+                        new Address("Blk 30 Geylang Street 29, #06-40"),
+                        getSubjectSet("Math", "Physics"),
+                        getAssignmentSet(getAssignment("Assignment 1", "30-05-2025"),
+                                getAssignment("Assignment 2", "31-05-2025", true))),
+
+                new Student(new Name("Bernice Yu"),
+                        new Phone("99272758"),
+                        new Email("berniceyu@example.com"),
+                        new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                        getSubjectSet("Science", "English"),
+                        getAssignmentSet(getAssignment("English Essay", "15-07-2025"))),
+
+                new Student(new Name("Charlotte Oliveiro"),
+                        new Phone("93210283"),
+                        new Email("charlotte@example.com"),
+                        new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                        getSubjectSet("Literature"),
+                        getAssignmentSet()),
+
+                new Student(new Name("David Li"),
+                        new Phone("91031282"),
+                        new Email("lidavid@example.com"),
+                        new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                        getSubjectSet("Chemistry"),
+                        getAssignmentSet()),
+
+                new Student(new Name("Irfan Ibrahim"),
+                        new Phone("92492021"),
+                        new Email("irfan@example.com"),
+                        new Address("Blk 47 Tampines Street 20, #17-35"),
+                        getSubjectSet("Biology", "Math"),
+                        getAssignmentSet()),
+
+                new Student(new Name("Roy Balakrishnan"),
+                        new Phone("92624417"),
+                        new Email("royb@example.com"),
+                        new Address("Blk 45 Aljunied Street 85, #11-31"),
+                        getSubjectSet("Economics"),
+                        getAssignmentSet()),
+
+                new Student(new Name("Zoy White"),
+                        new Phone("94351253"),
+                        new Email("zoyw@gnail.com"),
+                        new Address("Blk 45 Aljunied Street 85, #11-31"),
+                        getSubjectSet("History"),
+                        getAssignmentSet())
         };
     }
+
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
@@ -75,11 +85,11 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a subject set containing the list of strings given.
      */
-    public static Set<Tag> getTagSet(String... strings) {
+    public static Set<Subject> getSubjectSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(Subject::new)
                 .collect(Collectors.toSet());
     }
 

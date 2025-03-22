@@ -4,6 +4,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -15,7 +16,13 @@ import seedu.address.model.datetimeutil.Date;
 import seedu.address.model.student.Student;
 
 public class AddAssignmentCommandTest {
+
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    }
 
     @Test
     public void execute_duplicateAssignment_throwsCommandException() {
