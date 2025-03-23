@@ -15,8 +15,8 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.Subject;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.subject.Subject;
+
 
 /**
  * Jackson-friendly version of {@link Student}.
@@ -29,8 +29,7 @@ class JsonAdaptedStudent {
     private final String phone;
     private final String address;
     private final String email;
-    private final String subject;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedSubject> subjects = new ArrayList<>();
     private final List<JsonAdaptedAssignment> assignments;
 
     /**
@@ -39,15 +38,14 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("address") String address, @JsonProperty("email") String email,
-                              @JsonProperty("subject") String subject, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                              @JsonProperty("subjects") List<JsonAdaptedSubject> subjects,
                               @JsonProperty("assignments") List<JsonAdaptedAssignment> assignments) {
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.email = email;
-        this.subject = subject;
-        if (tags != null) {
-            this.tags.addAll(tags);
+        if (subjects != null) {
+            this.subjects.addAll(subjects);
         }
         this.assignments = assignments;
     }
@@ -59,11 +57,10 @@ class JsonAdaptedStudent {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        subject = source.getSubject().subject;
         address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(java.util.stream.Collectors.toList()));
+        subjects.addAll(source.getSubjects().stream()
+                .map(JsonAdaptedSubject::new)
+                .toList());
         assignments = source.getAssignments().asUnmodifiableObservableList().stream()
                 .map(JsonAdaptedAssignment::new)
                 .collect(java.util.stream.Collectors.toList());
@@ -75,11 +72,11 @@ class JsonAdaptedStudent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
-        // model type for tags
-        final Set<Tag> studentTags = new HashSet<>();
+        // model type for subjects
+        final Set<Subject> studentSubjects = new HashSet<>();
 
-        for (JsonAdaptedTag tag : tags) {
-            studentTags.add(tag.toModelType());
+        for (JsonAdaptedSubject subject : subjects) {
+            studentSubjects.add(subject.toModelType());
         }
 
         // model type for assignments
@@ -126,17 +123,10 @@ class JsonAdaptedStudent {
         }
         final Email modelEmail = new Email(email);
 
-        if (subject == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName()));
-        }
 
-        if (!Subject.isValidSubject(subject)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
+        final Set<Subject> modelSubjects = new HashSet<>(studentSubjects);
 
-        final Subject modelSubject = new Subject(subject);
-
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelSubject, studentTags,
+        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelSubjects,
                 studentAssignments);
     }
 

@@ -11,7 +11,7 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.UniqueAssignmentList;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.subject.Subject;
 
 /**
  * Represents a Student in the address book.
@@ -24,28 +24,21 @@ public class Student {
     private final Phone phone;
     private final Email email;
     private final Address address;
-    private final Subject subject;
 
     // Data fields
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Subject> subjects = new HashSet<>();
     private final UniqueAssignmentList assignments;
 
+
     /**
-     * Constructing a basic Student object with only the identity fields, such as name, phone, email,
-     * address and subject.
-     * @param name
-     * @param phone
-     * @param email
-     * @param address
-     * @param subject
+     * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Subject subject) {
-        requireAllNonNull(name, phone, email, address, subject);
+    public Student(Name name, Phone phone, Email email, Address address) {
+        requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.subject = subject;
         this.assignments = new UniqueAssignmentList();
     }
 
@@ -53,16 +46,30 @@ public class Student {
      * Every field must be present and not null.
      * Additional constructor for student to include subject, tags and assignments.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Subject subject,
-                   Set<Tag> tags,
-                   UniqueAssignmentList assignments) {
-        requireAllNonNull(name, phone, email, address, subject, tags, assignments);
+    public Student(Name name, Phone phone, Email email, Address address,
+                   Set<Subject> subjects) {
+        requireAllNonNull(name, phone, email, address, subjects);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.subject = subject;
-        this.tags.addAll(tags);
+        this.subjects.addAll(subjects);
+        this.assignments = new UniqueAssignmentList();
+    }
+
+    /**
+     * Every field must be present and not null.
+     * Additional constructor for student to include assignments.
+     */
+    public Student(Name name, Phone phone, Email email, Address address,
+                   Set<Subject> subjects,
+                   UniqueAssignmentList assignments) {
+        requireAllNonNull(name, phone, email, address, subjects, assignments);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.subjects.addAll(subjects);
         this.assignments = assignments;
     }
 
@@ -84,16 +91,12 @@ public class Student {
         return address;
     }
 
-    public Subject getSubject() {
-        return subject;
-    }
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Subject> getSubjects() {
+        return Collections.unmodifiableSet(subjects);
     }
 
     public UniqueAssignmentList getAssignments() {
@@ -107,7 +110,7 @@ public class Student {
         requireNonNull(assignment);
         UniqueAssignmentList newAssignments = this.assignments;
         newAssignments.add(assignment);
-        return new Student(name, phone, email, address, subject, tags, newAssignments);
+        return new Student(name, phone, email, address, subjects, newAssignments);
     }
 
     /**
@@ -142,13 +145,14 @@ public class Student {
         return name.equals(otherStudent.name)
                 && phone.equals(otherStudent.phone)
                 && email.equals(otherStudent.email)
-                && subject.equals(otherStudent.subject);
+                && address.equals(otherStudent.address)
+                && subjects.equals(otherStudent.subjects);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, assignments);
+        return Objects.hash(name, phone, email, address, subjects, assignments);
     }
 
     @Override
@@ -158,7 +162,7 @@ public class Student {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
+                .add("subjects", subjects)
                 .add("assignments", assignments)
                 .toString();
     }

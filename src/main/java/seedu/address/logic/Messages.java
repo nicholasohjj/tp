@@ -46,8 +46,8 @@ public class Messages {
                 .append(student.getEmail())
                 .append("; Address: ")
                 .append(student.getAddress())
-                .append("; Tags: ");
-        student.getTags().forEach(builder::append);
+                .append("; Subjects: ");
+        student.getSubjects().forEach(builder::append);
         return builder.toString();
     }
 
@@ -56,7 +56,7 @@ public class Messages {
      */
     public static String format(Lesson lesson) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(lesson.getSubject())
+        builder.append(lesson.getSubjects())
                 .append(" lesson; Student Name:")
                 .append(lesson.getName())
                 .append("; Date: ")

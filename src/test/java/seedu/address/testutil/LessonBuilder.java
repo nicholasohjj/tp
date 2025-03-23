@@ -1,10 +1,14 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.model.datetimeutil.Date;
 import seedu.address.model.datetimeutil.Time;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Subject;
+import seedu.address.model.subject.Subject;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Lesson objects.
@@ -19,7 +23,7 @@ public class LessonBuilder {
     private Name name;
     private Date date;
     private Time time;
-    private Subject subject;
+    private Set<Subject> subjects;
 
     /**
      * Creates a {@code LessonBuilder} with the default details.
@@ -28,7 +32,7 @@ public class LessonBuilder {
         name = new Name(DEFAULT_NAME);
         date = new Date(DEFAULT_DATE);
         time = new Time(DEFAULT_TIME);
-        subject = new Subject(DEFAULT_SUBJECT);
+        subjects = new HashSet<>();
     }
 
     /**
@@ -38,7 +42,7 @@ public class LessonBuilder {
         name = lessonToCopy.getName();
         date = lessonToCopy.getDate();
         time = lessonToCopy.getTime();
-        subject = lessonToCopy.getSubject();
+        subjects = new HashSet<>(lessonToCopy.getSubjects());
     }
 
     /**
@@ -52,8 +56,8 @@ public class LessonBuilder {
     /**
      * Sets the {@code Subject} of the {@code Lesson} that we are building.
      */
-    public LessonBuilder withSubject(String subject) {
-        this.subject = new Subject(subject);
+    public LessonBuilder withSubjects(String ... subjects) {
+        this.subjects = SampleDataUtil.getSubjectSet(subjects);
         return this;
     }
 
@@ -72,7 +76,7 @@ public class LessonBuilder {
         return this;
     }
     public Lesson build() {
-        return new Lesson(subject, name, date, time);
+        return new Lesson(subjects, name, date, time);
     }
 
 }

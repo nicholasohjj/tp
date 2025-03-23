@@ -2,13 +2,16 @@ package seedu.address.model.lesson;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.datetimeutil.Date;
 import seedu.address.model.datetimeutil.Time;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Subject;
+import seedu.address.model.subject.Subject;
 
 /**
  * Represents a Lesson in the address book.
@@ -18,20 +21,22 @@ public class Lesson {
 
     // Identity fields
     private final Name studentName;
-    private final Subject subject;
+    private final Set<Subject> subjects = new HashSet<>();
     private final Date date;
     private final Time time;
+
 
     /**
      * Every field must be present and not null.
      * This is the original constructor for student from AB3
      */
-    public Lesson(Subject subject, Name studentName, Date date, Time time) {
-        requireAllNonNull(subject, date, time);
-        this.subject = subject;
+    public Lesson(Set<Subject> subjects, Name studentName, Date date, Time time) {
+        requireAllNonNull(subjects, studentName, date, time);
         this.studentName = studentName;
         this.date = date;
         this.time = time;
+        this.subjects.addAll(subjects);
+
     }
 
     public Name getName() {
@@ -46,10 +51,9 @@ public class Lesson {
         return time;
     }
 
-    public Subject getSubject() {
-        return subject;
+    public Set<Subject> getSubjects() {
+        return Collections.unmodifiableSet(subjects);
     }
-
     /**
      * Returns true if both lessons have the same identity fields.
      */
@@ -67,19 +71,19 @@ public class Lesson {
         return studentName.equals(otherLesson.studentName)
                 && date.equals(otherLesson.date)
                 && time.equals(otherLesson.time)
-                && subject.equals(otherLesson.subject);
+                && subjects.equals(otherLesson.subjects);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(studentName, date, time, subject);
+        return Objects.hash(studentName, date, time, subjects);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("subject", subject)
+                .add("subjects", subjects)
                 .add("name", studentName)
                 .add("date", date)
                 .add("time", time)

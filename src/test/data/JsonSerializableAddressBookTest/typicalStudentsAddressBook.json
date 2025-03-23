@@ -1,53 +1,62 @@
 {
   "_comment": "AddressBook save file which contains the same Student values as in TypicalStudents#getTypicalAddressBook()",
-  "students" : [ {
-    "name" : "Alice Pauline",
-    "phone" : "94351253",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "email" : "alice@example.com",
-    "subject" : "CS2109S"
-  }, {
-    "name" : "Benson Meier",
-    "phone" : "98765432",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "email" : "johnd@example.com",
-    "subject" : "MA1522"
-  }, {
-    "name" : "Carl Kurz",
-    "phone" : "95352563",
-    "address" : "wall street",
-    "email" : "heinz@example.com",
-    "subject" : "CS"
-  }, {
-    "name" : "Daniel Meier",
-    "phone" : "87652533",
-    "address" : "10th street",
-    "email" : "cornelia@example.com",
-    "subject" : "CS"
-  }, {
-    "name" : "Elle Meyer",
-    "phone" : "94823224",
-    "address" : "michegan ave",
-    "email" : "werner@example.com",
-    "subject" : "BZA"
-  }, {
-    "name" : "Fiona Kunz",
-    "phone" : "94832427",
-    "address" : "little tokyo",
-    "email" : "lydia@example.com",
-    "subject" : "CS2100"
-  }, {
-    "name" : "George Best",
-    "phone" : "94820442",
-    "address" : "4th street",
-    "email" : "anna@example.com",
-    "subject" : "CS2105"
-  }, {
-    "name" : "Harry Potter",
-    "phone" : "94824420",
-    "address" : "4th street",
-    "email" : "harry@gmail.com",
-    "subject" : "CS2103T"
-  } ],
+  "students": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "email": "alice@example.com",
+      "subjects": ["CS2109S"]
+    },
+    {
+      "name": "Benson Meier",
+      "phone": "98765432",
+      "address": "456, Orchard Road, #10-20",
+      "email": "johnd@example.com",
+      "subjects": ["MA1522"]
+    },
+    {
+      "name": "Carl Kurz",
+      "phone": "95352563",
+      "address": "789, Bukit Timah Road, #05-10",
+      "email": "heinz@example.com",
+      "subjects": ["CS"]
+    },
+    {
+      "name": "Daniel Meier",
+      "phone": "87652533",
+      "address": "321, Clementi Ave 3, #02-15",
+      "email": "cornelia@example.com",
+      "subjects": ["CS"]
+    },
+    {
+      "name": "Elle Meyer",
+      "phone": "94823224",
+      "address": "654, Tampines Street 62, #07-12",
+      "email": "werner@example.com",
+      "subjects": ["BZA"]
+    },
+    {
+      "name": "Fiona Kunz",
+      "phone": "94832427",
+      "address": "987, Pasir Ris Drive, #03-21",
+      "email": "lydia@example.com",
+      "subjects": ["CS2100"]
+    },
+    {
+      "name": "George Best",
+      "phone": "94820442",
+      "address": "555, Bedok North Ave 1, #11-22",
+      "email": "anna@example.com",
+      "subjects": ["CS2105"]
+    },
+    {
+      "name": "Harry Potter",
+      "phone": "94824420",
+      "address": "777, Changi Road, #09-33",
+      "email": "harry@gmail.com",
+      "subjects": ["CS2103T"]
+    }
+  ],
   "lessons": []
 }

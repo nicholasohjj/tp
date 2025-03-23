@@ -9,7 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
@@ -52,8 +52,8 @@ public class EditStudentDescriptorTest {
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
-        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        // different subjects -> returns false
+        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withSubjects(VALID_SUBJECT_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
@@ -64,8 +64,8 @@ public class EditStudentDescriptorTest {
                 + editStudentDescriptor.getName().orElse(null) + ", phone="
                 + editStudentDescriptor.getPhone().orElse(null) + ", email="
                 + editStudentDescriptor.getEmail().orElse(null) + ", address="
-                + editStudentDescriptor.getAddress().orElse(null) + ", tags="
-                + editStudentDescriptor.getTags().orElse(null) + ", assignments="
+                + editStudentDescriptor.getAddress().orElse(null) + ", subjects="
+                + editStudentDescriptor.getSubjects().orElse(null) + ", assignments="
                 + editStudentDescriptor.getAssignments().orElse(null) + "}";
         assertEquals(expected, editStudentDescriptor.toString());
     }
