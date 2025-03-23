@@ -3,8 +3,7 @@ layout: page
 title: User Guide
 ---
 
-TutorTrack is a **desktop app designed for freelance tutors to manage students, lessons, and assignments efficiently**. It is optimized for use via a **Command Line Interface (CLI)** while still providing the benefits of a **Graphical User Interface (GUI)**. If you can type fast, TutorTrack can help you manage your tutoring tasks faster than traditional GUI apps.
-
+TutorTrack is a **desktop application designed for freelance tutors** to efficiently manage their students, lessons, and assignments. It combines the speed of a **Command Line Interface (CLI)** with the convenience of a **Graphical User Interface (GUI)**, making it ideal for tutors who prefer typing over mouse interactions. If you can type fast, TutorTrack will help you manage your tutoring tasks faster than traditional GUI apps.
 ### Target Users
 
 TutorTrack is designed for:
@@ -26,18 +25,19 @@ TutorTrack is designed for:
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
+
+1. **Ensure Java 17 or above is installed** on your computer.<br>
    **Mac users:** Follow the installation guide [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 1. Download the latest `.jar` file from the [releases page](https://github.com/AY2425S2-CS2103T-T13-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your TutorTrack.
+1. Copy the `.jar` file to the folder you want to use as the _home folder_ for your TutorTrack.
 
-1. Open a command terminal, navigate to the folder containing the `.jar` file in using the `cd` command, and run the application with the following command:
+1. Open a command terminal, navigate to the folder containing the `.jar` file using the `cd` command, and run the application with:
     ```bash
     java -jar TutorTrack.jar
     ```
-   A GUI similar to the below should appear in a few seconds. The app comes preloaded with some sample data.<br>
+   A GUI similar to the below should appear in a few seconds, preloaded with sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type commands in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
