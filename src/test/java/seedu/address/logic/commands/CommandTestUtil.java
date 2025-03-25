@@ -21,6 +21,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
+import seedu.address.testutil.EditLessonDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 /**
@@ -74,16 +75,23 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditStudentDescriptor DESC_AMY;
-    public static final EditCommand.EditStudentDescriptor DESC_BOB;
+    public static final EditCommand.EditStudentDescriptor STUDENT_DESC_AMY;
+    public static final EditCommand.EditStudentDescriptor STUDENT_DESC_BOB;
+    public static final EditLessonCommand.EditLessonDescriptor LESSON_DESC_AMY;
+    public static final EditLessonCommand.EditLessonDescriptor LESSON_DESC_BOB;
 
     static {
-        DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
+        STUDENT_DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withSubjects(VALID_SUBJECT_FRIEND).build();
-        DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
+        STUDENT_DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withSubjects(VALID_SUBJECT_HUSBAND, VALID_SUBJECT_FRIEND).build();
+
+        LESSON_DESC_AMY = new EditLessonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withDate(VALID_DATE_AMY).withTime(VALID_TIME_AMY).withSubjects(VALID_SUBJECT_FRIEND).build();
+        LESSON_DESC_BOB = new EditLessonDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withDate(VALID_DATE_BOB).withTime(VALID_TIME_BOB).withSubjects(VALID_SUBJECT_FRIEND).build();
     }
 
     /**
@@ -141,5 +149,20 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredStudentList().size());
     }
+    //    /**
+    //     * Updates {@code model}'s filtered list to show only the lesson at the given {@code targetIndex} in the
+    //     * {@code model}'s address book.
+    //     */
+    //    public static void showLessonAtIndex(Model model, Index targetIndex) {
+    //        assertTrue(targetIndex.getZeroBased() < model.getFilteredLessonList().size());
+    //
+    //        Lesson lesson = model.getFilteredLessonList().get(targetIndex.getZeroBased());
+    //        final List<String> splitName = Arrays.asList(lesson.getName().fullName.split("\\s+"));
+    //        Predicate<Lesson> predicate =
+    //        model.updateFilteredLessonList(filteredLesson -> StringUtil
+    //                .containsWordIgnoreCase(filteredLesson.getName().fullName, splitName));
+    //
+    //        assertEquals(1, model.getFilteredLessonList().size());
+    //    }
 
 }
