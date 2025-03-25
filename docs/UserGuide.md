@@ -319,7 +319,7 @@ Install the app on the new computer and replace the empty data file with the one
 | **Add Lesson**        | `add_lesson n/NAME d/DATE t/TIME s/SUBJECT`<br> e.g. `add_lesson n/Jack d/16-10-2025 t/15:00 s/CS2103T`                                                                  |
 | **Edit Lesson**       | `edit_lesson INDEX [n/NAME] [d/DATE] [t/TIME] [s/SUBJECT]`<br> e.g. `edit_lesson n/Jack d/16-10-2025 t/15:00 s/CS2103T`                                                  |
 | **Delete Student**    | `delete_student INDEX`<br> e.g., `delete_student 3`                                                                                                                      |
-| **Add Assignment**    | `add_assignment STUDENT_INDEX as/ASSIGNMENT d/DATE` <br> e.g. `add_assignment 1 as/Math Homework d/23-07-2025                                                            |
+| **Add Assignment**    | `add_assignment STUDENT_INDEX as/ASSIGNMENT d/DATE` <br> e.g. `add_assignment 1 as/Math Homework d/23-07-2025`                                                           |
 | **Delete Assignment** | `delete_assignment INDEX as/ASSIGNMENT_NAME`<br> e.g., `delete_assignment 1 as/Assignment 1`                                                                             |
 | **Mark Assignment**   | `mark_assignment INDEX as/ASSIGNMENT_NAME` e.g., `mark_assignment 1 as/Assignment 1`                                                                                     |
 | **Unmark Assignment** | `unmark_assignment INDEX as/ASSIGNMENT_NAME` e.g., `mark_assignment 1 as/Assignment 1`                                                                                   |
