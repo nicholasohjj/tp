@@ -174,4 +174,8 @@ public class Student {
     public void unmarkAssignment(String assignmentName) {
         assignments.unmarkAssignment(assignmentName);
     }
+
+    public void deleteAssignment(String assignmentName) {
+        assignments.deleteAssignment(assignmentName);
+    }
 }
