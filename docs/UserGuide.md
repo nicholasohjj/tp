@@ -182,11 +182,11 @@ Example:
 You can edit the details of a lesson in the lesson list.
 You can edit individual details or edit multiple of them together.
 
-Format: `edit_student INDEX [n/STUDENT_NAME] [d/DATE] [t/TIME] [s/SUBJECT]`
+Format: `edit_lesson INDEX [n/STUDENT_NAME] [d/DATE] [t/TIME] [s/SUBJECT]`
 
 Examples:
-* `edit_student 1 d/16-02-2026`
-* `edit_student 2 n/Jone King t/16:00 d/18-9-2025 s/Math`
+* `edit_lesson 1 d/16-02-2026`
+* `edit_lesson 2 n/Jone King t/16:00 d/18-9-2025 s/Math`
 
 #### Deleting a lesson: `delete_lesson`
 
