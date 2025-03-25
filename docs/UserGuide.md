@@ -42,14 +42,15 @@ TutorTrack is designed for:
 
 1. Type commands in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    - `help`: Opens the help window.
-   - `list_students`: Lists all students.
-   - `list_lessons n/Jackie` : Lists all lessons under a student or all lessons in the data
    - `add_student n/John Doe p/91234567 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`: Adds a new student.
    - `add_lesson n/Johnson Kit d/15-09-2026 t/17:00 s/CS2103T` : Adds a lesson.
    - `add_assignment 2 as/CS2103T tP increment d/19-04-2025` : Adds an assignment to a student in the list.
-   - `mark_assignment 2 as/CS2101 CA2` : Marks the assignment under the student as complete
-   - `unmark_assignment 3 as/Science CA2` : Marks the assignment under the student as incomplete
+   - `mark_assignment 2 as/CS2101 CA2` : Marks the assignment under the student as complete.
+   - `unmark_assignment 3 as/Science CA2` : Marks the assignment under the student as incomplete.
+   - `list_students`: Lists all students.
+   - `list_lessons n/Jackie` : Lists all lessons under a student or all lessons in the data.
    - `delete_student 1`: Deletes the 1st student in the list.
+   - `delete_lesson 1`: Deletes the 1st lesson in the list.
    - `clear`: Deletes all students.
    - `exit`: Exits the app.
 
@@ -264,6 +265,20 @@ Examples:
 * `find_student Betsy` followed by `delete_student 1` deletes the 1st student in the results of the `find` command.
 -->
 
+### Deleting a lesson : `delete_lesson`
+
+Deletes the specified lesson from the lesson list.
+
+Format: `delete_lesson INDEX`
+
+* Deletes the lesson at the specified `INDEX`.
+* The index refers to the index number shown in the displayed lesson list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list_lesson` followed by `delete_lesson 2` deletes the 2nd lesson in the lesson list.
+* `list_lessons n/John Lee` followed by `delete_lesson 1` deletes the 1st lesson in the lesson list.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the student list.
@@ -316,9 +331,10 @@ Install the app on the new computer and replace the empty data file with the one
 |-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Student**       | `add_student n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT​` <br> e.g., `add_student n/John Doe p/91234567 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math` |
 | **Edit Student**      | `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`<br> e.g., `edit_student 1 p/91234567`                                                              |
+| **Delete Student**    | `delete_student INDEX`<br> e.g., `delete_student 3`                                                                                                                      |
 | **Add Lesson**        | `add_lesson n/NAME d/DATE t/TIME s/SUBJECT`<br> e.g. `add_lesson n/Jack d/16-10-2025 t/15:00 s/CS2103T`                                                                  |
 | **Edit Lesson**       | `edit_lesson INDEX [n/NAME] [d/DATE] [t/TIME] [s/SUBJECT]`<br> e.g. `edit_lesson n/Jack d/16-10-2025 t/15:00 s/CS2103T`                                                  |
-| **Delete Student**    | `delete_student INDEX`<br> e.g., `delete_student 3`                                                                                                                      |
+| **Delete Lesson**     | `delete_lesson INDEX`<br> e.g., `delete_lesson 1`                                                                                                                        |
 | **Add Assignment**    | `add_assignment STUDENT_INDEX as/ASSIGNMENT d/DATE` <br> e.g. `add_assignment 1 as/Math Homework d/23-07-2025`                                                           |
 | **Delete Assignment** | `delete_assignment INDEX as/ASSIGNMENT_NAME`<br> e.g., `delete_assignment 1 as/Assignment 1`                                                                             |
 | **Mark Assignment**   | `mark_assignment INDEX as/ASSIGNMENT_NAME` e.g., `mark_assignment 1 as/Assignment 1`                                                                                     |
