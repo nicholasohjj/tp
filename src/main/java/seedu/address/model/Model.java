@@ -88,6 +88,12 @@ public interface Model {
     void addLesson(Lesson lesson);
 
     /**
+     * Deletes the given lesson.
+     * The lesson must exist in the address book.
+     */
+    void deleteLesson(Lesson lesson);
+
+    /**
      * Returns true if a lesson with the same identity as {@code lesson} exists in the address book
      */
     boolean hasLesson(Lesson lesson);

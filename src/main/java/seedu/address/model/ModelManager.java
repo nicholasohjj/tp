@@ -129,6 +129,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        addressBook.removeLesson(lesson);
+    }
+
+    @Override
     public void setLesson(Lesson target, Lesson editedLesson) {
         requireAllNonNull(target, editedLesson);
 
