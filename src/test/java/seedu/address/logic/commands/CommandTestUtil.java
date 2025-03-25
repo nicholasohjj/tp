@@ -21,6 +21,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.testutil.EditLessonDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
@@ -136,6 +137,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredStudentList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the student at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -149,20 +151,17 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredStudentList().size());
     }
-    //    /**
-    //     * Updates {@code model}'s filtered list to show only the lesson at the given {@code targetIndex} in the
-    //     * {@code model}'s address book.
-    //     */
-    //    public static void showLessonAtIndex(Model model, Index targetIndex) {
-    //        assertTrue(targetIndex.getZeroBased() < model.getFilteredLessonList().size());
-    //
-    //        Lesson lesson = model.getFilteredLessonList().get(targetIndex.getZeroBased());
-    //        final List<String> splitName = Arrays.asList(lesson.getName().fullName.split("\\s+"));
-    //        Predicate<Lesson> predicate =
-    //        model.updateFilteredLessonList(filteredLesson -> StringUtil
-    //                .containsWordIgnoreCase(filteredLesson.getName().fullName, splitName));
-    //
-    //        assertEquals(1, model.getFilteredLessonList().size());
-    //    }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the lesson at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showLessonAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredLessonList().size());
+
+        Lesson lesson = model.getFilteredLessonList().get(targetIndex.getZeroBased());
+        model.updateFilteredLessonList(l -> l.equals(lesson));
+
+        assertEquals(1, model.getFilteredLessonList().size());
+    }
 }
