@@ -134,7 +134,6 @@ A student can have any number of subjects (including 0)
 
 Examples:
 * `add_student n/John Doe p/98765432 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`
-
 * `add_student n/Mary Jane p/12345678 e/maryjane@email.com a/Blk 47 Tampines Street 20, #17-35 s/Math s/Science`
 
 #### Editing a student: `edit_student`
@@ -177,6 +176,16 @@ Format: `add_lesson n/NAME s/SUBJECT d/DATE t/TIME​`
 
 Example:
 * `add_lesson n/Alice Chan d/17-09-2025 t/15:00 s/Math`
+
+#### Editing a lesson: `edit_lesson`
+You can edit the details of a lesson in the lesson list.
+You can edit individual details or edit multiple of them together.
+
+Format: `edit_student INDEX [n/STUDENT_NAME] [d/DATE] [t/TIME] [s/SUBJECT]`
+
+Examples:
+* `edit_student 1 d/16-02-2026`
+* `edit_student 2 n/Jone King t/16:00 d/18-9-2025 s/Math`
 
 #### Listing lessons : `list_lessons`
 
@@ -310,18 +319,24 @@ Install the app on the new computer and replace the empty data file with the one
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add Assignment** | `add_assignment STUDENT_INDEX as/ASSIGNMENT d/DATE` <br> e.g. `add_assignment 1 as/Math Homework d/23-07-2025
-**Add Lesson** | `add_lesson n/NAME d/DATE t/TIME s/SUBJECT`<br> e.g. `add_lesson n/Jack d/16-10-2025 t/15:00 s/CS2103T`
-**Add Student** | `add_student n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT​` <br> e.g., `add_student n/John Doe p/91234567 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`
-**Clear** | `clear`
-**Delete Assignment** | `delete_assignment INDEX as/ASSIGNMENT_NAME`<br> e.g., `delete_assignment 2 as/Assignment 2`
-**Delete Student** | `delete_student INDEX`<br> e.g., `delete_student 3`
-**Edit Student** | `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`<br> e.g., `edit_student 1 p/91234567`
-**Exit** | `exit`
-**Help** | `help`
-**List Students** | `list_students`
-**List Lessons** | `list_lessons [n/NAME]` <br> e.g. `list_lessons`, `list_lessons n/Sally Mood`
-**Mark Assignment** | `mark_assignment INDEX as/ASSIGNMENT_NAME` e.g., `mark_assignment 1 as/Assignment 1`
-**Unmark Assignment** | `unmark_assignment INDEX as/ASSIGNMENT_NAME` e.g., `mark_assignment 1 as/Assignment 1`
+| Action                | Format, Examples                                                                                                                                                         |
+|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Student**       | `add_student n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT​` <br> e.g., `add_student n/John Doe p/91234567 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math` |
+| **Edit Student**      | `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`<br> e.g., `edit_student 1 p/91234567`                                                              |
+| **Add Lesson**        | `add_lesson n/NAME d/DATE t/TIME s/SUBJECT`<br> e.g. `add_lesson n/Jack d/16-10-2025 t/15:00 s/CS2103T`                                                                  |
+| **Edit Lesson**       | `edit_lesson INDEX [n/NAME] [d/DATE] [t/TIME] [s/SUBJECT]`<br> e.g. `edit_lesson n/Jack d/16-10-2025 t/15:00 s/CS2103T`                                                  |
+| **Delete Student**    | `delete_student INDEX`<br> e.g., `delete_student 3`                                                                                                                      |
+| **Add Assignment**    | `add_assignment STUDENT_INDEX as/ASSIGNMENT d/DATE` <br> e.g. `add_assignment 1 as/Math Homework d/23-07-2025`                                                           |
+| **Delete Assignment** | `delete_assignment INDEX as/ASSIGNMENT_NAME`<br> e.g., `delete_assignment 1 as/Assignment 1`                                                                             |
+| **Mark Assignment**   | `mark_assignment INDEX as/ASSIGNMENT_NAME` e.g., `mark_assignment 1 as/Assignment 1`                                                                                     |
+| **Unmark Assignment** | `unmark_assignment INDEX as/ASSIGNMENT_NAME` e.g., `mark_assignment 1 as/Assignment 1`                                                                                   |
+| **List Students**     | `list_students`                                                                                                                                                          |
+| **List Lessons**      | `list_lessons [n/NAME]` <br> e.g. `list_lessons`, `list_lessons n/Sally Mood`                                                                                            |
+| **Clear**             | `clear`                                                                                                                                                                  |
+| **Help**              | `help`                                                                                                                                                                   |
+| **Exit**              | `exit`                                                                                                                                                                   |
+
+<!--
+**Edit** | `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [s/SUBJECT]…​`<br> e.g.,`edit_student 2 n/James Lee e/jameslee@example.com`
+**Find** | `find_student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_student James Jake`
+-->
