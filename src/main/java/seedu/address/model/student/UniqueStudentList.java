@@ -99,6 +99,10 @@ public class UniqueStudentList implements Iterable<Student> {
         internalList.setAll(students);
     }
 
+    /**
+     * Deletes an assignment from a student.
+     * The assignment must belong to a student in the list.
+     */
     public void deleteAssignment(Student target, String assignmentName) {
         requireAllNonNull(target, assignmentName);
         int index = internalList.indexOf(target);
