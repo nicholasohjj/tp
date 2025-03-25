@@ -50,6 +50,7 @@ TutorTrack is designed for:
    - `mark_assignment 2 as/CS2101 CA2` : Marks the assignment under the student as complete
    - `unmark_assignment 3 as/Science CA2` : Marks the assignment under the student as incomplete
    - `delete_student 1`: Deletes the 1st student in the list.
+   - `delete_lesson 1`: Deletes the 1st lesson in the list.
    - `clear`: Deletes all students.
    - `exit`: Exits the app.
 
@@ -181,11 +182,25 @@ Example:
 You can edit the details of a lesson in the lesson list.
 You can edit individual details or edit multiple of them together.
 
-Format: `edit_student INDEX [n/STUDENT_NAME] [d/DATE] [t/TIME] [s/SUBJECT]`
+Format: `edit_lesson INDEX [n/STUDENT_NAME] [d/DATE] [t/TIME] [s/SUBJECT]`
 
 Examples:
-* `edit_student 1 d/16-02-2026`
-* `edit_student 2 n/Jone King t/16:00 d/18-9-2025 s/Math`
+* `edit_lesson 1 d/16-02-2026`
+* `edit_lesson 2 n/Jone King t/16:00 d/18-9-2025 s/Math`
+
+#### Deleting a lesson: `delete_lesson`
+
+Deletes the specified lesson from the lesson list.
+
+Format: `delete_lesson INDEX`
+
+* Deletes the lesson at the specified `INDEX`.
+* The index refers to the index number shown in the displayed lesson list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list_lessons` followed by `delete_lesson 2` deletes the 2nd lesson in the lesson list.
+* `list_lessons n/John Lee` followed by `delete_lesson 1` deletes the 1st lesson in the lesson list.
 
 #### Listing lessons : `list_lessons`
 
@@ -300,6 +315,35 @@ Examples:
   ![result for 'find_student alex david'](images/findAlexDavidResult.png)
 -->
 
+### Clearing all entries : `clear`
+
+Clears all entries from the student list.
+
+Format: `clear`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Saving the data
+
+TutorTrack data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### Editing the data file
+
+TutorTrack data is saved automatically as a JSON file `[JAR file location]/data/TutorTrack.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, TutorTrack will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the TutorTrack to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</div>
+
+### Archiving data files `[coming in v2.0]`
+
+_Details coming soon ..._
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -319,22 +363,43 @@ Install the app on the new computer and replace the empty data file with the one
 
 ## Command summary
 
-| Action                | Format, Examples                                                                                                                                                         |
-|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Student**       | `add_student n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT​` <br> e.g., `add_student n/John Doe p/91234567 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math` |
-| **Edit Student**      | `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`<br> e.g., `edit_student 1 p/91234567`                                                              |
-| **Add Lesson**        | `add_lesson n/NAME d/DATE t/TIME s/SUBJECT`<br> e.g. `add_lesson n/Jack d/16-10-2025 t/15:00 s/CS2103T`                                                                  |
-| **Edit Lesson**       | `edit_lesson INDEX [n/NAME] [d/DATE] [t/TIME] [s/SUBJECT]`<br> e.g. `edit_lesson n/Jack d/16-10-2025 t/15:00 s/CS2103T`                                                  |
-| **Delete Student**    | `delete_student INDEX`<br> e.g., `delete_student 3`                                                                                                                      |
-| **Add Assignment**    | `add_assignment STUDENT_INDEX as/ASSIGNMENT d/DATE` <br> e.g. `add_assignment 1 as/Math Homework d/23-07-2025`                                                           |
-| **Delete Assignment** | `delete_assignment INDEX as/ASSIGNMENT_NAME`<br> e.g., `delete_assignment 1 as/Assignment 1`                                                                             |
-| **Mark Assignment**   | `mark_assignment INDEX as/ASSIGNMENT_NAME` e.g., `mark_assignment 1 as/Assignment 1`                                                                                     |
-| **Unmark Assignment** | `unmark_assignment INDEX as/ASSIGNMENT_NAME` e.g., `mark_assignment 1 as/Assignment 1`                                                                                   |
-| **List Students**     | `list_students`                                                                                                                                                          |
-| **List Lessons**      | `list_lessons [n/NAME]` <br> e.g. `list_lessons`, `list_lessons n/Sally Mood`                                                                                            |
-| **Clear**             | `clear`                                                                                                                                                                  |
-| **Help**              | `help`                                                                                                                                                                   |
-| **Exit**              | `exit`                                                                                                                                                                   |
+### 👤 Student Management
+
+| Action             | Format, Examples |
+|--------------------|------------------|
+| **Add Student**    | `add_student n/NAME p/PHONE e/EMAIL a/ADDRESS s/SUBJECT`<br>e.g., `add_student n/John Doe p/91234567 e/john@example.com a/123 Street s/Math` |
+| **Edit Student**   | `edit_student INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`<br>e.g., `edit_student 1 p/98765432` |
+| **Delete Student** | `delete_student INDEX`<br>e.g., `delete_student 3` |
+| **List Students**  | `list_students` |
+
+
+### 📚 Lesson Management
+
+| Action             | Format, Examples |
+|--------------------|------------------|
+| **Add Lesson**     | `add_lesson n/STUDENT_NAME d/DATE t/TIME s/SUBJECT`<br>e.g., `add_lesson n/Jack d/16-10-2025 t/15:00 s/CS2103T` |
+| **Edit Lesson**    | `edit_lesson INDEX [n/STUDENT_NAME] [d/DATE] [t/TIME] [s/SUBJECT]`<br>e.g., `edit_lesson 1 d/20-10-2025 t/14:00` |
+| **Delete Lesson**  | `delete_lesson INDEX`<br>e.g., `delete_lesson 1` |
+| **List Lessons**   | `list_lessons [n/STUDENT_NAME]`<br>e.g., `list_lessons`, `list_lessons n/Sally Mood` |
+
+
+### 📝 Assignment Management
+
+| Action                | Format, Examples |
+|------------------------|------------------|
+| **Add Assignment**     | `add_assignment STUDENT_INDEX as/ASSIGNMENT d/DATE`<br>e.g., `add_assignment 1 as/Math Homework d/23-07-2025` |
+| **Delete Assignment**  | `delete_assignment STUDENT_INDEX as/ASSIGNMENT_NAME`<br>e.g., `delete_assignment 1 as/Assignment 1` |
+| **Mark Assignment**    | `mark_assignment STUDENT_INDEX as/ASSIGNMENT_NAME`<br>e.g., `mark_assignment 1 as/Assignment 1` |
+| **Unmark Assignment**  | `unmark_assignment STUDENT_INDEX as/ASSIGNMENT_NAME`<br>e.g., `unmark_assignment 1 as/Assignment 1` |
+
+
+### 🧹 General Utility
+
+| Action         | Format, Examples |
+|----------------|------------------|
+| **Clear**      | `clear` |
+| **Help**       | `help` |
+| **Exit**       | `exit` |                                                                                                                                                                  |
 
 <!--
 **Edit** | `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [s/SUBJECT]…​`<br> e.g.,`edit_student 2 n/James Lee e/jameslee@example.com`
