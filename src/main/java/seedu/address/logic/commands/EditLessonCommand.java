@@ -131,7 +131,7 @@ public class EditLessonCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editStudentDescriptor", editLessonDescriptor)
+                .add("editLessonDescriptor", editLessonDescriptor)
                 .toString();
     }
 
@@ -227,10 +227,10 @@ public class EditLessonCommand extends Command {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
+                    .add("subjects", subjects)
                     .add("name", name)
                     .add("date", date)
                     .add("time", time)
-                    .add("subjects", subjects)
                     .toString();
         }
 
