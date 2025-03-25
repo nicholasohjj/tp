@@ -28,7 +28,7 @@ public class Lesson {
 
     /**
      * Every field must be present and not null.
-     * This is the original constructor for student from AB3
+     * This is the original constructor for lesson from AB3
      */
     public Lesson(Set<Subject> subjects, Name studentName, Date date, Time time) {
         requireAllNonNull(subjects, studentName, date, time);
