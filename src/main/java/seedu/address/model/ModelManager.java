@@ -102,6 +102,7 @@ public class ModelManager implements Model {
         addressBook.removeStudent(target);
     }
 
+
     @Override
     public void addStudent(Student student) {
         addressBook.addStudent(student);

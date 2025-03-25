@@ -90,7 +90,7 @@ public class ListLessonsCommandTest {
             if (input.isEmpty()) {
                 return PREDICATE_SHOW_ALL_LESSONS;
             } else {
-                return lesson -> StringUtil.containsWordIgnoreCase(lesson.getName().fullName, input);
+                return lesson -> StringUtil.containsWordIgnoreCase(lesson.getStudentName().fullName, input);
             }
         }
     }

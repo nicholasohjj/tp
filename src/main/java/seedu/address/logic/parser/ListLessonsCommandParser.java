@@ -36,7 +36,8 @@ public class ListLessonsCommandParser implements Parser<ListLessonsCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
         String keyword = argMultimap.getValue(PREFIX_NAME).get();
 
-        Predicate<Lesson> predicate = lesson -> StringUtil.containsWordIgnoreCase(lesson.getName().fullName, keyword);
+        Predicate<Lesson> predicate = lesson -> StringUtil.containsWordIgnoreCase(lesson
+                .getStudentName().fullName, keyword);
         return new ListLessonsCommand(predicate);
     }
 

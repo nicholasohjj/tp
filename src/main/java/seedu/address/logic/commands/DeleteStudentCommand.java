@@ -9,10 +9,13 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
+
 /**
- * Deletes a student identified using it's displayed index from the address book.
+ * Deletes a student identified using it's displayed index from the address book,
+ * along with all their associated lessons and assignments.
  */
 public class DeleteStudentCommand extends Command {
 
@@ -23,7 +26,8 @@ public class DeleteStudentCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Student %1$s\ndeleted successfully.";
+    public static final String MESSAGE_DELETE_STUDENT_SUCCESS =
+            "Student %1$s\ndeleted successfully, along with all associated lessons and assignments.";
 
     private final Index targetIndex;
 
@@ -41,7 +45,17 @@ public class DeleteStudentCommand extends Command {
         }
 
         Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        // Delete all lessons associated with the student
+        List<Lesson> lessonsToDelete = model.getFilteredLessonList()
+                .stream()
+                .filter(lesson -> lesson.getStudentName().equals(studentToDelete.getName()))
+                .toList();
+        lessonsToDelete.forEach(model::deleteLesson);
+
+        // Finally, delete the student
         model.deleteStudent(studentToDelete);
+
         return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, Messages.format(studentToDelete)), true);
     }
 

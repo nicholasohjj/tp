@@ -62,7 +62,7 @@ public class AddLessonCommand extends Command {
         if (model.hasLesson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
-        if (!model.hasStudent(new Student(toAdd.getName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+        if (!model.hasStudent(new Student(toAdd.getStudentName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 new HashSet<Subject>(), new UniqueAssignmentList()))) {
             throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
         }

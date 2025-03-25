@@ -60,7 +60,7 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(lesson.getSubjects())
                 .append(" lesson; Student Name: ")
-                .append(lesson.getName())
+                .append(lesson.getStudentName())
                 .append("; Date: ")
                 .append(lesson.getDate())
                 .append("; Time: ")

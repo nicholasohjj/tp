@@ -86,7 +86,7 @@ public class EditLessonCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
 
-        if (!model.hasStudent(new Student(editedLesson.getName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+        if (!model.hasStudent(new Student(editedLesson.getStudentName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 new HashSet<Subject>(), new UniqueAssignmentList()))) {
             throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
         }
@@ -103,7 +103,7 @@ public class EditLessonCommand extends Command {
     private static Lesson createEditedLesson(Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor) {
         assert lessonToEdit != null;
 
-        Name updatedName = editLessonDescriptor.getName().orElse(lessonToEdit.getName());
+        Name updatedName = editLessonDescriptor.getName().orElse(lessonToEdit.getStudentName());
         Date updatedDate = editLessonDescriptor.getDate().orElse(lessonToEdit.getDate());
         Time updatedTime = editLessonDescriptor.getTime().orElse(lessonToEdit.getTime());
         Set<Subject> updatedSubjects = editLessonDescriptor.getSubjects().orElse(lessonToEdit.getSubjects());

@@ -39,7 +39,7 @@ public class Lesson {
 
     }
 
-    public Name getName() {
+    public Name getStudentName() {
         return studentName;
     }
 
