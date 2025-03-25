@@ -90,7 +90,8 @@ Format: `help`
 
 ### Adding a student: `add_student`
 
-Adds a student to the student list.
+Adds a student to the student list, with their name, phone number, address, email and subjects.
+You can add multiple subjects by using the subject prefix  `s/` for each subject.
 
 Format: `add_student n/STUDENT_NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL s/SUBJECT ​`
 
@@ -103,7 +104,18 @@ A student can have any number of subjects (including 0)
 Examples:
 * `add_student n/John Doe p/98765432 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`
 
-* `add_student n/Mary Jane p/12345678 e/maryjane@email.com a/Blk 47 Tampines Street 20, #17-35 s/Math Science`
+* `add_student n/Mary Jane p/12345678 e/maryjane@email.com a/Blk 47 Tampines Street 20, #17-35 s/Math s/Science`
+
+### Editing a student: `edit_student`
+You can edit the details of a student in the student list. 
+You can edit individual details or edit multiple of them together.
+Editing subject is not available yet but you will have it in future versions.
+
+Format: `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
+
+Examples:
+* `edit_student 1 p/91234567`
+* `edit_student 2 n/Betsy Crower e/betsy@gmail.com a/Blk 123, Clementi Ave 2, #08-25`
 
 ### Marking an assignment: `mark_assignment`
 
@@ -149,6 +161,16 @@ Format: `add_assignment STUDENT_INDEX as/ASSIGNMENT d/DATE`
 
 Example:
 * `add_assignment 2 as/Science 101 d/27-09-2026`
+
+### Deleting an assignment: `delete_assignment`
+
+Deletes the specified assignment from the student of the given index.
+
+Format: `delete_assignment INDEX as/ASSIGNMENT_NAME`
+
+Example:
+* `delete_assignment 1 as/Assignment 1`
+
 
 ### Listing all students : `list_students`
 
