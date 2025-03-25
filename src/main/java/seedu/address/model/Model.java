@@ -92,6 +92,14 @@ public interface Model {
      */
     boolean hasLesson(Lesson lesson);
 
+    /**
+     * Replaces the given lesson {@code target} with {@code editedLesson}.
+     * {@code target} must exist in the address book.
+     * The lesson identity of {@code editedStudent} must not be the same
+     * as another existing lesson in the address book.
+     */
+    void setLesson(Lesson target, Lesson editedLesson);
+
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
 
