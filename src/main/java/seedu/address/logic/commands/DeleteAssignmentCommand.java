@@ -27,7 +27,7 @@ public class DeleteAssignmentCommand extends Command {
             + "Parameters: ASSIGNMENT NAME (must be a string)\n"
             + "Example: " + COMMAND_WORD + " 1 as/Math Exercise 1";
 
-    public static final String MESSAGE_DELETE_ASSIGNMENT_SUCCESS = "Assignment %1$s\ndeleted successfully.";
+    public static final String MESSAGE_DELETE_ASSIGNMENT_SUCCESS = "Assignment %1$s deleted successfully.";
     public static final String MESSAGE_INVALID_ASSIGNMENT_DISPLAYED = "The assignment name provided cannot be found";
     private final Index targetIndex;
     private final String assignmentName;
@@ -57,7 +57,7 @@ public class DeleteAssignmentCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_ASSIGNMENT_DISPLAYED);
         }
 
-        studentToDeleteAssignment.deleteAssignment(assignmentName);
+        model.deleteAssignment(studentToDeleteAssignment, assignmentName);
         return new CommandResult(String.format(MESSAGE_DELETE_ASSIGNMENT_SUCCESS,
                 Messages.format(studentToDeleteAssignment, assignmentToDelete)));
     }

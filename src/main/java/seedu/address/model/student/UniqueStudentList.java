@@ -99,6 +99,17 @@ public class UniqueStudentList implements Iterable<Student> {
         internalList.setAll(students);
     }
 
+    public void deleteAssignment(Student target, String assignmentName) {
+        requireAllNonNull(target, assignmentName);
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new StudentNotFoundException();
+        }
+        Student student = internalList.get(index);
+        student.deleteAssignment(assignmentName);
+        internalList.set(index, student);
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

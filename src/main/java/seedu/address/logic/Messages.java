@@ -73,7 +73,7 @@ public class Messages {
     public static String format(Student student, Assignment assignment) {
         final StringBuilder builder = new StringBuilder();
         builder.append(assignment.getAssignmentName())
-                .append("; For student: ")
+                .append(" for student: ")
                 .append(student.getName());
         return builder.toString();
     }

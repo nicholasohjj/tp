@@ -82,6 +82,12 @@ public interface Model {
     void setStudent(Student target, Student editedStudent);
 
     /**
+     * Deletes the given assignment to the student
+     * {@code assignment} must not already exist in the student
+     */
+    void deleteAssignment(Student student, String assignmentName);
+
+    /**
      * Adds the given lesson
      * {@code lesson} must not already exist in the address book
      */

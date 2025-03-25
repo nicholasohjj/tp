@@ -109,6 +109,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         students.remove(key);
     }
 
+    //// Assignment-level operations
+
+    public void deleteAssignment(Student student, String assignmentName) {
+        students.deleteAssignment(student, assignmentName);
+    }
+
     //// lesson-level methods
 
     /**
