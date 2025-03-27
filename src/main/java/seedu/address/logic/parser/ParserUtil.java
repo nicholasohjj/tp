@@ -154,4 +154,34 @@ public class ParserUtil {
         }
         return subjectSet;
     }
+
+    /**
+     * Parses a {@code String assignmentName} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code assignmentName} is invalid.
+     */
+    public static String parseAssignmentName(String assignmentName) throws ParseException {
+        requireNonNull(assignmentName);
+        String trimmedAssignmentName = assignmentName.trim();
+        if (!Subject.isValidSubjectName(trimmedAssignmentName)) {
+            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedAssignmentName;
+    }
+
+    /**
+     * Parses a {@code String newAssignmentName} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code newAssignmentName} is invalid.
+     */
+    public static String parseNewAssignmentName(String newAssignmentName) throws ParseException {
+        requireNonNull(newAssignmentName);
+        String trimmedNewAssignmentName = newAssignmentName.trim();
+        if (!Subject.isValidSubjectName(trimmedNewAssignmentName)) {
+            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedNewAssignmentName;
+    }
 }

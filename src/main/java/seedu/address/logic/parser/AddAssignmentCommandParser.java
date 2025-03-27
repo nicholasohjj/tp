@@ -33,7 +33,7 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssignmentCommand.MESSAGE_USAGE), ive);
         }
 
-        String assignmentName = argMultimap.getValue(PREFIX_ASSIGNMENT).orElse("");
+        String assignmentName = ParserUtil.parseAssignmentName(argMultimap.getValue(PREFIX_ASSIGNMENT).orElse(""));
         Date dueDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(""));
 
         return new AddAssignmentCommand(index, new Assignment(assignmentName, dueDate));
