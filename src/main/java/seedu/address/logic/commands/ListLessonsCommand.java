@@ -2,9 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -24,7 +22,8 @@ public class ListLessonsCommand extends Command {
             + "the specified keyword (case-insensitive) and displays them as a list with index numbers.\n"
             + "If no keywords are specified, displays all lessons.\n"
             + "Parameters: KEYWORD + " + PREFIX_NAME + "[KEYWORD]...\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice or "
+            + COMMAND_WORD;
 
     private final Predicate<Lesson> predicate;
 
@@ -39,7 +38,7 @@ public class ListLessonsCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredLessonList(Optional.of(predicate).orElse(PREDICATE_SHOW_ALL_LESSONS));
+        model.updateFilteredLessonList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_LESSONS_LISTED_OVERVIEW, model.getFilteredLessonList().size()), true);
     }
@@ -55,8 +54,8 @@ public class ListLessonsCommand extends Command {
             return false;
         }
 
-        ListLessonsCommand otherFindCommand = (ListLessonsCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        ListLessonsCommand otherFindStudentCommand = (ListLessonsCommand) other;
+        return predicate.equals(otherFindStudentCommand.predicate);
     }
 
     @Override

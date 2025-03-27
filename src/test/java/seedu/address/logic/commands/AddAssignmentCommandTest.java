@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -26,10 +26,10 @@ public class AddAssignmentCommandTest {
 
     @Test
     public void execute_duplicateAssignment_throwsCommandException() {
-        Student student = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student student = model.getFilteredStudentList().get(INDEX_FIRST.getZeroBased());
         Assignment assignment = new Assignment("Assignment 1", new Date("10-04-2025"));
         student.addAssignment(assignment);
-        AddAssignmentCommand addAssignmentCommand = new AddAssignmentCommand(INDEX_FIRST_STUDENT, assignment);
+        AddAssignmentCommand addAssignmentCommand = new AddAssignmentCommand(INDEX_FIRST, assignment);
 
         assertThrows(DuplicateAssignmentException.class,
                 AddAssignmentCommand.MESSAGE_DUPLICATE_ASSIGNMENT, () -> addAssignmentCommand.execute(model));

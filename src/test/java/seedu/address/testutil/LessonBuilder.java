@@ -15,7 +15,7 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class LessonBuilder {
 
-    public static final String DEFAULT_NAME = "John Baker";
+    public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_SUBJECT = "CS2103T";
     public static final String DEFAULT_DATE = "11-08-2025";
     public static final String DEFAULT_TIME = "14:00";
@@ -33,6 +33,7 @@ public class LessonBuilder {
         date = new Date(DEFAULT_DATE);
         time = new Time(DEFAULT_TIME);
         subjects = new HashSet<>();
+        subjects.add(new Subject(DEFAULT_SUBJECT));
     }
 
     /**

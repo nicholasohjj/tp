@@ -134,6 +134,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Removes {@code lesson} from this {@code AddressBook}.
+     * {@code lesson} must exist in the address book.
+     */
+    public void removeLesson(Lesson lesson) {
+        lessons.remove(lesson);
+    }
+
+    /**
      * Replaces the given lesson {@code target} in the list with {@code editedLesson}.
      * {@code target} must exist in the address book.
      * The lesson identity of {@code editedLesson} must not be the same as
