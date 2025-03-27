@@ -9,7 +9,6 @@ skinparam {
     classBackgroundColor #000000
     classBorderColor MODEL_COLOR
     classArrowColor MODEL_COLOR
-    
 }
 
 title "Class Diagram: Student Management Structure"
@@ -77,5 +76,4 @@ Student "1" --> "*" Subject : subjectged with
 UniqueSubjectList -[hidden]right- UniqueStudentList
 Name -[hidden]down- Phone
 Email -[hidden]down- Address
-
 @enduml
