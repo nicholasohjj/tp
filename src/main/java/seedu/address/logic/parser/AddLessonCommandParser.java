@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddLessonCommand;
@@ -14,7 +15,7 @@ import seedu.address.model.datetimeutil.Date;
 import seedu.address.model.datetimeutil.Time;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Subject;
+import seedu.address.model.subject.Subject;
 
 /**
  * Parses input arguments and creates a new AddLessonCommand object
@@ -39,9 +40,9 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
-        Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
+        Set<Subject> subjectList = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
 
-        Lesson lesson = new Lesson(subject, name, date, time);
+        Lesson lesson = new Lesson(subjectList, name, date, time);
 
         return new AddLessonCommand(lesson);
     }

@@ -1,7 +1,10 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.lesson.Lesson;
@@ -30,7 +33,7 @@ public class LessonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label subject;
+    private FlowPane subjects;
     @FXML
     private Label date;
     @FXML
@@ -46,6 +49,8 @@ public class LessonCard extends UiPart<Region> {
         name.setText(lesson.getName().fullName);
         date.setText(lesson.getDate().date);
         time.setText(lesson.getTime().time);
-        subject.setText(lesson.getSubject().subject);
+        lesson.getSubjects().stream()
+                .sorted(Comparator.comparing(subject -> subject.subjectName))
+                .forEach(subject -> subjects.getChildren().add(new Label(subject.subjectName)));
     }
 }

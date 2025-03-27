@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
@@ -16,6 +17,7 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX = "The student index provided is invalid!";
+    public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX = "The lesson index provided is invalid!";
     public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d students listed!";
     public static final String MESSAGE_LESSONS_LISTED_OVERVIEW = "%1$d lessons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
@@ -46,8 +48,8 @@ public class Messages {
                 .append(student.getEmail())
                 .append("; Address: ")
                 .append(student.getAddress())
-                .append("; Tags: ");
-        student.getTags().forEach(builder::append);
+                .append("; Subjects: ");
+        student.getSubjects().forEach(builder::append);
         return builder.toString();
     }
 
@@ -56,8 +58,8 @@ public class Messages {
      */
     public static String format(Lesson lesson) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(lesson.getSubject())
-                .append(" lesson; Student Name:")
+        builder.append(lesson.getSubjects())
+                .append(" lesson; Student Name: ")
                 .append(lesson.getName())
                 .append("; Date: ")
                 .append(lesson.getDate())
@@ -66,4 +68,14 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code Assignment} for display to the user.
+     */
+    public static String format(Student student, Assignment assignment) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(assignment.getAssignmentName())
+                .append("; For student: ")
+                .append(student.getName());
+        return builder.toString();
+    }
 }

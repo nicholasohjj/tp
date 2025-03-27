@@ -26,7 +26,7 @@ import seedu.address.model.datetimeutil.Date;
 import seedu.address.model.datetimeutil.Time;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Subject;
+import seedu.address.model.subject.Subject;
 import seedu.address.testutil.LessonBuilder;
 
 public class AddLessonCommandParserTest {

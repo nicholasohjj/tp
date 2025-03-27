@@ -18,7 +18,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.subject.Subject;
 
 /**
  * Adds lesson to the addressbook
@@ -34,10 +34,10 @@ public class AddLessonCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME "
-            + PREFIX_SUBJECT + "SUBJECT "
+            + PREFIX_SUBJECT + "SUBJECT\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_DATE + "17/03/2025 "
+            + PREFIX_NAME + "Alex Yeoh "
+            + PREFIX_DATE + "17-09-2027 "
             + PREFIX_TIME + "14:00 "
             + PREFIX_SUBJECT + "Science";
 
@@ -62,8 +62,8 @@ public class AddLessonCommand extends Command {
         if (model.hasLesson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
-        if (!model.hasStudent(new Student(toAdd.getName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, toAdd.getSubject(),
-                new HashSet<Tag>(), new UniqueAssignmentList()))) {
+        if (!model.hasStudent(new Student(toAdd.getName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                new HashSet<Subject>(), new UniqueAssignmentList()))) {
             throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
         }
 

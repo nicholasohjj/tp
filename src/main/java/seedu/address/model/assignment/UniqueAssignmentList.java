@@ -136,4 +136,15 @@ public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<As
             }
         }
     }
+
+    /**
+     * Deletes an assignment from the list.
+     */
+    public void deleteAssignment(String assignmentName) {
+        for (Assignment assignment : internalList) {
+            if (assignment.getAssignmentName().equals(assignmentName)) {
+                internalList.remove(assignment);
+            }
+        }
+    }
 }

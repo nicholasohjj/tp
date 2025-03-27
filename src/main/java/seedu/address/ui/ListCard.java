@@ -33,8 +33,6 @@ public class ListCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label subject;
-    @FXML
     private Label phone;
     @FXML
     private Label address;
@@ -45,7 +43,7 @@ public class ListCard extends UiPart<Region> {
     @FXML
     private Label time;
     @FXML
-    private FlowPane tags;
+    private FlowPane subjects;
     @FXML
     private FlowPane assignments;
 
@@ -60,7 +58,9 @@ public class ListCard extends UiPart<Region> {
         name.setText(lesson.getName().fullName);
         date.setText(lesson.getDate().date);
         time.setText(lesson.getTime().time);
-        subject.setText(lesson.getSubject().subject);
+        lesson.getSubjects().stream()
+                .sorted(Comparator.comparing(subject -> subject.subjectName))
+                .forEach(subject -> subjects.getChildren().add(new Label(subject.subjectName)));
     }
 
     /**
@@ -75,10 +75,9 @@ public class ListCard extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         address.setText(student.getAddress().value);
         email.setText(student.getEmail().value);
-        subject.setText(student.getSubject().subject);
-        student.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        student.getSubjects().stream()
+                .sorted(Comparator.comparing(subject -> subject.subjectName))
+                .forEach(subject -> subjects.getChildren().add(new Label(subject.subjectName)));
         student.getAssignments().asUnmodifiableObservableList().stream()
                 .sorted(Comparator.comparing(assignment -> assignment.dueDate))
                 .forEach(assignment -> assignments.getChildren()

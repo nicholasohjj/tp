@@ -23,6 +23,7 @@ public class JsonSerializableAddressBookTest {
     private static final Path INVALID_LESSON_FILE = TEST_DATA_FOLDER.resolve("invalidLessonAddressBook.json");
     private static final Path DUPLICATE_LESSON_FILE = TEST_DATA_FOLDER.resolve("duplicateLessonAddressBook.json");
 
+
     @Test
     public void toModelType_typicalStudentsFile_success() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_STUDENTS_FILE,
