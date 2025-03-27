@@ -20,15 +20,6 @@ public class EditAssignmentDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditAssignmentDescriptor} with fields containing {@code assignment}'s details
-     */
-    public EditAssignmentDescriptorBuilder(Assignment assignment) {
-        descriptor = new EditAssignmentDescriptor();
-        descriptor.setNewAssignmentName(assignment.getAssignmentName()); // Assuming Assignment has a getName() method
-        descriptor.setDate(assignment.getDueDate()); // Assuming Assignment has a getDate() method
-    }
-
-    /**
      * Sets the {@code newAssignmentName} of the {@code EditAssignmentDescriptor} that we are building.
      */
     public EditAssignmentDescriptorBuilder withNewAssignmentName(String newAssignmentName) {

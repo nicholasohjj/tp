@@ -169,19 +169,4 @@ public class ParserUtil {
         }
         return trimmedAssignmentName;
     }
-
-    /**
-     * Parses a {@code String newAssignmentName} into a {@code String}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code newAssignmentName} is invalid.
-     */
-    public static String parseNewAssignmentName(String newAssignmentName) throws ParseException {
-        requireNonNull(newAssignmentName);
-        String trimmedNewAssignmentName = newAssignmentName.trim();
-        if (!Subject.isValidSubjectName(trimmedNewAssignmentName)) {
-            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
-        }
-        return trimmedNewAssignmentName;
-    }
 }

@@ -44,7 +44,7 @@ public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand
 
         if (argMultimap.getValue(PREFIX_NEW_ASSIGNMENT).isPresent()) {
             editAssignmentDescriptor.setNewAssignmentName(ParserUtil
-                    .parseNewAssignmentName(argMultimap.getValue(PREFIX_NEW_ASSIGNMENT).get()));
+                    .parseAssignmentName(argMultimap.getValue(PREFIX_NEW_ASSIGNMENT).get()));
         }
 
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
