@@ -169,7 +169,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_failure() {
         // More extensive testing of duplicate parameter detections is done in
-        // AddCommandParserTest#parse_repeatedNonSubjectValue_failure()
+        // AddStudentCommandParserTest#parse_repeatedNonSubjectValue_failure()
 
         // valid followed by invalid
         Index targetIndex = INDEX_FIRST;
