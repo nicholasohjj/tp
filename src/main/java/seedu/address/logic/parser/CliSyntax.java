@@ -14,5 +14,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_ASSIGNMENT = new Prefix("as/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_TIME = new Prefix("t/");
+    public static final Prefix PREFIX_NEW_ASSIGNMENT = new Prefix("nas/");
 
 }

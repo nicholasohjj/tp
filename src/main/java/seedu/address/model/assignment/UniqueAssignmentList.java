@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.assignment.expections.AssignmentNotFoundException;
 import seedu.address.model.assignment.expections.DuplicateAssignmentException;
 
 /**
@@ -55,7 +56,7 @@ public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<As
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new DuplicateAssignmentException();
+            throw new AssignmentNotFoundException();
         }
 
         if (!target.isSameAssignment(editedAssignment) && contains(editedAssignment)) {
@@ -149,5 +150,18 @@ public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<As
                 break;
             }
         }
+    }
+
+    /**
+     * Returns a specified assignment from the list.
+     * @param assignmentName
+     */
+    public Assignment getAssignment(String assignmentName) {
+        for (Assignment assignment : internalList) {
+            if (assignment.getAssignmentName().equals(assignmentName)) {
+                return assignment;
+            }
+        }
+        return null;
     }
 }
