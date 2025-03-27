@@ -19,6 +19,9 @@ import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.datetimeutil.Date;
 import seedu.address.model.student.Student;
 
+/**
+ * Edits the details of an existing assignment in the address book.
+ */
 public class EditAssignmentCommand extends Command {
 
     public static final String COMMAND_WORD = "edit_assignment";
@@ -47,7 +50,8 @@ public class EditAssignmentCommand extends Command {
      * @param index of the student in the filtered student list to edit
      * @param editAssignmentDescriptor details to edit the assignment with
      */
-    public EditAssignmentCommand(Index index, String assignmentName,EditAssignmentDescriptor editAssignmentDescriptor) {
+    public EditAssignmentCommand(Index index, String assignmentName,
+                                 EditAssignmentDescriptor editAssignmentDescriptor) {
         requireNonNull(index);
         requireNonNull(assignmentName);
         requireNonNull(editAssignmentDescriptor);
@@ -129,6 +133,10 @@ public class EditAssignmentCommand extends Command {
         return new Assignment(updatedAssignmentName, updatedDate);
     }
 
+    /**
+     * Stores the details to edit the assignment with. Each non-empty field value will replace the
+     * corresponding field value of the assignment.
+     */
     public static class EditAssignmentDescriptor {
         private String newAssignmentName;
         private Date date;
