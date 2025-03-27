@@ -23,7 +23,7 @@ public class DeleteStudentCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Student %1$s\ndeleted successfully.";
+    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Student %1$s deleted successfully.";
 
     private final Index targetIndex;
 
