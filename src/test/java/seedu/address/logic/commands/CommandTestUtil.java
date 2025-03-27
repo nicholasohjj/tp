@@ -37,8 +37,6 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_ASSIGNMENT_AMY = "Math Exercise 1";
-    public static final String VALID_ASSIGNMENT_BOB = "English Essay";
     public static final String VALID_SUBJECT_HUSBAND = "husband";
     public static final String VALID_SUBJECT_FRIEND = "friend";
     public static final String VALID_SUBJECT_AMY = "CS2103T";
@@ -60,9 +58,7 @@ public class CommandTestUtil {
     public static final String SUBJECT_DESC_HUSBAND = " " + PREFIX_SUBJECT + VALID_SUBJECT_HUSBAND;
     public static final String SUBJECT_DESC_AMY = " " + PREFIX_SUBJECT + VALID_SUBJECT_AMY;
     public static final String SUBJECT_DESC_BOB = " " + PREFIX_SUBJECT + VALID_SUBJECT_BOB;
-    public static final String DATE_DESC_AMY = " " + PREFIX_DATE + VALID_DATE_AMY;
     public static final String DATE_DESC_BOB = " " + PREFIX_DATE + VALID_DATE_BOB;
-    public static final String TIME_DESC_AMY = " " + PREFIX_TIME + VALID_TIME_AMY;
     public static final String TIME_DESC_BOB = " " + PREFIX_TIME + VALID_TIME_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names

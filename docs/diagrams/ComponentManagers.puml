@@ -4,6 +4,19 @@ skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
 
+
+skinparam {
+    ArrowThickness 1.3
+    ArrowColor LOGIC_COLOR_T4
+    ClassFontStyle bold
+    ClassFontSize 13
+    PackageBorderColor #444444
+    PackageFontSize 15
+    PackageFontStyle bold
+}
+
+title "Component Dependency Diagram"
+
 package Logic as LogicPackage {
 Class "<<interface>>\nLogic" as Logic
 Class LogicManager
@@ -26,6 +39,7 @@ LogicManager .up.|> Logic
 ModelManager .up.|> Model
 StorageManager .up.|> Storage
 
-LogicManager --> Model
-LogicManager --> Storage
+LogicManager -> Model : uses
+LogicManager -> Storage : saves to
+
 @enduml

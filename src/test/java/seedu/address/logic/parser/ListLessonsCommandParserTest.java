@@ -16,17 +16,17 @@ public class ListLessonsCommandParserTest {
 
     @Test
     public void parse_emptyArg_showsAllLessons() {
-        ListLessonsCommand expectedFindCommand =
+        ListLessonsCommand expectedFindStudentCommand =
                 new ListLessonsCommand(PREDICATE_SHOW_ALL_LESSONS);
-        assertParseSuccess(parser, "     ", expectedFindCommand);
+        assertParseSuccess(parser, "     ", expectedFindStudentCommand);
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validArgs_returnsFindStudentCommand() {
         // leading and trailing whitespaces
-        ListLessonsCommand expectedFindCommand =
+        ListLessonsCommand expectedFindStudentCommand =
                 new ListLessonsCommand(new StudentNameLessonPredicate("Alice"));
-        assertParseSuccess(parser, " n/ Alice ", expectedFindCommand);
+        assertParseSuccess(parser, " n/ Alice ", expectedFindStudentCommand);
 
         // blank keywords are not allowed
         assertParseFailure(parser, " n/ ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,

@@ -9,7 +9,7 @@ Freelance tutors often struggle with managing student records efficiently using 
 
 Our product provides a CLI-based, lightweight tutor management system that allows tutors to:
 * Quickly organise student contact details.
-* Track lesson schedules. 
+* Track lesson schedules.
 * Log student progress.
 
 The project is built upon an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.

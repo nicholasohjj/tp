@@ -52,6 +52,7 @@ TutorTrack is designed for:
    - `delete_student 1`: Deletes the 1st student in the list.
    - `delete_lesson 1`: Deletes the 1st lesson in the list.
    - `clear`: Deletes all students.
+   - `find_student Bernice`: Finds student containing Bernice.
    - `exit`: Exits the app.
 
 1. Refer to the [Features](#features) section below for detailed instructions on each command.
@@ -370,6 +371,7 @@ Install the app on the new computer and replace the empty data file with the one
 | **Add Student**    | `add_student n/NAME p/PHONE e/EMAIL a/ADDRESS s/SUBJECT`<br>e.g., `add_student n/John Doe p/91234567 e/john@example.com a/123 Street s/Math` |
 | **Edit Student**   | `edit_student INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`<br>e.g., `edit_student 1 p/98765432` |
 | **Delete Student** | `delete_student INDEX`<br>e.g., `delete_student 3` |
+| **Find Student** | `find_student KEYWORD [MORE_KEYWORDS]` e.g., find_student James Jake
 | **List Students**  | `list_students` |
 
 
