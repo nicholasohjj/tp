@@ -23,7 +23,7 @@ public class StudentNameLessonPredicate implements Predicate<Lesson> {
 
     @Override
     public boolean test(Lesson lesson) {
-        return lesson.getName().fullName.toLowerCase().contains(keyword);
+        return lesson.getStudentName().fullName.toLowerCase().contains(keyword);
     }
 
     @Override

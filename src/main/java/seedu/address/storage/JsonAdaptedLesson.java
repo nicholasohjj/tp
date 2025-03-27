@@ -46,7 +46,7 @@ class JsonAdaptedLesson {
      * Converts a given {@code Lesson} into this class for Jackson use.
      */
     public JsonAdaptedLesson(Lesson source) {
-        name = source.getName().fullName;
+        name = source.getStudentName().fullName;
         date = source.getDate().date;
         time = source.getTime().time;
         subjects.addAll(source.getSubjects().stream()

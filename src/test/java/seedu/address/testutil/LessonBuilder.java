@@ -40,7 +40,7 @@ public class LessonBuilder {
      * Initializes the LessonBuilder with the data of {@code lessonToCopy}.
      */
     public LessonBuilder(Lesson lessonToCopy) {
-        name = lessonToCopy.getName();
+        name = lessonToCopy.getStudentName();
         date = lessonToCopy.getDate();
         time = lessonToCopy.getTime();
         subjects = new HashSet<>(lessonToCopy.getSubjects());

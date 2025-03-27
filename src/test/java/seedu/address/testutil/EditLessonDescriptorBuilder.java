@@ -31,7 +31,7 @@ public class EditLessonDescriptorBuilder {
      */
     public EditLessonDescriptorBuilder(Lesson lesson) {
         descriptor = new EditLessonDescriptor();
-        descriptor.setName(lesson.getName());
+        descriptor.setName(lesson.getStudentName());
         descriptor.setDate(lesson.getDate());
         descriptor.setTime(lesson.getTime());
         descriptor.setSubjects(lesson.getSubjects());

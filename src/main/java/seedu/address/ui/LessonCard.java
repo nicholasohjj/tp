@@ -46,7 +46,7 @@ public class LessonCard extends UiPart<Region> {
         super(FXML);
         this.lesson = lesson;
         id.setText(displayedIndex + ". ");
-        name.setText(lesson.getName().fullName);
+        name.setText(lesson.getStudentName().fullName);
         date.setText(lesson.getDate().date);
         time.setText(lesson.getTime().time);
         lesson.getSubjects().stream()
