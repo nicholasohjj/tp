@@ -21,7 +21,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindStudentCommand}.
  */
 public class FindStudentCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
