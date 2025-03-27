@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditAssignmentCommand.EditAssignmentDescriptor;
-import seedu.address.model.assignment.Assignment;
 import seedu.address.model.datetimeutil.Date;
 
 /**
