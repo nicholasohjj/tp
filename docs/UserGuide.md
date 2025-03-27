@@ -203,6 +203,25 @@ Examples:
 * `find_student Betsy` followed by `delete_student 1` deletes the 1st student in the results of the `find` command.
 -->
 
+### Locating students by name: `find_student`
+
+Finds students whose names contain any of the given keywords.
+
+Format: `find_student KEYWORD [MORE_KEYWORDS]`
+
+- The search is case-insensitive. e.g `hans` will match `Hans`
+- The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+- Only the name is searched.
+- Only full words will be matched e.g. `Han` will not match `Hans`
+- Students matching at least one keyword will be returned (i.e. `OR` search).
+
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+
+- `find_student John` returns `john` and `John Doe`
+- `find_student alex david` returns `Alex Yeoh`, `David Li`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the student list.
@@ -257,6 +276,7 @@ Action | Format, Examples
 **Delete Student** | `delete_student INDEX`<br> e.g., `delete_student 3`
 **List Students** | `list_students`
 **List Lessons** | `list_lessons`
+**Find Student** | `find_student KEYWORD [MORE_KEYWORDS]` e.g., find_student James Jake
 **Mark Assignment** | `mark_assignment INDEX as/ASSIGNMENT_NAME` e.g., `mark_assignment 1 as/Assignment 1`
 **Unmark Assignment** | `unmark_assignment INDEX as/ASSIGNMENT_NAME` e.g., `mark_assignment 1 as/Assignment 1`
 **Help** | `help`
