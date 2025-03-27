@@ -12,10 +12,8 @@ import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
-
 /**
- * Deletes a student identified using it's displayed index from the address book,
- * along with all their associated lessons and assignments.
+ * Deletes a student identified using it's displayed index from the address book.
  */
 public class DeleteStudentCommand extends Command {
 

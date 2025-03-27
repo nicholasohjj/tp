@@ -4,13 +4,11 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.ListLessonsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.StudentNameLessonPredicate;
 
 /**
  * Parses input arguments and creates a new ListLessonsCommand object
@@ -35,10 +33,12 @@ public class ListLessonsCommandParser implements Parser<ListLessonsCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
         String keyword = argMultimap.getValue(PREFIX_NAME).get();
+        if (keyword.isBlank()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ListLessonsCommand.MESSAGE_USAGE));
+        }
 
-        Predicate<Lesson> predicate = lesson -> StringUtil.containsWordIgnoreCase(lesson
-                .getStudentName().fullName, keyword);
-        return new ListLessonsCommand(predicate);
+        return new ListLessonsCommand(new StudentNameLessonPredicate(keyword));
     }
 
     /**

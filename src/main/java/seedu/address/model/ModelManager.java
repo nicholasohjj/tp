@@ -117,6 +117,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteAssignment(Student target, String assignmentName) {
+        addressBook.deleteAssignment(target, assignmentName);
+    }
+
+    @Override
     public boolean hasLesson(Lesson lesson) {
         requireNonNull(lesson);
         return addressBook.hasLesson(lesson);

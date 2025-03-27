@@ -29,7 +29,7 @@ import seedu.address.testutil.StudentBuilder;
 public class AddStudentCommandTest {
     @Test
     public void constructor_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddStudentCommand(null));
     }
 
     @Test
@@ -38,9 +38,9 @@ public class AddStudentCommandTest {
                 new AddStudentCommandTest.ModelStubAcceptingStudentAdded();
         Student validStudent = new StudentBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validStudent).execute(modelStub);
+        CommandResult commandResult = new AddStudentCommand(validStudent).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validStudent)),
+        assertEquals(String.format(AddStudentCommand.MESSAGE_SUCCESS, Messages.format(validStudent)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validStudent), modelStub.studentsAdded);
     }
@@ -48,10 +48,11 @@ public class AddStudentCommandTest {
     @Test
     public void execute_duplicateStudent_throwsCommandException() {
         Student validStudent = new StudentBuilder().build();
-        AddStudentCommand addCommand = new AddStudentCommand(validStudent);
+        AddStudentCommand addStudentCommand = new AddStudentCommand(validStudent);
         AddStudentCommandTest.ModelStub modelStub = new AddStudentCommandTest.ModelStubWithStudent(validStudent);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddStudentCommand
+                .MESSAGE_DUPLICATE_STUDENT, () -> addStudentCommand.execute(modelStub));
     }
 
     @Test
@@ -80,9 +81,9 @@ public class AddStudentCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddStudentCommand addCommand = new AddStudentCommand(ALICE);
+        AddStudentCommand addStudentCommand = new AddStudentCommand(ALICE);
         String expected = AddStudentCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        assertEquals(expected, addStudentCommand.toString());
     }
 
     /**
@@ -101,6 +102,11 @@ public class AddStudentCommandTest {
 
         @Override
         public GuiSettings getGuiSettings() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAssignment(Student student, String assignmentName) {
             throw new AssertionError("This method should not be called.");
         }
 
