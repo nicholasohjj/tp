@@ -139,7 +139,7 @@ Examples:
 * `add_student n/Mary Jane p/12345678 e/maryjane@email.com a/Blk 47 Tampines Street 20, #17-35 s/Math s/Science`
 
 #### Editing a student: `edit_student`
-You can edit the details of a student in the student list. 
+You can edit the details of a student in the student list.
 You can edit individual details or edit multiple of them together.
 Editing subject is not available yet but you will have it in future versions.
 
