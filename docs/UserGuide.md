@@ -67,7 +67,7 @@ TutorTrack is designed for:
 
 - **Parameters in `UPPER_CASE`** are to be supplied by the user. Example: In `add_student n/STUDENT_NAME`, `STUDENT_NAME` can be replaced with `John Doe`.
 
-- **Optional fields** are enclosed in square brackets `[]`. Example: `add_student n/NAME p/PHONE [s/SUBJECT]` can be used as `add_student n/John Doe p/91234567 s/Math` or `add_student n/John Doe p/91234567`.
+- **Optional fields** are enclosed in square brackets `[]`. Example: `add_student n/NAME p/PHONE e/EMAIL a/ADDRESS [s/SUBJECT]` can be used as `add_student n/John Doe p/91234567 e/ johndoe@gmail.com a/ 311, Clementi Ave 2, #02-25 s/Math` or `add_student n/John Doe p/91234567 e/ johndoe@gmail.com a/ 311, Clementi Ave 2, #02-25`.
 
 - **Multiple uses** of a field are indicated by `…`.
 
