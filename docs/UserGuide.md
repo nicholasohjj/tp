@@ -168,6 +168,32 @@ Switch to a view that shows all students in the student list.
 
 Format: `list_students`
 
+### Locating students by name: `find_student`
+
+Finds students whose names contain any of the given keywords.
+
+Format: `find_student KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+
+* Only the name is searched.
+
+* Only full words will be matched e.g. `Han` will not match `Hans`
+
+* Students matching at least one keyword will be returned (i.e. `OR` search).
+
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+
+* `find_student John` returns `john` and `John Doe`
+
+* `find_student alex david` returns `Alex Yeoh`, `David Li`<br>
+
+  ![result for 'find_student alex david'](images/findAlexDavidResult.png)
+
 ### Managing lessons
 
 #### Adding a lesson: `add_lesson`
@@ -288,32 +314,6 @@ Examples:
 *  `edit_student 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 
 *  `edit_student 2 n/Betsy Crower s/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing subjects.
-
-### Locating students by name: `find_student`
-
-Finds students whose names contain any of the given keywords.
-
-Format: `find_student KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-
-* Only the name is searched.
-
-* Only full words will be matched e.g. `Han` will not match `Hans`
-
-* Students matching at least one keyword will be returned (i.e. `OR` search).
-
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-
-* `find_student John` returns `john` and `John Doe`
-
-* `find_student alex david` returns `Alex Yeoh`, `David Li`<br>
-
-  ![result for 'find_student alex david'](images/findAlexDavidResult.png)
 -->
 
 ### Clearing all entries : `clear`
