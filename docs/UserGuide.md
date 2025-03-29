@@ -35,7 +35,7 @@ TutorTrack is designed for:
 
 1. Open a command terminal, navigate to the folder containing the `.jar` file using the `cd` command, and run the application with:
     ```bash
-    java -jar TutorTrack.jar
+    java -jar tutorTrack.jar
     ```
    A GUI similar to the below should appear in a few seconds, preloaded with sample data.<br>
    ![Ui](images/Ui.png)
@@ -112,7 +112,7 @@ TutorTrack data are saved in the hard disk automatically after any command that 
 
 #### Editing the data file
 
-TutorTrack data is saved automatically as a JSON file `[JAR file location]/data/TutorTrack.json`. Advanced users are welcome to update data directly by editing that data file.
+TutorTrack data is saved automatically as a JSON file `[JAR file location]/data/tutorTrack.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TutorTrack will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -321,7 +321,7 @@ TutorTrack data are saved in the hard disk automatically after any command that 
 
 ### Editing the data file
 
-TutorTrack data is saved automatically as a JSON file `[JAR file location]/data/TutorTrack.json`. Advanced users are welcome to update data directly by editing that data file.
+TutorTrack data is saved automatically as a JSON file `[JAR file location]/data/tutorTrack.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TutorTrack will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
