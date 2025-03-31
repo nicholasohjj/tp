@@ -1,4 +1,4 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S2-CS2103T-T13-4/tp/actions)
+[![CI Status](https://github.com/AY2425S2-CS2103T-T13-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S2-CS2103T-T13-4/tp/actions)
 
 ![Ui](docs/images/Ui.png)
 The product is designed for freelance tutors who teach small groups or individual students. These tutors often manage multiple students across different subjects and require an efficient way to track student progress, lesson schedules, and important notes. The user is proficient in typing and prefers CLI over mouse-based interactions.

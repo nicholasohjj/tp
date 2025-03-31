@@ -35,7 +35,7 @@ TutorTrack is designed for:
 
 1. Open a command terminal, navigate to the folder containing the `.jar` file using the `cd` command, and run the application with:
     ```bash
-    java -jar TutorTrack.jar
+    java -jar tutorTrack.jar
     ```
    A GUI similar to the below should appear in a few seconds, preloaded with sample data.<br>
    ![Ui](images/Ui.png)
@@ -67,7 +67,7 @@ TutorTrack is designed for:
 
 - **Parameters in `UPPER_CASE`** are to be supplied by the user. Example: In `add_student n/STUDENT_NAME`, `STUDENT_NAME` can be replaced with `John Doe`.
 
-- **Optional fields** are enclosed in square brackets `[]`. Example: `add_student n/NAME p/PHONE [s/SUBJECT]` can be used as `add_student n/John Doe p/91234567 s/Math` or `add_student n/John Doe p/91234567`.
+- **Optional fields** are enclosed in square brackets `[]`. Example: `add_student n/NAME p/PHONE e/EMAIL a/ADDRESS [s/SUBJECT]` can be used as `add_student n/John Doe p/91234567 e/ johndoe@gmail.com a/ 311, Clementi Ave 2, #02-25 s/Math` or `add_student n/John Doe p/91234567 e/ johndoe@gmail.com a/ 311, Clementi Ave 2, #02-25`.
 
 - **Multiple uses** of a field are indicated by `…`.
 
@@ -112,7 +112,7 @@ TutorTrack data are saved in the hard disk automatically after any command that 
 
 #### Editing the data file
 
-TutorTrack data is saved automatically as a JSON file `[JAR file location]/data/TutorTrack.json`. Advanced users are welcome to update data directly by editing that data file.
+TutorTrack data is saved automatically as a JSON file `[JAR file location]/data/tutorTrack.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TutorTrack will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -138,16 +138,30 @@ Examples:
 * `add_student n/John Doe p/98765432 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`
 * `add_student n/Mary Jane p/12345678 e/maryjane@email.com a/Blk 47 Tampines Street 20, #17-35 s/Math s/Science`
 
-#### Editing a student: `edit_student`
-You can edit the details of a student in the student list.
-You can edit individual details or edit multiple of them together.
-Editing subject is not available yet but you will have it in future versions.
+### Editing a student : `edit_student`
 
-Format: `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
+Edits an existing student in the student list.
+
+Format: `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [s/SUBJECT]…​`
+
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+
+* At least one of the optional fields must be provided.
+
+* Existing values will be updated to the input values.
+
+* When editing subjects, the existing subjects of the student will be removed i.e adding of subjects is not cumulative.
+
+* You can remove all the student’s subjects by typing `s/` without
+
+  specifying any subjects after it.
 
 Examples:
-* `edit_student 1 p/91234567`
-* `edit_student 2 n/Betsy Crower e/betsy@gmail.com a/Blk 123, Clementi Ave 2, #08-25`
+
+*  `edit_student 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+
+*  `edit_student 2 n/Betsy Crower s/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing subjects.
+
 
 #### Deleting a student : `delete_student`
 
@@ -168,6 +182,31 @@ Switch to a view that shows all students in the student list.
 
 Format: `list_students`
 
+### Locating students by name: `find_student`
+
+Finds students whose names contain any of the given keywords.
+
+Format: `find_student KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+
+* Only the name is searched.
+
+* Only full words will be matched e.g. `Han` will not match `Hans`
+
+* Students matching at least one keyword will be returned (i.e. `OR` search).
+
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+
+* `find_student John` returns `john` and `John Doe`
+
+* `find_student alex david` returns `Alex Yeoh`, `David Li`<br>
+
+![result for 'find_student alex'](images/img.png)
 ### Managing lessons
 
 #### Adding a lesson: `add_lesson`
@@ -264,58 +303,6 @@ Unmarks the assignment identified by the index number of the student and the ass
 **Example:**
 - `unmark_assignment 1 as/Assignment 1` unmarks the first assignment in the list, setting it to incomplete.
 
-<!--
-### Editing a student : `edit_student`
-
-Edits an existing student in the student list.
-
-Format: `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [s/SUBJECT]…​`
-
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-
-* At least one of the optional fields must be provided.
-
-* Existing values will be updated to the input values.
-
-* When editing subjects, the existing subjects of the student will be removed i.e adding of subjects is not cumulative.
-
-* You can remove all the student’s subjects by typing `s/` without
-
-    specifying any subjects after it.
-
-Examples:
-
-*  `edit_student 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-
-*  `edit_student 2 n/Betsy Crower s/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing subjects.
-
-### Locating students by name: `find_student`
-
-Finds students whose names contain any of the given keywords.
-
-Format: `find_student KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-
-* Only the name is searched.
-
-* Only full words will be matched e.g. `Han` will not match `Hans`
-
-* Students matching at least one keyword will be returned (i.e. `OR` search).
-
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-
-* `find_student John` returns `john` and `John Doe`
-
-* `find_student alex david` returns `Alex Yeoh`, `David Li`<br>
-
-  ![result for 'find_student alex david'](images/findAlexDavidResult.png)
--->
-
 ### Clearing all entries : `clear`
 
 Clears all entries from the student list.
@@ -334,7 +321,7 @@ TutorTrack data are saved in the hard disk automatically after any command that 
 
 ### Editing the data file
 
-TutorTrack data is saved automatically as a JSON file `[JAR file location]/data/TutorTrack.json`. Advanced users are welcome to update data directly by editing that data file.
+TutorTrack data is saved automatically as a JSON file `[JAR file location]/data/tutorTrack.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TutorTrack will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
