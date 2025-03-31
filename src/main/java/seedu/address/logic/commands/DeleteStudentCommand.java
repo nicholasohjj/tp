@@ -38,6 +38,10 @@ public class DeleteStudentCommand extends Command {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
 
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_EMPTY_STUDENT_LIST);
+        }
+
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
