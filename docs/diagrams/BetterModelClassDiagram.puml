@@ -41,7 +41,10 @@ class Student {
 }
 
 class Lesson {
-  - subjectName: String
+  - studentName: Name
+  - subjects: Set<Subject>
+  - date: Date
+  - time: Time
 }
 
 class Name {
@@ -59,10 +62,17 @@ class Address {
 class Subject {
   - value: String
 }
+class Date {
+  - value: LocalDate
+}
+class Time {
+  - value: LocalTime
+}
 
 ' Composition Relationships
 AddressBook "1" *-- "1" UniqueStudentList : contains
 AddressBook "1" *-- "1" UniqueLessonList : contains
+
 UniqueStudentList "1" *-- "*" Student : maintains
 UniqueLessonList "1" *-- "*" Lesson : maintains
 
@@ -75,6 +85,12 @@ Student *-- "*" Subject : has
 
 ' Subject Association
 Student "1" --> "*" Lesson : subjected with
+
+' Lesson Components
+Lesson *-- "1" Name : for student
+Lesson *-- "*" Subject : teaches
+Lesson *-- "1" Date : on
+Lesson *-- "1" Time : at
 
 ' Layout improvements
 UniqueLessonList -[hidden]right- UniqueStudentList
