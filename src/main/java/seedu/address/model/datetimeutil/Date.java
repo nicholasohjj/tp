@@ -13,9 +13,9 @@ import java.time.format.DateTimeParseException;
  */
 public class Date implements Comparable<Date> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Dates should be in the format: D-M-YYYY and "
+    public static final String MESSAGE_CONSTRAINTS = "d/DATE: Must be in DD-MM-YYYY format (e.g. 15-10-2023) and"
             + "after the current date";
-    public static final DateTimeFormatter VALID_FORMAT = DateTimeFormatter.ofPattern("d-M-yyyy");
+    public static final DateTimeFormatter VALID_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public final String date;
 
     /**

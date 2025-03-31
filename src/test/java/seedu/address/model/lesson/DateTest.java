@@ -16,7 +16,7 @@ class DateTest {
 
     @Test
     void isValidDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-M-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         assertFalse(Date.isValidDate("12/07/2021")); // use of / is not allowed, only -
         assertFalse(Date.isValidDate("14-5-20")); // year must be 4 digits
@@ -37,13 +37,13 @@ class DateTest {
 
     @Test
     void testEquals() {
-        Date date = new Date("5-10-2026");
+        Date date = new Date("05-10-2026");
 
         //null object -> return false
         assertFalse(date.equals(null));
 
         //different date -> return false
-        assertFalse(date.equals(new Date("5-11-2026")));
+        assertFalse(date.equals(new Date("05-11-2026")));
 
         //same object -> return true
         assertTrue(date.equals(date));

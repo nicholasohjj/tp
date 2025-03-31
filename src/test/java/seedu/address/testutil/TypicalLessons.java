@@ -41,7 +41,7 @@ public class TypicalLessons {
             .withDate("18-10-2025").withTime("08:30")
             .withSubjects("CS2105").build();
     public static final Lesson HARRY = new LessonBuilder().withName("Harry Potter")
-            .withDate("22-9-2025").withTime("12:15")
+            .withDate("22-09-2025").withTime("12:15")
             .withSubjects("CS2103T").build();
 
     //manually added - details are in {@code CommandTestUtil}
