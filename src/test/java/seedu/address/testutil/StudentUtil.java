@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddStudentCommand;
-import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
+import seedu.address.logic.commands.EditStudentCommand.EditStudentDescriptor;
 import seedu.address.model.student.Student;
 import seedu.address.model.subject.Subject;
 

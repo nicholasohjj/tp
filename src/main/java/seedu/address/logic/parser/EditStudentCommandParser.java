@@ -6,17 +6,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditStudentCommand;
 import seedu.address.logic.commands.EditStudentCommand.EditStudentDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.subject.Subject;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -31,18 +26,20 @@ public class EditStudentCommandParser implements Parser<EditStudentCommand> {
     public EditStudentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                        PREFIX_ADDRESS, PREFIX_SUBJECT);
 
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(pe.getMessage() + "\n" + MESSAGE_INVALID_COMMAND_FORMAT,
                     EditStudentCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_SUBJECT);
 
         EditStudentDescriptor editStudentDescriptor = new EditStudentDescriptor();
 
@@ -58,28 +55,15 @@ public class EditStudentCommandParser implements Parser<EditStudentCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editStudentDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
+        if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
+            throw new ParseException(EditStudentCommand.MESSAGE_EDIT_SUBJECT_DISALLOWED);
+        }
 
         if (!editStudentDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditStudentCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditStudentCommand(index, editStudentDescriptor);
-    }
-
-    /**
-     * Parses {@code Collection<String> subjects} into a {@code Set<Subject>} if {@code subjects} is non-empty.
-     * If {@code subjects} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Subject>} containing zero subjects.
-     */
-    private Optional<Set<Subject>> parseSubjectsForEdit(Collection<String> subjects) throws ParseException {
-        assert subjects != null;
-
-        if (subjects.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> subjectSet = subjects.size() == 1 && subjects.contains("") ? Collections.emptySet()
-                : subjects;
-        return Optional.of(ParserUtil.parseSubjects(subjectSet));
     }
 
 }
