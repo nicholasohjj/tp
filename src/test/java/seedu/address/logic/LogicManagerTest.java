@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_STUDENT_LIST;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -60,7 +61,16 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_commandExecutionError_throwsCommandException() {
+    public void execute_commandExecutionErrorOnEmptyList_throwsEmptyListException() {
+        String deleteStudentCommand = "delete_student 1";
+        assertCommandException(deleteStudentCommand, MESSAGE_EMPTY_STUDENT_LIST);
+    }
+
+    @Test
+    public void execute_commandExecutionErrorForInvalidIndex_throwsInvalidIndexException() {
+        Student sampleStudent = new StudentBuilder().build();
+        model.addStudent(sampleStudent);
+
         String deleteStudentCommand = "delete_student 9";
         assertCommandException(deleteStudentCommand, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }

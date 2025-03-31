@@ -142,7 +142,7 @@ public class DeleteStudentCommandTest {
         model.updateFilteredStudentList(p -> false); // Empty the list
         DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(INDEX_FIRST);
 
-        assertCommandFailure(deleteStudentCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteStudentCommand, model, Messages.MESSAGE_EMPTY_STUDENT_LIST);
     }
 
     @Test
