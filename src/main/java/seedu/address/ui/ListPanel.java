@@ -35,7 +35,8 @@ public class ListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Lesson} or {@code Student} using a {@code ListCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Lesson} or
+     * {@code Student} using a {@code ListCard}.
      */
     class ListViewCell extends ListCell<Object> {
         @Override
