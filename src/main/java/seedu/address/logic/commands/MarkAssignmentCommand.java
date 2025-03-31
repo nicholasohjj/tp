@@ -24,7 +24,7 @@ public class MarkAssignmentCommand extends Command {
             + ": Marks the assignment identified by the index number used in the displayed assignment list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_ASSIGNMENT + "Assignment Name\n"
-            + "Example: " + COMMAND_WORD + " 1"
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ASSIGNMENT + "Assignment 1";
 
     public static final String MESSAGE_MARK_ASSIGNMENT_SUCCESS = "Assignment %1$s\nmarked successfully.";
