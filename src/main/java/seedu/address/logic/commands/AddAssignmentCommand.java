@@ -61,6 +61,10 @@ public class AddAssignmentCommand extends Command {
         Student studentToEdit = lastShownList.get(index.getZeroBased());
 
         // Add the new assignment to the student
+        if (studentToEdit.hasAssignment(assignment)) {
+            throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
+        }
+
         Student editedStudent = studentToEdit.addAssignment(assignment);
 
         // Update the model with the edited student

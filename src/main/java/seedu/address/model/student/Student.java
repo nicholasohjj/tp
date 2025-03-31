@@ -114,6 +114,14 @@ public class Student {
     }
 
     /**
+     * Returns boolean on whether assignment already exists in student.
+     */
+    public boolean hasAssignment(Assignment assignment) {
+        requireNonNull(assignment);
+        return assignments.contains(assignment);
+    }
+
+    /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.
      */

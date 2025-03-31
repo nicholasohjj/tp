@@ -18,7 +18,6 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
-import seedu.address.model.subject.Subject;
 
 /**
  * Adds lesson to the addressbook
@@ -63,7 +62,7 @@ public class AddLessonCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
         if (!model.hasStudent(new Student(toAdd.getStudentName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                new HashSet<Subject>(), new UniqueAssignmentList()))) {
+                new HashSet<>(), new UniqueAssignmentList()))) {
             throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
         }
 
