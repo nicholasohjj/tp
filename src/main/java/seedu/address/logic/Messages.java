@@ -24,6 +24,7 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_ADD_ASSIGNMENT_SUCCESS = "New assignment added to %1$s: %2$s";
     public static final String MESSAGE_EMPTY_STUDENT_LIST = "Student list is empty! Nothing to delete";
+    public static final String MESSAGE_EMPTY_LESSON_LIST = "Lesson list is empty! Nothing to delete";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
