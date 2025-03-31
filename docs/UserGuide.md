@@ -155,7 +155,6 @@ Format: `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] …​`
 Examples:
 
 *  `edit_student 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-
 #### Deleting a student : `delete_student`
 
 Deletes the specified student from the student list.
