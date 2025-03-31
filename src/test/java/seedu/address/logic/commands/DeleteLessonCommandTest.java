@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_EMPTY_LESSON_LIST;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showLessonAtIndex;
@@ -83,15 +82,6 @@ public class DeleteLessonCommandTest {
     }
 
     @Test
-    public void execute_deleteFromEmptyLessonList_throwsCommandException() {
-        model.updateFilteredLessonList(p -> false);
-
-        DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST);
-
-        assertCommandFailure(deleteLessonCommand, model, MESSAGE_EMPTY_LESSON_LIST);
-    }
-
-    @Test
     public void equals() {
         DeleteLessonCommand deleteFirstLessonCommand = new DeleteLessonCommand(INDEX_FIRST);
         DeleteLessonCommand deleteSecondLessonCommand = new DeleteLessonCommand(INDEX_SECOND);
@@ -126,7 +116,7 @@ public class DeleteLessonCommandTest {
         model.updateFilteredLessonList(p -> false); // Empty the list
         DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST);
 
-        assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_EMPTY_LESSON_LIST);
     }
 
     /**
