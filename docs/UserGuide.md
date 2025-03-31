@@ -295,31 +295,6 @@ Unmarks the assignment identified by the index number of the student and the ass
 **Example:**
 - `unmark_assignment 1 as/Assignment 1` unmarks the first assignment in the list, setting it to incomplete.
 
-### Clearing all entries : `clear`
-
-Clears all entries from the student list.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-TutorTrack data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-TutorTrack data is saved automatically as a JSON file `[JAR file location]/data/tutorTrack.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, TutorTrack will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the TutorTrack to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
-
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
