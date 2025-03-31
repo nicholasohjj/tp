@@ -36,7 +36,7 @@ activate storage STORAGE_COLOR
 
 storage -> storage : JSON Serialization
 activate storage STORAGE_COLOR_T1
-note right: Saves to addressbook.json
+note right: Saves to tutortrack.json
 storage --> storage
 deactivate storage
 
