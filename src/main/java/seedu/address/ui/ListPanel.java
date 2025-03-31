@@ -12,7 +12,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
 /**
- * Panel containing the list of lessons.
+ * Panel containing the list of lessons/students.
  */
 public class ListPanel extends UiPart<Region> {
     private static final String FXML = "ListPanel.fxml";
@@ -35,7 +35,7 @@ public class ListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Lesson} using a {@code LessonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Lesson} or {@code Student} using a {@code ListCard}.
      */
     class ListViewCell extends ListCell<Object> {
         @Override
