@@ -142,7 +142,7 @@ Examples:
 
 Edits an existing student in the student list.
 
-Format: `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [s/SUBJECT]…​`
+Format: `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] …​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 
@@ -150,19 +150,11 @@ Format: `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [s/SUBJECT]…�
 
 * Existing values will be updated to the input values.
 
-* When editing subjects, the existing subjects of the student will be removed i.e adding of subjects is not cumulative.
-
-* You can remove all the student’s subjects by typing `s/` without
-
-  specifying any subjects after it.
+* Subjects cannot be edited at this stage.
 
 Examples:
 
 *  `edit_student 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-
-*  `edit_student 2 n/Betsy Crower s/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing subjects.
-
-
 #### Deleting a student : `delete_student`
 
 Deletes the specified student from the student list.
