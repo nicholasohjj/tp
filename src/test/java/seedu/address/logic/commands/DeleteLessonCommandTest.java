@@ -116,7 +116,7 @@ public class DeleteLessonCommandTest {
         model.updateFilteredLessonList(p -> false); // Empty the list
         DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST);
 
-        assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_EMPTY_LESSON_LIST);
     }
 
     /**
