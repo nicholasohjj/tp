@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Subject {
 
-    public static final int MAX_LENGTH = 50; // or whatever maximum length you prefer
+    public static final int MAX_LENGTH = 30;
     public static final String MESSAGE_CONSTRAINTS = "Subject names should be alphanumeric and can contain spaces, "
             + "apostrophes, ampersands, and hyphens. It should not exceed " + MAX_LENGTH + " characters.";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} '&-]*";

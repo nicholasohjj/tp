@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.datetimeutil.Date;
 import seedu.address.model.datetimeutil.Time;
 import seedu.address.model.student.Address;
@@ -164,8 +165,8 @@ public class ParserUtil {
     public static String parseAssignmentName(String assignmentName) throws ParseException {
         requireNonNull(assignmentName);
         String trimmedAssignmentName = assignmentName.trim();
-        if (!Subject.isValidSubjectName(trimmedAssignmentName)) {
-            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+        if (!Assignment.isValidAssignmentDate(trimmedAssignmentName)) {
+            throw new ParseException(Assignment.MESSAGE_CONSTRAINTS);
         }
         return trimmedAssignmentName;
     }
