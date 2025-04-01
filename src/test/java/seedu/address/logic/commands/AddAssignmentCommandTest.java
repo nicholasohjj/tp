@@ -7,11 +7,11 @@ import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.assignment.expections.DuplicateAssignmentException;
 import seedu.address.model.datetimeutil.Date;
 import seedu.address.model.student.Student;
 
@@ -31,7 +31,7 @@ public class AddAssignmentCommandTest {
         student.addAssignment(assignment);
         AddAssignmentCommand addAssignmentCommand = new AddAssignmentCommand(INDEX_FIRST, assignment);
 
-        assertThrows(DuplicateAssignmentException.class,
+        assertThrows(CommandException.class,
                 AddAssignmentCommand.MESSAGE_DUPLICATE_ASSIGNMENT, () -> addAssignmentCommand.execute(model));
     }
 }

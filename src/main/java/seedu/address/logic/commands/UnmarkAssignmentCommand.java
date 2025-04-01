@@ -29,7 +29,7 @@ public class UnmarkAssignmentCommand extends Command {
 
     public static final String MESSAGE_UNMARK_ASSIGNMENT_SUCCESS = "Assignment %1$s\nunmarked successfully.";
     public static final String MESSAGE_INVALID_ASSIGNMENT_DISPLAYED = "Error: The assignment name provided cannot be "
-            +"found";
+            + "found";
 
     private final Index index;
     private final String assignmentName;
