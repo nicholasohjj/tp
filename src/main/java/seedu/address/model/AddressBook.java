@@ -1,9 +1,11 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -11,6 +13,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.UniqueLessonList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
+import seedu.address.model.subject.Subject;
 
 /**
  * Wraps all data at the address-book level
@@ -79,6 +82,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasStudent(Student student) {
         requireNonNull(student);
         return students.contains(student);
+    }
+
+    /**
+     * Returns true if a student has a subject.
+     */
+    public boolean hasStudentSubjects(Student student, Set<Subject> subjects) {
+        requireAllNonNull(student, subjects);
+        return students.hasStudentSubjects(student, subjects);
     }
 
     /**
