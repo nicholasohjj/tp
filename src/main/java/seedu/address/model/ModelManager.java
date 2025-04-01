@@ -144,6 +144,7 @@ public class ModelManager implements Model {
     public void deleteLesson(Lesson lesson) {
         requireNonNull(lesson);
         addressBook.removeLesson(lesson);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override
