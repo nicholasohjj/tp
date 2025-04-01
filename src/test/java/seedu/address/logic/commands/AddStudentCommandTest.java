@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -24,6 +26,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
+import seedu.address.model.subject.Subject;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddStudentCommandTest {
@@ -152,6 +155,11 @@ public class AddStudentCommandTest {
 
         @Override
         public void setStudent(Student target, Student editedStudent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasStudentSubjects(Student student, Set<Subject> subjects) {
             throw new AssertionError("This method should not be called.");
         }
 
