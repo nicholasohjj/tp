@@ -22,8 +22,8 @@ import seedu.address.model.assignment.expections.DuplicateAssignmentException;
  **/
 public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<Assignment> {
 
-    public static final String MESSAGE_ALREADY_MARKED = "Assignment is already marked";
-    public static final String MESSAGE_ALREADY_UNMARKED = "Assignment is already unmarked";
+    public static final String MESSAGE_ALREADY_MARKED = "Error: Assignment is already marked";
+    public static final String MESSAGE_ALREADY_UNMARKED = "Error: Assignment is already unmarked";
 
 
     private final ObservableList<Assignment> internalList = FXCollections.observableArrayList();

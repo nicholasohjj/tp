@@ -30,7 +30,9 @@ public class AddAssignmentCommand extends Command {
             + PREFIX_ASSIGNMENT + "Math Exercise 1 "
             + PREFIX_DATE + "31-12-2025";
 
-    public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the student";
+    public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "Error: This assignment already exists in the student.\n"
+            + "Assignments of the same students cannot have the same name.\n"
+            + "Please use the edit_assignment command to edit the assignment.";
 
     private final Index index;
     private final Assignment assignment;
@@ -54,6 +56,11 @@ public class AddAssignmentCommand extends Command {
         // Check if the index is valid
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INDEX_OUT_OF_BOUNDS);
+        }
+
+        // Check if the assignment already exists
+        if (lastShownList.get(index.getZeroBased()).getAssignments().contains(assignment)) {
+            throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
 
         // Get the student to edit

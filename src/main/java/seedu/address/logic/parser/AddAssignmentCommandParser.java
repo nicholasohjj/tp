@@ -1,13 +1,12 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INDEX_OUT_OF_BOUNDS;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIELD;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddAssignmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.assignment.Assignment;
@@ -36,6 +35,14 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ASSIGNMENT, PREFIX_DATE);
 
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+
+        if (argMultimap.getValue(PREFIX_ASSIGNMENT).filter(String::isEmpty).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_EMPTY_FIELD, PREFIX_ASSIGNMENT));
+        }
+
+        if (argMultimap.getValue(PREFIX_DATE).filter(String::isEmpty).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_EMPTY_FIELD, PREFIX_DATE));
+        }
 
         String assignmentName = ParserUtil.parseAssignmentName(argMultimap.getValue(PREFIX_ASSIGNMENT).orElse(""));
         Date dueDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(""));

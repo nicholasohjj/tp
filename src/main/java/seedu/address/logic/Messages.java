@@ -22,6 +22,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX = "Error: The lesson index provided is invalid!";
     public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d students listed!";
     public static final String MESSAGE_LESSONS_LISTED_OVERVIEW = "%1$d lessons listed!";
+    public static final String MESSAGE_EMPTY_FIELD = "Error: %1$s field cannot be empty!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Error: Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_ADD_ASSIGNMENT_SUCCESS = "New assignment added to %1$s: %2$s";

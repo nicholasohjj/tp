@@ -28,7 +28,8 @@ public class MarkAssignmentCommand extends Command {
             + PREFIX_ASSIGNMENT + "Assignment 1";
 
     public static final String MESSAGE_MARK_ASSIGNMENT_SUCCESS = "Assignment %1$s\nmarked successfully.";
-    public static final String MESSAGE_INVALID_ASSIGNMENT_DISPLAYED = "The assignment name provided cannot be found";
+    public static final String MESSAGE_INVALID_ASSIGNMENT_DISPLAYED = "Error: The assignment name provided cannot be "
+            + "found";
 
     private final Index index;
     private final String assignmentName;
