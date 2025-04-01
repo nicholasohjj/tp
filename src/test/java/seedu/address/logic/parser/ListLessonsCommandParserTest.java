@@ -1,14 +1,15 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
+import static seedu.address.model.student.Name.MESSAGE_CONSTRAINTS;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ListLessonsCommand;
 import seedu.address.model.lesson.StudentNameLessonPredicate;
+import seedu.address.model.student.Name;
 
 public class ListLessonsCommandParserTest {
 
@@ -25,12 +26,11 @@ public class ListLessonsCommandParserTest {
     public void parse_validArgs_returnsFindStudentCommand() {
         // leading and trailing whitespaces
         ListLessonsCommand expectedFindStudentCommand =
-                new ListLessonsCommand(new StudentNameLessonPredicate("Alice"));
+                new ListLessonsCommand(new StudentNameLessonPredicate(new Name("Alice")));
         assertParseSuccess(parser, " n/ Alice ", expectedFindStudentCommand);
 
         // blank keywords are not allowed
-        assertParseFailure(parser, " n/ ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ListLessonsCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " n/ ", MESSAGE_CONSTRAINTS);
     }
 
 }
