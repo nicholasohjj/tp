@@ -161,6 +161,11 @@ public class AddStudentCommandTest {
         }
 
         @Override
+        public boolean hasLessonConflict(Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addLesson(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
