@@ -44,6 +44,8 @@ public class AddLessonCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in the address book";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "The specified student does not exist in the address book";
+    public static final String MESSAGE_SUBJECT_NOT_FOUND = "The specified student does not study the specified subject";
+
 
 
     private final Lesson toAdd;
@@ -62,10 +64,15 @@ public class AddLessonCommand extends Command {
         if (model.hasLesson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
-        if (!model.hasStudent(new Student(toAdd.getStudentName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                new HashSet<Subject>(), new UniqueAssignmentList()))) {
+        Student toAddStudent = new Student(toAdd.getStudentName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                new HashSet<Subject>(), new UniqueAssignmentList());
+        if (!model.hasStudent(toAddStudent)) {
             throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
         }
+        if (!model.hasSubject(toAddStudent, toAdd.getSubject())) {
+            throw new CommandException(MESSAGE_SUBJECT_NOT_FOUND);
+        }
+
 
         model.addLesson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), true);

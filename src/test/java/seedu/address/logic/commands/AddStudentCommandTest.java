@@ -24,6 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
+import seedu.address.model.subject.Subject;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddStudentCommandTest {
@@ -152,6 +153,11 @@ public class AddStudentCommandTest {
 
         @Override
         public void setStudent(Student target, Student editedStudent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSubject(Student student, Subject subject) {
             throw new AssertionError("This method should not be called.");
         }
 

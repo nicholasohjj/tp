@@ -21,7 +21,7 @@ public class Lesson {
 
     // Identity fields
     private final Name studentName;
-    private final Set<Subject> subjects = new HashSet<>();
+    private final Subject subject;
     private final Date date;
     private final Time time;
 
@@ -30,12 +30,12 @@ public class Lesson {
      * Every field must be present and not null.
      * This is the original constructor for lesson from AB3
      */
-    public Lesson(Set<Subject> subjects, Name studentName, Date date, Time time) {
-        requireAllNonNull(subjects, studentName, date, time);
+    public Lesson(Subject subject, Name studentName, Date date, Time time) {
+        requireAllNonNull(subject, studentName, date, time);
         this.studentName = studentName;
         this.date = date;
         this.time = time;
-        this.subjects.addAll(subjects);
+        this.subject = subject;
 
     }
 
@@ -51,8 +51,8 @@ public class Lesson {
         return time;
     }
 
-    public Set<Subject> getSubjects() {
-        return Collections.unmodifiableSet(subjects);
+    public Subject getSubject() {
+        return subject;
     }
     /**
      * Returns true if both lessons have the same identity fields.
@@ -71,19 +71,19 @@ public class Lesson {
         return studentName.equals(otherLesson.studentName)
                 && date.equals(otherLesson.date)
                 && time.equals(otherLesson.time)
-                && subjects.equals(otherLesson.subjects);
+                && subject.equals(otherLesson.subject);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(studentName, date, time, subjects);
+        return Objects.hash(studentName, date, time, subject);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("subjects", subjects)
+                .add("subject", subject)
                 .add("name", studentName)
                 .add("date", date)
                 .add("time", time)

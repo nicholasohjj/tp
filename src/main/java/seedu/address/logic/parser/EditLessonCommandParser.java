@@ -7,10 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditLessonCommand;
@@ -56,7 +53,7 @@ public class EditLessonCommandParser implements Parser<EditLessonCommand> {
             editLessonDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get()));
         }
 
-        parseSubjectsForEdit(argMultimap.getAllValues(PREFIX_SUBJECT)).ifPresent(editLessonDescriptor::setSubjects);
+        parseSubjectForEdit(argMultimap.getValue(PREFIX_SUBJECT).get()).ifPresent(editLessonDescriptor::setSubject);
 
         if (!editLessonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditLessonCommand.MESSAGE_NOT_EDITED);
@@ -70,15 +67,13 @@ public class EditLessonCommandParser implements Parser<EditLessonCommand> {
      * If {@code subjects} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Subject>} containing zero subjects.
      */
-    private Optional<Set<Subject>> parseSubjectsForEdit(Collection<String> subjects) throws ParseException {
-        assert subjects != null;
+    private Optional<Subject> parseSubjectForEdit(String subject) throws ParseException {
+        assert subject != null;
 
-        if (subjects.isEmpty()) {
+        if (subject.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> subjectSet = subjects.size() == 1 && subjects.contains("") ? Collections.emptySet()
-                : subjects;
-        return Optional.of(ParserUtil.parseSubjects(subjectSet));
+        return Optional.of(ParserUtil.parseSubject(subject));
     }
 
 }

@@ -49,7 +49,7 @@ public class EditLessonDescriptorTest {
         assertFalse(LESSON_DESC_AMY.equals(editedAmy));
 
         // different subjects -> returns false
-        editedAmy = new EditLessonDescriptorBuilder(LESSON_DESC_AMY).withSubjects(VALID_SUBJECT_HUSBAND).build();
+        editedAmy = new EditLessonDescriptorBuilder(LESSON_DESC_AMY).withSubject(VALID_SUBJECT_HUSBAND).build();
         assertFalse(LESSON_DESC_AMY.equals(editedAmy));
     }
 
@@ -57,7 +57,7 @@ public class EditLessonDescriptorTest {
     public void toStringMethod() {
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
         String expected = EditLessonDescriptor.class.getCanonicalName() + "{subjects="
-                + editLessonDescriptor.getSubjects().orElse(null) + ", name="
+                + editLessonDescriptor.getSubject().orElse(null) + ", name="
                 + editLessonDescriptor.getName().orElse(null) + ", date="
                 + editLessonDescriptor.getDate().orElse(null) + ", time="
                 + editLessonDescriptor.getTime().orElse(null) + "}";
