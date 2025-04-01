@@ -54,7 +54,7 @@ public class AddAssignmentCommand extends Command {
 
         // Check if the index is valid
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INDEX_OUT_OF_BOUNDS);
         }
 
         // Get the student to edit
