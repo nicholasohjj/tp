@@ -44,6 +44,7 @@ public class AddLessonCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in the address book";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "The specified student does not exist in the address book";
+    public static final String MESSAGE_LESSON_CONFLICT = "The lesson clashes with existing lesson in the address book";
 
 
     private final Lesson toAdd;
@@ -61,6 +62,9 @@ public class AddLessonCommand extends Command {
         requireNonNull(model);
         if (model.hasLesson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
+        }
+        if (model.hasLessonConflict(toAdd)) {
+            throw new CommandException(MESSAGE_LESSON_CONFLICT);
         }
         if (!model.hasStudent(new Student(toAdd.getStudentName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 new HashSet<Subject>(), new UniqueAssignmentList()))) {

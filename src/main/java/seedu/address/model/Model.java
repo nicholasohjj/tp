@@ -105,6 +105,11 @@ public interface Model {
     boolean hasLesson(Lesson lesson);
 
     /**
+     * Returns true if a lesson with the same date and time as {@code lesson} exists in the address book
+     */
+    boolean hasLessonConflict(Lesson lesson);
+
+    /**
      * Replaces the given lesson {@code target} with {@code editedLesson}.
      * {@code target} must exist in the address book.
      * The lesson identity of {@code editedStudent} must not be the same
