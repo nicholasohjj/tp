@@ -9,7 +9,7 @@ import seedu.address.model.datetimeutil.Date;
 
 /**
  * Represents an Assignment in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAssignmentValue(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidAssignmentName(String)}
  */
 public class Assignment implements Comparable<Assignment> {
 
@@ -34,7 +34,7 @@ public class Assignment implements Comparable<Assignment> {
      */
     public Assignment(String assignment, Date dueDate) {
         requireAllNonNull(assignment, dueDate);
-        checkArgument(isValidAssignmentValue(assignment), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidAssignmentName(assignment), MESSAGE_CONSTRAINTS);
         this.assignmentName = assignment;
         this.dueDate = dueDate;
         this.isDone = false;
@@ -48,7 +48,7 @@ public class Assignment implements Comparable<Assignment> {
      */
     public Assignment(String assignment, Date dueDate, boolean isDone) {
         requireAllNonNull(assignment, dueDate);
-        checkArgument(isValidAssignmentValue(assignment), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidAssignmentName(assignment), MESSAGE_CONSTRAINTS);
         this.assignmentName = assignment;
         this.dueDate = dueDate;
         this.isDone = isDone;
@@ -77,7 +77,7 @@ public class Assignment implements Comparable<Assignment> {
         return Objects.hash(assignmentName, dueDate);
     }
 
-    public static boolean isValidAssignmentValue(String value) {
+    public static boolean isValidAssignmentName(String value) {
         return value.matches(VALIDATION_REGEX);
     }
 
