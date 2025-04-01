@@ -39,6 +39,14 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
+     * Returns true if the list contains a lesson that clashes with the lesson given
+     */
+    public boolean clashes(Lesson toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isConflict);
+    }
+
+    /**
      * Adds a lesson to the list.
      * The lesson must not already exist in the list.
      */

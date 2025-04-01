@@ -126,6 +126,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a lesson with the same data and time as {@code lesson} exists in the address book.
+     */
+    public boolean hasLessonConflict(Lesson lesson) {
+        requireNonNull(lesson);
+        return lessons.clashes(lesson);
+    }
+
+    /**
      * Adds a lesson to the address book.
      * The lesson must not already exist in the address book.
      */
