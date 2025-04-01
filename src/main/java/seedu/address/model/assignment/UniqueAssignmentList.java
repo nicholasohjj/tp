@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.assignment.expections.AssignmentNotFoundException;
 import seedu.address.model.assignment.expections.DuplicateAssignmentException;
 
@@ -21,10 +22,13 @@ import seedu.address.model.assignment.expections.DuplicateAssignmentException;
  **/
 public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<Assignment> {
 
+    public static final String MESSAGE_ALREADY_MARKED = "Assignment is already marked";
+    public static final String MESSAGE_ALREADY_UNMARKED = "Assignment is already unmarked";
+
+
     private final ObservableList<Assignment> internalList = FXCollections.observableArrayList();
     private final ObservableList<Assignment> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
-
     /**
      * Returns true if the list contains an equivalent assignment as the given argument.
      */
@@ -119,9 +123,12 @@ public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<As
     /**
      * Marks an assignment as done.
      */
-    public void markAssignment(String assignmentName) {
+    public void markAssignment(String assignmentName) throws CommandException {
         for (Assignment assignment : internalList) {
             if (assignment.getAssignmentName().equals(assignmentName)) {
+                if (assignment.isDone()) {
+                    throw new CommandException(MESSAGE_ALREADY_MARKED);
+                }
                 assignment.setDone();
             }
         }
@@ -130,9 +137,12 @@ public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<As
     /**
      * Marks an assignment as undone.
      */
-    public void unmarkAssignment(String assignmentName) {
+    public void unmarkAssignment(String assignmentName) throws CommandException {
         for (Assignment assignment : internalList) {
             if (assignment.getAssignmentName().equals(assignmentName)) {
+                if (!assignment.isDone()) {
+                    throw new CommandException(MESSAGE_ALREADY_UNMARKED);
+                }
                 assignment.setUndone();
             }
         }
