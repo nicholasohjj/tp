@@ -25,7 +25,8 @@ public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand
                 ArgumentTokenizer.tokenize(args, PREFIX_ASSIGNMENT, PREFIX_NEW_ASSIGNMENT, PREFIX_DATE);
 
         if (argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditAssignmentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditAssignmentCommand.MESSAGE_USAGE));
         }
 
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
