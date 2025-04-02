@@ -41,8 +41,8 @@ public class EditAssignmentCommand extends Command {
             + PREFIX_DATE + "30-09-2025";
 
     public static final String MESSAGE_EDIT_ASSIGNMENT_SUCCESS = "Edited Assignment: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the address book.";
+    public static final String MESSAGE_NOT_EDITED = "Error: At least one field to edit must be provided.";
+    public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "Error: This assignment already exists in the address book.";
     private static final Logger logger = LogsCenter.getLogger(EditAssignmentCommand.class);
 
     private final Index index;

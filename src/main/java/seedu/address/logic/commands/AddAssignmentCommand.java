@@ -36,7 +36,7 @@ public class AddAssignmentCommand extends Command {
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "Error: This assignment already exists in the student.\n"
             + "Assignments of the same students cannot have the same name.\n"
             + "Please use the edit_assignment command to edit the assignment.";
-    public static final String MESSAGE_EMPTY_STUDENT_LIST = "Student list is empty";
+    public static final String MESSAGE_EMPTY_STUDENT_LIST = "Error: Student list is empty";
 
     private static final Logger logger = LogsCenter.getLogger(AddAssignmentCommand.class);
 

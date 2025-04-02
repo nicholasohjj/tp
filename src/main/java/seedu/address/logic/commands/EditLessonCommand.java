@@ -54,8 +54,8 @@ public class EditLessonCommand extends Command {
             + PREFIX_TIME + "19:00";
 
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in the address book.";
+    public static final String MESSAGE_NOT_EDITED = "Error: At least one field to edit must be provided.";
+    public static final String MESSAGE_DUPLICATE_LESSON = "Error: This lesson already exists in the address book.";
     private static final Logger logger = LogsCenter.getLogger(EditLessonCommand.class);
 
     private final Index index;

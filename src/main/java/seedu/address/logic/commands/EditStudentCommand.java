@@ -51,8 +51,8 @@ public class EditStudentCommand extends Command {
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_EDIT_SUBJECT_DISALLOWED = "Error: Editing subjects directly is not allowed.";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book.";
+    public static final String MESSAGE_NOT_EDITED = "Error: At least one field to edit must be provided.";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "Error: This student already exists in the address book.";
     private static final Logger logger = LogsCenter.getLogger(EditStudentCommand.class);
 
     private final Index index;

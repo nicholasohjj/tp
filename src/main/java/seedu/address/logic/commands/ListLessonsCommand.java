@@ -36,8 +36,8 @@ public class ListLessonsCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice or "
             + COMMAND_WORD;
 
-    public static final String MESSAGE_STUDENT_NOT_FOUND = "The specified student does not exist in the address book";
-    public static final String MESSAGE_NO_LESSONS_FOUND = "No lessons found matching the criteria";
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "Error: The specified student does not exist in the address book";
+    public static final String MESSAGE_NO_LESSONS_FOUND = "Error: No lessons found matching the criteria";
 
     private static final Logger logger = LogsCenter.getLogger(ListLessonsCommand.class);
 

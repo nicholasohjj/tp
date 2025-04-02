@@ -31,7 +31,7 @@ public class DeleteAssignmentCommand extends Command {
 
     public static final String MESSAGE_DELETE_ASSIGNMENT_SUCCESS = "Assignment %1$s deleted successfully.";
     public static final String MESSAGE_INVALID_ASSIGNMENT_DISPLAYED = "The assignment name provided cannot be found";
-    public static final String MESSAGE_EMPTY_STUDENT_LIST = "Student list is empty";
+    public static final String MESSAGE_EMPTY_STUDENT_LIST = "Error: Student list is empty";
 
     private static final Logger logger = LogsCenter.getLogger(DeleteAssignmentCommand.class);
 
