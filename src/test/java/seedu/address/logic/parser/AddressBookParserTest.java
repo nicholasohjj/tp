@@ -7,7 +7,6 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ASSIGNMENT_NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSIGNMENT_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
@@ -124,12 +123,14 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_editAssignment() throws Exception {
         Assignment assignment = new AssignmentBuilder().build();
-        EditAssignmentCommand.EditAssignmentDescriptor descriptor = new EditAssignmentDescriptorBuilder(assignment).build();
+        EditAssignmentCommand.EditAssignmentDescriptor descriptor =
+                new EditAssignmentDescriptorBuilder(assignment).build();
         EditAssignmentCommand command = (EditAssignmentCommand) parser.parseCommand(EditAssignmentCommand.COMMAND_WORD
                 + " 1 "
                 + ASSIGNMENT_NAME_DESC_AMY
                 + AssignmentUtil.getEditAssignmentDescriptorDetails(descriptor));
-        assertEquals(new EditAssignmentCommand(Index.fromOneBased(1), VALID_ASSIGNMENT_NAME_AMY.trim(), descriptor), command);
+        assertEquals(new EditAssignmentCommand(Index.fromOneBased(1), VALID_ASSIGNMENT_NAME_AMY.trim(), descriptor),
+                command);
     }
 
     @Test

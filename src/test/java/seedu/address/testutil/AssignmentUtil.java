@@ -8,6 +8,9 @@ import seedu.address.logic.commands.AddAssignmentCommand;
 import seedu.address.logic.commands.EditAssignmentCommand;
 import seedu.address.model.assignment.Assignment;
 
+/**
+ * A utility class for Assignment.
+ */
 public class AssignmentUtil {
 
     /**
