@@ -122,4 +122,12 @@ public class AddAssignmentCommand extends Command {
                 && assignment.equals(e.assignment)
                 && dueDate.equals(e.dueDate);
     }
+
+    @Override
+    public String toString() {
+        return getClass().getCanonicalName() + "{index=" + index
+                + ", assignment=" + assignment
+                + ", dueDate=" + assignment.getDueDate() + "}";
+    }
+
 }

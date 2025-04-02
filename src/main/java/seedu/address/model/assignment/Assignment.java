@@ -98,8 +98,9 @@ public class Assignment implements Comparable<Assignment> {
         return dueDate;
     }
 
-    public void setDone() {
+    public Assignment setDone() {
         isDone = true;
+        return this;
     }
 
     public void setUndone() {

@@ -92,6 +92,10 @@ public class EditAssignmentCommand extends Command {
             throw new CommandException(String.format(Messages.MESSAGE_ASSIGNMENT_NOT_FOUND, assignmentName));
         }
 
+        if (!editAssignmentDescriptor.isAnyFieldEdited()) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
+
         Assignment editedAssignment = createEditedAssignment(assignmentToEdit, editAssignmentDescriptor);
         assert editedAssignment != null : "Edited assignment should not be null";
 
@@ -147,11 +151,12 @@ public class EditAssignmentCommand extends Command {
      * Creates and returns a {@code Assignment} with the details of {@code assignmentToEdit}
      * edited with {@code editAssignmentDescriptor}.
      */
-    private Assignment createEditedAssignment(Assignment assignmentToEdit,
+    public Assignment createEditedAssignment(Assignment assignmentToEdit,
                                               EditAssignmentDescriptor editAssignmentDescriptor) {
         assert assignmentToEdit != null : "Assignment to edit cannot be null";
         assert editAssignmentDescriptor != null : "Edit descriptor cannot be null";
         assert editAssignmentDescriptor.isAnyFieldEdited() : "At least one field should be edited";
+
 
         String updatedAssignmentName = editAssignmentDescriptor.getNewAssignmentName()
                 .orElse(assignmentToEdit.getAssignmentName());

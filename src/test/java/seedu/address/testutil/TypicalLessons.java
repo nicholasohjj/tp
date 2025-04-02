@@ -1,8 +1,12 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_BOB;
 import static seedu.address.testutil.TypicalStudents.getTypicalStudents;
 
@@ -47,6 +51,13 @@ public class TypicalLessons {
     //manually added - details are in {@code CommandTestUtil}
     public static final Lesson BOB = new LessonBuilder().withSubject(VALID_SUBJECT_BOB).withName(VALID_NAME_BOB)
             .withDate(VALID_DATE_BOB).withTime(VALID_TIME_BOB).build();
+    public static final Lesson MATH_LEARNING =
+            new LessonBuilder().withSubject(VALID_SUBJECT_BOB).withName(VALID_NAME_BOB)
+            .withDate(VALID_DATE_BOB).withTime(VALID_TIME_BOB).build();
+    public static final Lesson SCIENCE_TEACHING =
+            new LessonBuilder().withSubject(VALID_SUBJECT_AMY).withName(VALID_NAME_AMY)
+            .withDate(VALID_DATE_AMY).withTime(VALID_TIME_AMY).build();
+
 
     private TypicalLessons() {} // prevents instantiation
 

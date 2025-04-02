@@ -104,10 +104,14 @@ public class EditStudentCommand extends Command {
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}
      * edited with {@code editStudentDescriptor}.
      */
-    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
-        assert studentToEdit != null : "Student to edit cannot be null";
-        assert editStudentDescriptor != null : "Edit descriptor cannot be null";
-        assert editStudentDescriptor.isAnyFieldEdited() : "At least one field should be edited";
+    public static Student createEditedStudent(Student studentToEdit,
+                                              EditStudentDescriptor editStudentDescriptor) throws CommandException {
+        requireNonNull(studentToEdit);
+        requireNonNull(editStudentDescriptor);
+
+        if (!editStudentDescriptor.isAnyFieldEdited()) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());

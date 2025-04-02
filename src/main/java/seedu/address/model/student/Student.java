@@ -214,4 +214,8 @@ public class Student {
     public Student copy() {
         return new Student(name, phone, email, address, subjects, assignments);
     }
+
+    public void clearAssignments() {
+        assignments.clearAssignments();
+    }
 }
