@@ -75,4 +75,16 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Returns true if the prefixes are present in the argument multimap.
+     */
+    public boolean arePrefixesPresent(Prefix... prefixes) {
+        for (Prefix prefix : prefixes) {
+            if (!argMultimap.containsKey(prefix) || argMultimap.get(prefix).isEmpty()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
