@@ -54,8 +54,8 @@ public class Messages {
                 .append(student.getEmail())
                 .append("; Address: ")
                 .append(student.getAddress())
-                .append("; Subjects: ");
-        student.getSubjects().forEach(builder::append);
+                .append("; Subjects: ")
+                .append(student.getSubjects().toString().replace("[", "").replace("]", ""));
         return builder.toString();
     }
 
