@@ -107,6 +107,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteStudent(Student target) {
         addressBook.removeStudent(target);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
 
@@ -119,13 +120,13 @@ public class ModelManager implements Model {
     @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
-
         addressBook.setStudent(target, editedStudent);
     }
 
     @Override
     public void deleteAssignment(Student target, String assignmentName) {
         addressBook.deleteAssignment(target, assignmentName);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
@@ -157,7 +158,6 @@ public class ModelManager implements Model {
     @Override
     public void setLesson(Lesson target, Lesson editedLesson) {
         requireAllNonNull(target, editedLesson);
-
         addressBook.setLesson(target, editedLesson);
     }
 
