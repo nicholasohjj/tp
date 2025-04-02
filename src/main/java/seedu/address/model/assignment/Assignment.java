@@ -9,13 +9,15 @@ import seedu.address.model.datetimeutil.Date;
 
 /**
  * Represents an Assignment in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAssignmentValue(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidAssignmentName(String)}
  */
 public class Assignment implements Comparable<Assignment> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Error: Assignment names should be alphanumeric and should "
-            + "be maximum 30 characters long.";
-    public static final String VALIDATION_REGEX = "^(?=.*[a-zA-Z0-9])[a-zA-Z0-9 ]{1,30}$";
+    public static final String MESSAGE_CONSTRAINTS = "Assignment names should be alphanumeric "
+            + "and can only contain spaces. "
+            + "It should not exceed 50 characters.";
+
+    public static final String VALIDATION_REGEX = "^(?=.*[a-zA-Z0-9])[a-zA-Z0-9 ]+$";
 
     // Identity fields
     public final String assignmentName;
@@ -32,7 +34,7 @@ public class Assignment implements Comparable<Assignment> {
      */
     public Assignment(String assignment, Date dueDate) {
         requireAllNonNull(assignment, dueDate);
-        checkArgument(isValidAssignmentValue(assignment), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidAssignmentName(assignment), MESSAGE_CONSTRAINTS);
         this.assignmentName = assignment;
         this.dueDate = dueDate;
         this.isDone = false;
@@ -46,7 +48,7 @@ public class Assignment implements Comparable<Assignment> {
      */
     public Assignment(String assignment, Date dueDate, boolean isDone) {
         requireAllNonNull(assignment, dueDate);
-        checkArgument(isValidAssignmentValue(assignment), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidAssignmentName(assignment), MESSAGE_CONSTRAINTS);
         this.assignmentName = assignment;
         this.dueDate = dueDate;
         this.isDone = isDone;
@@ -76,7 +78,7 @@ public class Assignment implements Comparable<Assignment> {
         return Objects.hash(assignmentName, dueDate);
     }
 
-    public static boolean isValidAssignmentValue(String value) {
+    public static boolean isValidAssignmentName(String value) {
         return value.matches(VALIDATION_REGEX);
     }
 
@@ -85,7 +87,7 @@ public class Assignment implements Comparable<Assignment> {
     }
 
     public boolean isSameAssignment(Assignment assignment) {
-        return assignment.equals(this);
+        return this.assignmentName.equals(assignment.assignmentName);
     }
 
     public String getAssignmentName() {

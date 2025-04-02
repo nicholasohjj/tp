@@ -16,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lesson.StudentNameLessonPredicate;
+import seedu.address.model.student.Name;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListLessonsCommand.
@@ -26,8 +27,8 @@ public class ListLessonsCommandTest {
 
     @Test
     public void equals() {
-        StudentNameLessonPredicate firstPredicate = new StudentNameLessonPredicate("first");
-        StudentNameLessonPredicate secondPredicate = new StudentNameLessonPredicate("second");
+        StudentNameLessonPredicate firstPredicate = new StudentNameLessonPredicate(new Name("first"));
+        StudentNameLessonPredicate secondPredicate = new StudentNameLessonPredicate(new Name("second"));
 
         ListLessonsCommand listLessonsFirstCommand = new ListLessonsCommand(firstPredicate);
         ListLessonsCommand listLessonsSecondCommand = new ListLessonsCommand(secondPredicate);
@@ -50,20 +51,10 @@ public class ListLessonsCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_showsEverything() {
-        String expectedMessage = String.format(MESSAGE_LESSONS_LISTED_OVERVIEW, 8);
-        CommandResult expectedResult = new CommandResult(expectedMessage, true);
-        StudentNameLessonPredicate predicate = new StudentNameLessonPredicate("");
-        ListLessonsCommand command = new ListLessonsCommand(predicate);
-        expectedModel.updateFilteredLessonList(predicate);
-        assertCommandSuccess(command, model, expectedResult, expectedModel);
-    }
-
-    @Test
     public void execute_oneKeyword_lessonFound() {
         String expectedMessage = String.format(MESSAGE_LESSONS_LISTED_OVERVIEW, 1);
         CommandResult expectedResult = new CommandResult(expectedMessage, true);
-        StudentNameLessonPredicate predicate = new StudentNameLessonPredicate("Alice");
+        StudentNameLessonPredicate predicate = new StudentNameLessonPredicate(new Name("Alice"));
         ListLessonsCommand command = new ListLessonsCommand(predicate);
         expectedModel.updateFilteredLessonList(predicate);
         assertCommandSuccess(command, model, expectedResult, expectedModel);
@@ -72,7 +63,7 @@ public class ListLessonsCommandTest {
 
     @Test
     public void toStringMethod() {
-        StudentNameLessonPredicate predicate = new StudentNameLessonPredicate("keyword");
+        StudentNameLessonPredicate predicate = new StudentNameLessonPredicate(new Name("keyword"));
         ListLessonsCommand listLessonsCommand = new ListLessonsCommand(predicate);
         String expected = ListLessonsCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, listLessonsCommand.toString());
