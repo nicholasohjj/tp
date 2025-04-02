@@ -49,6 +49,11 @@ public class ListLessonsCommand extends Command {
         this.studentName = Optional.empty();
     }
 
+    /**
+     * Constructor for the ListLessonsCommand with student name
+     * @param predicate
+     * @param studentName
+     */
     public ListLessonsCommand(Predicate<Lesson> predicate, Name studentName) {
         this.predicate = predicate;
         this.studentName = Optional.of(studentName);
