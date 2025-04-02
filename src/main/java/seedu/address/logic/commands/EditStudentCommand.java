@@ -13,7 +13,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -51,6 +53,7 @@ public class EditStudentCommand extends Command {
     public static final String MESSAGE_EDIT_SUBJECT_DISALLOWED = "Error: Editing subjects directly is not allowed.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book.";
+    private static final Logger logger = LogsCenter.getLogger(EditStudentCommand.class);
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
@@ -65,26 +68,34 @@ public class EditStudentCommand extends Command {
 
         this.index = index;
         this.editStudentDescriptor = new EditStudentDescriptor(editStudentDescriptor);
+        logger.info("EditStudentCommand created for student index: " + index.getOneBased());
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing EditStudentCommand for student index: " + index.getOneBased());
+
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
+            logger.warning("Invalid student index: " + index.getOneBased());
             throw new CommandException(Messages.MESSAGE_INDEX_OUT_OF_BOUNDS);
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
+        assert editedStudent != null : "Edited student should not be null";
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
+            logger.warning("Duplicate student detected: " + editedStudent.getName());
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+
+        logger.info("Student successfully edited: " + editedStudent.getName());
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS,
                 Messages.format(editedStudent)), true);
     }
@@ -94,7 +105,9 @@ public class EditStudentCommand extends Command {
      * edited with {@code editStudentDescriptor}.
      */
     private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
-        assert studentToEdit != null;
+        assert studentToEdit != null : "Student to edit cannot be null";
+        assert editStudentDescriptor != null : "Edit descriptor cannot be null";
+        assert editStudentDescriptor.isAnyFieldEdited() : "At least one field should be edited";
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());

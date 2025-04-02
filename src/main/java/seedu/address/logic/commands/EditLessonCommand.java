@@ -98,7 +98,7 @@ public class EditLessonCommand extends Command {
         }
 
         //check whether after editing, lesson clashes with any lesson in the addressbook
-        if (model.hasLessonConflict(editedLesson) {
+        if (model.hasLessonConflict(editedLesson)) {
             if (!lessonToEdit.isConflict(editedLesson)) {
                 logger.warning("Lesson conflict detected for: " + editedLesson);
                 throw new CommandException(MESSAGE_LESSON_CONFLICT);
