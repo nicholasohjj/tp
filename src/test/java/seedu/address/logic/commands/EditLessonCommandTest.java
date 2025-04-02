@@ -8,8 +8,10 @@ import static seedu.address.logic.commands.CommandTestUtil.LESSON_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.LESSON_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showLessonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalLessons.getTypicalAddressBook;
@@ -66,10 +68,10 @@ public class EditLessonCommandTest {
 
         LessonBuilder lessonInList = new LessonBuilder(lastLesson);
         Lesson editedLesson = lessonInList.withName(VALID_NAME_BOB).withDate(VALID_DATE_BOB)
-                .build();
+                .withSubject(VALID_SUBJECT_BOB).build();
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withDate(VALID_DATE_BOB).build();
+                .withDate(VALID_DATE_BOB).withSubject(VALID_SUBJECT_BOB).build();
         EditLessonCommand editLessonCommand = new EditLessonCommand(indexLastLesson, descriptor);
 
         String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS,
@@ -89,24 +91,43 @@ public class EditLessonCommandTest {
                 EditLessonCommand.MESSAGE_NOT_EDITED);
     }
 
-    //    @Test
-    //    public void execute_filteredList_success() {
-    //        showLessonAtIndex(model, INDEX_FIRST);
-    //
-    //        Lesson lessonInFilteredList = model.getFilteredLessonList().get(INDEX_FIRST.getZeroBased());
-    //        Lesson editedLesson = new LessonBuilder(lessonInFilteredList).withName(VALID_NAME_BOB).build();
-    //        EditLessonCommand editLessonCommand = new EditLessonCommand(INDEX_FIRST,
-    //                new EditLessonDescriptorBuilder().withName(VALID_NAME_BOB).build());
-    //
-    //        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS,
-    //                Messages.format(editedLesson));
-    //        CommandResult expectedResult = new CommandResult(expectedMessage, true);
-    //
-    //        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-    //        expectedModel.setLesson(model.getFilteredLessonList().get(0), editedLesson);
-    //
-    //        assertCommandSuccess(editLessonCommand, model, expectedResult, expectedModel);
-    //    }
+    @Test
+    public void execute_editStudentNameWithoutEditingSubject_failure() {
+        Index indexLastLesson = Index.fromOneBased(model.getFilteredLessonList().size());
+        Lesson lastLesson = model.getFilteredLessonList().get(indexLastLesson.getZeroBased());
+
+        LessonBuilder lessonInList = new LessonBuilder(lastLesson);
+        Lesson editedLesson = lessonInList.withName(VALID_NAME_BOB).build();
+
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditLessonCommand editLessonCommand = new EditLessonCommand(indexLastLesson, descriptor);
+
+        String expectedMessage = String.format(AddLessonCommand.MESSAGE_SUBJECT_MISMATCH,
+                Messages.format(editedLesson));
+
+        assertCommandFailure(editLessonCommand, model, expectedMessage);
+    }
+
+
+    @Test
+    public void execute_filteredList_success() {
+        showLessonAtIndex(model, INDEX_FIRST);
+
+        Lesson lessonInFilteredList = model.getFilteredLessonList().get(INDEX_FIRST.getZeroBased());
+        Lesson editedLesson = new LessonBuilder(lessonInFilteredList).withName(VALID_NAME_BOB)
+                .withSubject(VALID_SUBJECT_BOB).build();
+        EditLessonCommand editLessonCommand = new EditLessonCommand(INDEX_FIRST,
+                new EditLessonDescriptorBuilder().withName(VALID_NAME_BOB).withSubject(VALID_SUBJECT_BOB).build());
+
+        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS,
+                Messages.format(editedLesson));
+        CommandResult expectedResult = new CommandResult(expectedMessage, true);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setLesson(model.getFilteredLessonList().get(0), editedLesson);
+
+        assertCommandSuccess(editLessonCommand, model, expectedResult, expectedModel);
+    }
 
     @Test
     public void execute_duplicateLessonUnfilteredList_failure() {
@@ -117,17 +138,17 @@ public class EditLessonCommandTest {
         assertCommandFailure(editLessonCommand, model, EditLessonCommand.MESSAGE_DUPLICATE_LESSON);
     }
 
-    //    @Test
-    //    public void execute_duplicateLessonFilteredList_failure() {
-    //        showLessonAtIndex(model, INDEX_FIRST);
-    //
-    //        // edit lesson in filtered list into a duplicate in address book
-    //        Lesson lessonInList = model.getAddressBook().getLessonList().get(INDEX_SECOND.getZeroBased());
-    //        EditLessonCommand editLessonCommand = new EditLessonCommand(INDEX_FIRST,
-    //                new EditLessonDescriptorBuilder(lessonInList).build());
-    //
-    //        assertCommandFailure(editLessonCommand, model, EditLessonCommand.MESSAGE_DUPLICATE_LESSON);
-    //    }
+    @Test
+    public void execute_duplicateLessonFilteredList_failure() {
+        showLessonAtIndex(model, INDEX_FIRST);
+
+        // edit lesson in filtered list into a duplicate in address book
+        Lesson lessonInList = model.getAddressBook().getLessonList().get(INDEX_SECOND.getZeroBased());
+        EditLessonCommand editLessonCommand = new EditLessonCommand(INDEX_FIRST,
+                new EditLessonDescriptorBuilder(lessonInList).build());
+
+        assertCommandFailure(editLessonCommand, model, EditLessonCommand.MESSAGE_DUPLICATE_LESSON);
+    }
 
     @Test
     public void execute_invalidLessonIndexUnfilteredList_failure() {
@@ -138,22 +159,22 @@ public class EditLessonCommandTest {
         assertCommandFailure(editLessonCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
 
-    //    /**
-    //     * Edit filtered list where index is larger than size of filtered list,
-    //     * but smaller than size of address book
-    //     */
-    //    @Test
-    //    public void execute_invalidLessonIndexFilteredList_failure() {
-    //        showLessonAtIndex(model, INDEX_FIRST);
-    //        Index outOfBoundIndex = INDEX_SECOND;
-    //        // ensures that outOfBoundIndex is still in bounds of address book list
-    //        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getLessonList().size());
-    //
-    //        EditLessonCommand editCommand = new EditLessonCommand(outOfBoundIndex,
-    //                new EditLessonDescriptorBuilder().withName(VALID_NAME_BOB).build());
-    //
-    //        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
-    //    }
+    /**
+     * Edit filtered list where index is larger than size of filtered list,
+     * but smaller than size of address book
+     */
+    @Test
+    public void execute_invalidLessonIndexFilteredList_failure() {
+        showLessonAtIndex(model, INDEX_FIRST);
+        Index outOfBoundIndex = INDEX_SECOND;
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getLessonList().size());
+
+        EditLessonCommand editCommand = new EditLessonCommand(outOfBoundIndex,
+                new EditLessonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+    }
 
     @Test
     public void equals() {

@@ -19,6 +19,8 @@ Class Email
 Class Name
 Class Phone
 Class Subject
+Class UniqueAssignmentList
+Class Assignment
 
 Class I #FFFFFF
 }
@@ -42,6 +44,8 @@ Student *--> Phone
 Student *--> Email
 Student *--> Address
 Student *--> "*" Subject
+Student *--> "1" UniqueAssignmentList
+UniqueAssignmentList --> "*" Assignment
 
 Student -[hidden]up--> I
 UniqueStudentList -[hidden]right-> I

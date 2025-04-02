@@ -42,12 +42,12 @@ public class AddLessonCommand extends Command {
             + PREFIX_TIME + "14:00 "
             + PREFIX_SUBJECT + "Science";
 
-    public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in the address book";
-    public static final String MESSAGE_STUDENT_NOT_FOUND = "The specified student does not exist in the address book";
+    public static final String MESSAGE_SUCCESS = "New lesson added: %1$s.";
+    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in the address book.";
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "The specified student does not exist in the address book.";
     public static final String MESSAGE_LESSON_CONFLICT = "The lesson clashes with an existing lesson "
-            + "in the address book";
-    public static final String MESSAGE_SUBJECT_MISMATCH = "The specified subject does not exist for the student";
+            + "in the address book.";
+    public static final String MESSAGE_SUBJECT_MISMATCH = "The specified subject does not exist for the student.";
 
     private static final Logger logger = LogsCenter.getLogger(AddLessonCommand.class);
 
@@ -85,9 +85,9 @@ public class AddLessonCommand extends Command {
             throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
         }
 
-        if (!model.hasStudentSubjects(dummyStudent, toAdd.getSubjects())) {
+        if (!model.hasStudentSubject(dummyStudent, toAdd.getSubject())) {
             logger.warning("Subject mismatch for student: " + toAdd.getStudentName()
-                    + " with subjects: " + toAdd.getSubjects());
+                    + " with subject: " + toAdd.getSubject());
             throw new CommandException(MESSAGE_SUBJECT_MISMATCH);
         }
 

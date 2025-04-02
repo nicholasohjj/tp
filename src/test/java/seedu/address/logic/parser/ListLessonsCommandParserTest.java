@@ -23,10 +23,10 @@ public class ListLessonsCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindStudentCommand() {
+    public void parse_validArgs_returnsListLessonsCommand() {
         // leading and trailing whitespaces
         ListLessonsCommand expectedFindStudentCommand =
-                new ListLessonsCommand(new StudentNameLessonPredicate(new Name("Alice")));
+                new ListLessonsCommand(new StudentNameLessonPredicate(new Name("Alice")), new Name("Alice"));
         assertParseSuccess(parser, " n/ Alice ", expectedFindStudentCommand);
 
         // blank keywords are not allowed

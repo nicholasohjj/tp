@@ -1,9 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.EditLessonCommand.EditLessonDescriptor;
 import seedu.address.model.datetimeutil.Date;
 import seedu.address.model.datetimeutil.Time;
@@ -34,7 +30,7 @@ public class EditLessonDescriptorBuilder {
         descriptor.setName(lesson.getStudentName());
         descriptor.setDate(lesson.getDate());
         descriptor.setTime(lesson.getTime());
-        descriptor.setSubjects(lesson.getSubjects());
+        descriptor.setSubject(lesson.getSubject());
     }
 
     /**
@@ -62,12 +58,12 @@ public class EditLessonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code subjects} into a {@code Set<Subject>} and set it to the {@code EditLessonDescriptor}
+     * Parses the {@code subject} into a {@code Subject} and set it to the {@code EditLessonDescriptor}
      * that we are building.
      */
-    public EditLessonDescriptorBuilder withSubjects(String... subjects) {
-        Set<Subject> subjectSet = Stream.of(subjects).map(Subject::new).collect(Collectors.toSet());
-        descriptor.setSubjects(subjectSet);
+    public EditLessonDescriptorBuilder withSubject(String subject) {
+        Subject newSubject = new Subject(subject);
+        descriptor.setSubject(newSubject);
         return this;
     }
 

@@ -34,6 +34,6 @@ public class ListLessonsCommandParser implements Parser<ListLessonsCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
 
-        return new ListLessonsCommand(new StudentNameLessonPredicate(name));
+        return new ListLessonsCommand(new StudentNameLessonPredicate(name), name);
     }
 }

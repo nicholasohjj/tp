@@ -47,7 +47,7 @@ public class LessonTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Lesson.class.getCanonicalName() + "{subjects=" + ALICE.getSubjects()
+        String expected = Lesson.class.getCanonicalName() + "{subject=" + ALICE.getSubject()
                 + ", name=" + ALICE.getStudentName() + ", date=" + ALICE.getDate()
                 + ", time=" + ALICE.getTime() + "}";
         assertEquals(expected, ALICE.toString());
