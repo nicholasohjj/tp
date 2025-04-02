@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.ListLessonsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.StudentNameLessonPredicate;
+import seedu.address.model.student.Name;
 
 /**
  * Parses input arguments and creates a new ListLessonsCommand object
@@ -37,8 +38,9 @@ public class ListLessonsCommandParser implements Parser<ListLessonsCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ListLessonsCommand.MESSAGE_USAGE));
         }
+        Name name = new Name(keyword);
 
-        return new ListLessonsCommand(new StudentNameLessonPredicate(keyword));
+        return new ListLessonsCommand(new StudentNameLessonPredicate(keyword), name);
     }
 
     /**

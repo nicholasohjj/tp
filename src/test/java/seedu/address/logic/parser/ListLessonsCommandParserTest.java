@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ListLessonsCommand;
 import seedu.address.model.lesson.StudentNameLessonPredicate;
+import seedu.address.model.student.Name;
 
 public class ListLessonsCommandParserTest {
 
@@ -22,11 +23,11 @@ public class ListLessonsCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindStudentCommand() {
+    public void parse_validArgs_returnsListLessonsCommand() {
         // leading and trailing whitespaces
-        ListLessonsCommand expectedFindStudentCommand =
-                new ListLessonsCommand(new StudentNameLessonPredicate("Alice"));
-        assertParseSuccess(parser, " n/ Alice ", expectedFindStudentCommand);
+        ListLessonsCommand expectedListLessonsCommand =
+                new ListLessonsCommand(new StudentNameLessonPredicate("Alice"), new Name("Alice"));
+        assertParseSuccess(parser, " n/ Alice ", expectedListLessonsCommand);
 
         // blank keywords are not allowed
         assertParseFailure(parser, " n/ ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
