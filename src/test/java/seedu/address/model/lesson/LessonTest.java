@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalLessons.BENNY;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.LessonBuilder;
+
 public class LessonTest {
     String FUTURE_DATE_1 = "01-02-2030";
     String FUTURE_DATE_2 = "02-02-2030";
