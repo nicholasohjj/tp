@@ -68,7 +68,7 @@ public class AddLessonCommand extends Command {
             throw new CommandException(MESSAGE_LESSON_CONFLICT);
         }
         if (!model.hasStudent(new Student(toAdd.getStudentName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                new HashSet<Subject>(), new UniqueAssignmentList()))) {
+                new HashSet<>(), new UniqueAssignmentList()))) {
             throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
         }
         if (!model.hasStudentSubjects(new Student(toAdd.getStudentName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
