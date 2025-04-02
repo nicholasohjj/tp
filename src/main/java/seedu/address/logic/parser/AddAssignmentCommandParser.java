@@ -4,8 +4,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
-import java.util.stream.Stream;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddAssignmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -24,7 +22,7 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
     public AddAssignmentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ASSIGNMENT, PREFIX_DATE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ASSIGNMENT, PREFIX_DATE)
+        if (!argMultimap.arePrefixesPresent(PREFIX_ASSIGNMENT, PREFIX_DATE)
                 || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssignmentCommand.MESSAGE_USAGE));
         }
@@ -36,13 +34,5 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
 
         Assignment assignment = new Assignment(assignmentName, dueDate);
         return new AddAssignmentCommand(index, assignment);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

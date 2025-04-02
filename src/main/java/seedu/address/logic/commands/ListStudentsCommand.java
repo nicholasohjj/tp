@@ -13,12 +13,15 @@ public class ListStudentsCommand extends Command {
     public static final String COMMAND_WORD = "list_students";
 
     public static final String MESSAGE_SUCCESS = "Listed all students";
-
+    public static final String MESSAGE_EMPTY_LIST = "No students found";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(MESSAGE_SUCCESS, true);
+        return new CommandResult(
+                model.getFilteredStudentList().isEmpty()
+                ? MESSAGE_EMPTY_LIST
+                : MESSAGE_SUCCESS, true);
     }
 }

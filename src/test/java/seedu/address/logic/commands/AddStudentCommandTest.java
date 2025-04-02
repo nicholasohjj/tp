@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalStudents.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
+import seedu.address.model.subject.Subject;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddStudentCommandTest {
@@ -156,7 +158,17 @@ public class AddStudentCommandTest {
         }
 
         @Override
+        public boolean hasStudentSubjects(Student student, Set<Subject> subjects) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasLesson(Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasLessonConflict(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -65,11 +65,12 @@ public class Assignment implements Comparable<Assignment> {
             return true;
         }
 
-        if (!(other instanceof Assignment otherAssignment)) {
+        if (!(other instanceof Assignment)) {
             return false;
         }
 
-        return assignmentName.equals(otherAssignment.assignmentName) && dueDate.equals(otherAssignment.dueDate);
+        Assignment otherAssignment = (Assignment) other;
+        return assignmentName.equals(otherAssignment.assignmentName);
     }
 
     @Override
@@ -121,4 +122,3 @@ public class Assignment implements Comparable<Assignment> {
         }
     }
 }
-
