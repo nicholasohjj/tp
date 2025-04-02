@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
@@ -18,13 +17,13 @@ public class DeleteLessonCommandParser implements Parser<DeleteLessonCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteLessonCommand parse(String args) throws ParseException {
-        requireNonNull(args);
-        try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteLessonCommand(index);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE), pe);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
+        if (argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteLessonCommand.MESSAGE_USAGE));
         }
+
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        return new DeleteLessonCommand(index);
     }
 }

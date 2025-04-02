@@ -8,7 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_ASSIGNMENT;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -41,6 +43,7 @@ public class EditAssignmentCommand extends Command {
     public static final String MESSAGE_EDIT_ASSIGNMENT_SUCCESS = "Edited Assignment: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the address book.";
+    private static final Logger logger = LogsCenter.getLogger(EditAssignmentCommand.class);
 
     private final Index index;
     private final String assignmentName;
@@ -59,24 +62,43 @@ public class EditAssignmentCommand extends Command {
         this.index = index;
         this.assignmentName = assignmentName;
         this.editAssignmentDescriptor = new EditAssignmentDescriptor(editAssignmentDescriptor);
+
+        logger.info("EditAssignmentCommand created for student index: " + index.getOneBased()
+                + " with assignment: " + assignmentName);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing EditAssignmentCommand for student index: " + index.getOneBased()
+                + " and assignment: " + assignmentName);
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
+            logger.warning("Invalid student index: " + index.getOneBased());
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         UniqueAssignmentList assignmentsToEdit = studentToEdit.getAssignments();
-        Assignment assignmentToEdit = assignmentsToEdit.getAssignment(assignmentName);
-        Assignment editedAssignment = createEditedAssignment(assignmentToEdit, editAssignmentDescriptor);
 
-        if (!assignmentToEdit.isSameAssignment(editedAssignment) && assignmentsToEdit.contains(editedAssignment)) {
-            throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
+        assert assignmentsToEdit != null : "Assignments list should not be null";
+
+        Assignment assignmentToEdit = assignmentsToEdit.getAssignment(assignmentName);
+
+        if (assignmentToEdit == null) {
+            logger.warning("Assignment not found: " + assignmentName);
+            throw new CommandException(String.format(Messages.MESSAGE_ASSIGNMENT_NOT_FOUND, assignmentName));
+        }
+
+        Assignment editedAssignment = createEditedAssignment(assignmentToEdit, editAssignmentDescriptor);
+        assert editedAssignment != null : "Edited assignment should not be null";
+
+        if (!assignmentToEdit.isSameAssignment(editedAssignment)) {
+            if (assignmentsToEdit.contains(editedAssignment)) {
+                logger.warning("Duplicate assignment detected: " + editedAssignment.getAssignmentName());
+                throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
+            }
         }
 
         UniqueAssignmentList updatedAssignments = assignmentsToEdit;
@@ -87,6 +109,8 @@ public class EditAssignmentCommand extends Command {
 
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+
+        logger.info("Assignment successfully edited: " + editedAssignment);
         return new CommandResult(String.format(MESSAGE_EDIT_ASSIGNMENT_SUCCESS,
                 editedAssignment), true);
     }
@@ -124,7 +148,9 @@ public class EditAssignmentCommand extends Command {
      */
     private Assignment createEditedAssignment(Assignment assignmentToEdit,
                                               EditAssignmentDescriptor editAssignmentDescriptor) {
-        assert assignmentToEdit != null;
+        assert assignmentToEdit != null : "Assignment to edit cannot be null";
+        assert editAssignmentDescriptor != null : "Edit descriptor cannot be null";
+        assert editAssignmentDescriptor.isAnyFieldEdited() : "At least one field should be edited";
 
         String updatedAssignmentName = editAssignmentDescriptor.getNewAssignmentName()
                 .orElse(assignmentToEdit.getAssignmentName());
