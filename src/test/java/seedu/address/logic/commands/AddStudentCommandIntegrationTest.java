@@ -32,10 +32,10 @@ public class AddStudentCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addStudent(validStudent);
+        String expectedMessage = String.format(AddStudentCommand.MESSAGE_SUCCESS, Messages.format(validStudent));
+        CommandResult expectedResult = new CommandResult(expectedMessage, true);
 
-        assertCommandSuccess(new AddStudentCommand(validStudent), model,
-                String.format(AddStudentCommand.MESSAGE_SUCCESS, Messages.format(validStudent)),
-                expectedModel);
+        assertCommandSuccess(new AddStudentCommand(validStudent), model, expectedResult, expectedModel);
     }
 
     @Test

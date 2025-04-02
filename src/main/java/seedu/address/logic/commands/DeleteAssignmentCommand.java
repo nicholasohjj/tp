@@ -59,7 +59,7 @@ public class DeleteAssignmentCommand extends Command {
 
         model.deleteAssignment(studentToDeleteAssignment, assignmentName);
         return new CommandResult(String.format(MESSAGE_DELETE_ASSIGNMENT_SUCCESS,
-                Messages.format(studentToDeleteAssignment, assignmentToDelete)));
+                Messages.format(studentToDeleteAssignment, assignmentToDelete)), true);
     }
 
     @Override
