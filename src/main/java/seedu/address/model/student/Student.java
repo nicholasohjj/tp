@@ -183,15 +183,32 @@ public class Student {
                 .toString();
     }
 
-    public void markAssignment(String assignmentName) throws CommandException {
+    /**
+     * Marks an assignment identified by its name as completed for the student.
+     *
+     * @param assignmentName The name of the assignment to mark as completed.
+     * @return A new Student instance with the updated assignment status.
+     * @throws CommandException if no assignment with the specified name exists for this student.
+     */
+    public Student markAssignment(String assignmentName) throws CommandException {
         assignments.markAssignment(assignmentName);
+        return new Student(name, phone, email, address, subjects, assignments);
     }
 
-    public void unmarkAssignment(String assignmentName) throws CommandException {
+    /**
+     * Unmarks an assignment identified by its name as uncompleted for the student.
+     *
+     * @param assignmentName The name of the assignment to mark as uncompleted.
+     * @return A new Student instance with the updated assignment status.
+     * @throws CommandException if no assignment with the specified name exists for this student.
+     */
+    public Student unmarkAssignment(String assignmentName) throws CommandException {
         assignments.unmarkAssignment(assignmentName);
+        return new Student(name, phone, email, address, subjects, assignments);
     }
 
     public void deleteAssignment(String assignmentName) {
         assignments.deleteAssignment(assignmentName);
     }
+
 }

@@ -1,11 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -27,49 +31,73 @@ public class UnmarkAssignmentCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1"
             + PREFIX_ASSIGNMENT + "Assignment 1";
 
-    public static final String MESSAGE_UNMARK_ASSIGNMENT_SUCCESS = "Assignment %1$s\nunmarked successfully.";
-    public static final String MESSAGE_INVALID_ASSIGNMENT_DISPLAYED = "Error: The assignment name provided cannot be "
-            + "found";
+    public static final String MESSAGE_SUCCESS = "Assignment \"%1$s\" unmarked as incomplete for %2$s";
+    public static final String MESSAGE_ASSIGNMENT_NOT_FOUND = "The assignment \"%1$s\" was not found for this student";
+    public static final String MESSAGE_EMPTY_STUDENT_LIST = "There are no students in the address book";
 
-    private final Index index;
+    private static final Logger logger = LogsCenter.getLogger(UnmarkAssignmentCommand.class);
+
+    private final Index studentIndex;
     private final String assignmentName;
 
     /**
-     * Creates a UnmarkAssignmentCommand to unmark the specified {@code Assignment}
+     * Creates an UnmarkAssignmentCommand to unmark the specified assignment.
+     *
+     * @param studentIndex Index of the student in the filtered student list
+     * @param assignmentName Name of the assignment to unmark
      */
-    public UnmarkAssignmentCommand(Index index, String assignmentName) {
-        requireAllNonNull(index, assignmentName);
-
-        this.index = index;
-        this.assignmentName = assignmentName;
+    public UnmarkAssignmentCommand(Index studentIndex, String assignmentName) {
+        requireAllNonNull(studentIndex, assignmentName);
+        this.studentIndex = studentIndex;
+        this.assignmentName = assignmentName.trim();
+        logger.info(String.format("Created UnmarkAssignmentCommand for student index %d, assignment: %s",
+                studentIndex.getOneBased(), assignmentName));
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Student> lastShownList = model.getFilteredStudentList();
+        requireNonNull(model);
+        logger.info("Executing UnmarkAssignmentCommand");
 
-        // Check if the index is valid
-        if (index.getZeroBased() >= lastShownList.size()) {
+        List<Student> studentList = model.getFilteredStudentList();
+
+        // Validate student list
+        if (studentList.isEmpty()) {
+            logger.warning("Attempted to unmark assignment in empty student list");
+            throw new CommandException(MESSAGE_EMPTY_STUDENT_LIST);
+        }
+
+        // Validate student index
+        if (studentIndex.getZeroBased() >= studentList.size()) {
+            logger.warning(String.format("Invalid student index: %d (list size: %d)",
+                    studentIndex.getOneBased(), studentList.size()));
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        // Get the student to edit
-        Student studentToEdit = lastShownList.get(index.getZeroBased());
+        Student student = studentList.get(studentIndex.getZeroBased());
+        assert student != null : "Student should not be null";
 
         // Check if the assignment exists
-        if (!studentToEdit.getAssignments().contains(new Assignment(assignmentName, new Date("31-12-9999")))) {
-            throw new CommandException(MESSAGE_INVALID_ASSIGNMENT_DISPLAYED);
+        Assignment targetAssignment = new Assignment(assignmentName, new Date("31-12-9999"));
+        if (!student.getAssignments().contains(targetAssignment)) {
+            logger.warning(String.format("Assignment not found: %s for student %s",
+                    assignmentName, student.getName()));
+            throw new CommandException(String.format(MESSAGE_ASSIGNMENT_NOT_FOUND, assignmentName));
         }
 
         // Unmark the assignment
-        studentToEdit.unmarkAssignment(assignmentName);
+        Student updatedStudent = student.unmarkAssignment(assignmentName);
+        model.setStudent(student, updatedStudent);
+        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
 
-        return new CommandResult(generateSuccessMessage(), true);
+        logger.info(String.format("Successfully unmarked assignment %s for student %s",
+                assignmentName, student.getName()));
+
+        return new CommandResult(
+                String.format(MESSAGE_SUCCESS, assignmentName, student.getName()),
+                true);
     }
 
-    private String generateSuccessMessage() {
-        return String.format(MESSAGE_UNMARK_ASSIGNMENT_SUCCESS, assignmentName);
-    }
 
     @Override
     public boolean equals(Object other) {
@@ -82,6 +110,15 @@ public class UnmarkAssignmentCommand extends Command {
         }
 
         UnmarkAssignmentCommand otherCommand = (UnmarkAssignmentCommand) other;
-        return index.equals(otherCommand.index) && assignmentName.equals(otherCommand.assignmentName);
+        return studentIndex.equals(otherCommand.studentIndex)
+                && assignmentName.equals(otherCommand.assignmentName);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("studentIndex", studentIndex)
+                .add("assignmentName", assignmentName)
+                .toString();
     }
 }
