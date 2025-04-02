@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalStudents.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -158,7 +157,7 @@ public class AddStudentCommandTest {
         }
 
         @Override
-        public boolean hasStudentSubjects(Student student, Set<Subject> subjects) {
+        public boolean hasStudentSubject(Student student, Subject subject) {
             throw new AssertionError("This method should not be called.");
         }
 

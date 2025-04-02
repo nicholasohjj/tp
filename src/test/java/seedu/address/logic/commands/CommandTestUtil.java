@@ -86,9 +86,9 @@ public class CommandTestUtil {
                 .withSubjects(VALID_SUBJECT_HUSBAND, VALID_SUBJECT_FRIEND).build();
 
         LESSON_DESC_AMY = new EditLessonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withDate(VALID_DATE_AMY).withTime(VALID_TIME_AMY).withSubjects(VALID_SUBJECT_FRIEND).build();
+                .withDate(VALID_DATE_AMY).withTime(VALID_TIME_AMY).withSubject(VALID_SUBJECT_FRIEND).build();
         LESSON_DESC_BOB = new EditLessonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withDate(VALID_DATE_BOB).withTime(VALID_TIME_BOB).withSubjects(VALID_SUBJECT_FRIEND).build();
+                .withDate(VALID_DATE_BOB).withTime(VALID_TIME_BOB).withSubject(VALID_SUBJECT_FRIEND).build();
     }
 
     /**

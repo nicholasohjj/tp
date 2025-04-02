@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -66,7 +65,7 @@ public interface Model {
     /**
      * Returns true if a student has a subject.
      */
-    boolean hasStudentSubjects(Student student, Set<Subject> subjects);
+    boolean hasStudentSubject(Student student, Subject subject);
 
     /**
      * Deletes the given student.

@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.AddLessonCommand.MESSAGE_LESSON_CONFLICT;
 import static seedu.address.logic.commands.AddLessonCommand.MESSAGE_STUDENT_NOT_FOUND;
+import static seedu.address.logic.commands.AddLessonCommand.MESSAGE_SUBJECT_MISMATCH;
 import static seedu.address.logic.commands.AddLessonCommand.VALID_ADDRESS;
 import static seedu.address.logic.commands.AddLessonCommand.VALID_EMAIL;
 import static seedu.address.logic.commands.AddLessonCommand.VALID_PHONE;
@@ -12,12 +13,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -92,12 +91,17 @@ public class EditLessonCommand extends Command {
             throw new CommandException(MESSAGE_LESSON_CONFLICT);
         }
 
+        Student student = new Student(editedLesson.getStudentName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                new HashSet<>(), new UniqueAssignmentList());
+
         //check whether student exists in the addressbook
-        if (!model.hasStudent(new Student(editedLesson.getStudentName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                new HashSet<Subject>(), new UniqueAssignmentList()))) {
+        if (!model.hasStudent(student)) {
             throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
         }
-
+        //check whether student has the subject
+        if (!model.hasStudentSubject(student, editedLesson.getSubject())) {
+            throw new CommandException(MESSAGE_SUBJECT_MISMATCH);
+        }
         model.setLesson(lessonToEdit, editedLesson);
         model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, Messages.format(editedLesson)), true);
@@ -113,9 +117,9 @@ public class EditLessonCommand extends Command {
         Name updatedName = editLessonDescriptor.getName().orElse(lessonToEdit.getStudentName());
         Date updatedDate = editLessonDescriptor.getDate().orElse(lessonToEdit.getDate());
         Time updatedTime = editLessonDescriptor.getTime().orElse(lessonToEdit.getTime());
-        Set<Subject> updatedSubjects = editLessonDescriptor.getSubjects().orElse(lessonToEdit.getSubjects());
+        Subject updatedSubject = editLessonDescriptor.getSubject().orElse(lessonToEdit.getSubject());
 
-        return new Lesson(updatedSubjects, updatedName, updatedDate, updatedTime);
+        return new Lesson(updatedSubject, updatedName, updatedDate, updatedTime);
     }
 
     @Override
@@ -149,7 +153,7 @@ public class EditLessonCommand extends Command {
         private Name name;
         private Date date;
         private Time time;
-        private Set<Subject> subjects;
+        private Subject subject;
 
         public EditLessonDescriptor() {}
 
@@ -161,7 +165,7 @@ public class EditLessonCommand extends Command {
             setName(toCopy.name);
             setDate(toCopy.date);
             setTime(toCopy.time);
-            setSubjects(toCopy.subjects);
+            setSubject(toCopy.subject);
         }
 
 
@@ -170,7 +174,7 @@ public class EditLessonCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, date, time, subjects);
+            return CollectionUtil.isAnyNonNull(name, date, time, subject);
         }
 
         public void setName(Name name) {
@@ -196,12 +200,8 @@ public class EditLessonCommand extends Command {
             return Optional.ofNullable(time);
         }
 
-        /**
-         * Sets {@code subjects} to this object's {@code subjects}.
-         * A defensive copy of {@code subjects} is used internally.
-         */
-        public void setSubjects(Set<Subject> subjects) {
-            this.subjects = (subjects != null) ? new HashSet<>(subjects) : null;
+        public void setSubject(Subject subject) {
+            this.subject = subject;
         }
 
         /**
@@ -209,8 +209,8 @@ public class EditLessonCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code subjects} is null.
          */
-        public Optional<Set<Subject>> getSubjects() {
-            return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
+        public Optional<Subject> getSubject() {
+            return (subject != null) ? Optional.of(subject) : Optional.empty();
         }
 
         @Override
@@ -228,13 +228,13 @@ public class EditLessonCommand extends Command {
             return Objects.equals(name, otherEditLessonDescriptor.name)
                     && Objects.equals(date, otherEditLessonDescriptor.date)
                     && Objects.equals(time, otherEditLessonDescriptor.time)
-                    && Objects.equals(subjects, otherEditLessonDescriptor.subjects);
+                    && Objects.equals(subject, otherEditLessonDescriptor.subject);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("subjects", subjects)
+                    .add("subjects", subject)
                     .add("name", name)
                     .add("date", date)
                     .add("time", time)

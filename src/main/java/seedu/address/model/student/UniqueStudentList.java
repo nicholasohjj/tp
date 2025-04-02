@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -104,14 +103,14 @@ public class UniqueStudentList implements Iterable<Student> {
     /**
      * Returns true if a student has a subject.
      */
-    public boolean hasStudentSubjects(Student student, Set<Subject> subjects) {
-        requireAllNonNull(student, subjects);
+    public boolean hasStudentSubjects(Student student, Subject subject) {
+        requireAllNonNull(student, subject);
         Student studentFound = internalList.stream().filter(student::isSameStudent).findFirst().orElse(null);
         if (studentFound == null) {
             throw new StudentNotFoundException();
         }
 
-        return studentFound.hasSubjects(subjects);
+        return studentFound.hasSubject(subject);
     }
 
     /**

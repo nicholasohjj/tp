@@ -8,7 +8,6 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
-import seedu.address.model.subject.Subject;
 
 /**
  * Container for user visible messages.
@@ -65,12 +64,7 @@ public class Messages {
      */
     public static String format(Lesson lesson) {
         final StringBuilder builder = new StringBuilder();
-
-        String subjectList = lesson.getSubjects().stream()
-                .map(Subject::toString)
-                .collect(Collectors.joining(" ")); // Or ", " if preferred
-
-        builder.append(subjectList)
+        builder.append(lesson.getSubject())
                 .append(" lesson; Student Name: ")
                 .append(lesson.getStudentName())
                 .append("; Date: ")

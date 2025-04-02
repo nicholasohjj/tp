@@ -11,7 +11,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
 /**
- * An UI component that displays information of a {@code Lesson} or {@code Student}.
+ * A UI component that displays information of a {@code Lesson} or {@code Student}.
  */
 public class ListCard extends UiPart<Region> {
 
@@ -43,6 +43,8 @@ public class ListCard extends UiPart<Region> {
     @FXML
     private Label time;
     @FXML
+    private Label subject;
+    @FXML
     private FlowPane subjects;
     @FXML
     private FlowPane assignments;
@@ -58,9 +60,7 @@ public class ListCard extends UiPart<Region> {
         name.setText(lesson.getStudentName().fullName);
         date.setText(lesson.getDate().toString());
         time.setText(lesson.getTime().time);
-        lesson.getSubjects().stream()
-                .sorted(Comparator.comparing(subject -> subject.subjectName))
-                .forEach(subject -> subjects.getChildren().add(new Label(subject.subjectName)));
+        subject.setText(lesson.getSubject().subjectName);
     }
 
     /**

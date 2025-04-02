@@ -103,8 +103,8 @@ public class Student {
     /**
      * Returns true if the student has the subject.
      */
-    public boolean hasSubjects(Set<Subject> targetSubjects) {
-        return subjects.containsAll(targetSubjects);
+    public boolean hasSubject(Subject targetSubject) {
+        return subjects.contains(targetSubject);
     }
 
     public UniqueAssignmentList getAssignments() {

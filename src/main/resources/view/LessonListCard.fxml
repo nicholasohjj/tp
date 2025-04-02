@@ -24,8 +24,7 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <!-- Changed from Label to FlowPane -->
-        <FlowPane fx:id="subjects" hgap="5" vgap="5" />
+        <Label fx:id="subject" styleClass="cell_big_label" text="\$first" />
       </HBox>
       <Label fx:id="name" styleClass="cell_small_label" text="\$name" />
       <Label fx:id="date" styleClass="cell_small_label" text="\$date" />

@@ -1,10 +1,5 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -25,21 +20,19 @@ class JsonAdaptedLesson {
     private final String name;
     private final String date;
     private final String time;
-    private final List<JsonAdaptedSubject> subjects = new ArrayList<>();
+    private final String subject;
 
     /**
      * Constructs a {@code JsonAdaptedLesson} with the given lesson details.
      */
     @JsonCreator
-    public JsonAdaptedLesson(@JsonProperty("subjects") List<JsonAdaptedSubject> subjects,
+    public JsonAdaptedLesson(@JsonProperty("subject") String subject,
                              @JsonProperty("name") String name,
                              @JsonProperty("date") String date, @JsonProperty("time") String time) {
         this.name = name;
         this.date = date;
         this.time = time;
-        if (subjects != null) {
-            this.subjects.addAll(subjects);
-        }
+        this.subject = subject;
     }
 
     /**
@@ -49,9 +42,7 @@ class JsonAdaptedLesson {
         name = source.getStudentName().fullName;
         date = source.getDate().date;
         time = source.getTime().time;
-        subjects.addAll(source.getSubjects().stream()
-                .map(JsonAdaptedSubject::new)
-                .toList());
+        subject = source.getSubject().subjectName;
     }
 
     /**
@@ -84,14 +75,14 @@ class JsonAdaptedLesson {
         }
         final Time modelTime = new Time(time);
 
-        final Set<Subject> studentSubjects = new HashSet<>();
-
-        for (JsonAdaptedSubject subject : subjects) {
-            studentSubjects.add(subject.toModelType());
+        if (subject == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName()));
         }
-        final Set<Subject> modelSubjects = new HashSet<>(studentSubjects);
+        if (!Subject.isValidSubjectName(subject)) {
+            throw new IllegalValueException(Subject.MESSAGE_CONSTRAINTS);
+        }
+        final Subject modelSubject = new Subject(subject);
 
-
-        return new Lesson(modelSubjects, modelName, modelDate, modelTime);
+        return new Lesson(modelSubject, modelName, modelDate, modelTime);
     }
 }

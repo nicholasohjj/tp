@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -87,7 +86,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a student has a subject.
      */
-    public boolean hasStudentSubjects(Student student, Set<Subject> subjects) {
+    public boolean hasStudentSubjects(Student student, Subject subjects) {
         requireAllNonNull(student, subjects);
         return students.hasStudentSubjects(student, subjects);
     }
