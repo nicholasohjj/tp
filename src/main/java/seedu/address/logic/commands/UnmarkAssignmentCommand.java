@@ -34,6 +34,7 @@ public class UnmarkAssignmentCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Assignment \"%1$s\" unmarked as incomplete for %2$s";
     public static final String MESSAGE_ASSIGNMENT_NOT_FOUND = "The assignment \"%1$s\" was not found for this student";
     public static final String MESSAGE_EMPTY_STUDENT_LIST = "There are no students in the address book";
+    public static final String MESSAGE_INVALID_ASSIGNMENT = "The assignment \"%1$s\" was not found for this student";
 
     private static final Logger logger = LogsCenter.getLogger(UnmarkAssignmentCommand.class);
 
