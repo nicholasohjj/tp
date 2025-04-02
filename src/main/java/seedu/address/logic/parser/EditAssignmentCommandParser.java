@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
@@ -22,18 +21,15 @@ public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditAssignmentCommand parse(String args) throws ParseException {
-        requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ASSIGNMENT, PREFIX_NEW_ASSIGNMENT, PREFIX_DATE);
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
+        if (argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditAssignmentCommand.MESSAGE_USAGE), pe);
+                    EditAssignmentCommand.MESSAGE_USAGE));
         }
+
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ASSIGNMENT, PREFIX_NEW_ASSIGNMENT, PREFIX_DATE);
 

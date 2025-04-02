@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -23,10 +23,13 @@ public class EditStudentCommandParser implements Parser<EditStudentCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditStudentCommand parse(String args) throws ParseException {
-        requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_SUBJECT);
+
+        if (argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStudentCommand.MESSAGE_USAGE));
+        }
 
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
@@ -57,5 +60,4 @@ public class EditStudentCommandParser implements Parser<EditStudentCommand> {
 
         return new EditStudentCommand(index, editStudentDescriptor);
     }
-
 }
