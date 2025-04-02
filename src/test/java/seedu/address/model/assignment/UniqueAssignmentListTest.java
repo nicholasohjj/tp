@@ -50,17 +50,20 @@ public class UniqueAssignmentListTest {
 
     @Test
     public void setAssignment_nullTargetAssignment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueAssignmentList.setAssignment(new AssignmentBuilder().build(), null));
+        assertThrows(NullPointerException.class, () -> uniqueAssignmentList.setAssignment(
+                new AssignmentBuilder().build(), null));
     }
 
     @Test
     public void setAssignment_nullEditedAssignment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueAssignmentList.setAssignment(new AssignmentBuilder().build(), null));
+        assertThrows(NullPointerException.class, () -> uniqueAssignmentList.setAssignment(
+                new AssignmentBuilder().build(), null));
     }
 
     @Test
     public void setAssignment_targetAssignmentNotInList_throwsAssignmentNotFoundException() {
-        assertThrows(AssignmentNotFoundException.class, () -> uniqueAssignmentList.setAssignment(new AssignmentBuilder().build(), new AssignmentBuilder().build()));
+        assertThrows(AssignmentNotFoundException.class, () -> uniqueAssignmentList.setAssignment(
+                new AssignmentBuilder().build(), new AssignmentBuilder().build()));
     }
 
     @Test
@@ -101,7 +104,8 @@ public class UniqueAssignmentListTest {
         uniqueAssignmentList.add(assignment);
         Assignment duplicateAssignment = new AssignmentBuilder().withAssignmentName("Duplicate Assignment").build();
         uniqueAssignmentList.add(duplicateAssignment);
-        assertThrows(DuplicateAssignmentException.class, () -> uniqueAssignmentList.setAssignment(assignment, duplicateAssignment));
+        assertThrows(DuplicateAssignmentException.class, () ->
+                uniqueAssignmentList.setAssignment(assignment, duplicateAssignment));
     }
 
     @Test
@@ -115,7 +119,8 @@ public class UniqueAssignmentListTest {
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> uniqueAssignmentList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () ->
+                uniqueAssignmentList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test
@@ -130,7 +135,8 @@ public class UniqueAssignmentListTest {
     public void unmarkAssignment_alreadyUnmarked_throwsCommandException() {
         Assignment assignment = new AssignmentBuilder().build();
         uniqueAssignmentList.add(assignment);
-        assertThrows(CommandException.class, () -> uniqueAssignmentList.unmarkAssignment(assignment.getAssignmentName()));
+        assertThrows(CommandException.class, () ->
+                uniqueAssignmentList.unmarkAssignment(assignment.getAssignmentName()));
     }
 
     @Test

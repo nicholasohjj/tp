@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.datetimeutil.Date;
 
 public class AssignmentTest {
-    String FUTURE_DATE_1 = "10-04-2030";
-    String FUTURE_DATE_2 = "11-04-2030";
-    String PAST_DATE = "10-04-2020";
+    private static final String FUTURE_DATE_1 = "10-04-2030";
+    private static final String FUTURE_DATE_2 = "11-04-2030";
+    private static final String PAST_DATE = "10-04-2020";
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Assignment(null, null));

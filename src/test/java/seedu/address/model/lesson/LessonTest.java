@@ -15,8 +15,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.LessonBuilder;
 
 public class LessonTest {
-    String FUTURE_DATE_1 = "01-02-2030";
-    String FUTURE_DATE_2 = "02-02-2030";
+    private static final String FUTURE_DATE_1 = "01-02-2030";
+    private static final String FUTURE_DATE_2 = "02-02-2030";
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Lesson(null, null, null, null));
