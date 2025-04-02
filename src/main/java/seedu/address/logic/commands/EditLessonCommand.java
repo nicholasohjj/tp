@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.AddLessonCommand.MESSAGE_LESSON_CONFLICT;
 import static seedu.address.logic.commands.AddLessonCommand.MESSAGE_STUDENT_NOT_FOUND;
 import static seedu.address.logic.commands.AddLessonCommand.VALID_ADDRESS;
 import static seedu.address.logic.commands.AddLessonCommand.VALID_EMAIL;
@@ -82,10 +83,16 @@ public class EditLessonCommand extends Command {
         Lesson lessonToEdit = lastShownList.get(index.getZeroBased());
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
 
+        //check duplicate
         if (!lessonToEdit.equals(editedLesson) && model.hasLesson(editedLesson)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
+        //check whether after editing, lesson clashes with any lesson in the addressbook
+        if (model.hasLessonConflict(editedLesson) && (!lessonToEdit.isConflict(editedLesson))) {
+            throw new CommandException(MESSAGE_LESSON_CONFLICT);
+        }
 
+        //check whether student exists in the addressbook
         if (!model.hasStudent(new Student(editedLesson.getStudentName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 new HashSet<Subject>(), new UniqueAssignmentList()))) {
             throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);

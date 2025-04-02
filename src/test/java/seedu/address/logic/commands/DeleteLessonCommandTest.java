@@ -63,7 +63,6 @@ public class DeleteLessonCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteLesson(lessonToDelete);
-        showNoLesson(expectedModel);
 
         assertCommandSuccess(deleteLessonCommand, model, expectedResult, expectedModel);
     }
@@ -116,15 +115,15 @@ public class DeleteLessonCommandTest {
         model.updateFilteredLessonList(p -> false); // Empty the list
         DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST);
 
-        assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_EMPTY_LESSON_LIST);
     }
 
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoLesson(Model model) {
-        model.updateFilteredLessonList(p -> false);
+    private void showNoStudent(Model model) {
+        model.updateFilteredStudentList(p -> false);
 
-        assertTrue(model.getFilteredLessonList().isEmpty());
+        assertTrue(model.getFilteredStudentList().isEmpty());
     }
 }

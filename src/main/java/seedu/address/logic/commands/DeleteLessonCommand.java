@@ -36,6 +36,10 @@ public class DeleteLessonCommand extends Command {
         requireNonNull(model);
         List<Lesson> lastShownList = model.getFilteredLessonList();
 
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_EMPTY_LESSON_LIST);
+        }
+
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
