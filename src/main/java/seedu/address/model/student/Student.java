@@ -211,4 +211,7 @@ public class Student {
         assignments.deleteAssignment(assignmentName);
     }
 
+    public Student copy() {
+        return new Student(name, phone, email, address, subjects, assignments);
+    }
 }
