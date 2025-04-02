@@ -79,7 +79,7 @@ public class AddLessonCommand extends Command {
         }
 
         Student dummyStudent = new Student(toAdd.getStudentName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                new HashSet<Subject>(), new UniqueAssignmentList());
+                new HashSet<>(), new UniqueAssignmentList());
 
         if (!model.hasStudent(dummyStudent)) {
             logger.warning("Student not found: " + toAdd.getStudentName());

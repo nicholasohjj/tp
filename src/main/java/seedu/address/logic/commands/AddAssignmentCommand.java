@@ -85,6 +85,11 @@ public class AddAssignmentCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
 
+        // Add the new assignment to the student
+        if (studentToEdit.hasAssignment(assignment)) {
+            throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
+        }
+
         Student editedStudent = studentToEdit.addAssignment(assignment);
         logger.info("Added assignment: " + assignment + " to student: " + studentToEdit.getName());
 

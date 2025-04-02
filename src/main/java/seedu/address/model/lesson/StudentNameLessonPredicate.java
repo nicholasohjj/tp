@@ -1,29 +1,31 @@
 package seedu.address.model.lesson;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.student.Name;
 
 /**
  * Tests that a {@code Lesson}'s {@code Name} matches the keyword given.
  */
 public class StudentNameLessonPredicate implements Predicate<Lesson> {
-    private final String keyword;
+    private final Name studentName;
 
     /**
      * Constructor for StudentNameLessonPredicate
-     * @param keyword Keyword to match
+     * @param studentName StudentName to match
      */
-    public StudentNameLessonPredicate(String keyword) {
-        requireNonNull(keyword);
-        this.keyword = keyword.toLowerCase();
+    public StudentNameLessonPredicate(Name studentName) {
+        this.studentName = studentName;
     }
 
     @Override
     public boolean test(Lesson lesson) {
-        return lesson.getStudentName().fullName.toLowerCase().contains(keyword);
+        String lessonName = lesson.getStudentName().fullName;
+        String targetName = studentName.fullName;
+
+        return lessonName != null && targetName != null
+                && lessonName.toLowerCase().contains(targetName.toLowerCase());
     }
 
     @Override
@@ -38,11 +40,11 @@ public class StudentNameLessonPredicate implements Predicate<Lesson> {
         }
 
         StudentNameLessonPredicate otherStudentNameLessonPredicate = (StudentNameLessonPredicate) other;
-        return keyword.equals(otherStudentNameLessonPredicate.keyword);
+        return studentName.equals(otherStudentNameLessonPredicate.studentName);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keyword", keyword).toString();
+        return new ToStringBuilder(this).add("studentName", studentName).toString();
     }
 }
