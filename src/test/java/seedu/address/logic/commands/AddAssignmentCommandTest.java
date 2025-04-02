@@ -31,7 +31,7 @@ public class AddAssignmentCommandTest {
         student.addAssignment(assignment);
         AddAssignmentCommand addAssignmentCommand = new AddAssignmentCommand(INDEX_FIRST, assignment);
 
-        assertThrows(CommandException.class,
-                AddAssignmentCommand.MESSAGE_DUPLICATE_ASSIGNMENT, () -> addAssignmentCommand.execute(model));
+        assertThrows(CommandException.class, AddAssignmentCommand
+                .MESSAGE_DUPLICATE_ASSIGNMENT, () -> addAssignmentCommand.execute(model));
     }
 }
