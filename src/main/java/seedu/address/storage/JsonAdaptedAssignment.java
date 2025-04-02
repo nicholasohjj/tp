@@ -49,7 +49,7 @@ class JsonAdaptedAssignment {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Assignment.class.getSimpleName()));
         }
-        if (!Assignment.isValidAssignmentValue(assignmentName)) {
+        if (!Assignment.isValidAssignmentName(assignmentName)) {
             throw new IllegalValueException(Assignment.MESSAGE_CONSTRAINTS);
         }
         if (dueDate == null) {
