@@ -2,7 +2,8 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static seedu.address.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -22,6 +23,13 @@ public class JsonUserPrefsStorageTest {
 
     @TempDir
     public Path testFolder;
+
+    @Test
+    public void getUserPrefsFilePath_returnsCorrectPath() {
+        Path expectedPath = Paths.get("preferences.json");
+        JsonUserPrefsStorage storage = new JsonUserPrefsStorage(expectedPath);
+        assertEquals(expectedPath, storage.getUserPrefsFilePath());
+    }
 
     @Test
     public void readUserPrefs_nullFilePath_throwsNullPointerException() {
@@ -66,7 +74,6 @@ public class JsonUserPrefsStorageTest {
     public void readUserPrefs_extraValuesInFile_extraValuesIgnored() throws DataLoadingException {
         UserPrefs expected = getTypicalUserPrefs();
         UserPrefs actual = readUserPrefs("ExtraValuesUserPref.json").get();
-
         assertEquals(expected, actual);
     }
 
@@ -78,13 +85,43 @@ public class JsonUserPrefsStorageTest {
     }
 
     @Test
-    public void savePrefs_nullPrefs_throwsNullPointerException() {
+    public void saveUserPrefs_nullPrefs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveUserPrefs(null, "SomeFile.json"));
     }
 
     @Test
     public void saveUserPrefs_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveUserPrefs(new UserPrefs(), null));
+    }
+
+    @Test
+    public void saveAndReadUserPrefs_allInOrder_success() throws DataLoadingException, IOException {
+        Path prefsFilePath = testFolder.resolve("TempPrefs.json");
+        JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(prefsFilePath);
+
+        // First save and read
+        UserPrefs original = new UserPrefs();
+        original.setGuiSettings(new GuiSettings(1200, 200, 0, 2));
+        jsonUserPrefsStorage.saveUserPrefs(original);
+        UserPrefs readBack = jsonUserPrefsStorage.readUserPrefs().get();
+        assertEquals(original, readBack);
+
+        // Modify and save again
+        original.setAddressBookFilePath(Paths.get("newPath.json"));
+        jsonUserPrefsStorage.saveUserPrefs(original);
+        readBack = jsonUserPrefsStorage.readUserPrefs().get();
+        assertEquals(original, readBack);
+    }
+
+    @Test
+    public void readUserPrefs_defaultPath_success() throws DataLoadingException, IOException {
+        UserPrefs original = new UserPrefs();
+        JsonUserPrefsStorage storage = new JsonUserPrefsStorage(testFolder.resolve("UserPrefs.json"));
+        storage.saveUserPrefs(original);
+
+        Optional<UserPrefs> readPrefs = storage.readUserPrefs();
+        assertTrue(readPrefs.isPresent());
+        assertEquals(original, readPrefs.get());
     }
 
     /**
@@ -98,26 +135,4 @@ public class JsonUserPrefsStorageTest {
             throw new AssertionError("There should not be an error writing to the file", ioe);
         }
     }
-
-    @Test
-    public void saveUserPrefs_allInOrder_success() throws DataLoadingException, IOException {
-
-        UserPrefs original = new UserPrefs();
-        original.setGuiSettings(new GuiSettings(1200, 200, 0, 2));
-
-        Path pefsFilePath = testFolder.resolve("TempPrefs.json");
-        JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
-
-        //Try writing when the file doesn't exist
-        jsonUserPrefsStorage.saveUserPrefs(original);
-        UserPrefs readBack = jsonUserPrefsStorage.readUserPrefs().get();
-        assertEquals(original, readBack);
-
-        //Try saving when the file exists
-        original.setGuiSettings(new GuiSettings(5, 5, 5, 5));
-        jsonUserPrefsStorage.saveUserPrefs(original);
-        readBack = jsonUserPrefsStorage.readUserPrefs().get();
-        assertEquals(original, readBack);
-    }
-
 }
