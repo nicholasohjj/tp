@@ -216,6 +216,6 @@ public class Student {
     }
 
     public void clearAssignments() {
-        assignments.clearAssignments();
+        assignments.clear();
     }
 }
