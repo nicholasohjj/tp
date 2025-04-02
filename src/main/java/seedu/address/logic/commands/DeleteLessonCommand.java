@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -25,27 +27,45 @@ public class DeleteLessonCommand extends Command {
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s";
 
+    private static final Logger logger = LogsCenter.getLogger(DeleteLessonCommand.class);
+
     private final Index targetIndex;
 
+    /**
+     * Creates a DeleteLessonCommand to delete the specified {@code Lesson}.
+     *
+     * @param targetIndex of the lesson in the filtered lesson list to delete
+     */
     public DeleteLessonCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
+        logger.info("DeleteLessonCommand created for index: " + targetIndex.getOneBased());
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing DeleteLessonCommand for index: " + targetIndex.getOneBased());
+
         List<Lesson> lastShownList = model.getFilteredLessonList();
 
         if (lastShownList.isEmpty()) {
+            logger.warning("Attempted to delete from empty lesson list");
             throw new CommandException(Messages.MESSAGE_EMPTY_LESSON_LIST);
         }
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            logger.warning("Invalid lesson index: " + targetIndex.getOneBased()
+                    + " (list size: " + lastShownList.size() + ")");
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
         Lesson lessonToDelete = lastShownList.get(targetIndex.getZeroBased());
+        assert lessonToDelete != null : "Lesson to delete should not be null";
+
         model.deleteLesson(lessonToDelete);
+        logger.info("Successfully deleted lesson: " + lessonToDelete);
+
         return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, Messages.format(lessonToDelete)), true);
     }
 

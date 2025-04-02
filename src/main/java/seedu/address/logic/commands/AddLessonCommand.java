@@ -7,7 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.HashSet;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -48,6 +50,8 @@ public class AddLessonCommand extends Command {
             + "in the address book";
     public static final String MESSAGE_SUBJECT_MISMATCH = "The specified subject does not exist for the student";
 
+    private static final Logger logger = LogsCenter.getLogger(AddLessonCommand.class);
+
     private final Lesson toAdd;
 
     /**
@@ -55,28 +59,42 @@ public class AddLessonCommand extends Command {
      */
     public AddLessonCommand(Lesson lesson) {
         requireNonNull(lesson);
-        toAdd = lesson;
+        this.toAdd = lesson;
+        logger.info("AddLessonCommand created for lesson: " + lesson);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing AddLessonCommand for lesson: " + toAdd);
+
         if (model.hasLesson(toAdd)) {
+            logger.warning("Duplicate lesson detected: " + toAdd);
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
+
         if (model.hasLessonConflict(toAdd)) {
+            logger.warning("Lesson conflict detected: " + toAdd);
             throw new CommandException(MESSAGE_LESSON_CONFLICT);
         }
-        if (!model.hasStudent(new Student(toAdd.getStudentName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                new HashSet<Subject>(), new UniqueAssignmentList()))) {
+
+        Student dummyStudent = new Student(toAdd.getStudentName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                new HashSet<Subject>(), new UniqueAssignmentList());
+
+        if (!model.hasStudent(dummyStudent)) {
+            logger.warning("Student not found: " + toAdd.getStudentName());
             throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
         }
-        if (!model.hasStudentSubjects(new Student(toAdd.getStudentName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                new HashSet<Subject>(), new UniqueAssignmentList()), toAdd.getSubjects())) {
+
+        if (!model.hasStudentSubjects(dummyStudent, toAdd.getSubjects())) {
+            logger.warning("Subject mismatch for student: " + toAdd.getStudentName()
+                    + " with subjects: " + toAdd.getSubjects());
             throw new CommandException(MESSAGE_SUBJECT_MISMATCH);
         }
 
         model.addLesson(toAdd);
+        logger.info("Lesson successfully added: " + toAdd);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), true);
     }
 

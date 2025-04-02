@@ -7,6 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -36,6 +39,8 @@ public class AddStudentCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
 
+    private static final Logger logger = LogsCenter.getLogger(AddStudentCommand.class);
+
     private final Student toAdd;
 
     /**
@@ -43,18 +48,25 @@ public class AddStudentCommand extends Command {
      */
     public AddStudentCommand(Student student) {
         requireNonNull(student);
-        toAdd = student;
+        this.toAdd = student;
+        logger.info("AddStudentCommand created for student: " + student.getName());
+
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing AddStudentCommand for student: " + toAdd.getName());
+
 
         if (model.hasStudent(toAdd)) {
+            logger.warning("Duplicate student detected: " + toAdd.getName());
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
         model.addStudent(toAdd);
+        logger.info("Student successfully added: " + toAdd.getName());
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

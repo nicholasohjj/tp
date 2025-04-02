@@ -1,12 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -33,6 +36,9 @@ public class AddAssignmentCommand extends Command {
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "Error: This assignment already exists in the student.\n"
             + "Assignments of the same students cannot have the same name.\n"
             + "Please use the edit_assignment command to edit the assignment.";
+    public static final String MESSAGE_EMPTY_STUDENT_LIST = "Student list is empty";
+
+    private static final Logger logger = LogsCenter.getLogger(AddAssignmentCommand.class);
 
     private final Index index;
     private final Assignment assignment;
@@ -43,38 +49,52 @@ public class AddAssignmentCommand extends Command {
      */
     public AddAssignmentCommand(Index index, Assignment assignment) {
         requireAllNonNull(index, assignment, assignment.getDueDate());
-
         this.index = index;
         this.assignment = assignment;
         this.dueDate = assignment.getDueDate();
+        logger.info("AddAssignmentCommand created for student index: " + index.getOneBased()
+                + " with assignment: " + assignment);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        logger.info("Executing AddAssignmentCommand for student index: " + index.getOneBased());
+
         List<Student> lastShownList = model.getFilteredStudentList();
+
+        if (lastShownList.isEmpty()) {
+            logger.warning("Attempted to add assignment to empty student list");
+            throw new CommandException(MESSAGE_EMPTY_STUDENT_LIST);
+        }
 
         // Check if the index is valid
         if (index.getZeroBased() >= lastShownList.size()) {
+            logger.warning("Invalid student index: " + index.getOneBased()
+                    + " (list size: " + lastShownList.size() + ")");
             throw new CommandException(Messages.MESSAGE_INDEX_OUT_OF_BOUNDS);
         }
 
+        Student studentToEdit = lastShownList.get(index.getZeroBased());
+        assert studentToEdit != null : "Student should not be null";
+
         // Check if the assignment already exists
-        if (lastShownList.get(index.getZeroBased()).getAssignments().contains(assignment)) {
+        if (studentToEdit.getAssignments().contains(assignment)) {
+            logger.warning("Duplicate assignment detected: " + assignment + " for student: "
+                    + studentToEdit.getName());
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
 
-        // Get the student to edit
-        Student studentToEdit = lastShownList.get(index.getZeroBased());
-
-        // Add the new assignment to the student
         Student editedStudent = studentToEdit.addAssignment(assignment);
+        logger.info("Added assignment: " + assignment + " to student: " + studentToEdit.getName());
 
         // Update the model with the edited student
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
-        // Return a success message
-        return new CommandResult(generateSuccessMessage(editedStudent), true);
+        String successMessage = generateSuccessMessage(editedStudent);
+        logger.info("Success: " + successMessage);
+        return new CommandResult(successMessage, true);
     }
 
     private String generateSuccessMessage(Student editedStudent) {
