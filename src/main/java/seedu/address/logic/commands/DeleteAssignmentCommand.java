@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -29,35 +31,61 @@ public class DeleteAssignmentCommand extends Command {
 
     public static final String MESSAGE_DELETE_ASSIGNMENT_SUCCESS = "Assignment %1$s deleted successfully.";
     public static final String MESSAGE_INVALID_ASSIGNMENT_DISPLAYED = "The assignment name provided cannot be found";
+    public static final String MESSAGE_EMPTY_STUDENT_LIST = "Error: Student list is empty";
+
+    private static final Logger logger = LogsCenter.getLogger(DeleteAssignmentCommand.class);
+
     private final Index targetIndex;
     private final String assignmentName;
 
     /**
-     * Creates a DeleteAssignmentCommand to delete the specified {@code Assignment}
+     * Creates a DeleteAssignmentCommand to delete the specified {@code Assignment}.
+     *
+     * @param targetIndex Index of the student in the filtered student list
+     * @param assignmentName Name of the assignment to delete
      */
     public DeleteAssignmentCommand(Index targetIndex, String assignmentName) {
         requireAllNonNull(targetIndex, assignmentName);
-
         this.targetIndex = targetIndex;
         this.assignmentName = assignmentName;
+        logger.info("DeleteAssignmentCommand created for student index: " + targetIndex.getOneBased()
+                + " and assignment: " + assignmentName);
     }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing DeleteAssignmentCommand for student index: " + targetIndex.getOneBased()
+                + " and assignment: " + assignmentName);
+
         List<Student> lastShownList = model.getFilteredStudentList();
 
+        if (lastShownList.isEmpty()) {
+            logger.warning("Attempted to delete assignment from empty student list");
+            throw new CommandException(MESSAGE_EMPTY_STUDENT_LIST);
+        }
+
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            logger.warning("Invalid student index: " + targetIndex.getOneBased()
+                    + " (list size: " + lastShownList.size() + ")");
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentToDeleteAssignment = lastShownList.get(targetIndex.getZeroBased());
+        assert studentToDeleteAssignment != null : "Student should not be null";
+
         Assignment assignmentToDelete = new Assignment(assignmentName, new Date("31-12-9999"));
         if (!studentToDeleteAssignment.getAssignments().contains(assignmentToDelete)) {
+            logger.warning("Assignment not found: " + assignmentName + " for student: "
+                    + studentToDeleteAssignment.getName());
             throw new CommandException(MESSAGE_INVALID_ASSIGNMENT_DISPLAYED);
         }
 
         model.deleteAssignment(studentToDeleteAssignment, assignmentName);
+        logger.info("Successfully deleted assignment: " + assignmentName + " for student: "
+                + studentToDeleteAssignment.getName());
+
         return new CommandResult(String.format(MESSAGE_DELETE_ASSIGNMENT_SUCCESS,
                 Messages.format(studentToDeleteAssignment, assignmentToDelete)), true);
     }

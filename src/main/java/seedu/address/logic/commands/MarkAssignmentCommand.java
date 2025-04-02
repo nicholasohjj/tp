@@ -4,8 +4,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -27,48 +30,66 @@ public class MarkAssignmentCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ASSIGNMENT + "Assignment 1";
 
-    public static final String MESSAGE_MARK_ASSIGNMENT_SUCCESS = "Assignment %1$s\nmarked successfully.";
-    public static final String MESSAGE_INVALID_ASSIGNMENT_DISPLAYED = "Error: The assignment name provided cannot be "
-            + "found";
+    public static final String MESSAGE_MARK_ASSIGNMENT_SUCCESS = "Assignment \"%1$s\" marked as completed for %2$s";
+    public static final String MESSAGE_INVALID_ASSIGNMENT = "The assignment \"%1$s\" was not found for this student";
+    public static final String MESSAGE_EMPTY_STUDENT_LIST = "There are no students in the address book";
 
-    private final Index index;
+    private static final Logger logger = LogsCenter.getLogger(MarkAssignmentCommand.class);
+    private final Index studentIndex;
     private final String assignmentName;
 
     /**
-     * Creates a MarkAssignmentCommand to mark the specified {@code Assignment}
+     * Creates a MarkAssignmentCommand to mark the specified assignment as completed.
+     *
+     * @param studentIndex Index of the student in the filtered student list
+     * @param assignmentName Name of the assignment to mark
      */
-    public MarkAssignmentCommand(Index index, String assignmentName) {
-        requireAllNonNull(index, assignmentName);
-
-        this.index = index;
-        this.assignmentName = assignmentName;
+    public MarkAssignmentCommand(Index studentIndex, String assignmentName) {
+        requireAllNonNull(studentIndex, assignmentName);
+        this.studentIndex = studentIndex;
+        this.assignmentName = assignmentName.trim();
+        logger.info(String.format("Created MarkAssignmentCommand for student index %d, assignment: %s",
+                studentIndex.getOneBased(), assignmentName));
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Student> lastShownList = model.getFilteredStudentList();
+        logger.info("Executing MarkAssignmentCommand");
 
-        // Check if the index is valid
-        if (index.getZeroBased() >= lastShownList.size()) {
+        List<Student> studentList = model.getFilteredStudentList();
+
+        if (studentList.isEmpty()) {
+            logger.warning("Attempted to mark assignment in empty student list");
+            throw new CommandException(MESSAGE_EMPTY_STUDENT_LIST);
+        }
+
+        if (studentIndex.getZeroBased() >= studentList.size()) {
+            logger.warning(String.format("Invalid student index: %d (list size: %d)",
+                    studentIndex.getOneBased(), studentList.size()));
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        // Get the student to edit
-        Student studentToEdit = lastShownList.get(index.getZeroBased());
+        Student student = studentList.get(studentIndex.getZeroBased());
+        assert student != null : "Student should not be null";
 
-        // Check if the assignment exists
-        if (!studentToEdit.getAssignments().contains(new Assignment(assignmentName, new Date("31-12-9999")))) {
-            throw new CommandException(MESSAGE_INVALID_ASSIGNMENT_DISPLAYED);
+        Assignment targetAssignment = new Assignment(assignmentName, new Date("31-12-9999"));
+        if (!student.getAssignments().contains(targetAssignment)) {
+            logger.warning(String.format("Assignment not found: %s for student %s",
+                    assignmentName, student.getName()));
+            throw new CommandException(String.format(MESSAGE_INVALID_ASSIGNMENT, assignmentName));
         }
 
         // Mark the assignment
-        studentToEdit.markAssignment(assignmentName);
+        Student updatedStudent = student.markAssignment(assignmentName);
+        model.setStudent(student, updatedStudent);
+        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
 
-        return new CommandResult(generateSuccessMessage(), true);
-    }
-
-    private String generateSuccessMessage() {
-        return String.format(MESSAGE_MARK_ASSIGNMENT_SUCCESS, assignmentName);
+        logger.info(String.format("Successfully marked assignment %s for student %s",
+                assignmentName, student.getName()));
+        return new CommandResult(
+                String.format(MESSAGE_MARK_ASSIGNMENT_SUCCESS, assignmentName, student.getName()),
+                true);
     }
 
     @Override
@@ -82,8 +103,16 @@ public class MarkAssignmentCommand extends Command {
             return false;
         }
 
-        MarkAssignmentCommand otherMarkAssignmentCommand = (MarkAssignmentCommand) other;
-        return index.equals(otherMarkAssignmentCommand.index)
-                && assignmentName.equals(otherMarkAssignmentCommand.assignmentName);
+        MarkAssignmentCommand otherCommand = (MarkAssignmentCommand) other;
+        return studentIndex.equals(otherCommand.studentIndex)
+                && assignmentName.equals(otherCommand.assignmentName);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("studentIndex", studentIndex)
+                .add("assignmentName", assignmentName)
+                .toString();
     }
 }

@@ -17,7 +17,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -52,8 +54,9 @@ public class EditLessonCommand extends Command {
             + PREFIX_TIME + "19:00";
 
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in the address book.";
+    public static final String MESSAGE_NOT_EDITED = "Error: At least one field to edit must be provided.";
+    public static final String MESSAGE_DUPLICATE_LESSON = "Error: This lesson already exists in the address book.";
+    private static final Logger logger = LogsCenter.getLogger(EditLessonCommand.class);
 
     private final Index index;
     private final EditLessonDescriptor editLessonDescriptor;
@@ -68,42 +71,53 @@ public class EditLessonCommand extends Command {
 
         this.index = index;
         this.editLessonDescriptor = new EditLessonDescriptor(editLessonDescriptor);
+        logger.info("EditLessonCommand created for lesson index: " + index.getOneBased());
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing EditLessonCommand for lesson index: " + index.getOneBased());
         List<Lesson> lastShownList = model.getFilteredLessonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
+            logger.warning("Invalid lesson index: " + index.getOneBased());
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
+
         Lesson lessonToEdit = lastShownList.get(index.getZeroBased());
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
+        assert editedLesson != null : "Edited lesson should not be null";
 
         //check duplicate
         if (!lessonToEdit.equals(editedLesson) && model.hasLesson(editedLesson)) {
+            logger.warning("Duplicate lesson detected: " + editedLesson);
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
+
         //check whether after editing, lesson clashes with any lesson in the addressbook
-        if (model.hasLessonConflict(editedLesson) && (!lessonToEdit.isConflict(editedLesson))) {
-            throw new CommandException(MESSAGE_LESSON_CONFLICT);
+        if (model.hasLessonConflict(editedLesson)) {
+            if (!lessonToEdit.isConflict(editedLesson)) {
+                logger.warning("Lesson conflict detected for: " + editedLesson);
+                throw new CommandException(MESSAGE_LESSON_CONFLICT);
+            }
         }
-
-        Student student = new Student(editedLesson.getStudentName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                new HashSet<>(), new UniqueAssignmentList());
-
         //check whether student exists in the addressbook
-        if (!model.hasStudent(student)) {
+        Student dummyStudent = new Student(editedLesson.getStudentName(), VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                new HashSet<>(), new UniqueAssignmentList());
+        if (!model.hasStudent(dummyStudent)) {
+            logger.warning("Student not found: " + editedLesson.getStudentName());
             throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
         }
         //check whether student has the subject
-        if (!model.hasStudentSubject(student, editedLesson.getSubject())) {
+        if (!model.hasStudentSubject(dummyStudent, editedLesson.getSubject())) {
             throw new CommandException(MESSAGE_SUBJECT_MISMATCH);
         }
         model.setLesson(lessonToEdit, editedLesson);
         model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+
+        logger.info("Lesson successfully edited: " + editedLesson);
         return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, Messages.format(editedLesson)), true);
     }
 
@@ -112,7 +126,9 @@ public class EditLessonCommand extends Command {
      * edited with {@code editStudentDescriptor}.
      */
     private static Lesson createEditedLesson(Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor) {
-        assert lessonToEdit != null;
+        assert lessonToEdit != null : "Lesson to edit cannot be null";
+        assert editLessonDescriptor != null : "Edit descriptor cannot be null";
+        assert editLessonDescriptor.isAnyFieldEdited() : "At least one field should be edited";
 
         Name updatedName = editLessonDescriptor.getName().orElse(lessonToEdit.getStudentName());
         Date updatedDate = editLessonDescriptor.getDate().orElse(lessonToEdit.getDate());

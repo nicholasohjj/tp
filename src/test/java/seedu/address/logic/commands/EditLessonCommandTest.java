@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.LESSON_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.LESSON_DESC_BOB;
@@ -84,17 +85,10 @@ public class EditLessonCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
+    public void execute_noFieldSpecified_throwsCommandException() {
         EditLessonCommand editLessonCommand = new EditLessonCommand(INDEX_FIRST, new EditLessonDescriptor());
-        Lesson editedLesson = model.getFilteredLessonList()
-                .get(INDEX_FIRST.getZeroBased());
-
-        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS,
-                Messages.format(editedLesson));
-
-        CommandResult expectedResult = new CommandResult(expectedMessage, true);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        assertCommandSuccess(editLessonCommand, model, expectedResult, expectedModel);
+        assertThrows(AssertionError.class, () -> editLessonCommand.execute(model),
+                EditLessonCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test
