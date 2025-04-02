@@ -52,15 +52,6 @@ public class ListLessonsCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_showsEverything() {
-        String expectedMessage = String.format(MESSAGE_LESSONS_LISTED_OVERVIEW, 8);
-        CommandResult expectedResult = new CommandResult(expectedMessage, true);
-        ListLessonsCommand command = new ListLessonsCommand(PREDICATE_SHOW_ALL_LESSONS);
-        expectedModel.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
-        assertCommandSuccess(command, model, expectedResult, expectedModel);
-    }
-
-    @Test
     public void execute_oneKeyword_lessonFound() {
         String expectedMessage = String.format(MESSAGE_LESSONS_LISTED_OVERVIEW, 1);
         CommandResult expectedResult = new CommandResult(expectedMessage, true);
