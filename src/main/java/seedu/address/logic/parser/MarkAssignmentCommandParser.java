@@ -1,11 +1,9 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.MarkAssignmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -19,19 +17,18 @@ public class MarkAssignmentCommandParser implements Parser<MarkAssignmentCommand
      * @throws ParseException if the user input does not conform the expected format
      */
     public MarkAssignmentCommand parse(String args) throws ParseException {
-        requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ASSIGNMENT);
-
-        Index index;
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (IllegalValueException ive) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAssignmentCommand.MESSAGE_USAGE), ive);
+        if (!argMultimap.arePrefixesPresent(PREFIX_ASSIGNMENT)
+                || argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MarkAssignmentCommand.MESSAGE_USAGE));
         }
 
-        String assignmentName = argMultimap.getValue(PREFIX_ASSIGNMENT).orElse("");
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ASSIGNMENT);
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        String assignmentName = ParserUtil.parseAssignmentName(argMultimap.getValue(PREFIX_ASSIGNMENT).get());
 
         return new MarkAssignmentCommand(index, assignmentName);
     }
+
 }

@@ -4,8 +4,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.ListLessonsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.StudentNameLessonPredicate;
@@ -29,7 +27,7 @@ public class ListLessonsCommandParser implements Parser<ListLessonsCommand> {
                     ListLessonsCommand.MESSAGE_USAGE));
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)) {
+        if (!argMultimap.arePrefixesPresent(PREFIX_NAME)) {
             return new ListLessonsCommand(PREDICATE_SHOW_ALL_LESSONS);
         }
 
@@ -37,13 +35,5 @@ public class ListLessonsCommandParser implements Parser<ListLessonsCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
 
         return new ListLessonsCommand(new StudentNameLessonPredicate(name));
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

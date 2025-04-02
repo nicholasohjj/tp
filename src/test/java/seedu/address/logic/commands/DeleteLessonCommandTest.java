@@ -63,7 +63,6 @@ public class DeleteLessonCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteLesson(lessonToDelete);
-        showNoLesson(expectedModel);
 
         assertCommandSuccess(deleteLessonCommand, model, expectedResult, expectedModel);
     }
@@ -122,9 +121,9 @@ public class DeleteLessonCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoLesson(Model model) {
-        model.updateFilteredLessonList(p -> false);
+    private void showNoStudent(Model model) {
+        model.updateFilteredStudentList(p -> false);
 
-        assertTrue(model.getFilteredLessonList().isEmpty());
+        assertTrue(model.getFilteredStudentList().isEmpty());
     }
 }

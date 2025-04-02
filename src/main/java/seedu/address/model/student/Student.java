@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.subject.Subject;
@@ -99,6 +100,13 @@ public class Student {
         return Collections.unmodifiableSet(subjects);
     }
 
+    /**
+     * Returns true if the student has the subject.
+     */
+    public boolean hasSubjects(Set<Subject> targetSubjects) {
+        return subjects.containsAll(targetSubjects);
+    }
+
     public UniqueAssignmentList getAssignments() {
         return assignments;
     }
@@ -167,11 +175,11 @@ public class Student {
                 .toString();
     }
 
-    public void markAssignment(String assignmentName) {
+    public void markAssignment(String assignmentName) throws CommandException {
         assignments.markAssignment(assignmentName);
     }
 
-    public void unmarkAssignment(String assignmentName) {
+    public void unmarkAssignment(String assignmentName) throws CommandException {
         assignments.unmarkAssignment(assignmentName);
     }
 

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
+import seedu.address.model.subject.Subject;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -98,6 +100,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasStudentSubjects(Student student, Set<Subject> subjects) {
+        requireAllNonNull(student, subjects);
+        return addressBook.hasStudentSubjects(student, subjects);
+    }
+
+    @Override
     public void deleteStudent(Student target) {
         addressBook.removeStudent(target);
     }
@@ -128,6 +136,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasLessonConflict(Lesson lesson) {
+        requireNonNull(lesson);
+        return addressBook.hasLessonConflict(lesson);
+    }
+
+    @Override
     public void addLesson(Lesson lesson) {
         requireNonNull(lesson);
         addressBook.addLesson(lesson);
@@ -138,6 +152,7 @@ public class ModelManager implements Model {
     public void deleteLesson(Lesson lesson) {
         requireNonNull(lesson);
         addressBook.removeLesson(lesson);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override
