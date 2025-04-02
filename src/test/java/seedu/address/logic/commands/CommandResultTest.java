@@ -8,56 +8,138 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class CommandResultTest {
+
     @Test
-    public void equals() {
+    public void constructor_defaultValues() {
         CommandResult commandResult = new CommandResult("feedback");
 
-        // same values -> returns true
-        assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertEquals("feedback", commandResult.getFeedbackToUser());
+        assertFalse(commandResult.isShowHelp());
+        assertFalse(commandResult.isExit());
+        assertFalse(commandResult.isUpdateList());
+    }
 
-        // same object -> returns true
-        assertTrue(commandResult.equals(commandResult));
+    @Test
+    public void constructor_allFields() {
+        CommandResult commandResult = new CommandResult("feedback", true, true);
 
-        // null -> returns false
+        assertEquals("feedback", commandResult.getFeedbackToUser());
+        assertTrue(commandResult.isShowHelp());
+        assertTrue(commandResult.isExit());
+        assertFalse(commandResult.isUpdateList());
+    }
+
+    @Test
+    public void constructor_updateList() {
+        CommandResult commandResult = new CommandResult("feedback", true);
+
+        assertEquals("feedback", commandResult.getFeedbackToUser());
+        assertFalse(commandResult.isShowHelp());
+        assertFalse(commandResult.isExit());
+        assertTrue(commandResult.isUpdateList());
+    }
+
+    @Test
+    public void equals_sameValues() {
+        CommandResult commandResult1 = new CommandResult("feedback", true, false);
+        CommandResult commandResult2 = new CommandResult("feedback", true, false);
+
+        assertTrue(commandResult1.equals(commandResult2));
+    }
+
+    @Test
+    public void equals_differentFeedback() {
+        CommandResult commandResult1 = new CommandResult("feedback1", true, false);
+        CommandResult commandResult2 = new CommandResult("feedback2", true, false);
+
+        assertFalse(commandResult1.equals(commandResult2));
+    }
+
+    @Test
+    public void equals_differentShowHelp() {
+        CommandResult commandResult1 = new CommandResult("feedback", true, false);
+        CommandResult commandResult2 = new CommandResult("feedback", false, false);
+
+        assertFalse(commandResult1.equals(commandResult2));
+    }
+
+    @Test
+    public void equals_differentExit() {
+        CommandResult commandResult1 = new CommandResult("feedback", false, true);
+        CommandResult commandResult2 = new CommandResult("feedback", false, false);
+
+        assertFalse(commandResult1.equals(commandResult2));
+    }
+
+    @Test
+    public void equals_differentUpdateList() {
+        CommandResult commandResult1 = new CommandResult("feedback", true);
+        CommandResult commandResult2 = new CommandResult("feedback", false);
+
+        assertFalse(commandResult1.equals(commandResult2));
+    }
+
+    @Test
+    public void equals_null() {
+        CommandResult commandResult = new CommandResult("feedback");
+
         assertFalse(commandResult.equals(null));
-
-        // different types -> returns false
-        assertFalse(commandResult.equals(0.5f));
-
-        // different feedbackToUser assignmentName -> returns false
-        assertFalse(commandResult.equals(new CommandResult("different")));
-
-        // different showHelp assignmentName -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false)));
-
-        // different exit assignmentName -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
     }
 
     @Test
-    public void hashcode() {
+    public void equals_differentType() {
         CommandResult commandResult = new CommandResult("feedback");
 
-        // same values -> returns same hashcode
-        assertEquals(commandResult.hashCode(), new CommandResult("feedback").hashCode());
-
-        // different feedbackToUser assignmentName -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
-
-        // different showHelp assignmentName -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false).hashCode());
-
-        // different exit assignmentName -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+        assertFalse(commandResult.equals("feedback"));
     }
 
     @Test
-    public void toStringMethod() {
-        CommandResult commandResult = new CommandResult("feedback");
-        String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
-                + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + ", updateList=" + commandResult.isUpdateList() + "}";
+    public void hashCode_sameValues() {
+        CommandResult commandResult1 = new CommandResult("feedback", true, false);
+        CommandResult commandResult2 = new CommandResult("feedback", true, false);
+
+        assertEquals(commandResult1.hashCode(), commandResult2.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentValues() {
+        CommandResult commandResult1 = new CommandResult("feedback1", true, false);
+        CommandResult commandResult2 = new CommandResult("feedback2", true, false);
+
+        assertNotEquals(commandResult1.hashCode(), commandResult2.hashCode());
+    }
+
+    @Test
+    public void toString_allFields() {
+        CommandResult commandResult = new CommandResult("feedback", true, true);
+        String expected = "seedu.address.logic.commands.CommandResult{"
+                + "feedbackToUser=feedback, "
+                + "showHelp=true, "
+                + "exit=true, "
+                + "updateList=false}";
+
         assertEquals(expected, commandResult.toString());
+    }
+
+    @Test
+    public void toString_updateList() {
+        CommandResult commandResult = new CommandResult("feedback", true);
+        String expected = "seedu.address.logic.commands.CommandResult{"
+                + "feedbackToUser=feedback, "
+                + "showHelp=false, "
+                + "exit=false, "
+                + "updateList=true}";
+
+        assertEquals(expected, commandResult.toString());
+    }
+
+    @Test
+    public void getters() {
+        CommandResult commandResult = new CommandResult("test feedback", true, false);
+
+        assertEquals("test feedback", commandResult.getFeedbackToUser());
+        assertTrue(commandResult.isShowHelp());
+        assertFalse(commandResult.isExit());
+        assertFalse(commandResult.isUpdateList());
     }
 }

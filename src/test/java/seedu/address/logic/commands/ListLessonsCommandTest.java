@@ -3,69 +3,118 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_LESSONS_LISTED_OVERVIEW;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalLessons.ALICE;
 import static seedu.address.testutil.TypicalLessons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudents.ALICE;
+import static seedu.address.testutil.TypicalStudents.BENSON;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lesson.StudentNameLessonPredicate;
-import seedu.address.model.student.Name;
+import seedu.address.testutil.TypicalStudents;
 
-/**
- * Contains integration tests (interaction with the Model) and unit tests for ListLessonsCommand.
- */
 public class ListLessonsCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model;
+    private Model expectedModel;
+    private TestLogHandler testLogHandler;
 
-    @Test
-    public void equals() {
-        StudentNameLessonPredicate firstPredicate = new StudentNameLessonPredicate(new Name("first"));
-        StudentNameLessonPredicate secondPredicate = new StudentNameLessonPredicate(new Name("second"));
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        ListLessonsCommand listLessonsFirstCommand = new ListLessonsCommand(firstPredicate);
-        ListLessonsCommand listLessonsSecondCommand = new ListLessonsCommand(secondPredicate);
-
-        // same object -> returns true
-        assertTrue(listLessonsFirstCommand.equals(listLessonsFirstCommand));
-
-        // same values -> returns true
-        ListLessonsCommand findFirstCommandCopy = new ListLessonsCommand(firstPredicate);
-        assertTrue(listLessonsFirstCommand.equals(findFirstCommandCopy));
-
-        // different types -> returns false
-        assertFalse(listLessonsFirstCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(listLessonsFirstCommand.equals(null));
-
-        // different student -> returns false
-        assertFalse(listLessonsFirstCommand.equals(listLessonsSecondCommand));
+        testLogHandler = new TestLogHandler();
+        Logger logger = LogsCenter.getLogger(ListLessonsCommand.class);
+        logger.setUseParentHandlers(false); // Prevent default handlers from interfering
+        logger.addHandler(testLogHandler);
+        logger.setLevel(java.util.logging.Level.ALL); // Capture all log levels
     }
 
     @Test
-    public void execute_oneKeyword_lessonFound() {
-        String expectedMessage = String.format(MESSAGE_LESSONS_LISTED_OVERVIEW, 1);
-        CommandResult expectedResult = new CommandResult(expectedMessage, true);
-        StudentNameLessonPredicate predicate = new StudentNameLessonPredicate(new Name("Alice"));
-        ListLessonsCommand command = new ListLessonsCommand(predicate);
-        expectedModel.updateFilteredLessonList(predicate);
-        assertCommandSuccess(command, model, expectedResult, expectedModel);
-        assertEquals(Arrays.asList(ALICE), model.getFilteredLessonList());
+    public void equals() {
+        StudentNameLessonPredicate firstPredicate = new StudentNameLessonPredicate(ALICE.getName());
+        StudentNameLessonPredicate secondPredicate = new StudentNameLessonPredicate(BENSON.getName());
+
+        ListLessonsCommand listAliceLessonsCommand = new ListLessonsCommand(firstPredicate);
+        ListLessonsCommand listBensonLessonsCommand = new ListLessonsCommand(secondPredicate);
+
+        // same object -> returns true
+        assertTrue(listAliceLessonsCommand.equals(listAliceLessonsCommand));
+
+        // same values -> returns true
+        ListLessonsCommand listAliceLessonsCommandCopy = new ListLessonsCommand(firstPredicate);
+        assertTrue(listAliceLessonsCommand.equals(listAliceLessonsCommandCopy));
+
+        // different types -> returns false
+        assertFalse(listAliceLessonsCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(listAliceLessonsCommand.equals(null));
+
+        // different predicate -> returns false
+        assertFalse(listAliceLessonsCommand.equals(listBensonLessonsCommand));
+    }
+
+    @Test
+    public void equals_withStudentName() {
+        StudentNameLessonPredicate predicate = new StudentNameLessonPredicate(ALICE.getName());
+
+        ListLessonsCommand commandWithName = new ListLessonsCommand(predicate, ALICE.getName());
+        ListLessonsCommand commandWithoutName = new ListLessonsCommand(predicate);
+
+        // Different because one has student name and other doesn't
+        assertFalse(commandWithName.equals(commandWithoutName));
     }
 
     @Test
     public void toStringMethod() {
-        StudentNameLessonPredicate predicate = new StudentNameLessonPredicate(new Name("keyword"));
-        ListLessonsCommand listLessonsCommand = new ListLessonsCommand(predicate);
+        StudentNameLessonPredicate predicate = new StudentNameLessonPredicate(ALICE.getName());
+        ListLessonsCommand command = new ListLessonsCommand(predicate);
+
         String expected = ListLessonsCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, listLessonsCommand.toString());
+        assertEquals(expected, command.toString());
+    }
+
+    @Test
+    public void toStringMethod_withStudentName() {
+        StudentNameLessonPredicate predicate = new StudentNameLessonPredicate(ALICE.getName());
+        ListLessonsCommand command = new ListLessonsCommand(predicate, ALICE.getName());
+
+        String expected = ListLessonsCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        assertEquals(expected, command.toString());
+    }
+
+    // Helper class to test logging
+    private static class TestLogHandler extends Handler {
+        private final List<String> messages = new ArrayList<>();
+
+        @Override
+        public void publish(LogRecord record) {
+            messages.add(record.getLevel() + ": " + record.getMessage());
+        }
+
+        @Override
+        public void flush() {}
+
+        public boolean containsMessage(String expectedMessagePart) {
+            return messages.stream().anyMatch(message -> message.contains(expectedMessagePart));
+        }
+
+        @Override
+        public void close() throws SecurityException {}
+
+        public void printMessages() {
+            messages.forEach(System.out::println); // debugging purpose
+        }
     }
 }

@@ -28,7 +28,7 @@ public class Student {
 
     // Data fields
     private final Set<Subject> subjects = new HashSet<>();
-    private final UniqueAssignmentList assignments;
+    private UniqueAssignmentList assignments;
 
 
     /**
@@ -211,4 +211,7 @@ public class Student {
         assignments.deleteAssignment(assignmentName);
     }
 
+    public void clearAssignments() {
+        this.assignments = new UniqueAssignmentList();
+    }
 }

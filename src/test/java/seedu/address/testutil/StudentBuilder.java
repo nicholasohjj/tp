@@ -100,10 +100,12 @@ public class StudentBuilder {
      * Parses the {@code assignments} into a {@code Set<Assignment>} and
      * set it to the {@code Student} that we are building.
      */
-    public StudentBuilder withAssignment(String assignment, String dueDate) {
-        this.assignments.add(new Assignment(assignment, new Date(dueDate)));
+    public StudentBuilder withAssignment(Assignment assignment) {
+        this.assignments.add(assignment);
         return this;
     }
+
+
 
     /**
      * Sets the {@code UniqueAssignmentList} of the {@code Student} that we are building.
