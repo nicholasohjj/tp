@@ -7,13 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
-import java.util.Optional;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditLessonCommand;
 import seedu.address.logic.commands.EditLessonCommand.EditLessonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.subject.Subject;
 
 /**
  * Parses input arguments and creates a new EditLessonCommand object
@@ -52,8 +49,9 @@ public class EditLessonCommandParser implements Parser<EditLessonCommand> {
         if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
             editLessonDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get()));
         }
-
-        parseSubjectForEdit(argMultimap.getValue(PREFIX_SUBJECT).get()).ifPresent(editLessonDescriptor::setSubject);
+        if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
+            editLessonDescriptor.setSubject(ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get()));
+        }
 
         if (!editLessonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditLessonCommand.MESSAGE_NOT_EDITED);
@@ -61,19 +59,4 @@ public class EditLessonCommandParser implements Parser<EditLessonCommand> {
 
         return new EditLessonCommand(index, editLessonDescriptor);
     }
-
-    /**
-     * Parses {@code Collection<String> subjects} into a {@code Set<Subject>} if {@code subjects} is non-empty.
-     * If {@code subjects} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Subject>} containing zero subjects.
-     */
-    private Optional<Subject> parseSubjectForEdit(String subject) throws ParseException {
-        assert subject != null;
-
-        if (subject.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(ParserUtil.parseSubject(subject));
-    }
-
 }
