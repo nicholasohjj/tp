@@ -100,6 +100,13 @@ public class Student {
         return Collections.unmodifiableSet(subjects);
     }
 
+    /**
+     * Returns true if the student has the subject.
+     */
+    public boolean hasSubject(Subject targetSubject) {
+        return subjects.contains(targetSubject);
+    }
+
     public UniqueAssignmentList getAssignments() {
         return assignments;
     }

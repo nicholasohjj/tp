@@ -54,6 +54,15 @@ public class Lesson {
     public Subject getSubject() {
         return subject;
     }
+
+    /**
+     * Returns true if both lessons have same date and time
+     */
+    public boolean isConflict(Lesson toCheck) {
+        return date.equals(toCheck.getDate())
+                && time.equals(toCheck.getTime());
+    }
+
     /**
      * Returns true if both lessons have the same identity fields.
      */

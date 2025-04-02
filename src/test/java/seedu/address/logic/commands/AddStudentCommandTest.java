@@ -157,12 +157,17 @@ public class AddStudentCommandTest {
         }
 
         @Override
-        public boolean hasSubject(Student student, Subject subject) {
+        public boolean hasStudentSubject(Student student, Subject subject) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasLesson(Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasLessonConflict(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
+import seedu.address.model.subject.Subject;
 
 /**
  * A list of students that enforces uniqueness between its elements and does not allow nulls.
@@ -97,6 +98,19 @@ public class UniqueStudentList implements Iterable<Student> {
         }
 
         internalList.setAll(students);
+    }
+
+    /**
+     * Returns true if a student has a subject.
+     */
+    public boolean hasStudentSubjects(Student student, Subject subject) {
+        requireAllNonNull(student, subject);
+        Student studentFound = internalList.stream().filter(student::isSameStudent).findFirst().orElse(null);
+        if (studentFound == null) {
+            throw new StudentNotFoundException();
+        }
+
+        return studentFound.hasSubject(subject);
     }
 
     /**

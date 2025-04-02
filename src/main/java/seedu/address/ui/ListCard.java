@@ -58,7 +58,7 @@ public class ListCard extends UiPart<Region> {
         this.student = null;
         id.setText(displayedIndex + ". ");
         name.setText(lesson.getStudentName().fullName);
-        date.setText(lesson.getDate().date);
+        date.setText(lesson.getDate().toString());
         time.setText(lesson.getTime().time);
         subject.setText(lesson.getSubject().subjectName);
     }

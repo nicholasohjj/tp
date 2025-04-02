@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
+import seedu.address.model.subject.Subject;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -98,6 +99,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasStudentSubject(Student student, Subject subject) {
+        requireAllNonNull(student, subject);
+        return addressBook.hasStudentSubjects(student, subject);
+    }
+
+    @Override
     public void deleteStudent(Student target) {
         addressBook.removeStudent(target);
     }
@@ -128,6 +135,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasLessonConflict(Lesson lesson) {
+        requireNonNull(lesson);
+        return addressBook.hasLessonConflict(lesson);
+    }
+
+    @Override
     public void addLesson(Lesson lesson) {
         requireNonNull(lesson);
         addressBook.addLesson(lesson);
@@ -138,6 +151,7 @@ public class ModelManager implements Model {
     public void deleteLesson(Lesson lesson) {
         requireNonNull(lesson);
         addressBook.removeLesson(lesson);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override

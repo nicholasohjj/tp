@@ -1,12 +1,14 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
+import seedu.address.model.subject.Subject;
 
 /**
  * The API of the Model component.
@@ -62,6 +64,11 @@ public interface Model {
     boolean hasStudent(Student student);
 
     /**
+     * Returns true if a student has a subject.
+     */
+    boolean hasStudentSubject(Student student, Subject subject);
+
+    /**
      * Deletes the given student.
      * The student must exist in the address book.
      */
@@ -103,6 +110,11 @@ public interface Model {
      * Returns true if a lesson with the same identity as {@code lesson} exists in the address book
      */
     boolean hasLesson(Lesson lesson);
+
+    /**
+     * Returns true if a lesson with the same date and time as {@code lesson} exists in the address book
+     */
+    boolean hasLessonConflict(Lesson lesson);
 
     /**
      * Replaces the given lesson {@code target} with {@code editedLesson}.
