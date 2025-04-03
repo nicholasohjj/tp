@@ -145,7 +145,7 @@ public class EditAssignmentCommandTest {
 
     @Test
     public void createEditedAssignment_allFieldsEdited() {
-        Assignment original = new AssignmentBuilder().withName("Original").withDueDate("25-01-2026").build();
+        Assignment original = new AssignmentBuilder().withAssignmentName("Original").withDueDate("25-01-2026").build();
         EditAssignmentCommand.EditAssignmentDescriptor descriptor =
                 new EditAssignmentDescriptorBuilder()
                         .withNewAssignmentName("Edited")
