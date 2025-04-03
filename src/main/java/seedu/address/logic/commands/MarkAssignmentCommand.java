@@ -31,7 +31,6 @@ public class MarkAssignmentCommand extends Command {
             + PREFIX_ASSIGNMENT + "Assignment 1";
 
     public static final String MESSAGE_MARK_ASSIGNMENT_SUCCESS = "Assignment \"%1$s\" marked as completed for %2$s";
-    public static final String MESSAGE_INVALID_ASSIGNMENT = "The assignment \"%1$s\" was not found for this student";
     public static final String MESSAGE_EMPTY_STUDENT_LIST = "There are no students in the address book";
 
     private static final Logger logger = LogsCenter.getLogger(MarkAssignmentCommand.class);
@@ -77,7 +76,7 @@ public class MarkAssignmentCommand extends Command {
         if (!student.getAssignments().contains(targetAssignment)) {
             logger.warning(String.format("Assignment not found: %s for student %s",
                     assignmentName, student.getName()));
-            throw new CommandException(String.format(MESSAGE_INVALID_ASSIGNMENT, assignmentName));
+            throw new CommandException(String.format(Messages.MESSAGE_ASSIGNMENT_NOT_FOUND, assignmentName));
         }
 
         // Mark the assignment

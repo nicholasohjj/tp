@@ -1,6 +1,7 @@
 package seedu.address.model.assignment;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -56,7 +57,7 @@ public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<As
      * existing assignment in the list.
      */
     public void setAssignment(Assignment target, Assignment editedAssignment) {
-        requireNonNull(editedAssignment);
+        requireAllNonNull(target, editedAssignment);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
@@ -104,7 +105,7 @@ public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<As
         return internalList.toString();
     }
 
-    private boolean studentAreUnique(List<Assignment> assignments) {
+    private boolean assignmentsAreUnique(List<Assignment> assignments) {
         for (int i = 0; i < assignments.size(); i++) {
             for (int j = i + 1; j < assignments.size(); j++) {
                 if (assignments.get(i).isSameAssignment(assignments.get(j))) {
@@ -124,6 +125,7 @@ public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<As
      * Marks an assignment as done.
      */
     public void markAssignment(String assignmentName) throws CommandException {
+        requireNonNull(assignmentName);
         for (Assignment assignment : internalList) {
             if (assignment.getAssignmentName().equals(assignmentName)) {
                 if (assignment.isDone()) {
@@ -138,6 +140,7 @@ public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<As
      * Marks an assignment as undone.
      */
     public void unmarkAssignment(String assignmentName) throws CommandException {
+        requireNonNull(assignmentName);
         for (Assignment assignment : internalList) {
             if (assignment.getAssignmentName().equals(assignmentName)) {
                 if (!assignment.isDone()) {
@@ -152,6 +155,7 @@ public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<As
      * Deletes an assignment from the list.
      */
     public void deleteAssignment(String assignmentName) {
+        requireNonNull(assignmentName);
         Iterator<Assignment> iterator = internalList.iterator();
         while (iterator.hasNext()) {
             Assignment assignment = iterator.next();
@@ -167,6 +171,7 @@ public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<As
      * @param assignmentName
      */
     public Assignment getAssignment(String assignmentName) {
+        requireNonNull(assignmentName);
         for (Assignment assignment : internalList) {
             if (assignment.getAssignmentName().equals(assignmentName)) {
                 return assignment;
