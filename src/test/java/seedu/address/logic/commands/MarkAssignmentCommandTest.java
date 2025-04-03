@@ -71,7 +71,7 @@ public class MarkAssignmentCommandTest {
         String nonExistentAssignment = "Nonexistent Assignment";
         MarkAssignmentCommand markCommand = new MarkAssignmentCommand(INDEX_FIRST, nonExistentAssignment);
 
-        String expectedMessage = String.format(MarkAssignmentCommand.MESSAGE_INVALID_ASSIGNMENT, nonExistentAssignment);
+        String expectedMessage = String.format(Messages.MESSAGE_ASSIGNMENT_NOT_FOUND, nonExistentAssignment);
         assertCommandFailure(markCommand, model, expectedMessage);
 
         // Verify logging

@@ -71,7 +71,7 @@ public class UnmarkAssignmentCommandTest {
         String nonExistentAssignment = "Nonexistent Assignment";
         UnmarkAssignmentCommand unmarkCommand = new UnmarkAssignmentCommand(INDEX_FIRST, nonExistentAssignment);
 
-        String expectedMessage = String.format(UnmarkAssignmentCommand.MESSAGE_INVALID_ASSIGNMENT,
+        String expectedMessage = String.format(Messages.MESSAGE_ASSIGNMENT_NOT_FOUND,
                 nonExistentAssignment);
         assertCommandFailure(unmarkCommand, model, expectedMessage);
 
