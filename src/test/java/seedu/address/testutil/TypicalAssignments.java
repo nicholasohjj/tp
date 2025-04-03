@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.datetimeutil.Date;
 import seedu.address.model.student.Student;
 
 /**
@@ -14,13 +15,13 @@ import seedu.address.model.student.Student;
 public class TypicalAssignments {
 
     public static final Assignment ASSIGNMENT1 = new AssignmentBuilder().withAssignmentName("Assignment 1")
-            .withDueDate("11-08-2025").build();
+            .withDueDate(new Date("11-08-2025")).build();
     public static final Assignment ASSIGNMENT2 = new AssignmentBuilder().withAssignmentName("Assignment 2")
-            .withDueDate("12-08-2025").build();
+            .withDueDate(new Date("12-08-2025")).build();
     public static final Assignment ASSIGNMENT3 = new AssignmentBuilder().withAssignmentName("Assignment 3")
-            .withDueDate("13-08-2025").build();
+            .withDueDate(new Date("13-08-2025")).build();
     public static final Assignment ASSIGNMENT_AMY = new AssignmentBuilder().withAssignmentName("some assignment")
-            .withDueDate("31-02-2026").build();
+            .withDueDate(new Date("31-02-2026")).build();
 
     private TypicalAssignments() {} // prevents instantiation
 

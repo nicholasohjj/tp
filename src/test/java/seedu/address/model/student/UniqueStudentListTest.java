@@ -22,7 +22,6 @@ import seedu.address.testutil.StudentBuilder;
 public class UniqueStudentListTest {
 
     private final UniqueStudentList uniqueStudentList = new UniqueStudentList();
-
     @Test
     public void contains_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueStudentList.contains(null));
