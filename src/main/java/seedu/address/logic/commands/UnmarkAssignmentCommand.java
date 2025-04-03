@@ -32,9 +32,7 @@ public class UnmarkAssignmentCommand extends Command {
             + PREFIX_ASSIGNMENT + "Assignment 1";
 
     public static final String MESSAGE_SUCCESS = "Assignment \"%1$s\" unmarked as incomplete for %2$s";
-    public static final String MESSAGE_ASSIGNMENT_NOT_FOUND = "The assignment \"%1$s\" was not found for this student";
     public static final String MESSAGE_EMPTY_STUDENT_LIST = "There are no students in the address book";
-    public static final String MESSAGE_INVALID_ASSIGNMENT = "The assignment \"%1$s\" was not found for this student";
 
     private static final Logger logger = LogsCenter.getLogger(UnmarkAssignmentCommand.class);
 
@@ -83,7 +81,7 @@ public class UnmarkAssignmentCommand extends Command {
         if (!student.getAssignments().contains(targetAssignment)) {
             logger.warning(String.format("Assignment not found: %s for student %s",
                     assignmentName, student.getName()));
-            throw new CommandException(String.format(MESSAGE_ASSIGNMENT_NOT_FOUND, assignmentName));
+            throw new CommandException(String.format(Messages.MESSAGE_ASSIGNMENT_NOT_FOUND, assignmentName));
         }
 
         // Unmark the assignment

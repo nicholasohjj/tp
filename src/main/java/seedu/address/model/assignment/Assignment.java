@@ -13,7 +13,7 @@ import seedu.address.model.datetimeutil.Date;
  */
 public class Assignment implements Comparable<Assignment> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Assignment names should be alphanumeric "
+    public static final String MESSAGE_CONSTRAINTS = "Error: Assignment names should be alphanumeric "
             + "and can only contain spaces. "
             + "It should not exceed 50 characters.";
 
