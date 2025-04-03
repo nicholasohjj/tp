@@ -365,22 +365,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 4a3: TutorTrack displays the filtered lesson history.
     - Use case ends.
 
-#### Use Case 3: Assign Homework to a Student
+#### Use Case 3: Add Assignment to a Student
 
 **System**: TutorTrack
 
 **Actor**: Tutor
 
-**Use Case**: UC03 - Assign Homework
+**Use Case**: UC03 - Add Assignment
 
 **MSS**:
 
 1. Tutor chooses to assign homework.
-2. TutorTrack prompts for the student’s name.
-3. Tutor enters the student’s name.
-4. TutorTrack prompts for homework details (task name, due date, description).
-5. Tutor enters the homework details.
-6. TutorTrack saves the homework assignment and confirms the assignment.
+2. TutorTrack prompts for the student’s index.
+3. Tutor enters the student’s index.
+4. TutorTrack prompts for assignment details (assignment name, due date).
+5. Tutor enters the assignment details.
+6. TutorTrack saves the assignment and confirms the assignment.
 
    Use case ends.
 
@@ -391,6 +391,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 3a1: TutorTrack informs the tutor that the student does not exist.
     - 3a2: Tutor chooses to add the student or retry the search.
     - Use case resumes from step 2 or ends.
+- **4a**: Tutor enters an invalid assignment name (e.g., longer than 30 characters, contains special characters).
+    - 4a1: TutorTrack warns the tutor about the invalid name.
+    - 4a2: Tutor enters a valid name.
+    - Use case resumes from step 5.
 - **5a**: Tutor enters an invalid due date (e.g., past date).
     - 5a1: TutorTrack warns the tutor about the invalid date.
     - 5a2: Tutor enters a valid date.
@@ -407,8 +411,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**:
 
 1. Tutor chooses to update student progress.
-2. TutorTrack prompts for the student’s name.
-3. Tutor enters the student’s name.
+2. TutorTrack prompts for the student’s index.
+3. Tutor enters the student’s index.
 4. TutorTrack prompts for progress details (e.g., understanding level, quiz scores, notes).
 5. Tutor enters the progress details.
 6. TutorTrack saves the progress update and confirms the update.
@@ -438,11 +442,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**:
 
 1. Tutor chooses to delete a student.
-2. TutorTrack prompts for the student’s name.
-3. Tutor enters the student’s name.
+2. TutorTrack prompts for the student’s index.
+3. Tutor enters the student’s index.
 4. TutorTrack confirms the deletion.
-5. Tutor confirms the deletion.
-6. TutorTrack deletes the student and confirms the deletion.
 
    Use case ends.
 
@@ -452,26 +454,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 3a1: TutorTrack informs the tutor that the student does not exist.
     - 3a2: Tutor chooses to retry the search or cancel.
     - Use case resumes from step 2 or ends.
-- **5a**: Tutor cancels the deletion.
-    - 5a1: TutorTrack discards the deletion request.
-    - Use case ends.
 
-#### Use Case 6: Track Assignment Completion
+#### Use Case 6: Toggle Assignment Completion Status
 
 **System**: TutorTrack
 
 **Actor**: Tutor
 
-**Use Case**: UC06 - Track Assignment Completion
+**Use Case**: UC06 - Update Assignment Completion
 
 **MSS**:
 
-1. Tutor chooses to track assignment completion.
-2. TutorTrack prompts for the student’s name.
-3. Tutor enters the student’s name.
-4. TutorTrack displays the list of assignments for the student.
-5. Tutor marks an assignment as completed.
-6. TutorTrack updates the assignment status and confirms the update.
+1. Tutor chooses to mark/unmark an assignment as completed.
+2. TutorTrack prompts for the student’s index and the assignment name.
+3. Tutor enters the student’s index and the assignment name. 
+4. TutorTrack updates the assignment status (toggle between completed/incomplete) and confirms the update.
 
    Use case ends.
 
@@ -482,8 +479,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 3a1: TutorTrack informs the tutor that the student does not exist.
     - 3a2: Tutor chooses to add the student or retry the search.
     - Use case resumes from step 2 or ends.
-- **5a**: Tutor marks an assignment as incomplete.
-    - 5a1: TutorTrack updates the assignment status and confirms the update.
+- **3b**: TutorTrack cannot find the assignment.
+    - 3b1: TutorTrack informs the tutor that the assignment does not exist.
+    - 3b2: Tutor chooses to add the assignment or retry the search.
+    - Use case resumes from step 2 or ends.
+- **4a**: The assignment is already in the target state (e.g., tutor tries to mark completed when already completed).
+    - 4a1: TutorTrack informs the tutor that the assignment is already completed/incomplete.
     - Use case ends.
 
 #### Use Case 7: Access Historical Logs
@@ -519,20 +520,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Any command should respond in 10 seconds or less for up to 100 students.
-5.  System should be usable by a user who is comfortable with typing and using a CLI.
-6.  System should be able to store data for at least 1 year without data loss.
-7.  Project is expected to adhere to the [Java Code Quality Guide](https://se-education.org/guides/contributing/javaCodeQualityGuide.html).
-8.  Project is expected to adhere to a schedule that delivers a feature set every week.
-9.  This project is not expected to connect to the internet or any external services (email, cloud storage, telegram, etc).
+2.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  Any command should respond in 10 seconds or less for up to 100 students.
+4.  System should be usable by a user who is comfortable with typing and using a CLI.
+5.  System should be able to store data for at least 1 year without data loss.
+6.  Project is expected to adhere to the [Java Code Quality Guide](https://se-education.org/guides/contributing/javaCodeQualityGuide.html). 
+7. Project is expected to adhere to a schedule that delivers a feature set every week. 
+8. This project is not expected to connect to the internet or any external services (email, cloud storage, telegram, etc).
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Tutor**: A person who does free-lance tutoring
-* **Student**: A person that is being or has been tutored by the current user of the application
+* **Student**: A person that is being or has been tutored by the current user of the application on a 1-on-1 basis
 * **Spreadsheet**: An Excel spreadsheet
 * **Assignment**: A homework assignment or task that has been given by the tutor to the student
 * **Historical logs**: The records of students' details and the changes that have been made during the lifetime use of the app

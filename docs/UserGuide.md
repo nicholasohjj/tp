@@ -22,6 +22,8 @@ TutorTrack is designed for:
 - Users have a basic understanding of file management (e.g., creating folders, moving files).
 - Users are comfortable with Java-based applications.
 
+---
+
 * Table of Contents
 {:toc}
 
