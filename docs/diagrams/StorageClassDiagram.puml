@@ -19,6 +19,7 @@ Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
 Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
 Class JsonAdaptedStudent
+Class JsonAdaptedLesson
 Class JsonAdaptedSubject
 Class JsonAdaptedUniqueAssignmentList
 Class JsonAdaptedAssignment
@@ -40,6 +41,7 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedStudent
+JsonSerializableAddressBook --> "*" JsonAdaptedLesson
 JsonAdaptedStudent --> "*" JsonAdaptedSubject
 JsonAdaptedStudent --> "1" JsonAdaptedUniqueAssignmentList
 JsonAdaptedUniqueAssignmentList --> "*" JsonAdaptedAssignment

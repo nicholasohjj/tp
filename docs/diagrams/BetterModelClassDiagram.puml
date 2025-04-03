@@ -11,89 +11,27 @@ skinparam {
     classArrowColor MODEL_COLOR
 }
 
-title "Class Diagram: Student Management Structure"
 
-class AddressBook {
-  - students: UniqueStudentList
-  - subjects: UniqueLessonList
-}
+AddressBook *-down-> "1" UniqueStudentList
+AddressBook *-down-> "1" UniqueNameList
+AddressBook *-down-> "1" UniqueLessonList
+UniqueNameList -[hidden]right- UniqueStudentList
+UniqueNameList -[hidden]left- UniqueLessonList
 
-class UniqueStudentList {
-  - internalList: List<Student>
-  + add(Student)
-  + remove(Student)
-}
+UniqueNameList -right-> "*" Name
+UniqueStudentList -right-> Student
+UniqueLessonList -down-> Lesson
 
-class UniqueLessonList {
-  - internalList: List<Lesson>
-  + add(Subject)
-  + remove(Subject)
-}
+Student -left-> "1" Name
+Lesson -right-> "1" Name
 
-class Student {
-  - name: Name
-  - phone: Phone
-  - email: Email
-  - address: Address
-  - subjects: Set<Subject>
-  + addSubject(Subject)
-  + removeSubject(Subject)
-}
+Student *--> Subject
+Student *--> Phone
+Student *--> Email
+Student *--> Address
+Student *--> Assignment
 
-class Lesson {
-  - studentName: Name
-  - subjects: Set<Subject>
-  - date: Date
-  - time: Time
-}
-
-class Name {
-  - fullName: String
-}
-class Phone {
-  - value: String
-}
-class Email {
-  - value: String
-}
-class Address {
-  - value: String
-}
-class Subject {
-  - value: String
-}
-class Date {
-  - value: LocalDate
-}
-class Time {
-  - value: LocalTime
-}
-
-' Composition Relationships
-AddressBook "1" *-- "1" UniqueStudentList : contains
-AddressBook "1" *-- "1" UniqueLessonList : contains
-
-UniqueStudentList "1" *-- "*" Student : maintains
-UniqueLessonList "1" *-- "*" Lesson : maintains
-
-' Student Components
-Student *-- "1" Name : has
-Student *-- "1" Phone : has
-Student *-- "1" Email : has
-Student *-- "1" Address : has
-Student *-- "*" Subject : has
-
-' Subject Association
-Student "1" --> "*" Lesson : subjected with
-
-' Lesson Components
-Lesson *-- "1" Name : for student
-Lesson *-- "*" Subject : teaches
-Lesson *-- "1" Date : on
-Lesson *-- "1" Time : at
-
-' Layout improvements
-UniqueLessonList -[hidden]right- UniqueStudentList
-Name -[hidden]down- Phone
-Email -[hidden]down- Address
+Lesson *--> Subject
+Lesson *--> Date
+Lesson *--> Time
 @enduml

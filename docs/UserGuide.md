@@ -44,15 +44,7 @@ TutorTrack is designed for:
    - `help`: Opens the help window.
    - `list_students`: Lists all students.
    - `list_lessons n/Jackie` : Lists all lessons under a student or all lessons in the data
-   - `add_student n/John Doe p/91234567 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`: Adds a new student.
-   - `add_lesson n/Johnson Kit d/15-09-2026 t/17:00 s/CS2103T` : Adds a lesson.
-   - `add_assignment 2 as/CS2103T tP increment d/19-04-2025` : Adds an assignment to a student in the list.
-   - `mark_assignment 2 as/CS2101 CA2` : Marks the assignment under the student as complete
-   - `unmark_assignment 3 as/Science CA2` : Marks the assignment under the student as incomplete
-   - `delete_student 1`: Deletes the 1st student in the list.
-   - `delete_lesson 1`: Deletes the 1st lesson in the list.
    - `clear`: Deletes all students.
-   - `find_student Bernice`: Finds student containing Bernice.
    - `exit`: Exits the app.
 
 1. Refer to the [Features](#features) section below for detailed instructions on each command.
@@ -138,23 +130,21 @@ Examples:
 * `add_student n/John Doe p/98765432 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`
 * `add_student n/Mary Jane p/12345678 e/maryjane@email.com a/Blk 47 Tampines Street 20, #17-35 s/Math s/Science`
 
-### Editing a student : `edit_student`
+#### Editing a student : `edit_student`
 
 Edits an existing student in the student list.
 
 Format: `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] …​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-
 * At least one of the optional fields must be provided.
-
 * Existing values will be updated to the input values.
-
 * Subjects cannot be edited at this stage.
 
 Examples:
 
-*  `edit_student 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+* `edit_student 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+
 #### Deleting a student : `delete_student`
 
 Deletes the specified student from the student list.
@@ -181,21 +171,15 @@ Finds students whose names contain any of the given keywords.
 Format: `find_student KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-
 * Only the name is searched.
-
 * Only full words will be matched e.g. `Han` will not match `Hans`
-
 * Students matching at least one keyword will be returned (i.e. `OR` search).
-
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 
 * `find_student John` returns `john` and `John Doe`
-
 * `find_student alex david` returns `Alex Yeoh`, `David Li`<br>
 
 ![result for 'find_student alex'](images/img.png)
@@ -325,7 +309,7 @@ Install the app on the new computer and replace the empty data file with the one
 | **Add Student**    | `add_student n/NAME p/PHONE e/EMAIL a/ADDRESS s/SUBJECT`<br>e.g., `add_student n/John Doe p/91234567 e/john@example.com a/123 Street s/Math` |
 | **Edit Student**   | `edit_student INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`<br>e.g., `edit_student 1 p/98765432` |
 | **Delete Student** | `delete_student INDEX`<br>e.g., `delete_student 3` |
-| **Find Student** | `find_student KEYWORD [MORE_KEYWORDS]` e.g., find_student James Jake
+| **Find Student** | `find_student KEYWORD [MORE_KEYWORDS]` <br> e.g., find_student James Jake
 | **List Students**  | `list_students` |
 
 
