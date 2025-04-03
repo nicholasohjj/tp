@@ -304,235 +304,226 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | first time user | use commands with contextual help                              | learn proper command syntax and options without having to refer to external documentation |
 | `*`      | tutor           | get a timeline overview of all events within a period of time  | view the overall structure of the schedule for said period of time                        |
 
-### Use cases
+# Use Cases for TutorTrack
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+## Use Case 1: Add Student
 
-#### Use Case 1: Add a New Student
+**System**: TutorTrack  
+**Actor**: Tutor  
+**Use Case**: UC01 - Add Student
 
-**System**: TutorTrack
+### Main Success Scenario (MSS)
 
-**Actor**: Tutor
+1. Tutor enters a command to add a student, including name, phone number, address, email, and subjects.
+2. TutorTrack validates the input and ensures the student does not already exist.
+3. TutorTrack saves the student information and confirms the addition.
 
-**Use Case**: UC01 - Add a New Student
+   **Use case ends.**
 
-**MSS**:
+### Extensions
 
-1. Tutor chooses to add a new student.
-2. TutorTrack prompts for student details (name, contact, subjects).
-3. Tutor enters the required details.
-4. TutorTrack saves the student details and confirms the addition.
+- **1a**: Tutor enters an invalid phone number format.
+    - 1a1: TutorTrack warns the tutor about the invalid phone number.
+    - 1a2: TutorTrack prompts the tutor to enter the command again.
+    - Use case resumes from step 1.
 
-   Use case ends.
+- **1b**: Tutor enters an invalid email format.
+    - 1b1: TutorTrack warns the tutor about the invalid email.
+    - 1b2: TutorTrack prompts the tutor to enter the command again.
+    - Use case resumes from step 1.
 
+- **1c**: Tutor tries to add a student that already exists (same name and phone number).
+    - 1c1: TutorTrack informs the tutor that the student already exists.
+    - **Use case ends.**
 
-**Extensions**:
+- **1d**: Tutor enters invalid subject format.
+    - 1d1: TutorTrack warns the tutor about the invalid subject.
+    - 1d2: TutorTrack prompts the tutor to enter the command again.
+    - Use case resumes from step 1.
 
-- **3a**: TutorTrack detects a duplicate student name.
-    - 3a1: TutorTrack warns the tutor about the duplicate.
-    - 3a2: Tutor confirms whether to proceed or cancel.
-    - 3a3: If tutor confirms, TutorTrack saves the student details.
-    - 3a4: If tutor cancels, TutorTrack discards the input.
-    - Use case resumes from step 4 or ends.
+---
 
-#### Use Case 2: View Lesson History for a Student
+## Use Case 2: View Student List
 
-**System**: TutorTrack
+**System**: TutorTrack  
+**Actor**: Tutor  
+**Use Case**: UC02 - View Student List
 
-**Actor**: Tutor
+### Main Success Scenario (MSS)
 
-**Use Case**: UC02 - View Lesson History
+1. Tutor enters the command to view all students.
+2. TutorTrack retrieves and displays all registered students in alphabetical order.
 
-**MSS**:
+   **Use case ends.**
 
-1. Tutor chooses to view lesson history.
-2. TutorTrack prompts for the student’s name.
-3. Tutor enters the student’s name.
-4. TutorTrack displays the lesson history for the student.
+### Extensions
 
-   Use case ends.
+- **1a**: No students are found in the system.
+    - 1a1: TutorTrack informs the tutor that no students are available.
+    - **Use case ends.**
 
+---
 
-**Extensions**:
+## Use Case 3: Delete Student
 
-- **3a**: TutorTrack cannot find the student.
-    - 3a1: TutorTrack informs the tutor that the student does not exist.
-    - 3a2: Tutor chooses to add the student or retry the search.
-    - Use case resumes from step 2 or ends.
-- **4a**: Tutor chooses to filter the lesson history by date range or subject.
-    - 4a1: TutorTrack prompts for the filter criteria.
-    - 4a2: Tutor enters the filter criteria.
-    - 4a3: TutorTrack displays the filtered lesson history.
-    - Use case ends.
+**System**: TutorTrack  
+**Actor**: Tutor  
+**Use Case**: UC03 - Delete Student
 
-#### Use Case 3: Add Assignment to a Student
+### Main Success Scenario (MSS)
 
-**System**: TutorTrack
+1. Tutor enters the command to delete a student using the student index.
+2. TutorTrack validates the index and removes the student.
+3. TutorTrack confirms the deletion.
 
-**Actor**: Tutor
+   **Use case ends.**
 
-**Use Case**: UC03 - Add Assignment
+### Extensions
 
-**MSS**:
+- **1a**: The entered student index is out of bound.
+    - 1a1: TutorTrack warns the tutor that the index is not valid.
+    - **Use case ends.**
 
-1. Tutor chooses to assign homework.
-2. TutorTrack prompts for the student’s index.
-3. Tutor enters the student’s index.
-4. TutorTrack prompts for assignment details (assignment name, due date).
-5. Tutor enters the assignment details.
-6. TutorTrack saves the assignment and confirms the assignment.
+---
 
-   Use case ends.
+## Use Case 4: Add Lesson
 
+**System**: TutorTrack  
+**Actor**: Tutor  
+**Use Case**: UC04 - Add Lesson
 
-**Extensions**:
+### Main Success Scenario (MSS)
 
-- **3a**: TutorTrack cannot find the student.
-    - 3a1: TutorTrack informs the tutor that the student does not exist.
-    - 3a2: Tutor chooses to add the student or retry the search.
-    - Use case resumes from step 2 or ends.
-- **4a**: Tutor enters an invalid assignment name (e.g., longer than 30 characters, contains special characters).
-    - 4a1: TutorTrack warns the tutor about the invalid name.
-    - 4a2: Tutor enters a valid name.
-    - Use case resumes from step 5.
-- **5a**: Tutor enters an invalid due date (e.g., past date).
-    - 5a1: TutorTrack warns the tutor about the invalid date.
-    - 5a2: Tutor enters a valid date.
-    - Use case resumes from step 6.
+1. Tutor enters a command to add a lesson, including student name, date, time, and subject.
+2. TutorTrack validates the input and ensures no duplicate lesson exists at the same time.
+3. TutorTrack saves the lesson and confirms the addition.
 
-#### Use Case 4: Update Student Progress After a Lesson
+   **Use case ends.**
 
-**System**: TutorTrack
+### Extensions
 
-**Actor**: Tutor
+- **1a**: Student not found.
+    - 1a1: TutorTrack informs the tutor that the student does not exist.
+    - **Use case ends.**
 
-**Use Case**: UC04 - Update Student Progress
+- **1b**: Tutor enters an invalid date or time format.
+    - 1b1: TutorTrack warns the tutor about the incorrect format.
+    - 1b2: TutorTrack prompts the tutor to enter the command again.
+    - Use case resumes from step 1.
 
-**MSS**:
+- **1c**: A duplicate lesson exists for the same student at the same time.
+    - 1c1: TutorTrack warns the tutor about the duplicate lesson.
+    - **Use case ends.**
 
-1. Tutor chooses to update student progress.
-2. TutorTrack prompts for the student’s index.
-3. Tutor enters the student’s index.
-4. TutorTrack prompts for progress details (e.g., understanding level, quiz scores, notes).
-5. Tutor enters the progress details.
-6. TutorTrack saves the progress update and confirms the update.
+---
 
-   Use case ends.
+## Use Case 5: View Lessons for a Student
 
+**System**: TutorTrack  
+**Actor**: Tutor  
+**Use Case**: UC05 - View Lessons
 
-**Extensions**:
+### Main Success Scenario (MSS)
 
-- **3a**: TutorTrack cannot find the student.
-    - 3a1: TutorTrack informs the tutor that the student does not exist.
-    - 3a2: Tutor chooses to add the student or retry the search.
-    - Use case resumes from step 2 or ends.
-- **5a**: Tutor enters invalid data (e.g., quiz score out of range).
-    - 5a1: TutorTrack warns the tutor about the invalid data.
-    - 5a2: Tutor enters valid data.
-    - Use case resumes from step 6.
+1. Tutor enters the command to view all lessons for a student.
+2. TutorTrack retrieves and displays all lessons with timestamps.
 
-#### Use Case 5: Delete a Student
+   **Use case ends.**
 
-**System**: TutorTrack
+### Extensions
 
-**Actor**: Tutor
+- **1a**: No lessons found for the student.
+    - 1a1: TutorTrack informs the tutor that no lessons are recorded.
+    - **Use case ends.**
+- **1b**: The student is not found.
+    - 1b1: TutorTrack informs the tutor that the student name is not found.
+    - 1b2: TutorTrack prompts the tutor to enter the command again.
+    - Use case resumes from step 1.
 
-**Use Case**: UC05 - Delete a Student
+---
 
-**MSS**:
+## Use Case 6: Create Assignment to a Student
 
-1. Tutor chooses to delete a student.
-2. TutorTrack prompts for the student’s index.
-3. Tutor enters the student’s index.
-4. TutorTrack confirms the deletion.
+**System**: TutorTrack  
+**Actor**: Tutor  
+**Use Case**: UC06 - Create Assignment
 
-   Use case ends.
+### Main Success Scenario (MSS)
 
-**Extensions**:
+1. Tutor enters a command to create an assignment, including the student's index, assignment name, and due date.
+2. TutorTrack validates the input and ensures the assignment does not already exist for the student.
+3. TutorTrack saves the assignment and confirms the addition.
 
-- **3a**: TutorTrack cannot find the student.
-    - 3a1: TutorTrack informs the tutor that the student does not exist.
-    - 3a2: Tutor chooses to retry the search or cancel.
-    - Use case resumes from step 2 or ends.
+   **Use case ends.**
 
-#### Use Case 6: Toggle Assignment Completion Status
+### Extensions
 
-**System**: TutorTrack
+- **1a**: Student index is out of bounds.
+    - 1a1: TutorTrack informs the tutor that the student was not found.
+    - **Use case ends.**
 
-**Actor**: Tutor
+- **1b**: Tutor enters an invalid due date (e.g., past date).
+    - 1b1: TutorTrack warns the tutor about the invalid date.
+    - 1b2: TutorTrack prompts the tutor to enter the command again.
+    - Use case resumes from step 1.
 
-**Use Case**: UC06 - Update Assignment Completion
+- **1c**: Assignment already exists for the student.
+    - 1c1: TutorTrack warns the tutor about the duplicate assignment.
+    - **Use case ends.**
 
-**MSS**:
+- **1d**: Tutor enters a blank assignment name.
+    - 1d1: TutorTrack warns the tutor about the blank assignment name.
+    - 1d2: TutorTrack prompts the tutor to enter the command again.
+    - **Use case ends.**
 
-1. Tutor chooses to mark/unmark an assignment as completed.
-2. TutorTrack prompts for the student’s index and the assignment name.
-3. Tutor enters the student’s index and the assignment name. 
-4. TutorTrack updates the assignment status (toggle between completed/incomplete) and confirms the update.
+---
 
-   Use case ends.
+## Use Case 7: Track Assignment Completion
 
+**System**: TutorTrack  
+**Actor**: Tutor  
+**Use Case**: UC07 - Mark Assignment as Completed
 
-**Extensions**:
+### Main Success Scenario (MSS)
 
-- **3a**: TutorTrack cannot find the student.
-    - 3a1: TutorTrack informs the tutor that the student does not exist.
-    - 3a2: Tutor chooses to add the student or retry the search.
-    - Use case resumes from step 2 or ends.
-- **3b**: TutorTrack cannot find the assignment.
-    - 3b1: TutorTrack informs the tutor that the assignment does not exist.
-    - 3b2: Tutor chooses to add the assignment or retry the search.
-    - Use case resumes from step 2 or ends.
-- **4a**: The assignment is already in the target state (e.g., tutor tries to mark completed when already completed).
-    - 4a1: TutorTrack informs the tutor that the assignment is already completed/incomplete.
-    - Use case ends.
+1. Tutor enters the command to mark an assignment as completed.
+2. TutorTrack updates the assignment status and confirms completion.
 
-#### Use Case 7: Access Historical Logs
+   **Use case ends.**
 
-**System**: TutorTrack
+### Extensions
 
-**Actor**: Tutor
+- **1a**: Student index out of bound.
+    - 1a1: TutorTrack informs the tutor that the index is out of bound.
+    - 1a2: TutorTrack prompts the tutor to enter the command again.
+    - Use case resumes from step 1.
 
-**Use Case**: UC07 - Access Historical Logs
+- **1b**: Assignment not found.
+    - 1b1: TutorTrack informs the tutor that the assignment does not exist.
+    - **Use case ends.**
 
-**MSS**:
-
-1. Tutor chooses to access historical logs.
-2. TutorTrack prompts for the student’s name.
-3. Tutor enters the student’s name.
-4. TutorTrack displays the historical logs for the student.
-
-   Use case ends.
-
-
-**Extensions**:
-
-- **3a**: TutorTrack cannot find the student.
-    - 3a1: TutorTrack informs the tutor that the student does not exist.
-    - 3a2: Tutor chooses to add the student or retry the search.
-    - Use case resumes from step 2 or ends.
-- **4a**: Tutor chooses to filter logs by date range or type (e.g., lessons, assignments).
-    - 4a1: TutorTrack prompts for the filter criteria.
-    - 4a2: Tutor enters the filter criteria.
-    - 4a3: TutorTrack displays the filtered logs.
-    - Use case ends.
+- **1c**: Tutor enters a blank assignment name.
+    - 1c1: TutorTrack warns the tutor about the assignment name is missing.
+    - 1c2: TutorTrack prompts the tutor to enter the command again.
+    - **Use case ends.**
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-3.  Any command should respond in 10 seconds or less for up to 100 students.
-4.  System should be usable by a user who is comfortable with typing and using a CLI.
-5.  System should be able to store data for at least 1 year without data loss.
-6.  Project is expected to adhere to the [Java Code Quality Guide](https://se-education.org/guides/contributing/javaCodeQualityGuide.html). 
-7. Project is expected to adhere to a schedule that delivers a feature set every week. 
-8. This project is not expected to connect to the internet or any external services (email, cloud storage, telegram, etc).
+2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
+3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Any command should respond in 10 seconds or less for up to 100 students.
+5.  System should be usable by a user who is comfortable with typing and using a CLI.
+6.  System should be able to store data for at least 1 year without data loss.
+7.  Project is expected to adhere to the [Java Code Quality Guide](https://se-education.org/guides/contributing/javaCodeQualityGuide.html).
+8.  Project is expected to adhere to a schedule that delivers a feature set every week.
+9.  This project is not expected to connect to the internet or any external services (email, cloud storage, telegram, etc).
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Tutor**: A person who does free-lance tutoring
-* **Student**: A person that is being or has been tutored by the current user of the application on a 1-on-1 basis
+* **Student**: A person that is being or has been tutored by the current user of the application
 * **Spreadsheet**: An Excel spreadsheet
 * **Assignment**: A homework assignment or task that has been given by the tutor to the student
 * **Historical logs**: The records of students' details and the changes that have been made during the lifetime use of the app
