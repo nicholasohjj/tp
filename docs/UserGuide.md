@@ -152,7 +152,7 @@ Examples:
 * `add_student n/John Doe p/98765432 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`
 * `add_student n/Mary Jane p/12345678 e/maryjane@email.com a/Blk 47 Tampines Street 20, #17-35 s/Math s/Science`
 
-### Editing a student : `edit_student`
+#### Editing a student : `edit_student`
 
 Edits an existing student in the student list.
 
@@ -170,6 +170,7 @@ Format: `edit_student STUDENT_INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] …​`
 Examples:
 
 *  `edit_student 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+
 #### Deleting a student : `delete_student`
 
 Deletes the specified student from the student list.
@@ -189,7 +190,7 @@ Switch to a view that shows all students in the student list.
 
 Format: `list_students`
 
-### Locating students by name: `find_student`
+#### Locating students by name: `find_student`
 
 Finds students whose names contain any of the given keywords.
 
