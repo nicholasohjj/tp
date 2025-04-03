@@ -174,4 +174,8 @@ public class UniqueAssignmentList implements Iterable<Assignment>, Comparator<As
         }
         return null;
     }
+
+    public void clear() {
+        internalList.clear();
+    }
 }

@@ -36,7 +36,7 @@ public class AssignmentBuilder {
     /**
      * Sets the {@code assignmentName} of the {@code Assignment} that we are building.
      */
-    public AssignmentBuilder withName(String name) {
+    public AssignmentBuilder withAssignmentName(String name) {
         this.assignmentName = name;
         return this;
     }
