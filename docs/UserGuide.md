@@ -80,7 +80,7 @@ TutorTrack is designed for:
   Example: `help 123` is interpreted as `help`.
 
 - **Use of indexes**: To facilitate ease of typing, lessons and students are referred as indexes in the current view. 
-  
+
   For example, if you are viewing the student list and you want to delete the 2nd student, you can type `delete_student 2` to delete the 2nd student in the list. The same applies for lessons.
 
   - Depends on the filtered view of each list, each student/lesson may have different index.

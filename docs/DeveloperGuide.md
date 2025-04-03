@@ -303,8 +303,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 1: Add Student
 
-**System**: TutorTrack  
-**Actor**: Tutor  
+**System**: TutorTrack 
+**Actor**: Tutor 
 **Use Case**: UC01 - Add Student
 
 ### Main Success Scenario (MSS)
@@ -340,8 +340,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 2: View Student List
 
-**System**: TutorTrack  
-**Actor**: Tutor  
+**System**: TutorTrack
+**Actor**: Tutor
 **Use Case**: UC02 - View Student List
 
 ### Main Success Scenario (MSS)
@@ -361,8 +361,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 3: Delete Student
 
-**System**: TutorTrack  
-**Actor**: Tutor  
+**System**: TutorTrack
+**Actor**: Tutor
 **Use Case**: UC03 - Delete Student
 
 ### Main Success Scenario (MSS)
@@ -383,8 +383,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 4: Add Lesson
 
-**System**: TutorTrack  
-**Actor**: Tutor  
+**System**: TutorTrack
+**Actor**: Tutor
 **Use Case**: UC04 - Add Lesson
 
 ### Main Success Scenario (MSS)
@@ -414,8 +414,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 5: View Lessons for a Student
 
-**System**: TutorTrack  
-**Actor**: Tutor  
+**System**: TutorTrack
+**Actor**: Tutor
 **Use Case**: UC05 - View Lessons
 
 ### Main Success Scenario (MSS)
@@ -439,8 +439,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 6: Create Assignment to a Student
 
-**System**: TutorTrack  
-**Actor**: Tutor  
+**System**: TutorTrack
+**Actor**: Tutor
 **Use Case**: UC06 - Create Assignment
 
 ### Main Success Scenario (MSS)
@@ -475,8 +475,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 7: Track Assignment Completion
 
-**System**: TutorTrack  
-**Actor**: Tutor  
+**System**: TutorTrack
+**Actor**: Tutor
 **Use Case**: UC07 - Toggle Assignment Completion Status
 
 ### Main Success Scenario (MSS)
