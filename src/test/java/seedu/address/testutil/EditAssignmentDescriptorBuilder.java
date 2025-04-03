@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditAssignmentCommand.EditAssignmentDescriptor;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.datetimeutil.Date;
 
 /**
@@ -16,6 +17,13 @@ public class EditAssignmentDescriptorBuilder {
 
     public EditAssignmentDescriptorBuilder(EditAssignmentDescriptor descriptor) {
         this.descriptor = new EditAssignmentDescriptor(descriptor);
+    }
+
+    /** Constructor that takes an Assignment and initializes the descriptor */
+    public EditAssignmentDescriptorBuilder(Assignment assignment) {
+        descriptor = new EditAssignmentDescriptor();
+        descriptor.setNewAssignmentName(assignment.getAssignmentName());
+        descriptor.setDate(assignment.getDueDate());
     }
 
     /**

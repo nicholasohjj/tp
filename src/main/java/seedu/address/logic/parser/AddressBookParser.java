@@ -47,21 +47,41 @@ public class AddressBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
+        assert userInput != null : "User input cannot be null";
+        logger.info("Starting to parse command: " + userInput);
+
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
+            logger.warning("Failed to parse command - invalid format: " + userInput);
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
-        // log messages such as the one below.
-        // Lower level log messages are used sparingly to minimize noise in the code.
-        logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
+        logger.fine("Parsed command word: " + commandWord + " with arguments: " + arguments);
+
+        try {
+            Command command = parseCommandByWord(commandWord, arguments);
+            logger.info("Successfully parsed command: " + commandWord);
+            return command;
+        } catch (ParseException pe) {
+            logger.warning("Failed to parse command '" + commandWord + "': " + pe.getMessage());
+            throw pe;
+        } catch (NullPointerException npe) {
+            logger.severe("Null pointer encountered while parsing command '" + commandWord + "'");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+    }
+
+    /**
+     * Parses the command based on the command word.
+     */
+    private Command parseCommandByWord(String commandWord, String arguments) throws ParseException {
+        assert commandWord != null : "Command word cannot be null";
+        assert arguments != null : "Arguments cannot be null";
 
         switch (commandWord) {
-
         case AddStudentCommand.COMMAND_WORD:
             return new AddStudentCommandParser().parse(arguments);
 
@@ -114,9 +134,8 @@ public class AddressBookParser {
             return new EditAssignmentCommandParser().parse(arguments);
 
         default:
-            logger.finer("This user input caused a ParseException: " + userInput);
+            logger.warning("Unknown command encountered: " + commandWord);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

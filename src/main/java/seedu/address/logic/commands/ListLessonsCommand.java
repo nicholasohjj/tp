@@ -109,7 +109,8 @@ public class ListLessonsCommand extends Command {
         }
 
         ListLessonsCommand otherFindStudentCommand = (ListLessonsCommand) other;
-        return predicate.equals(otherFindStudentCommand.predicate);
+        return predicate.equals(otherFindStudentCommand.predicate)
+                && studentName.equals(otherFindStudentCommand.studentName);
     }
 
     @Override

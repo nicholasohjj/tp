@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -45,6 +46,9 @@ public class CommandTestUtil {
     public static final String VALID_DATE_BOB = "26-09-2026";
     public static final String VALID_TIME_AMY = "12:00";
     public static final String VALID_TIME_BOB = "15:00";
+    public static final String VALID_ASSIGNMENT_NAME_AMY = " some assignment ";
+    public static final String VALID_ASSIGNMENT_NAME_BOB = " some other assignment ";
+    public static final String VALID_PREAMBLE = " 1 ";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -58,8 +62,11 @@ public class CommandTestUtil {
     public static final String SUBJECT_DESC_HUSBAND = " " + PREFIX_SUBJECT + VALID_SUBJECT_HUSBAND;
     public static final String SUBJECT_DESC_AMY = " " + PREFIX_SUBJECT + VALID_SUBJECT_AMY;
     public static final String SUBJECT_DESC_BOB = " " + PREFIX_SUBJECT + VALID_SUBJECT_BOB;
+    public static final String DATE_DESC_AMY = " " + PREFIX_DATE + VALID_DATE_AMY;
     public static final String DATE_DESC_BOB = " " + PREFIX_DATE + VALID_DATE_BOB;
     public static final String TIME_DESC_BOB = " " + PREFIX_TIME + VALID_TIME_BOB;
+    public static final String ASSIGNMENT_NAME_DESC_AMY = " " + PREFIX_ASSIGNMENT + VALID_ASSIGNMENT_NAME_AMY;
+    public static final String ASSIGNMENT_NAME_DESC_BOB = " " + PREFIX_ASSIGNMENT + VALID_ASSIGNMENT_NAME_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -68,6 +75,8 @@ public class CommandTestUtil {
     public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT + "@@@";
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "17-19-2024"; // month must be within 0-12
     public static final String INVALID_TIME_DESC = " " + PREFIX_TIME + "27:00"; // time must be within 0-24
+    public static final String INVALID_ASSIGNMENT_NAME_DESC = " "
+            + PREFIX_ASSIGNMENT + "Math Exercise #1"; // '#' not allowed in assignment names
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -114,6 +123,16 @@ public class CommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
+     * that takes a string {@code expectedMessage}.
+     */
+    public static void assertCommandSuccessWithUpdate(Command command, Model actualModel, String expectedMessage,
+                                            Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, true);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
