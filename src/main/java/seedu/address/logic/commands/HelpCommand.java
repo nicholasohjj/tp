@@ -16,7 +16,7 @@ public class HelpCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     public static final String GENERAL_HELP_MESSAGE =
-            "Available commands (non-exhautive):\n"
+            "Available commands (non-exhaustive):\n"
                     + "1. add_student - Add a new student\n"
                     + "2. list_students - List all students\n"
                     + "3. delete_student - Delete a student\n"
