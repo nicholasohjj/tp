@@ -8,18 +8,18 @@ import seedu.address.model.datetimeutil.Date;
  */
 public class AssignmentBuilder {
 
-    public static final String DEFAULT_NAME = "Default Assignment";
-    public static final String DEFAULT_DUE_DATE = "01-01-2026";
+    public static final String DEFAULT_ASSIGNMENT_NAME = "Homework 1";
+    public static final String DEFAULT_DUE_DATE = "10-04-2025";
 
     private String assignmentName;
     private Date dueDate;
     private boolean isDone;
 
     /**
-     * Creates an {@code AssignmentBuilder} with default details.
+     * Initializes the AssignmentBuilder with the data of {@code assignmentToCopy}.
      */
     public AssignmentBuilder() {
-        assignmentName = DEFAULT_NAME;
+        assignmentName = DEFAULT_ASSIGNMENT_NAME;
         dueDate = new Date(DEFAULT_DUE_DATE);
         isDone = false;
     }
@@ -30,6 +30,7 @@ public class AssignmentBuilder {
     public AssignmentBuilder(Assignment assignmentToCopy) {
         assignmentName = assignmentToCopy.getAssignmentName();
         dueDate = assignmentToCopy.getDueDate();
+
         isDone = assignmentToCopy.isDone();
     }
 
@@ -44,8 +45,8 @@ public class AssignmentBuilder {
     /**
      * Sets the {@code dueDate} of the {@code Assignment} that we are building.
      */
-    public AssignmentBuilder withDueDate(String date) {
-        this.dueDate = new Date(date);
+    public AssignmentBuilder withDueDate(Date dueDate) {
+        this.dueDate = dueDate;
         return this;
     }
 
