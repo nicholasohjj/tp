@@ -34,4 +34,5 @@ Student *--> Assignment
 Lesson *--> Subject
 Lesson *--> Date
 Lesson *--> Time
+
 @enduml

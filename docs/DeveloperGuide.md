@@ -303,8 +303,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 1: Add Student
 
-**System**: TutorTrack 
-**Actor**: Tutor 
+**System**: TutorTrack
+**Actor**: Tutor
 **Use Case**: UC01 - Add Student
 
 ### Main Success Scenario (MSS)
