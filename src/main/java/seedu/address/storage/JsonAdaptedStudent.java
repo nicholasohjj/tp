@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.logic.commands.AddAssignmentCommand.MESSAGE_DUPLICATE_ASSIGNMENT;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -9,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
@@ -83,6 +86,10 @@ class JsonAdaptedStudent {
         final UniqueAssignmentList studentAssignments = new UniqueAssignmentList();
         if (assignments != null) {
             for (JsonAdaptedAssignment assignment : assignments) {
+                Assignment assignmentToAdd = assignment.toModelType();
+                if (studentAssignments.contains(assignmentToAdd)) {
+                    throw new IllegalValueException(MESSAGE_DUPLICATE_ASSIGNMENT);
+                }
                 studentAssignments.add(assignment.toModelType());
             }
         }

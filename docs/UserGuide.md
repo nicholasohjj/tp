@@ -4,6 +4,10 @@ title: User Guide
 ---
 
 TutorTrack is a **desktop application designed for freelance tutors** to efficiently manage their students, lessons, and assignments. It combines the speed of a **Command Line Interface (CLI)** with the convenience of a **Graphical User Interface (GUI)**, making it ideal for tutors who prefer typing over mouse interactions. If you can type fast, TutorTrack will help you manage your tutoring tasks faster than traditional GUI apps.
+
+TutorTrack uses a **dual-list system** to manage students and lessons. Users can easily modify the student list and lesson list, allowing for quick access to student information and lesson schedules with their unique indexes. The application also supports assignment management, enabling tutors to keep track of their students' assignments and their completion status uniquely identified by the name of the assignment. Users can easily toggle between the lists with simple CLI-based commands.
+
+---
 ### Target Users
 
 TutorTrack is designed for:
@@ -17,6 +21,8 @@ TutorTrack is designed for:
 - Users are familiar with basic CLI commands.
 - Users have a basic understanding of file management (e.g., creating folders, moving files).
 - Users are comfortable with Java-based applications.
+
+---
 
 * Table of Contents
 {:toc}
@@ -72,6 +78,15 @@ TutorTrack is designed for:
 - **Extraneous parameters** for commands like `help`, `list_students`, `exit`, and `clear` will be ignored.
 
   Example: `help 123` is interpreted as `help`.
+
+- **Use of indexes**: To facilitate ease of typing, lessons and students are referred as indexes in the current view. 
+  
+  For example, if you are viewing the student list and you want to delete the 2nd student, you can type `delete_student 2` to delete the 2nd student in the list. The same applies for lessons.
+
+  - Depends on the filtered view of each list, each student/lesson may have different index.
+
+  - Avoid accessing lessons through index while viewing the student list and vice versa. It is recommended to use the `list_students` or `list_lessons` command to view the respective lists before using the index.
+
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
@@ -88,7 +103,7 @@ Format: `help`
 
 #### Clearing all entries : `clear`
 
-Clears all entries from the student list.
+Clears all entries from both the student list and the lesson list.
 
 Format: `clear`
 
@@ -134,24 +149,25 @@ Examples:
 
 Edits an existing student in the student list.
 
-Format: `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] …​`
+Format: `edit_student STUDENT_INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] …​`
 
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student at the specified `STUDENT_INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * Subjects cannot be edited at this stage.
+  * To edit the subjects, you can delete the student and add a new one with the updated subjects.
 
 Examples:
 
-* `edit_student 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+*  `edit_student 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 
 #### Deleting a student : `delete_student`
 
 Deletes the specified student from the student list.
 
-Format: `delete_student INDEX`
+Format: `delete_student STUDENT_INDEX`
 
-* Deletes the student at the specified `INDEX`.
+* Deletes the student at the specified `STUDENT_INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -164,7 +180,7 @@ Switch to a view that shows all students in the student list.
 
 Format: `list_students`
 
-### Locating students by name: `find_student`
+#### Locating students by name: `find_student`
 
 Finds students whose names contain any of the given keywords.
 
@@ -182,7 +198,6 @@ Examples:
 * `find_student John` returns `john` and `John Doe`
 * `find_student alex david` returns `Alex Yeoh`, `David Li`<br>
 
-![result for 'find_student alex'](images/img.png)
 ### Managing lessons
 
 #### Adding a lesson: `add_lesson`
@@ -198,7 +213,7 @@ Example:
 You can edit the details of a lesson in the lesson list.
 You can edit individual details or edit multiple of them together.
 
-Format: `edit_lesson INDEX [n/STUDENT_NAME] [d/DATE] [t/TIME] [s/SUBJECT]`
+Format: `edit_lesson LESSON_INDEX [n/STUDENT_NAME] [d/DATE] [t/TIME] [s/SUBJECT]`
 
 Examples:
 * `edit_lesson 1 d/16-02-2026`
@@ -208,9 +223,9 @@ Examples:
 
 Deletes the specified lesson from the lesson list.
 
-Format: `delete_lesson INDEX`
+Format: `delete_lesson LESSON_INDEX`
 
-* Deletes the lesson at the specified `INDEX`.
+* Deletes the lesson at the specified `LESSON_INDEX`.
 * The index refers to the index number shown in the displayed lesson list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -234,7 +249,14 @@ Example:
 
 Adds an assignment to a student in the student list
 
-Format: `add_assignment STUDENT_INDEX as/ASSIGNMENT d/DATE`
+Format: `add_assignment STUDENT_INDEX as/ASSIGNMENT_NAME d/DATE`
+
+- `STUDENT_INDEX` must be a positive integer corresponding to the student to which the assignment belongs in the displayed list.
+- `ASSIGNMENT_NAME` is the name of the assignment to add.
+  - The name of the assignment must be unique within the student.
+- `DATE` is the due date of the assignment.
+  - The date must be in the format `d-M-yyyy` (e.g., `27-09-2026` or `1-1-2026`).
+  - The date must be in the future (i.e., not in the past).
 
 Example:
 * `add_assignment 2 as/Science 101 d/27-09-2026`
@@ -245,9 +267,9 @@ Deletes the assignment identified by the index number of the student and the ass
 
 **Format:**
 
-`delete_assignment INDEX as/ASSIGNMENT_NAME`
+`delete_assignment STUDENT_INDEX as/ASSIGNMENT_NAME`
 
-- `INDEX` must be a positive integer corresponding to the assignment in the displayed list.
+- `INDEX` must be a positive integer corresponding to the student to which the assignment belongs in the displayed list.
 - `ASSIGNMENT_NAME` is the name of the assignment to delete.
 
 **Example:**
@@ -257,8 +279,8 @@ Deletes the assignment identified by the index number of the student and the ass
 
 Marks the assignment identified by the index number of the student and the assignment name. Marking an assignment will change its status to "completed" (e.g., displayed in green).
 
-Format: `mark_assignment INDEX as/ASSIGNMENT_NAME​`
-- `INDEX` must be a positive integer corresponding to the assignment in the displayed list.
+Format: `mark_assignment STUDENT_INDEX as/ASSIGNMENT_NAME​`
+- `STUDENT_INDEX` must be a positive integer corresponding to the student to which the assignment belongs in the displayed list.
 - `ASSIGNMENT_NAME` is the name of the assignment to mark.
 
 **Example:**
@@ -271,7 +293,7 @@ Unmarks the assignment identified by the index number of the student and the ass
 
 **Format:**
 
-`unmark_assignment INDEX as/ASSIGNMENT_NAME`
+`unmark_assignment STUDENT_INDEX as/ASSIGNMENT_NAME`
 
 - `INDEX` must be a positive integer corresponding to the assignment in the displayed list.
 - `ASSIGNMENT_NAME` is the name of the assignment to unmark.
