@@ -482,11 +482,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **System**: TutorTrack  
 **Actor**: Tutor  
-**Use Case**: UC07 - Mark Assignment as Completed
+**Use Case**: UC07 - Toggle Assignment Completion Status
 
 ### Main Success Scenario (MSS)
 
-1. Tutor enters the command to mark an assignment as completed.
+1. Tutor enters the command to mark/unmark an assignment as completed/incomplete.
 2. TutorTrack updates the assignment status and confirms completion.
 
    **Use case ends.**
@@ -505,6 +505,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **1c**: Tutor enters a blank assignment name.
     - 1c1: TutorTrack warns the tutor about the assignment name is missing.
     - 1c2: TutorTrack prompts the tutor to enter the command again.
+    - **Use case ends.**
+
+- **1d**: Assignment already in the target (e.g., tutor tries to mark completed when already completed).
+    - 1d1: TutorTrack informs the tutor that the assignment is already in the target state.
     - **Use case ends.**
 
 ### Non-Functional Requirements
