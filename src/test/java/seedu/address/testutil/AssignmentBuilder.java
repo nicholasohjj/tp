@@ -17,16 +17,6 @@ public class AssignmentBuilder {
 
     /**
      * Initializes the AssignmentBuilder with the data of {@code assignmentToCopy}.
-=======
-    public static final String DEFAULT_NAME = "Default Assignment";
-    public static final String DEFAULT_DUE_DATE = "01-01-2026";
-
-    private String assignmentName;
-    private Date dueDate;
-    private boolean isDone;
-
-    /**
-     * Creates an {@code AssignmentBuilder} with default details.
      */
     public AssignmentBuilder() {
         assignmentName = DEFAULT_ASSIGNMENT_NAME;
@@ -59,11 +49,6 @@ public class AssignmentBuilder {
         this.dueDate = dueDate;
         return this;
     }
-//
-//    public AssignmentBuilder withDueDate(String dueDate) {
-//        this.dueDate = new Date(dueDate);
-//        return this;
-//    }
 
     /**
      * Sets the {@code isDone} status of the {@code Assignment} that we are building.
