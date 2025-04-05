@@ -263,6 +263,13 @@ You can edit individual details or edit multiple of them together.
 
 `edit_lesson LESSON_INDEX [n/STUDENT_NAME] [d/DATE] [t/TIME] [s/SUBJECT]`
 
+✓ **Validation**:
+
+- Days beyond month length auto-correct to last day (e.g., **`31-04-2023`** → **`30-04-2023`**)
+- Values >31 always rejected (e.g., **`32-01-2023`** fails)
+- Must be a future date (after today)
+- Invalid months (>12) always rejected
+
 **Examples**:
 * `edit_lesson 1 d/16-02-2026`
 * `edit_lesson 2 n/Jone King t/16:00 d/18-9-2025 s/Math`
