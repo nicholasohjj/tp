@@ -234,6 +234,24 @@ Adds a lesson to the lesson list.
 
 `add_lesson n/NAME s/SUBJECT d/DATE t/TIME​`
 
+**Validation Rules:**
+
+✓ **Unique time slots**:
+
+- Lessons cannot have identical:
+    - Student name (**`n/`**)
+    - Date (**`d/`**)
+    - Time (**`t/`**)
+- Example: Rejects duplicate **`Alice Chan`** lessons at **`15:00`** on **`17-09-2025`**.
+
+✓ **Case-insensitive name matching**:
+
+- **`alice chan`** matches **`Alice Chan`**.
+
+✓ **Future dates only**:
+
+- Past dates are rejected.
+
 Example:
 * `add_lesson n/Alice Chan d/17-09-2025 t/15:00 s/Math`
 
