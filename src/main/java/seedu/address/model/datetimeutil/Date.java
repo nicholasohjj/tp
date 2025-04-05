@@ -36,6 +36,12 @@ public class Date implements Comparable<Date> {
         LocalDate parsedDate;
         try {
             parsedDate = LocalDate.parse(test, VALID_FORMAT);
+            String[] parts = test.split("-");
+            LocalDate.of(
+                    Integer.parseInt(parts[2]),
+                    Integer.parseInt(parts[1]),
+                    Integer.parseInt(parts[0])
+            );
         } catch (DateTimeParseException e) {
             return false;
         }
