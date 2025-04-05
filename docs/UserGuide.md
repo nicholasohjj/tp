@@ -233,7 +233,20 @@ Adds a lesson to the lesson list.
 **Format:**
 
 `add_lesson n/NAME s/SUBJECT d/DATE t/TIME​`
+*Coming in v2.0: **`add_lesson n/NAME s/SUBJECT d/DATE t/TIME dur/DURATION`***
 
+**Time Slot Rules:**
+
+✓ **Discrete Time Management**:
+
+- Lessons cannot be scheduled at the exact same time (same hour and minute)
+- Currently treats each time slot as discrete points (e.g., 15:00 and 15:01 are considered separate)
+- Does not account for real-world lesson durations/overlaps
+
+✓ **Future Scheduling**:
+
+- All lessons must be scheduled for future dates/times
+- Prevents accidental double-booking at identical times
 **Validation Rules:**
 
 ✓ **Tutor time slot management**:
