@@ -32,14 +32,11 @@ public class Name {
     }
 
     private String standardizeCapitalization(String name) {
-        if (name == null || name.isEmpty()) {
-            return name;
-        }
         name = name.toLowerCase();
         String[] words = name.split("\\s+");
         StringBuilder result = new StringBuilder();
         for (String word : words) {
-            if (word.length() > 0) {
+            if (!word.isEmpty()) {
                 result.append(Character.toUpperCase(word.charAt(0)))
                         .append(word.substring(1))
                         .append(" ");
