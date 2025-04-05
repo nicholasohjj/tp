@@ -187,11 +187,14 @@ Finds students whose names contain any of the given keywords.
 Format: `find_student KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
+* Only matches complete words in the name (e.g., `Alex` matches `Alex Yeoh` but not `Alexander`).
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Students matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+<div markdown="span" class="alert alert-info">:information_source: **Note for Future Enhancement:** *Partial-word matching (e.g., searching for "Sre" to match "Sree Haridos") is currently not supported but may be added in a future update. </div>
 
 Examples:
 
