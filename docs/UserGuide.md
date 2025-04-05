@@ -413,6 +413,7 @@ Install the app on the new computer and replace the empty data file with the one
 | Action                | Format, Examples |
 |------------------------|------------------|
 | **Add Assignment**     | `add_assignment STUDENT_INDEX as/ASSIGNMENT d/DATE`<br>e.g., `add_assignment 1 as/Math Homework d/23-07-2025` |
+| **Add Assignment**     | `edit_assignment STUDENT_INDEX as/ASSIGNMENT_NAME [as/NEW_NAME] [d/NEW_DATE]`<br>e.g., `edit_assignment 1 as/Assignment1 as/UpdatedAssignment d/25-12-2025` |
 | **Delete Assignment**  | `delete_assignment STUDENT_INDEX as/ASSIGNMENT_NAME`<br>e.g., `delete_assignment 1 as/Assignment 1` |
 | **Mark Assignment**    | `mark_assignment STUDENT_INDEX as/ASSIGNMENT_NAME`<br>e.g., `mark_assignment 1 as/Assignment 1` |
 | **Unmark Assignment**  | `unmark_assignment STUDENT_INDEX as/ASSIGNMENT_NAME`<br>e.g., `unmark_assignment 1 as/Assignment 1` |
