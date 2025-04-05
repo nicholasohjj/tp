@@ -16,8 +16,8 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Error: Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Error: Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX = "Error: The student index" +
-            " provided is out of bounds!";
+    public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX = "Error: The student index"
+        + " provided is out of bounds!";
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "Error: The student index provided is out of bounds!";
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX = "Error: The lesson index provided is invalid!";
     public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d students listed!";
