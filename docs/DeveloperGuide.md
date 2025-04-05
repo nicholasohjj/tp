@@ -2,8 +2,12 @@
 layout: page
 title: Developer Guide
 ---
+
+---
+## Table of Contents
+
 * Table of Contents
-{:toc}
+{:toc max_level="2"}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -226,7 +230,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 
@@ -301,7 +305,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 # Use Cases for TutorTrack
 
-## Use Case 1: Add Student
+## **Use Case 1: Add Student**
 
 **System**: TutorTrack
 **Actor**: Tutor
@@ -506,7 +510,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 1d1: TutorTrack informs the tutor that the assignment is already in the target state.
     - **Use case ends.**
 
-### Non-Functional Requirements
+## **Non-Functional Requirements**
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
@@ -518,7 +522,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 8.  Project is expected to adhere to a schedule that delivers a feature set every week.
 9.  This project is not expected to connect to the internet or any external services (email, cloud storage, telegram, etc).
 
-### Glossary
+---
+
+## **Glossary**
 
 * **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Tutor**: A person who does free-lance tutoring
