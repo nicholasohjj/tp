@@ -29,7 +29,7 @@ public class ListLessonsCommand extends Command {
 
     public static final String COMMAND_WORD = "list_lessons";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all lessons whose student name contains"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all lessons whose student name contains "
             + "the specified keyword (case-insensitive) and displays them as a list with index numbers.\n"
             + "If no keywords are specified, displays all lessons.\n"
             + "Parameters: KEYWORD + " + PREFIX_NAME + "[KEYWORD]...\n"
