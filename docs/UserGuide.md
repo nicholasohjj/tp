@@ -141,6 +141,14 @@ A student can have any number of subjects (including 0)
 </div>
 -->
 
+Name Format Rules:
+* Alphabetic characters and spaces only (e.g., `Alex Yeoh`, `Mary Jane`).
+* Automatically converted to Title Case (e.g., `alex yeoh` → `Alex Yeoh`).
+* Special constructs like d/o are not supported (e.g., `Khadi d/o Farhan` will be rejected).
+* Hyphens (`-`), apostrophes (`'`), or numerals (`0-9`) are not allowed.
+
+
+
 Examples:
 * `add_student n/John Doe p/98765432 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`
 * `add_student n/Mary Jane p/12345678 e/maryjane@email.com a/Blk 47 Tampines Street 20, #17-35 s/Math s/Science`
