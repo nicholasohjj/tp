@@ -312,7 +312,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Main Success Scenario (MSS)
 
-1. Tutor enters a command to add a student, including name, phone number, address, email, and subjects.
+1. Tutor enters a command to add a student, including name, phone number, address, and email. Subject(s) may be optionally included.
 2. TutorTrack validates the input and ensures the student does not already exist.
 3. TutorTrack saves the student information and confirms the addition.
 
