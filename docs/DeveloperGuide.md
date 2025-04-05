@@ -286,7 +286,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | tutor           | view list of all students                                      | view all students that I am teaching                                                      |
 | `* * *`  | tutor           | delete a student                                               | remove students that I am no longer tutoring                                              |
 | `* * *`  | tutor           | track completion status of assignments                         | know if my students have completed them and their past performances                       |
-| `* * *`  | long-term user  | access historical logs and previous versions of student records | track and recover information when needed                                                 |
 | `* *`    | tutor           | reschedule lessons                                             | make changes to lesson plans to better fit mine or my student's schedule                  |
 | `* *`    | tutor           | mark lessons as complete                                       | review session history and track my students' lesson progress                             |
 | `* *`    | tutor           | set personalized reminders for students                        | address individual needs effectively                                                      |
@@ -509,6 +508,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **1d**: Assignment already in the target (e.g., tutor tries to mark completed when already completed).
     - 1d1: TutorTrack informs the tutor that the assignment is already in the target state.
     - **Use case ends.**
+
+---
 
 ## **Non-Functional Requirements**
 
