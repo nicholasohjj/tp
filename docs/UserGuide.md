@@ -285,7 +285,7 @@ Format: `mark_assignment STUDENT_INDEX as/ASSIGNMENT_NAME​`
 
 **Example:**
 
-- `mark_assignment 1 as/Assignment 1` marks the first assignment in the list as completed.
+- `mark_assignment 1 as/Assignment 1` marks the assignment named "Assignment 1" of the first student in the list as completed.
 
 #### Unmarking an Assignment: `unmark_assignment`
 
