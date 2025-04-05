@@ -29,12 +29,12 @@ public class ListLessonsCommand extends Command {
 
     public static final String COMMAND_WORD = "list_lessons";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all lessons whose student name contains "
-            + "the specified keyword (case-insensitive) and displays them as a list with index numbers.\n"
-            + "If no keywords are specified, displays all lessons.\n"
-            + "Parameters: KEYWORD + " + PREFIX_NAME + "[KEYWORD]...\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice or "
-            + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all lessons. "
+            + "Can optionally filter by student name.\n"
+            + "Format: " + COMMAND_WORD + " [" + PREFIX_NAME + "STUDENT_NAME]\n"
+            + "Examples:\n"
+            + "1. " + COMMAND_WORD + " " + PREFIX_NAME + "alice - Shows lessons for students named 'alice'\n"
+            + "2. " + COMMAND_WORD + " - Shows all lessons";
 
     public static final String MESSAGE_STUDENT_NOT_FOUND = "Error: The specified "
             + "student does not exist in the address book";
