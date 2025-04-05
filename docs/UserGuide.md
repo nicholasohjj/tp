@@ -236,24 +236,26 @@ Adds a lesson to the lesson list.
 
 **Validation Rules:**
 
-✓ **Unique time slots**:
+✓ **Tutor time slot management**:
 
-- Lessons cannot have identical:
-    - Student name (**`n/`**)
-    - Date (**`d/`**)
-    - Time (**`t/`**)
-- Example: Rejects duplicate **`Alice Chan`** lessons at **`15:00`** on **`17-09-2025`**.
+- Prevents scheduling multiple lessons at the same time
+- Applies even for different students (e.g., can't schedule Bernice and Abel at same time)
+- Ensures tutors don't get double-booked
 
 ✓ **Case-insensitive name matching**:
 
-- **`alice chan`** matches **`Alice Chan`**.
+- **`alice chan`** matches **`Alice Chan`**
 
 ✓ **Future dates only**:
 
-- Past dates are rejected.
+- Past dates are rejected
+
+<div markdown="span" class="alert alert-info">:information_source: **Group Lessons Note**: Currently, TutorTrack doesn't support group lessons where multiple students share the same time slot. Each lesson time must be unique to the tutor's schedule. We're considering adding group lesson support in a future update. </div>
+
 
 Example:
 * `add_lesson n/Alice Chan d/17-09-2025 t/15:00 s/Math`
+* `add_lesson n/Bob Lee d/17-09-2025 t/16:00 s/Math` (different time slot)
 
 #### Editing a lesson: `edit_lesson`
 You can edit the details of a lesson in the lesson list.
