@@ -2,8 +2,12 @@
 layout: page
 title: Developer Guide
 ---
+
+---
+## Table of Contents
+
 * Table of Contents
-{:toc}
+{:toc max_level="2"}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -226,7 +230,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 
@@ -282,7 +286,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | tutor           | view list of all students                                      | view all students that I am teaching                                                      |
 | `* * *`  | tutor           | delete a student                                               | remove students that I am no longer tutoring                                              |
 | `* * *`  | tutor           | track completion status of assignments                         | know if my students have completed them and their past performances                       |
-| `* * *`  | long-term user  | access historical logs and previous versions of student records | track and recover information when needed                                                 |
 | `* *`    | tutor           | reschedule lessons                                             | make changes to lesson plans to better fit mine or my student's schedule                  |
 | `* *`    | tutor           | mark lessons as complete                                       | review session history and track my students' lesson progress                             |
 | `* *`    | tutor           | set personalized reminders for students                        | address individual needs effectively                                                      |
@@ -301,7 +304,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 # Use Cases for TutorTrack
 
-## Use Case 1: Add Student
+## **Use Case 1: Add Student**
 
 **System**: TutorTrack
 **Actor**: Tutor
@@ -309,7 +312,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Main Success Scenario (MSS)
 
-1. Tutor enters a command to add a student, including name, phone number, address, email, and subjects.
+1. Tutor enters a command to add a student, including name, phone number, address, and email. Subject(s) may be optionally included.
 2. TutorTrack validates the input and ensures the student does not already exist.
 3. TutorTrack saves the student information and confirms the addition.
 
@@ -506,7 +509,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 1d1: TutorTrack informs the tutor that the assignment is already in the target state.
     - **Use case ends.**
 
-### Non-Functional Requirements
+---
+
+## **Non-Functional Requirements**
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
@@ -518,7 +523,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 8.  Project is expected to adhere to a schedule that delivers a feature set every week.
 9.  This project is not expected to connect to the internet or any external services (email, cloud storage, telegram, etc).
 
-### Glossary
+---
+
+## **Glossary**
 
 * **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Tutor**: A person who does free-lance tutoring
@@ -733,7 +740,8 @@ For each test case:
 
 ## Planned Enhancements
 
-1. **Enhanced Error Messages**: Improve error messages to be more specific and actionable. For example, instead of showing "Operation failed!", the message could indicate the exact reason for the failure, such as "The student 'John Doe' could not be added because the name already exists."
+1. **Undo/Redo Feature**: Allow users to undo their previous commands. It improves the users experience by providing a way to recover from mistakes.
+2. **Enhanced Error Messages**: Improve error messages to be more specific and actionable. For example, instead of showing "Operation failed!", the message could indicate the exact reason for the failure, such as "The student 'John Doe' could not be added because the name already exists."
 2. **Data Validation**: Implement more robust data validation to prevent invalid inputs from being processed. For instance, validate email formats, phone numbers, and date formats before saving them.
 3. **Batch Operations**: Add support for batch operations, such as adding multiple students or assignments at once, to improve efficiency for users managing large datasets.
 4. **Improved Search Functionality**: Enhance the search feature to support more complex queries, such as searching by multiple criteria (e.g., name, subject, and status) simultaneously.
