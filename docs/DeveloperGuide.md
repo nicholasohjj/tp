@@ -4,10 +4,10 @@ title: Developer Guide
 ---
 
 ---
-## Table of Contents
+## **Table of Contents**
 
 * Table of Contents
-{:toc max_level="2"}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -89,6 +89,10 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` object and `Lesson` object residing in the `Model`.
 
+In addition to displaying students via `ListPanel` and `ListCard`, the `UI` also supports displaying lessons. This is achieved through:
+* `LessonListPanel`: a JavaFX `UI` component that lists all lessons in the application. It is managed by the MainWindow class.
+* `LessonCard`: a reusable `UI` part that renders information about a single lesson (e.g. subject, time, and date) using FXML and JavaFX. It is used within `LessonListPanel`.
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -128,8 +132,8 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
-* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Student` and `Lesson` objects (which are contained in a `UniqueStudentList` and `UniqueLessonList` object respectively).
+* maintains a list of currently selected `Student` and `Lesson` objects (e.g., results of a search query) as separate filtered lists, each exposed as an unmodifiable`ObservableList<Student>` and `ObservableList<Lesson>` that can be observed. This allows the UI to bind to these lists so that it automatically updates when the data in the lists change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -302,9 +306,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | first time user | use commands with contextual help                              | learn proper command syntax and options without having to refer to external documentation |
 | `*`      | tutor           | get a timeline overview of all events within a period of time  | view the overall structure of the schedule for said period of time                        |
 
-# Use Cases for TutorTrack
+# **Use Cases for TutorTrack**
 
-## **Use Case 1: Add Student**
+## Use Case 1: Add Student
 
 **System**: TutorTrack
 **Actor**: Tutor
@@ -587,7 +591,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-## Appendix: Effort
+## **Appendix: Effort**
 
 **Team size**: 5
 
@@ -738,7 +742,7 @@ For each test case:
 
 **Tip**: Use the **`clear`** command between test scenarios to reset state.
 
-## Planned Enhancements
+## **Planned Enhancements**
 
 1. **Undo/Redo Feature**: Allow users to undo their previous commands. It improves the users experience by providing a way to recover from mistakes.
 2. **Enhanced Error Messages**: Improve error messages to be more specific and actionable. For example, instead of showing "Operation failed!", the message could indicate the exact reason for the failure, such as "The student 'John Doe' could not be added because the name already exists."
