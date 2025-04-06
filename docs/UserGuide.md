@@ -8,7 +8,14 @@ TutorTrack is a **desktop application designed for freelance tutors** to efficie
 TutorTrack uses a **dual-list system** to manage students and lessons. Users can easily modify the student list and lesson list, allowing for quick access to student information and lesson schedules with their unique indexes. The application also supports assignment management, enabling tutors to keep track of their students' assignments and their completion status uniquely identified by the name of the assignment. Users can easily toggle between the lists with simple CLI-based commands.
 
 ---
-### Target Users
+## Table of Contents
+
+* Table of Contents
+  {:toc}
+
+---
+
+## Target Users
 
 TutorTrack is designed for:
 
@@ -16,16 +23,11 @@ TutorTrack is designed for:
 - **Tech-savvy individuals** who prefer keyboard commands over mouse interactions.
 - **Users who need a simple yet powerful tool** for tracking tutoring-related tasks.
 
-### Assumptions about Users
+## Assumptions about Users
 
 - Users are familiar with basic CLI commands.
 - Users have a basic understanding of file management (e.g., creating folders, moving files).
 - Users are comfortable with Java-based applications.
-
----
-
-* Table of Contents
-{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
