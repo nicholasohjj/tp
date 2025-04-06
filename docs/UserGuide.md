@@ -154,9 +154,9 @@ You can add multiple subjects by using the subject prefix  `s/` for each subjec
 - **Not Allowed**:
 
   ✗ Special constructs (**`d/o`**, **`bin`**, **`binti`**)
-
   ✗ Symbols/hyphens (**`-`**, **`'`**) or numerals (**`0-9`**)
 
+<div markdown="span" class="alert alert-primary">:bulb: **Note:** Names will be automatically formatted to Title Case (e.g., "alex yeoh" → "Alex Yeoh") </div>
 
 **Examples**:
 * `add_student n/John Doe p/98765432 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`
@@ -172,6 +172,7 @@ Edits an existing student in the student list.
 
 * Edits the student at the specified `STUDENT_INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
+* Student names will be automatically formatted to Title Case when edited.
 * Existing values will be updated to the input values.
 * Subjects cannot be edited at this stage.
   * To edit the subjects, you can delete the student and add a new one with the updated subjects.
@@ -232,8 +233,10 @@ Adds a lesson to the lesson list.
 
 **Format:**
 
-`add_lesson n/NAME s/SUBJECT d/DATE t/TIME​`
+`add_lesson n/STUDENT_NAME s/SUBJECT d/DATE t/TIME​`
 *Coming in v2.0: **`add_lesson n/NAME s/SUBJECT d/DATE t/TIME dur/DURATION`***
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:** Student names will be automatically matched in a case-insensitive manner and stored in Title Case. </div>
 
 **Time Slot Rules:**
 
@@ -271,8 +274,9 @@ Example:
 * `add_lesson n/Bob Lee d/17-09-2025 t/16:00 s/Math` (different time slot)
 
 #### Editing a lesson: `edit_lesson`
-You can edit the details of a lesson in the lesson list.
-You can edit individual details or edit multiple of them together.
+* You can edit the details of a lesson in the lesson list.
+* You can edit individual details or edit multiple of them together.
+* Student names in lessons will be automatically converted to Title Case when edited
 
 **Format:**
 
