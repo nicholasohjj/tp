@@ -36,12 +36,10 @@ public class Date implements Comparable<Date> {
         LocalDate parsedDate;
         try {
             parsedDate = LocalDate.parse(test, VALID_FORMAT);
+            return parsedDate.isAfter(LocalDate.now());
         } catch (DateTimeParseException e) {
             return false;
         }
-        boolean isBeforeCurrDate = parsedDate.isBefore(LocalDate.now());
-        boolean isEqualCurrDate = parsedDate.isEqual(LocalDate.now());
-        return !(isBeforeCurrDate || isEqualCurrDate);
     }
 
     @Override

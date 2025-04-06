@@ -96,7 +96,9 @@ TutorTrack is designed for:
 
 Shows a message explaining how to access the help page.
 
-Format: `help`
+**Format:**
+
+`help`
 
 ![help message](images/helpMessage.png)
 
@@ -105,13 +107,17 @@ Format: `help`
 
 Clears all entries from both the student list and the lesson list.
 
-Format: `clear`
+**Format:**
+
+`clear`
 
 #### Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`
+**Format:**
+
+`exit`
 
 #### Saving the data
 
@@ -133,15 +139,26 @@ Furthermore, certain edits can cause the TutorTrack to behave in unexpected ways
 Adds a student to the student list, with their name, phone number, address, email and subjects.
 You can add multiple subjects by using the subject prefix  `s/` for each subject.
 
-Format: `add_student n/STUDENT_NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL s/SUBJECT ​`
+**Format:**
 
-<!--
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A student can have any number of subjects (including 0)
-</div>
--->
+**`add_student n/STUDENT_NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL s/SUBJECT [s/MORE_SUBJECTS]…`**
 
-Examples:
+**Name Format Rules:**
+
+- **Allowed**:
+
+  ✓ Alphabetic characters and spaces (e.g., **`Alex Yeoh`**)
+
+  ✓ Auto-converted to Title Case (e.g., **`alex yeoh`** → **`Alex Yeoh`**)
+
+- **Not Allowed**:
+
+  ✗ Special constructs (**`d/o`**, **`bin`**, **`binti`**)
+  ✗ Symbols/hyphens (**`-`**, **`'`**) or numerals (**`0-9`**)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:** Names will be automatically formatted to Title Case (e.g., "alex yeoh" → "Alex Yeoh") </div>
+
+**Examples**:
 * `add_student n/John Doe p/98765432 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`
 * `add_student n/Mary Jane p/12345678 e/maryjane@email.com a/Blk 47 Tampines Street 20, #17-35 s/Math s/Science`
 
@@ -149,52 +166,62 @@ Examples:
 
 Edits an existing student in the student list.
 
-Format: `edit_student STUDENT_INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] …​`
+**Format:**
+
+`edit_student STUDENT_INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] …​`
 
 * Edits the student at the specified `STUDENT_INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
+* Student names will be automatically formatted to Title Case when edited.
 * Existing values will be updated to the input values.
 * Subjects cannot be edited at this stage.
   * To edit the subjects, you can delete the student and add a new one with the updated subjects.
 
-Examples:
-
+**Examples**:
 *  `edit_student 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 
 #### Deleting a student : `delete_student`
 
 Deletes the specified student from the student list.
 
-Format: `delete_student STUDENT_INDEX`
+**Format:**
+
+`delete_student STUDENT_INDEX`
 
 * Deletes the student at the specified `STUDENT_INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+**Examples**:
 * `list_students` followed by `delete_student 2` deletes the 2nd student in the student list.
 
 #### Listing all students : `list_students`
 
 Switch to a view that shows all students in the student list.
 
-Format: `list_students`
+**Format:**
+
+`list_students`
 
 #### Locating students by name: `find_student`
 
 Finds students whose names contain any of the given keywords.
 
-Format: `find_student KEYWORD [MORE_KEYWORDS]`
+**Format:**
+
+`find_student KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
+* Only matches complete words in the name (e.g., `Alex` matches `Alex Yeoh` but not `Alexander`).
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Students matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
+<div markdown="span" class="alert alert-info">:information_source: **Note for Future Enhancement:** *Partial-word matching (e.g., searching for "Sre" to match "Sree Haridos") is currently not supported but may be added in a future update. </div>
 
+**Examples**:
 * `find_student John` returns `john` and `John Doe`
 * `find_student alex david` returns `Alex Yeoh`, `David Li`<br>
 
@@ -204,18 +231,65 @@ Examples:
 
 Adds a lesson to the lesson list.
 
-Format: `add_lesson n/NAME s/SUBJECT d/DATE t/TIME​`
+**Format:**
+
+`add_lesson n/STUDENT_NAME s/SUBJECT d/DATE t/TIME​`
+*Coming in v2.0: **`add_lesson n/NAME s/SUBJECT d/DATE t/TIME dur/DURATION`***
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:** Student names will be automatically matched in a case-insensitive manner and stored in Title Case. </div>
+
+**Time Slot Rules:**
+
+✓ **Discrete Time Management**:
+
+- Lessons cannot be scheduled at the exact same time (same hour and minute)
+- Currently treats each time slot as discrete points (e.g., 15:00 and 15:01 are considered separate)
+- Does not account for real-world lesson durations/overlaps
+
+✓ **Future Scheduling**:
+
+- All lessons must be scheduled for future dates/times
+- Prevents accidental double-booking at identical times
+**Validation Rules:**
+
+✓ **Tutor time slot management**:
+
+- Prevents scheduling multiple lessons at the same time
+- Applies even for different students (e.g., can't schedule Bernice and Abel at same time)
+- Ensures tutors don't get double-booked
+
+✓ **Case-insensitive name matching**:
+
+- **`alice chan`** matches **`Alice Chan`**
+
+✓ **Future dates only**:
+
+- Past dates are rejected
+
+<div markdown="span" class="alert alert-info">:information_source: **Group Lessons Note**: Currently, TutorTrack doesn't support group lessons where multiple students share the same time slot. Each lesson time must be unique to the tutor's schedule. We're considering adding group lesson support in a future update. </div>
+
 
 Example:
 * `add_lesson n/Alice Chan d/17-09-2025 t/15:00 s/Math`
+* `add_lesson n/Bob Lee d/17-09-2025 t/16:00 s/Math` (different time slot)
 
 #### Editing a lesson: `edit_lesson`
-You can edit the details of a lesson in the lesson list.
-You can edit individual details or edit multiple of them together.
+* You can edit the details of a lesson in the lesson list.
+* You can edit individual details or edit multiple of them together.
+* Student names in lessons will be automatically converted to Title Case when edited
 
-Format: `edit_lesson LESSON_INDEX [n/STUDENT_NAME] [d/DATE] [t/TIME] [s/SUBJECT]`
+**Format:**
 
-Examples:
+`edit_lesson LESSON_INDEX [n/STUDENT_NAME] [d/DATE] [t/TIME] [s/SUBJECT]`
+
+✓ **Validation**:
+
+- Days beyond month length auto-correct to last day (e.g., **`31-04-2023`** → **`30-04-2023`**)
+- Values >31 always rejected (e.g., **`32-01-2023`** fails)
+- Must be a future date (after today)
+- Invalid months (>12) always rejected
+
+**Examples**:
 * `edit_lesson 1 d/16-02-2026`
 * `edit_lesson 2 n/Jone King t/16:00 d/18-9-2025 s/Math`
 
@@ -223,7 +297,9 @@ Examples:
 
 Deletes the specified lesson from the lesson list.
 
-Format: `delete_lesson LESSON_INDEX`
+**Format:** 
+
+`delete_lesson LESSON_INDEX`
 
 * Deletes the lesson at the specified `LESSON_INDEX`.
 * The index refers to the index number shown in the displayed lesson list.
@@ -237,7 +313,9 @@ Examples:
 
 Shows a list of all lessons under a student in the lesson list. If no student is specified, shows all lessons in the list.
 
-Format: `list_lessons n/STUDENT_NAME`
+**Format:**
+
+`list_lessons n/STUDENT_NAME`
 
 Example:
 * `list_lessons n/John Lee`
@@ -249,7 +327,9 @@ Example:
 
 Adds an assignment to a student in the student list
 
-Format: `add_assignment STUDENT_INDEX as/ASSIGNMENT_NAME d/DATE`
+**Format:**
+
+`add_assignment STUDENT_INDEX as/ASSIGNMENT_NAME d/DATE`
 
 - `STUDENT_INDEX` must be a positive integer corresponding to the student to which the assignment belongs in the displayed list.
 - `ASSIGNMENT_NAME` is the name of the assignment to add.
@@ -279,7 +359,9 @@ Deletes the assignment identified by the index number of the student and the ass
 
 Marks the assignment identified by the index number of the student and the assignment name. Marking an assignment will change its status to "completed" (e.g., displayed in green).
 
-Format: `mark_assignment STUDENT_INDEX as/ASSIGNMENT_NAME​`
+**Format:**
+
+`mark_assignment STUDENT_INDEX as/ASSIGNMENT_NAME​`
 - `STUDENT_INDEX` must be a positive integer corresponding to the student to which the assignment belongs in the displayed list.
 - `ASSIGNMENT_NAME` is the name of the assignment to mark.
 
@@ -350,6 +432,7 @@ Install the app on the new computer and replace the empty data file with the one
 | Action                | Format, Examples |
 |------------------------|------------------|
 | **Add Assignment**     | `add_assignment STUDENT_INDEX as/ASSIGNMENT d/DATE`<br>e.g., `add_assignment 1 as/Math Homework d/23-07-2025` |
+| **Edit Assignment**    | `edit_assignment STUDENT_INDEX as/ASSIGNMENT_NAME [as/NEW_NAME] [d/NEW_DATE]`<br>e.g., `edit_assignment 1 as/Assignment1 as/UpdatedAssignment d/25-12-2025` |
 | **Delete Assignment**  | `delete_assignment STUDENT_INDEX as/ASSIGNMENT_NAME`<br>e.g., `delete_assignment 1 as/Assignment 1` |
 | **Mark Assignment**    | `mark_assignment STUDENT_INDEX as/ASSIGNMENT_NAME`<br>e.g., `mark_assignment 1 as/Assignment 1` |
 | **Unmark Assignment**  | `unmark_assignment STUDENT_INDEX as/ASSIGNMENT_NAME`<br>e.g., `unmark_assignment 1 as/Assignment 1` |

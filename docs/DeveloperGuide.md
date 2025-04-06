@@ -619,6 +619,125 @@ testers are expected to do more *exploratory* testing.
 - The lessons/assignments feature was inspired by similar implementations in other projects, but our implementation was tailored to fit the specific needs of TutorTrack.
 - Some utility functions and classes were reused from the AddressBook-Level3 project, with minimal modifications to suit our requirements.
 
+## **Appendix: Instructions for manual testing**
+
+### **Launch and Shutdown Testing**
+
+1. **First-time launch**
+    - Delete any existing **`data/tutorTrack.json`** file
+    - Launch the application via **`java -jar tutorTrack.jar`**
+    - *Expected*: Loads with sample data, creates new data file
+2. **Persisting window preferences**
+    - Resize and reposition the window
+    - Close and relaunch the application
+    - *Expected*: Retains previous window size and position
+
+---
+
+### **Student Management Testing**
+
+1. **Adding a student**
+    - Test case: **`add_student n/John Doe p/98765432 e/john@email.com a/123 Street s/Math`**
+    - *Expected*: Student added with proper formatting (name in Title Case)
+    - Test invalid:
+        - **`add_student n/John@Doe...`** (special characters)
+        - **`add_student n/John p/abc...`** (invalid phone)
+        - *Expected*: Clear error messages for each invalid field
+2. **Deleting a student**
+    - First list students: **`list_students`**
+    - Then: **`delete_student 1`**
+    - *Expected*: First student removed, confirmation shown
+    - Test invalid:
+        - **`delete_student 0`**
+        - **`delete_student 999`** (non-existent index)
+        - *Expected*: Appropriate index errors
+
+---
+
+### **Lesson Management Testing**
+
+1. **Adding a lesson**
+    - Prerequisite: At least one student exists
+    - Test case: **`add_lesson n/John Doe d/01-01-2025 t/14:00 s/Math`**
+    - *Expected*: Lesson added to student
+    - Test conflicts:
+        - Same time for different students
+        - Invalid dates (past dates, 31-04-2025)
+        - *Expected*: Clear time conflict/validation errors
+2. **Editing a lesson**
+    - First list lessons: **`list_lessons`**
+    - Then: **`edit_lesson 1 t/15:00`**
+    - *Expected*: Lesson time updated
+    - Test invalid:
+        - Overlapping times
+        - Invalid date formats
+        - *Expected*: Appropriate error messages
+
+---
+
+### **Assignment Management Testing**
+
+1. **Creating an assignment**
+    - Prerequisite: At least one student exists
+    - Test case: **`add_assignment 1 as/MathHomework d/01-01-2025`**
+    - *Expected*: Assignment added with future date
+    - Test invalid:
+        - Past dates
+        - Duplicate assignment names
+        - *Expected*: Validation errors
+2. **Marking assignments**
+    - **`mark_assignment 1 as/MathHomework`**
+    - *Expected*: Assignment marked complete (visual indicator)
+    - **`unmark_assignment 1 as/MathHomework`**
+    - *Expected*: Assignment marked incomplete
+
+---
+
+### **Data Persistence Testing**
+
+1. **Corrupted data file**
+    - Manually edit **`data/tutorTrack.json`** to:
+        - Remove closing brackets
+        - Add invalid field values
+    - Launch application
+    - *Expected*: Creates new empty data file, logs error
+2. **Missing data file**
+    - Delete **`data/tutorTrack.json`**
+    - Launch application
+    - *Expected*: Creates new file with sample data
+3. **Data integrity**
+    - Perform series of add/edit/delete operations
+    - Close and reopen application
+    - *Expected*: All changes persist correctly
+
+---
+
+### **Edge Case Testing**
+
+1. **Mass data operations**
+    - Add 50+ students via script
+    - *Expected*: No performance lag in commands
+2. **Special characters**
+    - Test names with apostrophes: **`n/O'Connor`**
+    - *Expected*: Handled properly (may need validation adjustment)
+3. **Timezone testing**
+    - Change system timezone
+    - Test date-sensitive commands
+    - *Expected*: Consistent behavior across timezones
+
+---
+
+### **Verification Steps**
+
+For each test case:
+
+1. Check command output for success/error messages
+2. Verify UI updates match expected state
+3. For data operations, restart app to verify persistence
+4. Check **`logs/tutorTrack.log`** for any unexpected errors
+
+**Tip**: Use the **`clear`** command between test scenarios to reset state.
+
 ## Planned Enhancements
 
 1. **Undo/Redo Feature**: Allow users to undo their previous commands. It improves the users experience by providing a way to recover from mistakes.
