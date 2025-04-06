@@ -135,11 +135,13 @@ You can add multiple subjects by using the subject prefix  `s/` for each subjec
 
 Format: `add_student n/STUDENT_NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL s/SUBJECT ​`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Note:** Names will be automatically formatted to Title Case (e.g., "alex yeoh" → "Alex Yeoh") </div>
+
 <!--
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student can have any number of subjects (including 0)
 </div>
--->
+
 
 Examples:
 * `add_student n/John Doe p/98765432 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`
@@ -153,6 +155,7 @@ Format: `edit_student STUDENT_INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] …​`
 
 * Edits the student at the specified `STUDENT_INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
+* Student names will be automatically formatted to Title Case when edited.
 * Existing values will be updated to the input values.
 * Subjects cannot be edited at this stage.
   * To edit the subjects, you can delete the student and add a new one with the updated subjects.
@@ -204,14 +207,17 @@ Examples:
 
 Adds a lesson to the lesson list.
 
-Format: `add_lesson n/NAME s/SUBJECT d/DATE t/TIME​`
+Format: `add_lesson n/STUDENT_NAME s/SUBJECT d/DATE t/TIME​`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:** Student names will be automatically matched in a case-insensitive manner and stored in Title Case. </div>
 
 Example:
 * `add_lesson n/Alice Chan d/17-09-2025 t/15:00 s/Math`
 
 #### Editing a lesson: `edit_lesson`
-You can edit the details of a lesson in the lesson list.
-You can edit individual details or edit multiple of them together.
+* You can edit the details of a lesson in the lesson list.
+* You can edit individual details or edit multiple of them together.
+* Student names in lessons will be automatically converted to Title Case when edited
 
 Format: `edit_lesson LESSON_INDEX [n/STUDENT_NAME] [d/DATE] [t/TIME] [s/SUBJECT]`
 
