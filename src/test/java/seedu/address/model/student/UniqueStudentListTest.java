@@ -15,8 +15,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
+import seedu.address.model.subject.Subject;
+import seedu.address.testutil.AssignmentBuilder;
 import seedu.address.testutil.StudentBuilder;
 
 public class UniqueStudentListTest {
@@ -168,6 +171,47 @@ public class UniqueStudentListTest {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueStudentList.asUnmodifiableObservableList().remove(0));
     }
+
+    @Test
+    public void hasStudentSubjects_studentExistsWithSubject_returnsTrue() {
+        Student student = new StudentBuilder().withSubjects(VALID_SUBJECT_HUSBAND).build();
+        uniqueStudentList.add(student);
+        Subject subject = new Subject(VALID_SUBJECT_HUSBAND);
+        assertTrue(uniqueStudentList.hasStudentSubjects(student, subject));
+    }
+
+    @Test
+    public void hasStudentSubjects_studentExistsWithoutSubject_returnsFalse() {
+        Student student = new StudentBuilder().build(); // No subjects
+        uniqueStudentList.add(student);
+        Subject subject = new Subject(VALID_SUBJECT_HUSBAND);
+        assertFalse(uniqueStudentList.hasStudentSubjects(student, subject));
+    }
+
+    @Test
+    public void hasStudentSubjects_studentNotInList_throwsStudentNotFoundException() {
+        Student student = new StudentBuilder().withSubjects(VALID_SUBJECT_HUSBAND).build();
+        Subject subject = new Subject(VALID_SUBJECT_HUSBAND);
+        assertThrows(StudentNotFoundException.class, () -> uniqueStudentList.hasStudentSubjects(student, subject));
+    }
+
+    @Test
+    public void deleteAssignment_studentExists_assignmentDeleted() {
+        Assignment assignment = new AssignmentBuilder().build();
+        Student student = new StudentBuilder().withAssignment(assignment).build();
+        uniqueStudentList.add(student);
+
+        uniqueStudentList.deleteAssignment(student, assignment.getAssignmentName());
+        assertFalse(uniqueStudentList.asUnmodifiableObservableList().get(0).hasAssignment(assignment));
+    }
+
+    @Test
+    public void deleteAssignment_studentNotFound_throwsStudentNotFoundException() {
+        Student student = new StudentBuilder().build();
+        assertThrows(StudentNotFoundException.class, () ->
+                uniqueStudentList.deleteAssignment(student, "Dummy Assignment"));
+    }
+
 
     @Test
     public void toStringMethod() {

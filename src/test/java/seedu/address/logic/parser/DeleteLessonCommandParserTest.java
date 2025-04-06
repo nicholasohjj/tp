@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -8,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteLessonCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -42,5 +44,21 @@ public class DeleteLessonCommandParserTest {
         assertParseFailure(parser, "-1",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_emptyString_throwsParseException() {
+        assertParseFailure(parser, "   ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_nullInput_throwsParseException() {
+        try {
+            parser.parse(null);
+        } catch (ParseException e) {
+            assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE), e.getMessage());
+        }
+    }
+
 }
 

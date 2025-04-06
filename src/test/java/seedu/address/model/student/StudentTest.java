@@ -14,6 +14,9 @@ import static seedu.address.testutil.TypicalStudents.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.testutil.AssignmentBuilder;
 import seedu.address.testutil.StudentBuilder;
 
 public class StudentTest {
@@ -97,4 +100,52 @@ public class StudentTest {
                 + ", assignments=" + ALICE.getAssignments() + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void hasAssignment_assignmentInList_returnsTrue() {
+        Assignment assignment = new AssignmentBuilder().build();
+        Student student = new StudentBuilder().withAssignment(assignment).build();
+        assertTrue(student.hasAssignment(assignment));
+    }
+
+    @Test
+    public void hasAssignment_assignmentNotInList_returnsFalse() {
+        Assignment assignment = new AssignmentBuilder().build();
+        Student student = new StudentBuilder().build();
+        assertFalse(student.hasAssignment(assignment));
+    }
+
+    @Test
+    public void markAssignment_validAssignment_marksSuccessfully() throws Exception {
+        Assignment assignment = new AssignmentBuilder().build();
+        Student student = new StudentBuilder().withAssignment(assignment).build();
+        Student updatedStudent = student.markAssignment(assignment.getAssignmentName());
+        assertTrue(updatedStudent.getAssignments().getAssignment(assignment.getAssignmentName()).isDone());
+    }
+
+    @Test
+    public void unmarkAssignment_validAssignment_unmarksSuccessfully() throws Exception {
+        Assignment assignment = new AssignmentBuilder().build();
+        assignment.setDone();
+        Student student = new StudentBuilder().withAssignment(assignment).build();
+        Student updatedStudent = student.unmarkAssignment(assignment.getAssignmentName());
+        assertFalse(updatedStudent.getAssignments().getAssignment(assignment.getAssignmentName()).isDone());
+    }
+
+    @Test
+    public void deleteAssignment_assignmentInList_removesSuccessfully() {
+        Assignment assignment = new AssignmentBuilder().build();
+        Student student = new StudentBuilder().withAssignment(assignment).build();
+        student.deleteAssignment(assignment.getAssignmentName());
+        assertFalse(student.getAssignments().contains(assignment));
+    }
+
+    @Test
+    public void clearAssignments_allAssignmentsRemoved() {
+        Assignment assignment = new AssignmentBuilder().build();
+        Student student = new StudentBuilder().withAssignment(assignment).build();
+        student.clearAssignments();
+        assertTrue(student.getAssignments().asUnmodifiableObservableList().isEmpty());
+    }
+
 }
