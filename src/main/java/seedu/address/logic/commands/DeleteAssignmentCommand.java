@@ -3,8 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
@@ -47,7 +49,9 @@ public class DeleteAssignmentCommand extends Command {
     public DeleteAssignmentCommand(Index targetIndex, String assignmentName) {
         requireAllNonNull(targetIndex, assignmentName);
         this.targetIndex = targetIndex;
-        this.assignmentName = assignmentName;
+        this.assignmentName = Arrays.stream(assignmentName.split("\\s+"))
+                .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+                .collect(Collectors.joining(" ")).trim();
         logger.info("DeleteAssignmentCommand created for student index: " + targetIndex.getOneBased()
                 + " and assignment: " + assignmentName);
     }

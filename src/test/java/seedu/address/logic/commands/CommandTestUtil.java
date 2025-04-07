@@ -46,7 +46,7 @@ public class CommandTestUtil {
     public static final String VALID_DATE_BOB = "26-09-2026";
     public static final String VALID_TIME_AMY = "12:00";
     public static final String VALID_TIME_BOB = "15:00";
-    public static final String VALID_ASSIGNMENT_NAME_AMY = " some assignment ";
+    public static final String VALID_ASSIGNMENT_NAME_AMY = " Some Assignment ";
     public static final String VALID_ASSIGNMENT_NAME_BOB = " some other assignment ";
     public static final String VALID_PREAMBLE = " 1 ";
 
