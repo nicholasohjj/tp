@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_FIELDS;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ASSIGNMENT_NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ASSIGNMENT_NAME_DESC_BOB;
@@ -59,6 +60,26 @@ public class AddAssignmentCommandParserTest {
 
         // invalid date
         assertParseFailure(parser, VALID_PREAMBLE + ASSIGNMENT_NAME_DESC_AMY + INVALID_DATE_DESC,
+                Date.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_duplicatePrefixes_failure() {
+        String expectedMessage = MESSAGE_DUPLICATE_FIELDS + CliSyntax.PREFIX_ASSIGNMENT;
+        assertParseFailure(parser,
+                VALID_PREAMBLE + ASSIGNMENT_NAME_DESC_AMY + ASSIGNMENT_NAME_DESC_BOB + DATE_DESC_AMY,
+                expectedMessage);
+    }
+
+    @Test
+    public void parse_emptyAssignmentValue_failure() {
+        assertParseFailure(parser, VALID_PREAMBLE + " as/ " + DATE_DESC_AMY,
+                Assignment.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_emptyDateValue_failure() {
+        assertParseFailure(parser, VALID_PREAMBLE + ASSIGNMENT_NAME_DESC_AMY + " d/",
                 Date.MESSAGE_CONSTRAINTS);
     }
 }

@@ -42,5 +42,18 @@ public class DeleteStudentCommandParserTest {
         assertParseFailure(parser, "-1",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_nullArgs_throwsParseException() {
+        assertParseFailure(parser, null,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyString_throwsParseException() {
+        assertParseFailure(parser, "   ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentCommand.MESSAGE_USAGE));
+    }
+
 }
 
