@@ -20,7 +20,7 @@ public class TypicalAssignments {
             .withDueDate(new Date("12-08-2025")).build();
     public static final Assignment ASSIGNMENT3 = new AssignmentBuilder().withAssignmentName("Assignment 3")
             .withDueDate(new Date("13-08-2025")).build();
-    public static final Assignment ASSIGNMENT_AMY = new AssignmentBuilder().withAssignmentName("some assignment")
+    public static final Assignment ASSIGNMENT_AMY = new AssignmentBuilder().withAssignmentName("Some Assignment")
             .withDueDate(new Date("31-02-2026")).build();
 
     private TypicalAssignments() {} // prevents instantiation

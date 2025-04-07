@@ -12,7 +12,7 @@ public class AssignmentTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Assignment assignment = new Assignment("some assignment", new Date("10-04-2025"));
+        Assignment assignment = new Assignment("Some Assignment", new Date("10-04-2025"));
         Assignment assignmentCopy = new Assignment(assignment.assignmentName, assignment.dueDate);
         assertTrue(assignment.equals(assignmentCopy));
 
