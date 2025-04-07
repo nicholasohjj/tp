@@ -37,7 +37,7 @@ public class Assignment implements Comparable<Assignment> {
     public Assignment(String assignment, Date dueDate) {
         requireAllNonNull(assignment, dueDate);
         checkArgument(isValidAssignmentName(assignment), MESSAGE_CONSTRAINTS);
-        this.assignmentName = Arrays.stream(assignment.split("\\s+"))
+        this.assignmentName = Arrays.stream(assignment.trim().split("\\s+"))
                 .map(word -> word.isEmpty() ? word
                         : Character.toUpperCase(word.charAt(0)) + word.substring(1).toLowerCase())
                 .collect(Collectors.joining(" "));
