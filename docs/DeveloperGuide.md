@@ -7,7 +7,7 @@ title: Developer Guide
 ## **Table of Contents**
 
 * Table of Contents
-{:toc}
+{:toc max_level="2"}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -575,7 +575,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Instructions for manual testing**
 
-### **Launch and Shutdown Testing**
+### Launch and Shutdown Testing
 
 1. **First-time launch**
     - Delete any existing **`data/tutorTrack.json`** file
@@ -588,7 +588,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### **Student Management Testing**
+### Student Management Testing
 
 1. **Adding a student**
     - Test case: **`add_student n/John Doe p/98765432 e/john@email.com a/123 Street s/Math`**
@@ -608,7 +608,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### **Lesson Management Testing**
+### Lesson Management Testing
 
 1. **Adding a lesson**
     - Prerequisite: At least one student exists
@@ -629,7 +629,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### **Assignment Management Testing**
+### Assignment Management Testing
 
 1. **Creating an assignment**
     - Prerequisite: At least one student exists
@@ -647,7 +647,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### **Data Persistence Testing**
+### Data Persistence Testing
 
 1. **Corrupted data file**
     - Manually edit **`data/tutorTrack.json`** to:
@@ -666,7 +666,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### **Edge Case Testing**
+### Edge Case Testing
 
 1. **Mass data operations**
     - Add 50+ students via script
@@ -681,7 +681,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### **Verification Steps**
+### Verification Steps
 
 For each test case:
 
