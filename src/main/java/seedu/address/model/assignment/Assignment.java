@@ -3,7 +3,9 @@ package seedu.address.model.assignment;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import seedu.address.model.datetimeutil.Date;
 
@@ -35,7 +37,10 @@ public class Assignment implements Comparable<Assignment> {
     public Assignment(String assignment, Date dueDate) {
         requireAllNonNull(assignment, dueDate);
         checkArgument(isValidAssignmentName(assignment), MESSAGE_CONSTRAINTS);
-        this.assignmentName = assignment;
+        this.assignmentName = Arrays.stream(assignment.trim().split("\\s+"))
+                .map(word -> word.isEmpty() ? word
+                        : Character.toUpperCase(word.charAt(0)) + word.substring(1).toLowerCase())
+                .collect(Collectors.joining(" "));
         this.dueDate = dueDate;
         this.isDone = false;
     }

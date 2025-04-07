@@ -366,6 +366,14 @@ Adds an assignment to a student in the student list
   - The date must be in the format `d-M-yyyy` (e.g., `27-09-2026` or `1-1-2026`).
   - The date must be in the future (i.e., not in the past).
 
+**Assignment Name Format Rules:**
+
+- **Allowed**:
+
+  ✓ Alphabetic characters and spaces (e.g., **`Math Exercise`**)
+
+  ✓ Auto-converted to Title Case (e.g., **`math exercise`** → **`Math Exercise`**)
+
 Example:
 * `add_assignment 2 as/Science 101 d/27-09-2026`
 
@@ -393,6 +401,14 @@ Marks the assignment identified by the index number of the student and the assig
 - `STUDENT_INDEX` must be a positive integer corresponding to the student to which the assignment belongs in the displayed list.
 - `ASSIGNMENT_NAME` is the name of the assignment to mark.
 
+**Assignment Name Format Rules:**
+
+- **Allowed**:
+
+  ✓ Alphabetic characters and spaces (e.g., **`Math Exercise`**)
+
+  ✓ Auto-converted to Title Case (e.g., **`math exercise`** → **`Math Exercise`**)
+
 **Example:**
 
 - `mark_assignment 1 as/Assignment 1` marks the assignment named "Assignment 1" of the first student in the list as completed.
@@ -410,6 +426,14 @@ Unmarks the assignment identified by the index number of the student and the ass
 
 **Example:**
 - `unmark_assignment 1 as/Assignment 1` unmarks the first assignment in the list, setting it to incomplete.
+
+**Assignment Name Format Rules:**
+
+- **Allowed**:
+
+  ✓ Alphabetic characters and spaces (e.g., **`Math Exercise`**)
+
+  ✓ Auto-converted to Title Case (e.g., **`math exercise`** → **`Math Exercise`**)
 
 ### Archiving data files `[coming in v2.0]`
 
