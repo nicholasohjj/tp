@@ -332,7 +332,7 @@ Deletes the specified lesson from the lesson list.
 * The index refers to the index number shown in the displayed lesson list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+**Examples:**
 * `list_lessons` followed by `delete_lesson 2` deletes the 2nd lesson in the lesson list.
 * `list_lessons n/John Lee` followed by `delete_lesson 1` deletes the 1st lesson in the lesson list.
 
@@ -343,7 +343,7 @@ Shows a list of all lessons under a student in the lesson list. If no student is
 **Format:**
 `list_lessons [n/STUDENT_NAME]`
 
-Example:
+**Example:**
 * `list_lessons n/John Lee`
 * `list_lessons`
 
@@ -374,7 +374,7 @@ Adds an assignment to a student in the student list
 
   ✓ Auto-converted to Title Case (e.g., **`math exercise`** → **`Math Exercise`**)
 
-Example:
+**Example:**
 * `add_assignment 2 as/Science 101 d/27-09-2026`
 
 #### Deleting an assignment: `delete_assignment`
@@ -390,6 +390,28 @@ Deletes the assignment identified by the index number of the student and the ass
 
 **Example:**
 - `delete_assignment 1 as/Assignment 1` deletes the assignment named `Assignment 1` for the first student in the list.
+
+#### Editing an assignment: `edit_assignment`
+
+Edits an assignment for a student in the student list
+
+**Format:**
+
+`edit assignment STUDENT_INDEX as/ASSIGNMENT_NAME [nas/NEW_ASSIGNMENT_NAME] [d/DATE]`
+
+- `STUDENT_INDEX` must be a positive integer corresponding to the student to which the assignment belongs in the displayed list.
+- `ASSIGNMENT_NAME` is the name of the assignment to be edited.
+    - The name of the assignment must be unique within the student.
+- `NEW_ASSIGNMENT_NAME` is the new name of the assignment to be changed to.
+    - The name of the assignment must be unique within the student.
+- `DATE` is the due date of the assignment.
+    - The date must be in the format `d-M-yyyy` (e.g., `27-09-2026` or `1-1-2026`).
+    - The date must be in the future (i.e., not in the past).
+
+**Example:**
+* `edit_assignment 1 as/Science nas/Math` changes the name of the assignment of the first student in the display student list from `Science` to `Math`.
+* `edit_assignment 1 as/Science d/12-12-2025` changes the date of the assignment named "Science" of the first student in the display student list.
+* `edit_assignment 1 as/Science nas/Math d/12-12-2025` combination of the two example above.
 
 #### Marking an assignment: `mark_assignment`
 
@@ -469,11 +491,8 @@ The system will accept names that:
 
 ✓ Differ by at least one character (e.g., "John Doe" vs "Jon Doe")
 
-✓ Have different capitalization (e.g., "alex tan" vs "Alex Tan")
-
 **Tip:** For students who share names naturally (e.g., siblings), consider adding identifiers:
-
-- Middle initials (e.g., "John A Doe" vs "John B Doe")
+1. Middle initials (e.g., "John A Doe" vs "John B Doe")
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
