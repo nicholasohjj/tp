@@ -34,13 +34,14 @@ public class StudentTest {
         // null -> returns false
         assertFalse(ALICE.isSameStudent(null));
 
-        // same name, all other attributes different -> returns true
-        Student editedAlice = new StudentBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withSubjects(VALID_SUBJECT_HUSBAND).build();
+        // same name, phone, email but all other attributes different -> returns true
+        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+                .withSubjects(VALID_SUBJECT_HUSBAND).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
 
-        // different name, all other attributes same -> returns false
-        editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        // different name, email and phone, all other attributes same -> returns false
+        editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.isSameStudent(editedAlice));
 
         // name differs in case, all other attributes same -> returns true
