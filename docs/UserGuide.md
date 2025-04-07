@@ -492,8 +492,8 @@ The system will accept names that:
 
 ✓ Differ by at least one character (e.g., "John Doe" vs "Jon Doe")
 
-**Tip:** For students who share names naturally (e.g., siblings), consider adding identifiers:
-1. Middle initials (e.g., "John A Doe" vs "John B Doe")
+**Tip:** For students who share names naturally (e.g., siblings), consider adding middle initials (e.g., "John A Doe" vs "John B Doe").
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
