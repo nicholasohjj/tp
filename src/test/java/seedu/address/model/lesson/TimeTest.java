@@ -13,8 +13,8 @@ class TimeTest {
     @Test
     void isValidTime() {
         assertFalse(Time.isValidTime("12.08")); // use of . is not allowed, only :
-        assertFalse(Time.isValidTime("7:00")); // not within hours of 8am-9pm
-        assertFalse(Time.isValidTime("21:02")); // not within hours of 8am-9pm
+        assertTrue(Time.isValidTime("7:00"));
+        assertTrue(Time.isValidTime("21:02"));
 
         assertTrue(Time.isValidTime("20:00")); //valid and within hours
         assertTrue(Time.isValidTime("21:00"));

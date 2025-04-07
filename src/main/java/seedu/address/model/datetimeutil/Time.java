@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
 public class Time {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Error: Time should be of format: HH:MM, be in 24 hour format, and within hours of 8am-9pm";
+            "Error: Time should be of format: HH:MM, be in 24 hour format.";
     public static final DateTimeFormatter VALID_FORMAT = DateTimeFormatter.ofPattern("H:m");
     public final String time;
 
@@ -39,9 +39,7 @@ public class Time {
         } catch (DateTimeParseException e) {
             return false;
         }
-        LocalTime afterTime = LocalTime.of(7, 59);
-        LocalTime beforeTime = LocalTime.of(21, 1);
-        return parsedTime.isBefore(beforeTime) && parsedTime.isAfter(afterTime);
+        return true;
     }
 
     @Override
