@@ -2,6 +2,10 @@
 layout: page
 title: Developer Guide
 ---
+
+---
+## **Table of Contents**
+
 * Table of Contents
 {:toc}
 
@@ -85,6 +89,10 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` object and `Lesson` object residing in the `Model`.
 
+In addition to displaying students via `ListPanel` and `ListCard`, the `UI` also supports displaying lessons. This is achieved through:
+* `LessonListPanel`: a JavaFX `UI` component that lists all lessons in the application. It is managed by the MainWindow class.
+* `LessonCard`: a reusable `UI` part that renders information about a single lesson (e.g. subject, time, and date) using FXML and JavaFX. It is used within `LessonListPanel`.
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -124,12 +132,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
-* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Student` and `Lesson` objects (which are contained in a `UniqueStudentList` and `UniqueLessonList` object respectively).
+* maintains a list of currently selected `Student` and `Lesson` objects (e.g., results of a search query) as separate filtered lists, each exposed as an unmodifiable`ObservableList<Student>` and `ObservableList<Lesson>` that can be observed. This allows the UI to bind to these lists so that it automatically updates when the data in the lists change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Name` list in the `AddressBook`, which `Student` and `Lesson` references. This allows `AddressBook` to only require one `Name` object per unique name, instead of each `Student` and `Lesson` needing their own `Name` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -163,31 +171,31 @@ This section describes some noteworthy details on how certain features are imple
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current TutorTrack state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous TutorTrack state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone TutorTrack state from its history.
+* `VersionedAddressBook#commit()` — Saves the current AddressBook state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous AddressBook state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone AddressBook state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial TutorTrack state, and the `currentStatePointer` pointing to that single TutorTrack state.
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial AddressBook state, and the `currentStatePointer` pointing to that single AddressBook state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete_student 5` command to delete the 5th student in the TutorTrack. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the TutorTrack after the `delete_student 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted TutorTrack state.
+Step 2. The user executes `delete_student 5` command to delete the 5th student in the addressbook. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the addressbook after the `delete_student 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted AddressBook state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add_student n/David …​` to add a new student. The `add_student` command also calls `Model#commitAddressBook()`, causing another modified TutorTrack state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add_student n/David …​` to add a new student. The `add_student` command also calls `Model#commitAddressBook()`, causing another modified AddressBook state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the TutorTrack state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the addressbook state will not be saved into the `addressBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous TutorTrack state, and restores the TutorTrack to that state.
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous AddressBook state, and restores the addressbook to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -208,17 +216,17 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the TutorTrack to that state.
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the addressbook to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest TutorTrack state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest addressbook state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the TutorTrack, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the addressbook, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all TutorTrack states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add_student n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all addressbook states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add_student n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -226,11 +234,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire TutorTrack.
+* **Alternative 1 (current choice):** Saves the entire addressbook.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -240,11 +248,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -287,7 +290,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | tutor           | view list of all students                                      | view all students that I am teaching                                                      |
 | `* * *`  | tutor           | delete a student                                               | remove students that I am no longer tutoring                                              |
 | `* * *`  | tutor           | track completion status of assignments                         | know if my students have completed them and their past performances                       |
-| `* * *`  | long-term user  | access historical logs and previous versions of student records | track and recover information when needed                                                 |
 | `* *`    | tutor           | reschedule lessons                                             | make changes to lesson plans to better fit mine or my student's schedule                  |
 | `* *`    | tutor           | mark lessons as complete                                       | review session history and track my students' lesson progress                             |
 | `* *`    | tutor           | set personalized reminders for students                        | address individual needs effectively                                                      |
@@ -304,17 +306,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | first time user | use commands with contextual help                              | learn proper command syntax and options without having to refer to external documentation |
 | `*`      | tutor           | get a timeline overview of all events within a period of time  | view the overall structure of the schedule for said period of time                        |
 
-# Use Cases for TutorTrack
+# **Use Cases for TutorTrack**
 
 ## Use Case 1: Add Student
 
-**System**: TutorTrack  
-**Actor**: Tutor  
+**System**: TutorTrack
+**Actor**: Tutor
 **Use Case**: UC01 - Add Student
 
 ### Main Success Scenario (MSS)
 
-1. Tutor enters a command to add a student, including name, phone number, address, email, and subjects.
+1. Tutor enters a command to add a student, including name, phone number, address, and email. Subject(s) may be optionally included.
 2. TutorTrack validates the input and ensures the student does not already exist.
 3. TutorTrack saves the student information and confirms the addition.
 
@@ -345,8 +347,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 2: View Student List
 
-**System**: TutorTrack  
-**Actor**: Tutor  
+**System**: TutorTrack
+**Actor**: Tutor
 **Use Case**: UC02 - View Student List
 
 ### Main Success Scenario (MSS)
@@ -366,8 +368,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 3: Delete Student
 
-**System**: TutorTrack  
-**Actor**: Tutor  
+**System**: TutorTrack
+**Actor**: Tutor
 **Use Case**: UC03 - Delete Student
 
 ### Main Success Scenario (MSS)
@@ -388,8 +390,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 4: Add Lesson
 
-**System**: TutorTrack  
-**Actor**: Tutor  
+**System**: TutorTrack
+**Actor**: Tutor
 **Use Case**: UC04 - Add Lesson
 
 ### Main Success Scenario (MSS)
@@ -419,8 +421,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 5: View Lessons for a Student
 
-**System**: TutorTrack  
-**Actor**: Tutor  
+**System**: TutorTrack
+**Actor**: Tutor
 **Use Case**: UC05 - View Lessons
 
 ### Main Success Scenario (MSS)
@@ -444,8 +446,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 6: Create Assignment to a Student
 
-**System**: TutorTrack  
-**Actor**: Tutor  
+**System**: TutorTrack
+**Actor**: Tutor
 **Use Case**: UC06 - Create Assignment
 
 ### Main Success Scenario (MSS)
@@ -480,13 +482,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 7: Track Assignment Completion
 
-**System**: TutorTrack  
-**Actor**: Tutor  
-**Use Case**: UC07 - Mark Assignment as Completed
+**System**: TutorTrack
+**Actor**: Tutor
+**Use Case**: UC07 - Toggle Assignment Completion Status
 
 ### Main Success Scenario (MSS)
 
-1. Tutor enters the command to mark an assignment as completed.
+1. Tutor enters the command to mark/unmark an assignment as completed/incomplete.
 2. TutorTrack updates the assignment status and confirms completion.
 
    **Use case ends.**
@@ -507,7 +509,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 1c2: TutorTrack prompts the tutor to enter the command again.
     - **Use case ends.**
 
-### Non-Functional Requirements
+- **1d**: Assignment already in the target (e.g., tutor tries to mark completed when already completed).
+    - 1d1: TutorTrack informs the tutor that the assignment is already in the target state.
+    - **Use case ends.**
+
+---
+
+## **Non-Functional Requirements**
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
@@ -519,7 +527,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 8.  Project is expected to adhere to a schedule that delivers a feature set every week.
 9.  This project is not expected to connect to the internet or any external services (email, cloud storage, telegram, etc).
 
-### Glossary
+---
+
+## **Glossary**
 
 * **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Tutor**: A person who does free-lance tutoring
@@ -581,7 +591,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-## Appendix: Effort
+## **Appendix: Effort**
 
 **Team size**: 5
 
@@ -613,9 +623,129 @@ testers are expected to do more *exploratory* testing.
 - The lessons/assignments feature was inspired by similar implementations in other projects, but our implementation was tailored to fit the specific needs of TutorTrack.
 - Some utility functions and classes were reused from the AddressBook-Level3 project, with minimal modifications to suit our requirements.
 
-## Planned Enhancements
+## **Appendix: Instructions for manual testing**
 
-1. **Enhanced Error Messages**: Improve error messages to be more specific and actionable. For example, instead of showing "Operation failed!", the message could indicate the exact reason for the failure, such as "The student 'John Doe' could not be added because the name already exists."
+### **Launch and Shutdown Testing**
+
+1. **First-time launch**
+    - Delete any existing **`data/tutorTrack.json`** file
+    - Launch the application via **`java -jar tutorTrack.jar`**
+    - *Expected*: Loads with sample data, creates new data file
+2. **Persisting window preferences**
+    - Resize and reposition the window
+    - Close and relaunch the application
+    - *Expected*: Retains previous window size and position
+
+---
+
+### **Student Management Testing**
+
+1. **Adding a student**
+    - Test case: **`add_student n/John Doe p/98765432 e/john@email.com a/123 Street s/Math`**
+    - *Expected*: Student added with proper formatting (name in Title Case)
+    - Test invalid:
+        - **`add_student n/John@Doe...`** (special characters)
+        - **`add_student n/John p/abc...`** (invalid phone)
+        - *Expected*: Clear error messages for each invalid field
+2. **Deleting a student**
+    - First list students: **`list_students`**
+    - Then: **`delete_student 1`**
+    - *Expected*: First student removed, confirmation shown
+    - Test invalid:
+        - **`delete_student 0`**
+        - **`delete_student 999`** (non-existent index)
+        - *Expected*: Appropriate index errors
+
+---
+
+### **Lesson Management Testing**
+
+1. **Adding a lesson**
+    - Prerequisite: At least one student exists
+    - Test case: **`add_lesson n/John Doe d/01-01-2025 t/14:00 s/Math`**
+    - *Expected*: Lesson added to student
+    - Test conflicts:
+        - Same time for different students
+        - Invalid dates (past dates, 31-04-2025)
+        - *Expected*: Clear time conflict/validation errors
+2. **Editing a lesson**
+    - First list lessons: **`list_lessons`**
+    - Then: **`edit_lesson 1 t/15:00`**
+    - *Expected*: Lesson time updated
+    - Test invalid:
+        - Overlapping times
+        - Invalid date formats
+        - *Expected*: Appropriate error messages
+
+---
+
+### **Assignment Management Testing**
+
+1. **Creating an assignment**
+    - Prerequisite: At least one student exists
+    - Test case: **`add_assignment 1 as/MathHomework d/01-01-2025`**
+    - *Expected*: Assignment added with future date
+    - Test invalid:
+        - Past dates
+        - Duplicate assignment names
+        - *Expected*: Validation errors
+2. **Marking assignments**
+    - **`mark_assignment 1 as/MathHomework`**
+    - *Expected*: Assignment marked complete (visual indicator)
+    - **`unmark_assignment 1 as/MathHomework`**
+    - *Expected*: Assignment marked incomplete
+
+---
+
+### **Data Persistence Testing**
+
+1. **Corrupted data file**
+    - Manually edit **`data/tutorTrack.json`** to:
+        - Remove closing brackets
+        - Add invalid field values
+    - Launch application
+    - *Expected*: Creates new empty data file, logs error
+2. **Missing data file**
+    - Delete **`data/tutorTrack.json`**
+    - Launch application
+    - *Expected*: Creates new file with sample data
+3. **Data integrity**
+    - Perform series of add/edit/delete operations
+    - Close and reopen application
+    - *Expected*: All changes persist correctly
+
+---
+
+### **Edge Case Testing**
+
+1. **Mass data operations**
+    - Add 50+ students via script
+    - *Expected*: No performance lag in commands
+2. **Special characters**
+    - Test names with apostrophes: **`n/O'Connor`**
+    - *Expected*: Handled properly (may need validation adjustment)
+3. **Timezone testing**
+    - Change system timezone
+    - Test date-sensitive commands
+    - *Expected*: Consistent behavior across timezones
+
+---
+
+### **Verification Steps**
+
+For each test case:
+
+1. Check command output for success/error messages
+2. Verify UI updates match expected state
+3. For data operations, restart app to verify persistence
+4. Check **`logs/tutorTrack.log`** for any unexpected errors
+
+**Tip**: Use the **`clear`** command between test scenarios to reset state.
+
+## **Planned Enhancements**
+
+1. **Undo/Redo Feature**: Allow users to undo their previous commands. It improves the users experience by providing a way to recover from mistakes.
+2. **Enhanced Error Messages**: Improve error messages to be more specific and actionable. For example, instead of showing "Operation failed!", the message could indicate the exact reason for the failure, such as "The student 'John Doe' could not be added because the name already exists."
 2. **Data Validation**: Implement more robust data validation to prevent invalid inputs from being processed. For instance, validate email formats, phone numbers, and date formats before saving them.
 3. **Batch Operations**: Add support for batch operations, such as adding multiple students or assignments at once, to improve efficiency for users managing large datasets.
 4. **Improved Search Functionality**: Enhance the search feature to support more complex queries, such as searching by multiple criteria (e.g., name, subject, and status) simultaneously.
