@@ -87,7 +87,7 @@ The `UI` component,
 * depends on some classes in the `Model` component, as it displays `Student` object and `Lesson` object residing in the `Model`.
 
 In addition to displaying students via `ListPanel` and `ListCard`, the `UI` also supports displaying lessons. This is achieved through:
-* `LessonListPanel`: a JavaFX `UI` component that lists all lessons in the application. It is managed by the MainWindow class.
+* `ListPanel`: a JavaFX `UI` component that lists all lessons in the application. It is managed by the MainWindow class.
 * `LessonCard`: a reusable `UI` part that renders information about a single lesson (e.g. subject, time, and date) using FXML and JavaFX. It is used within `LessonListPanel`.
 
 ### Logic component
@@ -124,7 +124,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/BetterModelClassDiagram-Class_Diagram__Student_Management_Structure.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
@@ -174,7 +174,7 @@ Step 1. The user launches the application for the first time. The `VersionedTuto
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. TThe user executes the command `delete_student 5` to delete the 5th student in TutorTrack. The `delete` command calls `Model#commitTutorTrack()`, causing the modified state after the command execution to be saved in the `tutorTrackStateList`. The `currentStatePointer` shifts to the newly added state.
+Step 2. The user executes the command `delete_student 5` to delete the 5th student in TutorTrack. The `delete` command calls `Model#commitTutorTrack()`, causing the modified state after the command execution to be saved in the `tutorTrackStateList`. The `currentStatePointer` shifts to the newly added state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
@@ -257,7 +257,7 @@ _{more aspects and alternatives to be added}_
 
 **Target user profile**:
 
-* is a freelance tutor, who teaches small groups or individual students
+* is a Singaporean freelance tutor, who teaches small groups or individual students
 * has a need to manage a significant number of students, with various lessons and assignments
 * prefer desktop apps over other types
 * can type fast
@@ -344,7 +344,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Main Success Scenario (MSS)
 
 1. Tutor enters the command to view all students.
-2. TutorTrack retrieves and displays all registered students in alphabetical order.
+2. TutorTrack retrieves and displays all registered students.
 
    **Use case ends.**
 
@@ -409,7 +409,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## Use Case 5: View Lessons for a Student
+## Use Case 5: View Lessons
 
 **System**: TutorTrack
 **Actor**: Tutor
@@ -417,20 +417,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Main Success Scenario (MSS)
 
-1. Tutor enters the command to view all lessons for a student.
-2. TutorTrack retrieves and displays all lessons with timestamps.
+1. Tutor enters the command to view all lessons, optionally with keywords of student names.
+2. TutorTrack retrieves and displays all lessons.
 
    **Use case ends.**
 
 ### Extensions
 
-- **1a**: No lessons found for the student.
-    - 1a1: TutorTrack informs the tutor that no lessons are recorded.
+-**1a**: No student matches the keywords.
+    - 1a1: TutorTrack informs the tutor that no lessons are available.
     - **Use case ends.**
-- **1b**: The student is not found.
-    - 1b1: TutorTrack informs the tutor that the student name is not found.
-    - 1b2: TutorTrack prompts the tutor to enter the command again.
-    - Use case resumes from step 1.
 
 ---
 
@@ -526,7 +522,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Student**: A person that is being or has been tutored by the current user of the application
 * **Spreadsheet**: An Excel spreadsheet
 * **Assignment**: A homework assignment or task that has been given by the tutor to the student
-* **Historical logs**: The records of students' details and the changes that have been made during the lifetime use of the app
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -569,8 +564,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Launch and Shutdown Testing
 
 1. **First-time launch**
-    - Delete any existing **`data/tutorTrack.json`** file
-    - Launch the application via **`java -jar tutorTrack.jar`**
+    - Delete any existing **`data/TutorTrack.json`** file
+    - Launch the application via **`java -jar TutorTrack.jar`**
     - *Expected*: Loads with sample data, creates new data file
 2. **Persisting window preferences**
     - Resize and reposition the window
@@ -603,7 +598,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. **Adding a lesson**
     - Prerequisite: At least one student exists
-    - Test case: **`add_lesson n/John Doe d/01-01-2025 t/14:00 s/Math`**
+    - Test case: **`add_lesson n/John Doe d/01-09-2025 t/14:00 s/Math`**
     - *Expected*: Lesson added to student
     - Test conflicts:
         - Same time for different students
@@ -624,7 +619,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. **Creating an assignment**
     - Prerequisite: At least one student exists
-    - Test case: **`add_assignment 1 as/MathHomework d/01-01-2025`**
+    - Test case: **`add_assignment 1 as/MathHomework d/01-09-2025`**
     - *Expected*: Assignment added with future date
     - Test invalid:
         - Past dates
@@ -641,13 +636,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Data Persistence Testing
 
 1. **Corrupted data file**
-    - Manually edit **`data/tutorTrack.json`** to:
+    - Manually edit **`data/TutorTrack.json`** to:
         - Remove closing brackets
         - Add invalid field values
     - Launch application
     - *Expected*: Creates new empty data file, logs error
 2. **Missing data file**
-    - Delete **`data/tutorTrack.json`**
+    - Delete **`data/TutorTrack.json`**
     - Launch application
     - *Expected*: Creates new file with sample data
 3. **Data integrity**
@@ -679,7 +674,7 @@ For each test case:
 1. Check command output for success/error messages
 2. Verify UI updates match expected state
 3. For data operations, restart app to verify persistence
-4. Check **`logs/tutorTrack.log`** for any unexpected errors
+4. Check **`logs/TutorTrack.log`** for any unexpected errors
 
 **Tip**: Use the **`clear`** command between test scenarios to reset state.
 

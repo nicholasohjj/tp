@@ -11,7 +11,7 @@ skinparam {
     classArrowColor MODEL_COLOR
 }
 
-title "Class Diagram: Student Management Structure"
+title "Class Diagram of Models in TutorTrack"
 
 class AddressBook {
   - students: UniqueStudentList
