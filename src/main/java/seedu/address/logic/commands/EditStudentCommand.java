@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.EditLessonCommand.EditLessonDescriptor;
+import static seedu.address.logic.commands.EditLessonCommand.createEditedLesson;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -23,6 +24,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.UniqueAssignmentList;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -92,8 +94,24 @@ public class EditStudentCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
+        // Edit all lessons associated with the student
+        List<Lesson> lessonsToEdit = model.getFilteredLessonList()
+                .stream()
+                .filter(lesson -> lesson.getStudentName().equals(studentToEdit.getName()))
+                .toList();
+
+        EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
+        editLessonDescriptor.setName(editStudentDescriptor.getName().get());
+
+        logger.info("Editing " + lessonsToEdit.size() + " associated lessons");
+        lessonsToEdit.forEach(lesson -> {
+            Lesson editedLesson = createEditedLesson(lesson, editLessonDescriptor);
+            model.setLesson(lesson, editedLesson);
+            logger.fine("Edited lesson: " + lesson);
+        });
+
         model.setStudent(studentToEdit, editedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
 
         logger.info("Student successfully edited: " + editedStudent.getName());
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS,
