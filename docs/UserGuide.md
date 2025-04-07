@@ -17,11 +17,11 @@ TutorTrack uses a **dual-list system** to manage students and lessons. Users can
 
 ## Target Users
 
-TutorTrack is designed for:
+Freelance tutors who:
 
-- **Freelance tutors** who need to manage multiple students, lessons, and assignments.
-- **Tech-savvy individuals** who prefer keyboard commands over mouse interactions.
-- **Users who need a simple yet powerful tool** for tracking tutoring-related tasks.
+- Juggle multiple students/lessons and need centralized tracking
+- Prefer keyboard-driven efficiency over mouse navigation
+- Want lightweight but capable task management
 
 ## Assumptions about Users
 
