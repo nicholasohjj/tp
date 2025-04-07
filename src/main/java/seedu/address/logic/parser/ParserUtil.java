@@ -151,7 +151,13 @@ public class ParserUtil {
         requireNonNull(subjects);
         final Set<Subject> subjectSet = new HashSet<>();
         for (String subjectName : subjects) {
-            subjectSet.add(parseSubject(subjectName));
+            Subject subject = parseSubject(subjectName);
+            for (Subject existingSubject : subjectSet) {
+                if (existingSubject.equals(subject)) {
+                    throw new ParseException(Subject.MESSAGE_DUPLICATE_SUBJECT);
+                }
+            }
+            subjectSet.add(subject);
         }
         return subjectSet;
     }
