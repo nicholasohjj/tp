@@ -16,11 +16,11 @@ TutorTrack uses a **dual-list system** to manage students and lessons. Users can
 
 ## Target Users
 
-TutorTrack is designed for:
+Freelance tutors who:
 
-- **Freelance tutors** who need to manage multiple students, lessons, and assignments.
-- **Tech-savvy individuals** who prefer keyboard commands over mouse interactions.
-- **Users who need a simple yet powerful tool** for tracking tutoring-related tasks.
+- Juggle multiple students/lessons and need centralized tracking
+- Prefer keyboard-driven efficiency over mouse navigation
+- Want lightweight but capable task management
 
 ## Assumptions about Users
 
@@ -423,6 +423,33 @@ _Details coming soon ..._
 
 **A:**
 Install the app on the new computer and replace the empty data file with the one from your previous TutorTrack folder.
+
+
+**Q:** Why can't I add students with identical names?
+
+**A:** TutorTrack prevents students with identical names to:
+
+1. **Prevent Confusion**
+    - Ensures each student has a unique identity in your records
+    - Eliminates ambiguity when scheduling lessons or assignments
+2. **Maintain Data Accuracy**
+    - Guarantees commands like **`delete_student`** or **`edit_student`** affect the correct individual
+    - Prevents accidental merging of different students' records
+3. **Optimize Workflow**
+    - Makes student selection faster when managing lessons/assignments
+    - Reduces cognitive load when scanning your student list
+
+**What if I need to add students with similar names?**
+
+The system will accept names that:
+
+✓ Differ by at least one character (e.g., "John Doe" vs "Jon Doe")
+
+✓ Have different capitalization (e.g., "alex tan" vs "Alex Tan")
+
+**Tip:** For students who share names naturally (e.g., siblings), consider adding identifiers:
+
+- Middle initials (e.g., "John A Doe" vs "John B Doe")
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
