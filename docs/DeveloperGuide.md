@@ -134,12 +134,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Name` list in the `AddressBook`, which `Student` and `Lesson` references. This allows `AddressBook` to only require one `Name` object per unique name, instead of each `Student` and `Lesson` needing their own `Name` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
 
 ### Storage component
 
@@ -511,7 +505,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-# **Non-Functional Requirements**
+## **Non-Functional Requirements**
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
@@ -525,7 +519,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-# **Glossary**
+## **Glossary**
 
 * **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Tutor**: A person who does free-lance tutoring
@@ -536,7 +530,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-# **Appendix: Effort**
+## **Appendix: Effort**
 
 **Team size**: 5
 
@@ -570,9 +564,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-# **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for manual testing**
 
-## Launch and Shutdown Testing
+### Launch and Shutdown Testing
 
 1. **First-time launch**
     - Delete any existing **`data/tutorTrack.json`** file
@@ -585,7 +579,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## Student Management Testing
+### Student Management Testing
 
 1. **Adding a student**
     - Test case: **`add_student n/John Doe p/98765432 e/john@email.com a/123 Street s/Math`**
@@ -605,7 +599,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## Lesson Management Testing
+### Lesson Management Testing
 
 1. **Adding a lesson**
     - Prerequisite: At least one student exists
@@ -626,7 +620,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## Assignment Management Testing
+### Assignment Management Testing
 
 1. **Creating an assignment**
     - Prerequisite: At least one student exists
@@ -644,7 +638,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## Data Persistence Testing
+### Data Persistence Testing
 
 1. **Corrupted data file**
     - Manually edit **`data/tutorTrack.json`** to:
@@ -663,7 +657,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## Edge Case Testing
+### Edge Case Testing
 
 1. **Mass data operations**
     - Add 50+ students via script
@@ -678,7 +672,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## Verification Steps
+### Verification Steps
 
 For each test case:
 
@@ -691,7 +685,7 @@ For each test case:
 
 ---
 
-# **Planned Enhancements**
+## **Planned Enhancements**
 
 1. **Undo/Redo Feature**: Allow users to undo their previous commands. It improves the users experience by providing a way to recover from mistakes.
 2. **Enhanced Error Messages**: Improve error messages to be more specific and actionable. For example, instead of showing "Operation failed!", the message could indicate the exact reason for the failure, such as "The student 'John Doe' could not be added because the name already exists."

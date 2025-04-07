@@ -170,7 +170,8 @@ You can add multiple subjects by using the subject prefix  `s/` for each subjec
 
 - **Not Allowed**:
 
-  ✗ Special constructs (**`d/o`**, **`bin`**, **`binti`**)
+  ✗ Special constructs (**`d/o`**, **`s/o`**)
+
   ✗ Symbols/hyphens (**`-`**, **`'`**) or numerals (**`0-9`**)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:** Names will be automatically formatted to Title Case (e.g., "alex yeoh" → "Alex Yeoh") </div>
@@ -486,13 +487,11 @@ Install the app on the new computer and replace the empty data file with the one
     - Makes student selection faster when managing lessons/assignments
     - Reduces cognitive load when scanning your student list
 
-**What if I need to add students with similar names?**
+**Q:** What if I need to add students with similar names?
 
-The system will accept names that:
+**A:** The system will accept names that: Differ by at least one character (e.g., "John Doe" vs "Jon Doe")
 
-✓ Differ by at least one character (e.g., "John Doe" vs "Jon Doe")
-
-**Tip:** For students who share names naturally (e.g., siblings), consider adding middle initials (e.g., "John A Doe" vs "John B Doe").
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** For students who share names naturally (e.g., siblings), consider adding identifiers: Middle initials (e.g., "John A Doe" vs "John B Doe")
 
 --------------------------------------------------------------------------------------------------------------------
 

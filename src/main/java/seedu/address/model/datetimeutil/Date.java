@@ -71,6 +71,6 @@ public class Date implements Comparable<Date> {
     }
 
     public int compareTo(Date dueDate) {
-        return this.date.compareTo(dueDate.date);
+        return LocalDate.parse(this.date, VALID_FORMAT).compareTo(LocalDate.parse(dueDate.date, VALID_FORMAT));
     }
 }
