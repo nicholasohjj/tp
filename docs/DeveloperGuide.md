@@ -289,7 +289,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | tutor           | assign tasks to students                                       | track student's workload and assignments                                                  |
 | `* * *`  | tutor           | view list of all students                                      | view all students that I am teaching                                                      |
 | `* * *`  | tutor           | delete a student                                               | remove students that I am no longer tutoring                                              |
-| `* * *`  | tutor           | track completion status of assignments                         | know if my students have completed them and their past performances                       |
+| `* * *`  | tutor           | track completion status of assignments                         | know if my students have completed them                                                   |
 | `* *`    | tutor           | reschedule lessons                                             | make changes to lesson plans to better fit mine or my student's schedule                  |
 | `* *`    | tutor           | mark lessons as complete                                       | review session history and track my students' lesson progress                             |
 | `* *`    | tutor           | set personalized reminders for students                        | address individual needs effectively                                                      |
@@ -300,7 +300,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | tutor           | search for a student by name                                   | quickly find their records                                                                |
 | `* *`    | tutor           | update student details                                         | keep their information accurate                                                           |
 | `* *`    | new user        | view help documentation                                        | understand how to interact with the application effectively                               |
-| `* *`    | long-time user  | add shortcuts to commands                                      | studentalize my use of the app                                                             |
+| `* *`    | long-time user  | add shortcuts to commands                                      | personalize my use of the app                                                               |
 | `*`      | tutor           | export schedules to my personal calendar                       | manage the tutoring schedule with my other commitments                                    |
 | `*`      | new user        | import data from a spreadsheet                                 | start to keep track of my students                                                        |
 | `*`      | first time user | use commands with contextual help                              | learn proper command syntax and options without having to refer to external documentation |
@@ -749,7 +749,7 @@ For each test case:
 2. **Data Validation**: Implement more robust data validation to prevent invalid inputs from being processed. For instance, validate email formats, phone numbers, and date formats before saving them.
 3. **Batch Operations**: Add support for batch operations, such as adding multiple students or assignments at once, to improve efficiency for users managing large datasets.
 4. **Improved Search Functionality**: Enhance the search feature to support more complex queries, such as searching by multiple criteria (e.g., name, subject, and status) simultaneously.
-5. **Export Functionality**: Allow users to export data to external formats (e.g., CSV, Excel) for easier sharing and analysis outside the application.
+5. **Customizable Commands**: Enable users to customize commands to their own liking and preferences, to cater to tutors who like shorter commands to have a more efficient workflow.
 6. **Customizable Reminders**: Enable users to set customizable reminders for lessons and assignments, with options for recurring reminders and notifications.
 7. **User Profiles**: Implement user profiles to allow multiple tutors to use the application with personalized settings and data separation.
 8. **Performance Optimization**: Optimize the application's performance to handle larger datasets more efficiently, ensuring smooth operation even with thousands of entries.

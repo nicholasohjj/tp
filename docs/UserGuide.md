@@ -113,6 +113,10 @@ Clears all entries from both the student list and the lesson list.
 
 `clear`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+There is no confirmation for this command and the data will be cleared immediately after execution. Use at your own risk.
+</div>
+
 #### Exiting the program : `exit`
 
 Exits the program.
