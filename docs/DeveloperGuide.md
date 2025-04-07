@@ -511,7 +511,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## **Non-Functional Requirements**
+# **Non-Functional Requirements**
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
@@ -525,7 +525,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## **Glossary**
+# **Glossary**
 
 * **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Tutor**: A person who does free-lance tutoring
@@ -536,7 +536,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Effort**
+# **Appendix: Effort**
 
 **Team size**: 5
 
@@ -570,9 +570,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## **Appendix: Instructions for manual testing**
+# **Appendix: Instructions for manual testing**
 
-### Launch and Shutdown Testing
+## Launch and Shutdown Testing
 
 1. **First-time launch**
     - Delete any existing **`data/tutorTrack.json`** file
@@ -585,7 +585,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Student Management Testing
+## Student Management Testing
 
 1. **Adding a student**
     - Test case: **`add_student n/John Doe p/98765432 e/john@email.com a/123 Street s/Math`**
@@ -605,7 +605,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Lesson Management Testing
+## Lesson Management Testing
 
 1. **Adding a lesson**
     - Prerequisite: At least one student exists
@@ -626,7 +626,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Assignment Management Testing
+## Assignment Management Testing
 
 1. **Creating an assignment**
     - Prerequisite: At least one student exists
@@ -644,7 +644,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Data Persistence Testing
+## Data Persistence Testing
 
 1. **Corrupted data file**
     - Manually edit **`data/tutorTrack.json`** to:
@@ -663,7 +663,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Edge Case Testing
+## Edge Case Testing
 
 1. **Mass data operations**
     - Add 50+ students via script
@@ -678,7 +678,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Verification Steps
+## Verification Steps
 
 For each test case:
 
@@ -691,7 +691,7 @@ For each test case:
 
 ---
 
-## **Planned Enhancements**
+# **Planned Enhancements**
 
 1. **Undo/Redo Feature**: Allow users to undo their previous commands. It improves the users experience by providing a way to recover from mistakes.
 2. **Enhanced Error Messages**: Improve error messages to be more specific and actionable. For example, instead of showing "Operation failed!", the message could indicate the exact reason for the failure, such as "The student 'John Doe' could not be added because the name already exists."
@@ -700,7 +700,7 @@ For each test case:
 4. **Improved Search Functionality**: Enhance the search feature to support more complex queries, such as searching by multiple criteria (e.g., name, subject, and status) simultaneously.
 5. **Customizable Commands**: Enable users to customize commands to their own liking and preferences, to cater to tutors who like shorter commands to have a more efficient workflow.
 6. **Customizable Reminders**: Enable users to set customizable reminders for lessons and assignments, with options for recurring reminders and notifications.
-7. **User Profiles**: Implement user profiles to allow multiple tutors to use the application with personalized settings and data separation.
+7. **Input working hours**: Enable the tutors to input their working hours so to restrict the timings of the lessons to within their comfortable timings.
 8. **Performance Optimization**: Optimize the application's performance to handle larger datasets more efficiently, ensuring smooth operation even with thousands of entries.
 9. **Enhanced Reporting**: Add reporting features to generate summaries and insights, such as student progress reports, lesson attendance, and assignment completion rates.
 10. **Integration with Calendars**: Allow users to integrate their lesson schedules with external calendar applications (e.g., Google Calendar) for better schedule management.
