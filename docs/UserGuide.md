@@ -262,6 +262,8 @@ Example:
 
 ### Managing assignments
 
+TutorTrack allows for easy management of assignments, including adding, deleting, marking and unmarking assignments. You can also view all assignments in the student list under each student entry.
+
 #### Adding an assignment: `add_assignment`
 
 Adds an assignment to a student in the student list
