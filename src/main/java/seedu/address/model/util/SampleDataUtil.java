@@ -9,6 +9,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.datetimeutil.Date;
+import seedu.address.model.datetimeutil.Time;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -74,12 +76,38 @@ public class SampleDataUtil {
                     getAssignmentSet())
         };
     }
+    public static Lesson[] getSampleLessons() {
+        return new Lesson[] {
+            new Lesson(new Subject("Math"), new Name("Alex Yeoh"),
+                    new Date("07-07-2025"), new Time("09:00")),
 
+            new Lesson(new Subject("English"), new Name("Bernice Yu"),
+                    new Date("08-07-2025"), new Time("10:30")),
+
+            new Lesson(new Subject("Literature"), new Name("Charlotte Oliveiro"),
+                    new Date("09-07-2025"), new Time("11:00")),
+
+            new Lesson(new Subject("Chemistry"), new Name("David Li"),
+                    new Date("10-07-2025"), new Time("13:00")),
+
+            new Lesson(new Subject("Biology"), new Name("Irfan Ibrahim"),
+                    new Date("11-07-2025"), new Time("14:30")),
+
+            new Lesson(new Subject("Economics"), new Name("Roy Balakrishnan"),
+                    new Date("12-07-2025"), new Time("16:00")),
+
+            new Lesson(new Subject("History"), new Name("Zoy White"),
+                    new Date("13-07-2025"), new Time("17:30")),
+        };
+    }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Student sampleStudent : getSampleStudents()) {
             sampleAb.addStudent(sampleStudent);
+        }
+        for (Lesson sampleLesson : getSampleLessons()) {
+            sampleAb.addLesson(sampleLesson);
         }
         return sampleAb;
     }
