@@ -196,6 +196,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isStudentView() {
+        return filteredCurr.equals(filteredStudents);
+    }
+
+    @Override
     public ObservableList<?> getFilteredCurrList() {
         return filteredCurr;
     }

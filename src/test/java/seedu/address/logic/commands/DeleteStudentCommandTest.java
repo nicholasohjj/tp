@@ -109,6 +109,7 @@ public class DeleteStudentCommandTest {
         model.addLesson(lesson);
 
         int initialLessonCount = model.getFilteredLessonList().size();
+        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
 
         DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(INDEX_FIRST);
         deleteStudentCommand.execute(model);

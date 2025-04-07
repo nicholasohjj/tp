@@ -28,7 +28,7 @@ public class Messages {
     public static final String MESSAGE_EMPTY_STUDENT_LIST = "Error: Student list is empty! Nothing to delete";
     public static final String MESSAGE_EMPTY_LESSON_LIST = "Error: Lesson list is empty! Nothing to delete";
     public static final String MESSAGE_ASSIGNMENT_NOT_FOUND = "Error: Assignment with name \"%1$s\" not found!";
-
+    public static final String MESSAGE_STUDENT_VIEW_REQUIRED = "Error: You can only delete student on student list!";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

@@ -201,6 +201,11 @@ public class AddStudentCommandTest {
         }
 
         @Override
+        public boolean isStudentView() {
+            return true;
+        }
+
+        @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
             throw new AssertionError("This method should not be called.");
         }
