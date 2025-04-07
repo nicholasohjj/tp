@@ -21,7 +21,6 @@ Class JsonSerializableAddressBook
 Class JsonAdaptedStudent
 Class JsonAdaptedLesson
 Class JsonAdaptedSubject
-Class JsonAdaptedUniqueAssignmentList
 Class JsonAdaptedAssignment
 }
 
@@ -43,7 +42,6 @@ JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedStudent
 JsonSerializableAddressBook --> "*" JsonAdaptedLesson
 JsonAdaptedStudent --> "*" JsonAdaptedSubject
-JsonAdaptedStudent --> "1" JsonAdaptedUniqueAssignmentList
-JsonAdaptedUniqueAssignmentList --> "*" JsonAdaptedAssignment
+JsonAdaptedStudent --> "*" JsonAdaptedAssignment
 
 @enduml
