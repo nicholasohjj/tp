@@ -58,12 +58,11 @@ public class Time {
             return false;
         }
 
-        return time.equals(otherTime.time);
+        return LocalTime.parse(this.time, VALID_FORMAT).equals(LocalTime.parse(otherTime.time, VALID_FORMAT));
     }
 
     @Override
     public int hashCode() {
         return time.hashCode();
     }
-
 }

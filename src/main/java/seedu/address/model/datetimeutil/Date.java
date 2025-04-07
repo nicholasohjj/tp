@@ -62,7 +62,7 @@ public class Date implements Comparable<Date> {
             return false;
         }
 
-        return date.equals(otherDate.date);
+        return LocalDate.parse(this.date, VALID_FORMAT).equals(LocalDate.parse(otherDate.date, VALID_FORMAT));
     }
 
     @Override
