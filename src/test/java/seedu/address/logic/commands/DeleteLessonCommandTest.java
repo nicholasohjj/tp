@@ -32,6 +32,7 @@ public class DeleteLessonCommandTest {
         Lesson lessonToDelete = model.getFilteredLessonList().get(INDEX_FIRST.getZeroBased());
         DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST);
 
+        model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
         String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS,
                 Messages.format(lessonToDelete));
         CommandResult expectedResult = new CommandResult(expectedMessage, true);
@@ -45,6 +46,7 @@ public class DeleteLessonCommandTest {
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredLessonList().size() + 1);
         DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(outOfBoundIndex);
+        model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
 
         assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
