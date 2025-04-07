@@ -89,19 +89,11 @@ public class EditStudentCommand extends Command {
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
         assert editedStudent != null : "Edited student should not be null";
 
-        if (editStudentDescriptor.getName().isPresent()) {
-            String newName = editStudentDescriptor.getName().get().fullName.toLowerCase();
-            boolean hasDuplicateName = model.getFilteredStudentList().stream()
-                    .filter(student -> !student.equals(studentToEdit)) // exclude the student being edited
-                    .anyMatch(student -> student.getName().fullName.toLowerCase().equals(newName));
+        boolean isDuplicate = model.getFilteredStudentList().stream()
+                .filter(student -> !student.equals(studentToEdit)) // exclude the student being edited
+                .anyMatch(student -> student.isSameStudent(editedStudent));
 
-            if (hasDuplicateName) {
-                logger.warning("Duplicate student name detected: " + newName);
-                throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
-            }
-        }
-
-        if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
+        if (isDuplicate) {
             logger.warning("Duplicate student detected: " + editedStudent.getName());
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
@@ -111,16 +103,17 @@ public class EditStudentCommand extends Command {
                 .stream()
                 .filter(lesson -> lesson.getStudentName().equals(studentToEdit.getName()))
                 .toList();
+        if (editStudentDescriptor.getName().isPresent()) {
+            EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
+            editLessonDescriptor.setName(editStudentDescriptor.getName().get());
 
-        EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
-        editLessonDescriptor.setName(editStudentDescriptor.getName().get());
-
-        logger.info("Editing " + lessonsToEdit.size() + " associated lessons");
-        lessonsToEdit.forEach(lesson -> {
-            Lesson editedLesson = createEditedLesson(lesson, editLessonDescriptor);
-            model.setLesson(lesson, editedLesson);
-            logger.fine("Edited lesson: " + lesson);
-        });
+            logger.info("Editing " + lessonsToEdit.size() + " associated lessons");
+            lessonsToEdit.forEach(lesson -> {
+                Lesson editedLesson = createEditedLesson(lesson, editLessonDescriptor);
+                model.setLesson(lesson, editedLesson);
+                logger.fine("Edited lesson: " + lesson);
+            });
+        }
 
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
