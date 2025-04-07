@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a Lesson's date in the address book.
@@ -13,9 +14,12 @@ import java.time.format.DateTimeParseException;
  */
 public class Date implements Comparable<Date> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Error: Date must be in DD-MM-YYYY or D-M-YYYY format "
-            + "(e.g., 05-10-2023 or 5-10-2023), and must be a future date (after today)";
-    public static final DateTimeFormatter VALID_FORMAT = DateTimeFormatter.ofPattern("d-M-yyyy");
+    public static final String MESSAGE_CONSTRAINTS = "Error: Date must be a valid date, "
+            + "in DD-MM-YYYY or D-M-YYYY format (e.g., 05-10-2023 or 5-10-2023),"
+            + "\nand must be a future date (after today)";
+    public static final DateTimeFormatter VALID_FORMAT = DateTimeFormatter.ofPattern("d-M-uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
+
     public final String date;
 
     /**

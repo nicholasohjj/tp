@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-TutorTrack is a **desktop application designed for freelance tutors** to efficiently manage their students, lessons, and assignments. It combines the speed of a **Command Line Interface (CLI)** with the convenience of a **Graphical User Interface (GUI)**, making it ideal for tutors who prefer typing over mouse interactions. If you can type fast, TutorTrack will help you manage your tutoring tasks faster than traditional GUI apps.
+TutorTrack is a **desktop application designed for Singaporean freelance tutors** to efficiently manage their students, lessons, and assignments. It combines the speed of a **Command Line Interface (CLI)** with the convenience of a **Graphical User Interface (GUI)**, making it ideal for tutors who prefer typing over mouse interactions. If you can type fast, TutorTrack will help you manage your tutoring tasks faster than traditional GUI apps.
 
 TutorTrack uses a **dual-list system** to manage students and lessons. Users can easily modify the student list and lesson list, allowing for quick access to student information and lesson schedules with their unique indexes. The application also supports assignment management, enabling tutors to keep track of their students' assignments and their completion status uniquely identified by the name of the assignment. Users can easily toggle between the lists with simple CLI-based commands.
 
@@ -16,7 +16,7 @@ TutorTrack uses a **dual-list system** to manage students and lessons. Users can
 
 ## Target Users
 
-Freelance tutors who:
+Singaporean freelance tutors who:
 
 - Juggle multiple students/lessons and need centralized tracking
 - Prefer keyboard-driven efficiency over mouse navigation
@@ -272,6 +272,7 @@ Adds a lesson to the lesson list.
 
 - All lessons must be scheduled for future dates/times
 - Prevents accidental double-booking at identical times
+
 **Validation Rules:**
 
 ✓ **Tutor time slot management**:
@@ -311,10 +312,10 @@ Adds a lesson to the lesson list.
 
 ✓ **Validation**:
 
-- Days beyond month length auto-correct to last day (e.g., **`31-04-2023`** → **`30-04-2023`**)
 - Values >31 always rejected (e.g., **`32-01-2023`** fails)
-- Must be a future date (after today)
 - Invalid months (>12) always rejected
+- Must be a future date (after today)
+- Must be a valid date (e.g. leap years)
 
 **Examples**:
 * `edit_lesson 1 d/16-02-2026`

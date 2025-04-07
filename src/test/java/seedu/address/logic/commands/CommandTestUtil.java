@@ -42,7 +42,7 @@ public class CommandTestUtil {
     public static final String VALID_SUBJECT_FRIEND = "friend";
     public static final String VALID_SUBJECT_AMY = "CS2103T";
     public static final String VALID_SUBJECT_BOB = "CS2101";
-    public static final String VALID_DATE_AMY = "31-02-2026";
+    public static final String VALID_DATE_AMY = "28-02-2026";
     public static final String VALID_DATE_BOB = "26-09-2026";
     public static final String VALID_TIME_AMY = "12:00";
     public static final String VALID_TIME_BOB = "15:00";
