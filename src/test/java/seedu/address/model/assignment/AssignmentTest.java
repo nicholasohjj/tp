@@ -36,9 +36,9 @@ public class AssignmentTest {
         assertFalse(Assignment.isValidAssignmentName("assignment*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(Assignment.isValidAssignmentName("some assignment")); // alphabets only
+        assertTrue(Assignment.isValidAssignmentName("Some Assignment")); // alphabets only
         assertTrue(Assignment.isValidAssignmentName("12345")); // numbers only
-        assertTrue(Assignment.isValidAssignmentName("some assignment 2")); // alphanumeric characters
+        assertTrue(Assignment.isValidAssignmentName("Some Assignment 2")); // alphanumeric characters
         assertTrue(Assignment.isValidAssignmentName("Some Assignment")); // with capital letters
         assertTrue(Assignment.isValidAssignmentName("Some Assignment 123")); // with numbers and letters
     }
@@ -60,7 +60,7 @@ public class AssignmentTest {
 
     @Test
     public void equals() {
-        Assignment assignment = new Assignment("some assignment", new Date(FUTURE_DATE_1));
+        Assignment assignment = new Assignment("Some Assignment", new Date(FUTURE_DATE_1));
         Assignment assignmentCopy = new Assignment(assignment.assignmentName, assignment.dueDate);
 
         // same values -> returns true
@@ -82,21 +82,21 @@ public class AssignmentTest {
 
     @Test
     public void hashCode_sameValues_returnsSameHashCode() {
-        Assignment assignment = new Assignment("some assignment", new Date(FUTURE_DATE_1));
+        Assignment assignment = new Assignment("Some Assignment", new Date(FUTURE_DATE_1));
         Assignment assignmentCopy = new Assignment(assignment.assignmentName, assignment.dueDate);
         assertEquals(assignment.hashCode(), assignmentCopy.hashCode());
     }
 
     @Test
     public void setDone() {
-        Assignment assignment = new Assignment("some assignment", new Date(FUTURE_DATE_1));
+        Assignment assignment = new Assignment("Some Assignment", new Date(FUTURE_DATE_1));
         assignment.setDone();
         assertTrue(assignment.isDone());
     }
 
     @Test
     public void setUndone() {
-        Assignment assignment = new Assignment("some assignment", new Date("10-04-2025"));
+        Assignment assignment = new Assignment("Some Assignment", new Date("10-04-2025"));
         assignment.setDone();
         assignment.setUndone();
         assertFalse(assignment.isDone());

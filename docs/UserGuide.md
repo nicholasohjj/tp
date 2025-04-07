@@ -8,20 +8,19 @@ TutorTrack is a **desktop application designed for freelance tutors** to efficie
 TutorTrack uses a **dual-list system** to manage students and lessons. Users can easily modify the student list and lesson list, allowing for quick access to student information and lesson schedules with their unique indexes. The application also supports assignment management, enabling tutors to keep track of their students' assignments and their completion status uniquely identified by the name of the assignment. Users can easily toggle between the lists with simple CLI-based commands.
 
 ---
-## Table of Contents
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 ---
 
 ## Target Users
 
-TutorTrack is designed for:
+Freelance tutors who:
 
-- **Freelance tutors** who need to manage multiple students, lessons, and assignments.
-- **Tech-savvy individuals** who prefer keyboard commands over mouse interactions.
-- **Users who need a simple yet powerful tool** for tracking tutoring-related tasks.
+- Juggle multiple students/lessons and need centralized tracking
+- Prefer keyboard-driven efficiency over mouse navigation
+- Want lightweight but capable task management
 
 ## Assumptions about Users
 
@@ -52,7 +51,15 @@ TutorTrack is designed for:
    - `help`: Opens the help window.
    - `list_students`: Lists all students.
    - `list_lessons n/Jackie` : Lists all lessons under a student or all lessons in the data
+   - `add_student n/John Doe p/91234567 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`: Adds a new student.
+   - `add_lesson n/Johnson Kit d/15-09-2026 t/17:00 s/CS2103T` : Adds a lesson.
+   - `add_assignment 2 as/CS2103T tP increment d/19-04-2025` : Adds an assignment to a student in the list.
+   - `mark_assignment 2 as/CS2101 CA2` : Marks the assignment under the student as complete
+   - `unmark_assignment 3 as/Science CA2` : Marks the assignment under the student as incomplete
+   - `delete_student 1`: Deletes the 1st student in the list.
+   - `delete_lesson 1`: Deletes the 1st lesson in the list.
    - `clear`: Deletes all students.
+   - `find_student Bernice`: Finds student containing Bernice.
    - `exit`: Exits the app.
 
 1. Refer to the [Features](#features) section below for detailed instructions on each command.
@@ -113,6 +120,10 @@ Clears all entries from both the student list and the lesson list.
 
 `clear`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+There is no confirmation for this command and the data will be cleared immediately after execution. Use at your own risk.
+</div>
+
 #### Exiting the program : `exit`
 
 Exits the program.
@@ -135,6 +146,10 @@ Furthermore, certain edits can cause the TutorTrack to behave in unexpected ways
 </div>
 
 ### Managing students
+
+TutorTrack allows for easy management of students, including adding, editing, deleting, and finding students. You can also view all students in the list.
+
+The student list is displayed on default when the application is opened. The student list shows the name, phone number, email, address, subjects and assignments of each student.
 
 #### Adding a student: `add_student`
 
@@ -210,8 +225,7 @@ Switch to a view that shows all students in the student list.
 Finds students whose names contain any of the given keywords.
 
 **Format:**
-
-`find_student KEYWORD [MORE_KEYWORDS]`
+`find_student KEYWORD [MORE_KEYWORDS...]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * Only matches complete words in the name (e.g., `Alex` matches `Alex Yeoh` but not `Alexander`).
@@ -228,6 +242,12 @@ Finds students whose names contain any of the given keywords.
 * `find_student alex david` returns `Alex Yeoh`, `David Li`<br>
 
 ### Managing lessons
+
+TutorTrack allows for easy management of lessons, including adding, editing, deleting, and listing lessons. You can also view all lessons in the list.
+
+The lesson list is displayed when you type `list_lessons` in the command box. The lesson list shows the name of the student, date, time and subject of each lesson.
+
+![lesson list](images/lessonList.png)
 
 #### Adding a lesson: `add_lesson`
 
@@ -272,7 +292,12 @@ Adds a lesson to the lesson list.
 <div markdown="span" class="alert alert-info">:information_source: **Group Lessons Note**: Currently, TutorTrack doesn't support group lessons where multiple students share the same time slot. Each lesson time must be unique to the tutor's schedule. We're considering adding group lesson support in a future update. </div>
 
 
-Example:
+* `NAME` is the name of the student. It must be a valid name of a student in the student list.
+* `SUBJECT` is the subject of the lesson. It must be a valid subject of the student in the student list.
+* `DATE` is the date of the lesson. It must be in the format `d-M-yyyy` and must be in the future.
+* `TIME` is the time of the lesson. It must be in the format `HH:mm`.
+
+**Example:**
 * `add_lesson n/Alice Chan d/17-09-2025 t/15:00 s/Math`
 * `add_lesson n/Bob Lee d/17-09-2025 t/16:00 s/Math` (different time slot)
 
@@ -317,14 +342,15 @@ Examples:
 Shows a list of all lessons under a student in the lesson list. If no student is specified, shows all lessons in the list.
 
 **Format:**
-
-`list_lessons n/STUDENT_NAME`
+`list_lessons [n/STUDENT_NAME]`
 
 Example:
 * `list_lessons n/John Lee`
 * `list_lessons`
 
 ### Managing assignments
+
+TutorTrack allows for easy management of assignments, including adding, deleting, marking and unmarking assignments. You can also view all assignments in the student list under each student entry.
 
 #### Adding an assignment: `add_assignment`
 
@@ -340,6 +366,14 @@ Adds an assignment to a student in the student list
 - `DATE` is the due date of the assignment.
   - The date must be in the format `d-M-yyyy` (e.g., `27-09-2026` or `1-1-2026`).
   - The date must be in the future (i.e., not in the past).
+
+**Assignment Name Format Rules:**
+
+- **Allowed**:
+
+  ✓ Alphabetic characters and spaces (e.g., **`Math Exercise`**)
+
+  ✓ Auto-converted to Title Case (e.g., **`math exercise`** → **`Math Exercise`**)
 
 Example:
 * `add_assignment 2 as/Science 101 d/27-09-2026`
@@ -368,6 +402,14 @@ Marks the assignment identified by the index number of the student and the assig
 - `STUDENT_INDEX` must be a positive integer corresponding to the student to which the assignment belongs in the displayed list.
 - `ASSIGNMENT_NAME` is the name of the assignment to mark.
 
+**Assignment Name Format Rules:**
+
+- **Allowed**:
+
+  ✓ Alphabetic characters and spaces (e.g., **`Math Exercise`**)
+
+  ✓ Auto-converted to Title Case (e.g., **`math exercise`** → **`Math Exercise`**)
+
 **Example:**
 
 - `mark_assignment 1 as/Assignment 1` marks the assignment named "Assignment 1" of the first student in the list as completed.
@@ -386,6 +428,14 @@ Unmarks the assignment identified by the index number of the student and the ass
 **Example:**
 - `unmark_assignment 1 as/Assignment 1` unmarks the first assignment in the list, setting it to incomplete.
 
+**Assignment Name Format Rules:**
+
+- **Allowed**:
+
+  ✓ Alphabetic characters and spaces (e.g., **`Math Exercise`**)
+
+  ✓ Auto-converted to Title Case (e.g., **`math exercise`** → **`Math Exercise`**)
+
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
@@ -398,6 +448,33 @@ _Details coming soon ..._
 
 **A:**
 Install the app on the new computer and replace the empty data file with the one from your previous TutorTrack folder.
+
+
+**Q:** Why can't I add students with identical names?
+
+**A:** TutorTrack prevents students with identical names to:
+
+1. **Prevent Confusion**
+    - Ensures each student has a unique identity in your records
+    - Eliminates ambiguity when scheduling lessons or assignments
+2. **Maintain Data Accuracy**
+    - Guarantees commands like **`delete_student`** or **`edit_student`** affect the correct individual
+    - Prevents accidental merging of different students' records
+3. **Optimize Workflow**
+    - Makes student selection faster when managing lessons/assignments
+    - Reduces cognitive load when scanning your student list
+
+**What if I need to add students with similar names?**
+
+The system will accept names that:
+
+✓ Differ by at least one character (e.g., "John Doe" vs "Jon Doe")
+
+✓ Have different capitalization (e.g., "alex tan" vs "Alex Tan")
+
+**Tip:** For students who share names naturally (e.g., siblings), consider adding identifiers:
+
+- Middle initials (e.g., "John A Doe" vs "John B Doe")
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
