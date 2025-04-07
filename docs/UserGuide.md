@@ -178,7 +178,7 @@ Format: `list_students`
 
 Finds students whose names contain any of the given keywords.
 
-Format: `find_student KEYWORD [MORE_KEYWORDS]`
+Format: `find_student KEYWORD [MORE_KEYWORDS...]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 
@@ -238,7 +238,7 @@ Examples:
 
 Shows a list of all lessons under a student in the lesson list. If no student is specified, shows all lessons in the list.
 
-Format: `list_lessons n/STUDENT_NAME`
+Format: `list_lessons [n/STUDENT_NAME]`
 
 Example:
 * `list_lessons n/John Lee`
