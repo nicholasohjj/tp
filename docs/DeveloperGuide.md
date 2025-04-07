@@ -6,7 +6,6 @@ title: Developer Guide
 ---
 ## **Table of Contents**
 
-* Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -103,7 +102,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete_student 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete_student 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete_student 1` Command](images/DeleteStudentSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteStudentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
@@ -169,37 +168,36 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedTutorTrack`. It extends `TutorTrack` with an undo/redo history, stored internally as a `tutorTrackStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current AddressBook state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous AddressBook state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone AddressBook state from its history.
+* `VersionedTutorTrack#commit()` — Saves the current TutorTrack state in its history.
+* `VersionedTutorTrack#undo()` — Restores the previous TutorTrack state from its history.
+* `VersionedTutorTrack#redo()` — Restores a previously undone TutorTrack state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitTutorTrack()`, `Model#undoTutorTrack()` and `Model#redoTutorTrack()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial AddressBook state, and the `currentStatePointer` pointing to that single AddressBook state.
+Step 1. The user launches the application for the first time. The `VersionedTutorTrack` will be initialized with the initial TutorTrack state, and the `currentStatePointer` will point to that single TutorTrack state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete_student 5` command to delete the 5th student in the addressbook. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the addressbook after the `delete_student 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted AddressBook state.
+Step 2. TThe user executes the command `delete_student 5` to delete the 5th student in TutorTrack. The `delete` command calls `Model#commitTutorTrack()`, causing the modified state after the command execution to be saved in the `tutorTrackStateList`. The `currentStatePointer` shifts to the newly added state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add_student n/David …​` to add a new student. The `add_student` command also calls `Model#commitAddressBook()`, causing another modified AddressBook state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add_student n/David …​` to add a new student. The `add_student` command also calls `Model#commitTutorTrack()`, causing another modified TutorTrack state to be saved into the `tutorTrackStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the addressbook state will not be saved into the `addressBookStateList`.
-
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0 (the initial state), there are no earlier states to restore. `Model#canUndoTutorTrack()` checks this and returns an error if undo is not possible.
 </div>
 
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous AddressBook state, and restores the addressbook to that state.
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoTutorTrack()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous TutorTrack state, and restores the previous state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial TutorTrack state, then there are no previous states to restore. The `undo` command uses `Model#canUndoTutorTrack()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -216,17 +214,17 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the addressbook to that state.
+The `redo` command reverses the undo. It calls `Model#redoTutorTrack()`, shifting the `currentStatePointer` one step forward to restore the next state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest addressbook state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is already at the latest state (i.e., index `tutorTrackStateList.size() - 1`), `redo` is not possible. `Model#canRedoTutorTrack()` handles this check.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the addressbook, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user executes a non-mutating command like `list`. Such commands do not modify the state and do not trigger any undo/redo behavior. The `tutorTrackStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all addressbook states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add_student n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`. Since `clear` calls `Model#commitTutorTrack()` and the `currentStatePointer` is not at the latest state, all states after the pointer are purged — making redo impossible. This mirrors typical desktop application behavior.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -289,7 +287,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | tutor           | assign tasks to students                                       | track student's workload and assignments                                                  |
 | `* * *`  | tutor           | view list of all students                                      | view all students that I am teaching                                                      |
 | `* * *`  | tutor           | delete a student                                               | remove students that I am no longer tutoring                                              |
-| `* * *`  | tutor           | track completion status of assignments                         | know if my students have completed them and their past performances                       |
+| `* * *`  | tutor           | track completion status of assignments                         | know if my students have completed them                                                   |
 | `* *`    | tutor           | reschedule lessons                                             | make changes to lesson plans to better fit mine or my student's schedule                  |
 | `* *`    | tutor           | mark lessons as complete                                       | review session history and track my students' lesson progress                             |
 | `* *`    | tutor           | set personalized reminders for students                        | address individual needs effectively                                                      |
@@ -300,7 +298,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | tutor           | search for a student by name                                   | quickly find their records                                                                |
 | `* *`    | tutor           | update student details                                         | keep their information accurate                                                           |
 | `* *`    | new user        | view help documentation                                        | understand how to interact with the application effectively                               |
-| `* *`    | long-time user  | add shortcuts to commands                                      | studentalize my use of the app                                                             |
+| `* *`    | long-time user  | add shortcuts to commands                                      | personalize my use of the app                                                               |
 | `*`      | tutor           | export schedules to my personal calendar                       | manage the tutoring schedule with my other commitments                                    |
 | `*`      | new user        | import data from a spreadsheet                                 | start to keep track of my students                                                        |
 | `*`      | first time user | use commands with contextual help                              | learn proper command syntax and options without having to refer to external documentation |
@@ -540,57 +538,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
-
-Given below are instructions to test the app manually.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
-
-</div>
-
-### Launch and shutdown
-
-1. Initial launch
-
-   1. Download the jar file and copy into an empty folder
-
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
-
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
-
-### Deleting a student
-
-1. Deleting a student while all students are being shown
-
-   1. Prerequisites: List all students using the `list_students` command. Multiple students in the list.
-
-   1. Test case: `delete_student 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete_student 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete_student`, `delete_student x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
-
 ## **Appendix: Effort**
 
 **Team size**: 5
@@ -623,9 +570,11 @@ testers are expected to do more *exploratory* testing.
 - The lessons/assignments feature was inspired by similar implementations in other projects, but our implementation was tailored to fit the specific needs of TutorTrack.
 - Some utility functions and classes were reused from the AddressBook-Level3 project, with minimal modifications to suit our requirements.
 
+---
+
 ## **Appendix: Instructions for manual testing**
 
-### **Launch and Shutdown Testing**
+### Launch and Shutdown Testing
 
 1. **First-time launch**
     - Delete any existing **`data/tutorTrack.json`** file
@@ -638,7 +587,7 @@ testers are expected to do more *exploratory* testing.
 
 ---
 
-### **Student Management Testing**
+### Student Management Testing
 
 1. **Adding a student**
     - Test case: **`add_student n/John Doe p/98765432 e/john@email.com a/123 Street s/Math`**
@@ -658,7 +607,7 @@ testers are expected to do more *exploratory* testing.
 
 ---
 
-### **Lesson Management Testing**
+### Lesson Management Testing
 
 1. **Adding a lesson**
     - Prerequisite: At least one student exists
@@ -679,7 +628,7 @@ testers are expected to do more *exploratory* testing.
 
 ---
 
-### **Assignment Management Testing**
+### Assignment Management Testing
 
 1. **Creating an assignment**
     - Prerequisite: At least one student exists
@@ -697,7 +646,7 @@ testers are expected to do more *exploratory* testing.
 
 ---
 
-### **Data Persistence Testing**
+### Data Persistence Testing
 
 1. **Corrupted data file**
     - Manually edit **`data/tutorTrack.json`** to:
@@ -716,7 +665,7 @@ testers are expected to do more *exploratory* testing.
 
 ---
 
-### **Edge Case Testing**
+### Edge Case Testing
 
 1. **Mass data operations**
     - Add 50+ students via script
@@ -731,7 +680,7 @@ testers are expected to do more *exploratory* testing.
 
 ---
 
-### **Verification Steps**
+### Verification Steps
 
 For each test case:
 
@@ -742,6 +691,8 @@ For each test case:
 
 **Tip**: Use the **`clear`** command between test scenarios to reset state.
 
+---
+
 ## **Planned Enhancements**
 
 1. **Undo/Redo Feature**: Allow users to undo their previous commands. It improves the users experience by providing a way to recover from mistakes.
@@ -749,7 +700,7 @@ For each test case:
 2. **Data Validation**: Implement more robust data validation to prevent invalid inputs from being processed. For instance, validate email formats, phone numbers, and date formats before saving them.
 3. **Batch Operations**: Add support for batch operations, such as adding multiple students or assignments at once, to improve efficiency for users managing large datasets.
 4. **Improved Search Functionality**: Enhance the search feature to support more complex queries, such as searching by multiple criteria (e.g., name, subject, and status) simultaneously.
-5. **Export Functionality**: Allow users to export data to external formats (e.g., CSV, Excel) for easier sharing and analysis outside the application.
+5. **Customizable Commands**: Enable users to customize commands to their own liking and preferences, to cater to tutors who like shorter commands to have a more efficient workflow.
 6. **Customizable Reminders**: Enable users to set customizable reminders for lessons and assignments, with options for recurring reminders and notifications.
 7. **User Profiles**: Implement user profiles to allow multiple tutors to use the application with personalized settings and data separation.
 8. **Performance Optimization**: Optimize the application's performance to handle larger datasets more efficiently, ensuring smooth operation even with thousands of entries.
