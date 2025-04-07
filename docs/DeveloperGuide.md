@@ -88,7 +88,7 @@ The `UI` component,
 
 In addition to displaying students via `ListPanel` and `ListCard`, the `UI` also supports displaying lessons. This is achieved through:
 * `ListPanel`: a JavaFX `UI` component that lists all lessons in the application. It is managed by the MainWindow class.
-* `LessonCard`: a reusable `UI` part that renders information about a single lesson (e.g. subject, time, and date) using FXML and JavaFX. It is used within `LessonListPanel`.
+* `LessonCard`: a reusable `UI` part that renders information about a single lesson (e.g. subject, time, and date) using FXML and JavaFX. It is used within `ListPanel`.
 
 ### Logic component
 
@@ -115,7 +115,7 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<img src="images/ParserClasses.png" width="618"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddStudentCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddStudentCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -124,7 +124,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+![Overview of the Model component](images/BetterModelClassDiagram.png)
 
 
 The `Model` component,
@@ -139,7 +139,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="784" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -237,8 +237,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete_student`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -300,8 +298,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 1: Add Student
 
-**System**: TutorTrack
-**Actor**: Tutor
+**System**: TutorTrack\
+**Actor**: Tutor\
 **Use Case**: UC01 - Add Student
 
 ### Main Success Scenario (MSS)
@@ -337,8 +335,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 2: View Student List
 
-**System**: TutorTrack
-**Actor**: Tutor
+**System**: TutorTrack\
+**Actor**: Tutor\
 **Use Case**: UC02 - View Student List
 
 ### Main Success Scenario (MSS)
@@ -358,8 +356,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 3: Delete Student
 
-**System**: TutorTrack
-**Actor**: Tutor
+**System**: TutorTrack\
+**Actor**: Tutor\
 **Use Case**: UC03 - Delete Student
 
 ### Main Success Scenario (MSS)
@@ -373,15 +371,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Extensions
 
 - **1a**: The entered student index is out of bound.
-    - 1a1: TutorTrack warns the tutor that the index is not valid.
+    - 1a1: TutorTrack warns the tutor that the index is not valid. 
     - **Use case ends.**
 
 ---
 
 ## Use Case 4: Add Lesson
 
-**System**: TutorTrack
-**Actor**: Tutor
+**System**: TutorTrack\
+**Actor**: Tutor\
 **Use Case**: UC04 - Add Lesson
 
 ### Main Success Scenario (MSS)
@@ -404,15 +402,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Use case resumes from step 1.
 
 - **1c**: A duplicate lesson exists for the same student at the same time.
-    - 1c1: TutorTrack warns the tutor about the duplicate lesson.
+    - 1c1: TutorTrack warns the tutor about the duplicate lesson. 
     - **Use case ends.**
 
 ---
 
 ## Use Case 5: View Lessons
 
-**System**: TutorTrack
-**Actor**: Tutor
+**System**: TutorTrack\
+**Actor**: Tutor\
 **Use Case**: UC05 - View Lessons
 
 ### Main Success Scenario (MSS)
@@ -424,16 +422,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Extensions
 
--**1a**: No student matches the keywords.
-    - 1a1: TutorTrack informs the tutor that no lessons are available.
+- **1a**: No student matches the keywords.
+    - 1a1: TutorTrack informs the tutor that no lessons are available. 
     - **Use case ends.**
 
 ---
 
 ## Use Case 6: Create Assignment to a Student
 
-**System**: TutorTrack
-**Actor**: Tutor
+**System**: TutorTrack\
+**Actor**: Tutor\
 **Use Case**: UC06 - Create Assignment
 
 ### Main Success Scenario (MSS)
@@ -468,8 +466,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 7: Track Assignment Completion
 
-**System**: TutorTrack
-**Actor**: Tutor
+**System**: TutorTrack\
+**Actor**: Tutor\
 **Use Case**: UC07 - Toggle Assignment Completion Status
 
 ### Main Success Scenario (MSS)
@@ -565,7 +563,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. **First-time launch**
     - Delete any existing **`data/TutorTrack.json`** file
-    - Launch the application via **`java -jar TutorTrack.jar`**
+    - Launch the application via **`java -jar tutortrack.jar`**
     - *Expected*: Loads with sample data, creates new data file
 2. **Persisting window preferences**
     - Resize and reposition the window
@@ -689,7 +687,7 @@ For each test case:
 4. **Improved Search Functionality**: Enhance the search feature to support more complex queries, such as searching by multiple criteria (e.g., name, subject, and status) simultaneously.
 5. **Customizable Commands**: Enable users to customize commands to their own liking and preferences, to cater to tutors who like shorter commands to have a more efficient workflow.
 6. **Customizable Reminders**: Enable users to set customizable reminders for lessons and assignments, with options for recurring reminders and notifications.
-7. **Input working hours**: Enable the tutors to input their working hours so to restrict the timings of the lessons to within their comfortable timings.
+7. **Input Working Hours**: Enable the tutors to input their working hours so to restrict the timings of the lessons to within their comfortable timings.
 8. **Performance Optimization**: Optimize the application's performance to handle larger datasets more efficiently, ensuring smooth operation even with thousands of entries.
 9. **Enhanced Reporting**: Add reporting features to generate summaries and insights, such as student progress reports, lesson attendance, and assignment completion rates.
 10. **Integration with Calendars**: Allow users to integrate their lesson schedules with external calendar applications (e.g., Google Calendar) for better schedule management.
