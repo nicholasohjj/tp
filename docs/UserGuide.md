@@ -51,7 +51,15 @@ TutorTrack is designed for:
    - `help`: Opens the help window.
    - `list_students`: Lists all students.
    - `list_lessons n/Jackie` : Lists all lessons under a student or all lessons in the data
+   - `add_student n/John Doe p/91234567 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`: Adds a new student.
+   - `add_lesson n/Johnson Kit d/15-09-2026 t/17:00 s/CS2103T` : Adds a lesson.
+   - `add_assignment 2 as/CS2103T tP increment d/19-04-2025` : Adds an assignment to a student in the list.
+   - `mark_assignment 2 as/CS2101 CA2` : Marks the assignment under the student as complete
+   - `unmark_assignment 3 as/Science CA2` : Marks the assignment under the student as incomplete
+   - `delete_student 1`: Deletes the 1st student in the list.
+   - `delete_lesson 1`: Deletes the 1st lesson in the list.
    - `clear`: Deletes all students.
+   - `find_student Bernice`: Finds student containing Bernice.
    - `exit`: Exits the app.
 
 1. Refer to the [Features](#features) section below for detailed instructions on each command.
@@ -139,6 +147,10 @@ Furthermore, certain edits can cause the TutorTrack to behave in unexpected ways
 
 ### Managing students
 
+TutorTrack allows for easy management of students, including adding, editing, deleting, and finding students. You can also view all students in the list.
+
+The student list is displayed on default when the application is opened. The student list shows the name, phone number, email, address, subjects and assignments of each student.
+
 #### Adding a student: `add_student`
 
 Adds a student to the student list, with their name, phone number, address, email and subjects.
@@ -213,8 +225,7 @@ Switch to a view that shows all students in the student list.
 Finds students whose names contain any of the given keywords.
 
 **Format:**
-
-`find_student KEYWORD [MORE_KEYWORDS]`
+`find_student KEYWORD [MORE_KEYWORDS...]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * Only matches complete words in the name (e.g., `Alex` matches `Alex Yeoh` but not `Alexander`).
@@ -231,6 +242,12 @@ Finds students whose names contain any of the given keywords.
 * `find_student alex david` returns `Alex Yeoh`, `David Li`<br>
 
 ### Managing lessons
+
+TutorTrack allows for easy management of lessons, including adding, editing, deleting, and listing lessons. You can also view all lessons in the list.
+
+The lesson list is displayed when you type `list_lessons` in the command box. The lesson list shows the name of the student, date, time and subject of each lesson.
+
+![lesson list](images/lessonList.png)
 
 #### Adding a lesson: `add_lesson`
 
@@ -274,7 +291,12 @@ Adds a lesson to the lesson list.
 <div markdown="span" class="alert alert-info">:information_source: **Group Lessons Note**: Currently, TutorTrack doesn't support group lessons where multiple students share the same time slot. Each lesson time must be unique to the tutor's schedule. We're considering adding group lesson support in a future update. </div>
 
 
-Example:
+* `NAME` is the name of the student. It must be a valid name of a student in the student list.
+* `SUBJECT` is the subject of the lesson. It must be a valid subject of the student in the student list.
+* `DATE` is the date of the lesson. It must be in the format `d-M-yyyy` and must be in the future.
+* `TIME` is the time of the lesson. It must be in the format `HH:mm`.
+
+**Example:**
 * `add_lesson n/Alice Chan d/17-09-2025 t/15:00 s/Math`
 * `add_lesson n/Bob Lee d/17-09-2025 t/16:00 s/Math` (different time slot)
 
@@ -319,14 +341,15 @@ Examples:
 Shows a list of all lessons under a student in the lesson list. If no student is specified, shows all lessons in the list.
 
 **Format:**
-
-`list_lessons n/STUDENT_NAME`
+`list_lessons [n/STUDENT_NAME]`
 
 Example:
 * `list_lessons n/John Lee`
 * `list_lessons`
 
 ### Managing assignments
+
+TutorTrack allows for easy management of assignments, including adding, deleting, marking and unmarking assignments. You can also view all assignments in the student list under each student entry.
 
 #### Adding an assignment: `add_assignment`
 
