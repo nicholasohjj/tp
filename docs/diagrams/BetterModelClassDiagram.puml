@@ -30,6 +30,12 @@ class UniqueLessonList {
   + remove(Subject)
 }
 
+class UniqueAssignmentList {
+  - internalList: List<Assignment>
+  + add(Assignment)
+  + remove(Assignment)
+}
+
 class Student {
   - name: Name
   - phone: Phone
@@ -46,6 +52,11 @@ class Lesson {
   - date: Date
   - time: Time
 }
+
+class Assignment {
+  - assignmentName: Name
+  - dueDate: Date
+  - isComplete: boolean
 
 class Name {
   - fullName: String
@@ -82,6 +93,7 @@ Student *-- "1" Phone : has
 Student *-- "1" Email : has
 Student *-- "1" Address : has
 Student *-- "*" Subject : has
+Student *-- "1" UniqueAssignmentList : has
 
 ' Subject Association
 Student "1" --> "*" Lesson : subjected with
@@ -91,6 +103,9 @@ Lesson *-- "1" Name : for student
 Lesson *-- "*" Subject : teaches
 Lesson *-- "1" Date : on
 Lesson *-- "1" Time : at
+
+' Assignment Components
+UniqueAssignmentList "1" *-- "*" Assignment : maintains
 
 ' Layout improvements
 UniqueLessonList -[hidden]right- UniqueStudentList

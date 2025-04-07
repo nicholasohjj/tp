@@ -121,6 +121,10 @@ Furthermore, certain edits can cause the TutorTrack to behave in unexpected ways
 
 ### Managing students
 
+TutorTrack allows for easy management of students, including adding, editing, deleting, and finding students. You can also view all students in the list.
+
+The student list is displayed on default when the application is opened. The student list shows the name, phone number, email, address, subjects and assignments of each student.
+
 #### Adding a student: `add_student`
 
 Adds a student to the student list, with their name, phone number, address, email and subjects.
@@ -155,6 +159,7 @@ Format: `edit_student INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] …​`
 Examples:
 
 *  `edit_student 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+
 #### Deleting a student : `delete_student`
 
 Deletes the specified student from the student list.
@@ -201,11 +206,22 @@ Examples:
 ![result for 'find_student alex'](images/img.png)
 ### Managing lessons
 
+TutorTrack allows for easy management of lessons, including adding, editing, deleting, and listing lessons. You can also view all lessons in the list.
+
+The lesson list is displayed when you type `list_lessons` in the command box. The lesson list shows the name of the student, date, time and subject of each lesson.
+
+![lesson list](images/lessonList.png)
+
 #### Adding a lesson: `add_lesson`
 
 Adds a lesson to the lesson list.
 
 Format: `add_lesson n/NAME s/SUBJECT d/DATE t/TIME​`
+
+* `NAME` is the name of the student. It must be a valid name of a student in the student list.
+* `SUBJECT` is the subject of the lesson. It must be a valid subject of the student in the student list.
+* `DATE` is the date of the lesson. It must be in the format `d-M-yyyy` and must be in the future.
+* `TIME` is the time of the lesson. It must be in the format `HH:mm`.
 
 Example:
 * `add_lesson n/Alice Chan d/17-09-2025 t/15:00 s/Math`
