@@ -31,7 +31,7 @@ public class DeleteAssignmentCommand extends Command {
             + "Parameters: ASSIGNMENT NAME (must be a string)\n"
             + "Example: " + COMMAND_WORD + " 1 as/Math Exercise 1";
 
-    public static final String MESSAGE_DELETE_ASSIGNMENT_SUCCESS = "Assignment \"%1$s\" deleted successfully.";
+    public static final String MESSAGE_DELETE_ASSIGNMENT_SUCCESS = "Assignment %1$s deleted successfully.";
     public static final String MESSAGE_INVALID_ASSIGNMENT_DISPLAYED = "The assignment name provided cannot be found";
     public static final String MESSAGE_EMPTY_STUDENT_LIST = "Error: Student list is empty";
 
