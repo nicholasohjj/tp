@@ -27,7 +27,7 @@ public class DeleteAssignmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes an assignment of student identified by the index number used in the displayed student list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: STUDENT INDEX (must be a positive integer)\n"
             + "Parameters: ASSIGNMENT NAME (must be a string)\n"
             + "Example: " + COMMAND_WORD + " 1 as/Math Exercise 1";
 
