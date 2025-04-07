@@ -56,7 +56,8 @@ public class DeleteLessonCommandParserTest {
         try {
             parser.parse(null);
         } catch (ParseException e) {
-            assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE), e.getMessage());
+            assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteLessonCommand.MESSAGE_USAGE), e.getMessage());
         }
     }
 

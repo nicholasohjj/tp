@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.util.Iterator;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -13,8 +15,6 @@ import seedu.address.model.assignment.expections.AssignmentNotFoundException;
 import seedu.address.model.assignment.expections.DuplicateAssignmentException;
 import seedu.address.model.datetimeutil.Date;
 import seedu.address.testutil.AssignmentBuilder;
-
-import java.util.Iterator;
 
 public class UniqueAssignmentListTest {
 
