@@ -124,7 +124,7 @@ public class EditLessonCommandTest {
         CommandResult expectedResult = new CommandResult(expectedMessage, true);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setLesson(model.getFilteredLessonList().get(0), editedLesson);
+        expectedModel.setLesson(model.getFilteredLessonList().get(INDEX_FIRST.getZeroBased()), editedLesson);
 
         assertCommandSuccess(editLessonCommand, model, expectedResult, expectedModel);
     }

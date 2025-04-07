@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.util.Iterator;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -158,4 +160,33 @@ public class UniqueAssignmentListTest {
     public void getAssignment_nonExistingAssignment_returnsNull() {
         assertEquals(null, uniqueAssignmentList.getAssignment("Non-existing Assignment"));
     }
+
+    @Test
+    public void compare_assignmentsByDueDate_worksCorrectly() {
+        Assignment a1 = new AssignmentBuilder().withDueDate(new Date("01-01-2030")).build();
+        Assignment a2 = new AssignmentBuilder().withDueDate(new Date("01-02-2030")).build();
+
+        assertTrue(uniqueAssignmentList.compare(a1, a2) < 0);
+        assertTrue(uniqueAssignmentList.compare(a2, a1) > 0);
+        assertEquals(0, uniqueAssignmentList.compare(a1, a1));
+    }
+
+    @Test
+    public void clear_assignmentListCleared_successfully() {
+        Assignment assignment = new AssignmentBuilder().build();
+        uniqueAssignmentList.add(assignment);
+        uniqueAssignmentList.clear();
+        assertEquals(0, uniqueAssignmentList.asUnmodifiableObservableList().size());
+    }
+
+    @Test
+    public void iterator_iteratesAssignmentsCorrectly() {
+        Assignment assignment = new AssignmentBuilder().build();
+        uniqueAssignmentList.add(assignment);
+        Iterator<Assignment> iterator = uniqueAssignmentList.iterator();
+        assertTrue(iterator.hasNext());
+        assertEquals(assignment, iterator.next());
+    }
+
+
 }

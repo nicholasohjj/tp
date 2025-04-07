@@ -3,6 +3,7 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
@@ -92,6 +93,16 @@ public class ModelManagerTest {
     public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredStudentList().remove(0));
     }
+
+    @Test
+    public void getFilteredCurrList_afterUpdate_returnsCorrectList() {
+        modelManager.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+        assertEquals(modelManager.getFilteredLessonList(), modelManager.getFilteredCurrList());
+
+        modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        assertEquals(modelManager.getFilteredStudentList(), modelManager.getFilteredCurrList());
+    }
+
 
     @Test
     public void equals() {

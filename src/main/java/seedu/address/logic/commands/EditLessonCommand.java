@@ -125,7 +125,7 @@ public class EditLessonCommand extends Command {
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}
      * edited with {@code editStudentDescriptor}.
      */
-    private static Lesson createEditedLesson(Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor) {
+    public static Lesson createEditedLesson(Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor) {
         assert lessonToEdit != null : "Lesson to edit cannot be null";
         assert editLessonDescriptor != null : "Edit descriptor cannot be null";
         assert editLessonDescriptor.isAnyFieldEdited() : "At least one field should be edited";
