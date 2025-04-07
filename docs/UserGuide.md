@@ -449,8 +449,7 @@ The system will accept names that:
 
 **Tip:** For students who share names naturally (e.g., siblings), consider adding identifiers:
 
-- Middle initials (e.g., "John A. Doe" vs "John B. Doe")
-- Parent names (e.g., "Emma (Lee family)" vs "Emma (Wong family)")
+- Middle initials (e.g., "John A Doe" vs "John B Doe")
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues

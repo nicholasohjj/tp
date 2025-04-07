@@ -41,7 +41,8 @@ public class Assignment implements Comparable<Assignment> {
     }
 
     /**
-     * Constructs a {@code Assignment} given if it is done via {@code isDone}.
+     * Constructs a {@code Assignment} given
+     * if it is done via {@code isDone}.
      *
      * @param assignment A valid assignment name.
      * @param dueDate    A valid due date.
