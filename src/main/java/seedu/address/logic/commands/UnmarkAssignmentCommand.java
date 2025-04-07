@@ -30,7 +30,7 @@ public class UnmarkAssignmentCommand extends Command {
             + ": Unmarks the assignment identified by the index number used in the displayed assignment list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_ASSIGNMENT + "Assignment Name\n"
-            + "Example: " + COMMAND_WORD + " 1"
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ASSIGNMENT + "Assignment 1";
 
     public static final String MESSAGE_SUCCESS = "Assignment \"%1$s\" unmarked as incomplete for %2$s";

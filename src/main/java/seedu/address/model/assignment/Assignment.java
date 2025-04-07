@@ -19,7 +19,7 @@ public class Assignment implements Comparable<Assignment> {
             + "and can only contain spaces. "
             + "It should not exceed 50 characters.";
 
-    public static final String VALIDATION_REGEX = "^(?=.*[a-zA-Z0-9])[a-zA-Z0-9 ]+$";
+    public static final String VALIDATION_REGEX = "^(?=.*[a-zA-Z0-9])[a-zA-Z0-9 ]{1,50}$";
 
     // Identity fields
     public final String assignmentName;
