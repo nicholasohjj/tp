@@ -12,6 +12,7 @@ public class Subject {
     public static final int MAX_LENGTH = 50;
     public static final String MESSAGE_CONSTRAINTS = "Subject names should be alphanumeric and can contain spaces, "
             + "apostrophes, ampersands, and hyphens. It should not exceed " + MAX_LENGTH + " characters.";
+    public static final String MESSAGE_DUPLICATE_SUBJECT = "Error: This subject is a duplicate of another subject.";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} '&-]*";
 
     public final String subjectName;
@@ -46,7 +47,7 @@ public class Subject {
         }
 
         Subject otherSubject = (Subject) other;
-        return subjectName.equals(otherSubject.subjectName);
+        return subjectName.toLowerCase().equals(otherSubject.subjectName.toLowerCase());
     }
 
     @Override
