@@ -50,6 +50,9 @@ public class DeleteStudentCommand extends Command {
         logger.info("Executing DeleteStudentCommand for index: " + targetIndex.getOneBased());
 
         List<Student> lastShownList = model.getFilteredStudentList();
+        if (!model.isStudentView()) {
+            throw new CommandException(Messages.MESSAGE_STUDENT_VIEW_REQUIRED);
+        }
 
         if (lastShownList.isEmpty()) {
             logger.warning("Attempted to delete from empty student list");

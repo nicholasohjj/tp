@@ -136,6 +136,11 @@ public interface Model {
     ObservableList<Lesson> getFilteredLessonList();
 
     /**
+     * Returns the current predicate of the filtered lesson list
+     */
+    boolean isStudentView();
+
+    /**
      * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
