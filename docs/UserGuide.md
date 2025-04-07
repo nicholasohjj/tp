@@ -42,7 +42,7 @@ Singaporean freelance tutors who:
 
 1. Open a command terminal, navigate to the folder containing the `.jar` file using the `cd` command, and run the application with:
     ```bash
-    java -jar tutorTrack.jar
+    java -jar tutortrack.jar
     ```
    A GUI similar to the below should appear in a few seconds, preloaded with sample data.<br>
    ![Ui](images/Ui.png)
@@ -51,16 +51,10 @@ Singaporean freelance tutors who:
    - `help`: Opens the help window.
    - `list_students`: Lists all students.
    - `list_lessons n/Jackie` : Lists all lessons under a student or all lessons in the data
-   - `add_student n/John Doe p/91234567 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`: Adds a new student.
-   - `add_lesson n/Johnson Kit d/15-09-2026 t/17:00 s/CS2103T` : Adds a lesson.
-   - `add_assignment 2 as/CS2103T tP increment d/19-04-2025` : Adds an assignment to a student in the list.
-   - `mark_assignment 2 as/CS2101 CA2` : Marks the assignment under the student as complete
-   - `unmark_assignment 3 as/Science CA2` : Marks the assignment under the student as incomplete
-   - `delete_student 1`: Deletes the 1st student in the list.
-   - `delete_lesson 1`: Deletes the 1st lesson in the list.
    - `clear`: Deletes all students.
    - `find_student Bernice`: Finds student containing Bernice.
    - `exit`: Exits the app.
+   More commands listed below.
 
 1. Refer to the [Features](#features) section below for detailed instructions on each command.
 
@@ -116,13 +110,13 @@ Shows a message explaining how to access the help page.
 
 Clears all entries from both the student list and the lesson list.
 
-**Format:**
-
-`clear`
-
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 There is no confirmation for this command and the data will be cleared immediately after execution. Use at your own risk.
 </div>
+
+**Format:**
+
+`clear`
 
 #### Exiting the program : `exit`
 
@@ -134,11 +128,11 @@ Exits the program.
 
 #### Saving the data
 
-TutorTrack data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TutorTrack data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 #### Editing the data file
 
-TutorTrack data is saved automatically as a JSON file `[JAR file location]/data/tutorTrack.json`. Advanced users are welcome to update data directly by editing that data file.
+TutorTrack data is saved automatically as a JSON file `[JAR file location]/data/TutorTrack.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TutorTrack will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -164,15 +158,12 @@ You can add multiple subjects by using the subject prefix  `s/` for each subjec
 
 - **Allowed**:
 
-  ✓ Alphabetic characters and spaces (e.g., **`Alex Yeoh`**)
-
-  ✓ Auto-converted to Title Case (e.g., **`alex yeoh`** → **`Alex Yeoh`**)
+  - Alphabetic characters and spaces (e.g., **`Alex Yeoh`**)
+  - Auto-converted to Title Case (e.g., **`alex yeoh`** → **`Alex Yeoh`**)
 
 - **Not Allowed**:
-
-  ✗ Special constructs (**`d/o`**, **`s/o`**)
-
-  ✗ Symbols/hyphens (**`-`**, **`'`**) or numerals (**`0-9`**)
+  - Special constructs (**`d/o`**, **`s/o`**) \
+  - Symbols/hyphens (**`-`**, **`'`**) or numerals (**`0-9`**)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:** Names will be automatically formatted to Title Case (e.g., "alex yeoh" → "Alex Yeoh") </div>
 
