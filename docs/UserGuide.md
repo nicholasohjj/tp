@@ -158,7 +158,7 @@ You can add multiple subjects by using the subject prefix  `s/` for each subjec
 
 **Format:**
 
-**`add_student n/STUDENT_NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL s/SUBJECT [s/MORE_SUBJECTS]…`**
+`add_student n/STUDENT_NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL s/SUBJECT [s/MORE_SUBJECTS]…`
 
 **Name Format Rules:**
 
@@ -225,6 +225,7 @@ Switch to a view that shows all students in the student list.
 Finds students whose names contain any of the given keywords.
 
 **Format:**
+
 `find_student KEYWORD [MORE_KEYWORDS...]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -256,7 +257,6 @@ Adds a lesson to the lesson list.
 **Format:**
 
 `add_lesson n/STUDENT_NAME s/SUBJECT d/DATE t/TIME​`
-*Coming in v2.0: **`add_lesson n/NAME s/SUBJECT d/DATE t/TIME dur/DURATION`***
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:** Student names will be automatically matched in a case-insensitive manner and stored in Title Case. </div>
 
@@ -272,7 +272,6 @@ Adds a lesson to the lesson list.
 
 - All lessons must be scheduled for future dates/times
 - Prevents accidental double-booking at identical times
-**Validation Rules:**
 
 ✓ **Tutor time slot management**:
 
@@ -289,7 +288,6 @@ Adds a lesson to the lesson list.
 - Past dates are rejected
 
 <div markdown="span" class="alert alert-info">:information_source: **Group Lessons Note**: Currently, TutorTrack doesn't support group lessons where multiple students share the same time slot. Each lesson time must be unique to the tutor's schedule. We're considering adding group lesson support in a future update. </div>
-
 
 * `NAME` is the name of the student. It must be a valid name of a student in the student list.
 * `SUBJECT` is the subject of the lesson. It must be a valid subject of the student in the student list.
@@ -341,6 +339,7 @@ Examples:
 Shows a list of all lessons under a student in the lesson list. If no student is specified, shows all lessons in the list.
 
 **Format:**
+
 `list_lessons [n/STUDENT_NAME]`
 
 Example:
