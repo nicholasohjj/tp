@@ -150,21 +150,22 @@ The student list is displayed on default when the application is opened. The stu
 Adds a student to the student list, with their name, phone number, address, email and subjects.
 You can add multiple subjects by using the subject prefix  `s/` for each subject.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Note:** Names will be automatically formatted to Title Case (e.g., "alex yeoh" → "Alex Yeoh") </div>
-
 **Format:**
 
 `add_student n/STUDENT_NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL [s/SUBJECTS]…`
 
-**Name Format Rules:**
-
-- **Allowed**:
+- `STUDENT_NAME` is the student's name displayed on the student list.
   - Alphabetic characters and spaces (e.g., **`Alex Yeoh`**)
   - Auto-converted to Title Case (e.g., **`alex yeoh`** → **`Alex Yeoh`**)
-
-- **Not Allowed**:
-  - Special constructs (**`d/o`**, **`s/o`**) \
-  - Symbols/hyphens (**`-`**, **`'`**) or numerals (**`0-9`**)
+  - Special constructs (**`d/o`**, **`s/o`**) and Symbols/hyphens (**`-`**, **`'`**) or numerals (**`0-9`**) not allowed
+- `PHONE_NUMBER` is the student's contact number
+  - Has to be 8 digits
+- `ADDRESS` is the student's postal address
+- `EMAIL` is the student's email
+  - Must be a valid email address (details in the app)
+- `SUBJECT` is the subject the student is being taught
+  - Can have any number of subjects
+  - Alphanumeric characters allowed, case-insensitive and automatically converts to Title Case
 
 **Examples**:
 * `add_student n/John Doe p/98765432 e/johndoe@email.com a/311, Clementi Ave 2, #02-25 s/Math`
@@ -176,14 +177,19 @@ Edits an existing student in the student list.
 
 **Format:**
 
-`edit_student STUDENT_INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] …​`
+`edit_student STUDENT_INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
 
-* Edits the student at the specified `STUDENT_INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Student names will be automatically formatted to Title Case when edited.
-* Existing values will be updated to the input values.
-* Subjects cannot be edited at this stage.
-  * To edit the subjects, you can delete the student and add a new one with the updated subjects.
+- `STUDENT_NAME` is the student's name displayed on the student list.
+    - Alphabetic characters and spaces (e.g., **`Alex Yeoh`**)
+    - Auto-converted to Title Case (e.g., **`alex yeoh`** → **`Alex Yeoh`**)
+    - Special constructs (**`d/o`**, **`s/o`**) and Symbols/hyphens (**`-`**, **`'`**) or numerals (**`0-9`**) not allowed
+- `PHONE_NUMBER` is the student's contact number
+    - Has to be 8 digits
+- `ADDRESS` is the student's postal address
+- `EMAIL` is the student's email
+    - Must be a valid email address (details in the app)
+- Subjects cannot be edited at this stage.
+    - To edit the subjects, you can delete the student and add a new one with the updated subjects. 
 
 **Examples**:
 *  `edit_student 1 p/91234567 e/johndoe@example.com` <br> Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
@@ -198,10 +204,9 @@ Deletes the specified student from the student list.
 
 `delete_student STUDENT_INDEX`
 
-* Deletes the student at the specified `STUDENT_INDEX`.
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
+* `STUDENT_INDEX` corresponds to the index of the student as displayed in the student list
+  * Has to be a **positive integer**
+  
 **Example**:
 * `list_students` followed by `delete_student 2` deletes the 2nd student in the student list.
 
@@ -223,13 +228,14 @@ Finds students whose names contain any of the given keywords.
 
 `find_student KEYWORD [MORE_KEYWORDS...]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* Only matches complete words in the name (e.g., `Alex` matches `Alex Yeoh` but not `Alexander`).
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Students matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* `STUDENT_NAME` is the name of the student.
+    * It must be a valid name of a student in the student list.
+    * Search is case-insensitive. e.g `hans` will match `Hans`
+    * Only matches complete words in the name (e.g., `Alex` matches `Alex Yeoh` but not `Alexander`).
+    * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+    * Only the name is searched.
+    * Students matching at least one keyword will be returned. 
+      e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 **Examples**:
 * `find_student John` returns `john` and `John Doe`
@@ -255,20 +261,17 @@ Adds a lesson to the lesson list.
 
 <div markdown="span" class="alert alert-info">:bulb: **Note:** Student names will be automatically matched in a case-insensitive manner and stored in Title Case. </div>
 
- **Constraints**:
-
-- Lessons cannot be scheduled at the exact same time (same hour and minute)
-- Currently treats each time slot as discrete points (e.g., 15:00 and 15:01 are considered separate)
-  - Does not account for real-world lesson durations/overlaps
-- All lessons must be scheduled for **future dates/times**
-  - Prevents accidental double-booking at identical times
-- Names are case-insensitive 
-  - **`alice chan`** matches **`Alice Chan`**
-
-* `NAME` is the name of the student. It must be a valid name of a student in the student list.
-* `SUBJECT` is the subject of the lesson. It must be a valid subject of the student in the student list.
-* `DATE` is the date of the lesson. It must be in the format `d-M-yyyy` and must be in the future.
-* `TIME` is the time of the lesson. It must be in the format `HH:mm`.
+* `STUDENT_NAME` is the name of the student.
+  * It must be a valid name of a student in the student list.
+  * Names are case-insensitive
+    * **`alice chan`** matches **`Alice Chan`**
+* `SUBJECT` is the subject of the lesson.
+  * It must be a valid subject of the student in the student list.
+* `DATE` is the date of the lesson.
+  * It must be in the format `d-M-yyyy` and must be in the future.
+* `TIME` is the time of the lesson.
+  * It must be in the format `HH:mm`.
+  * Two lessons cannot be scheduled at the same time (e.g. 15:00 and 15:01 are considered different)
 
 **Example:**
 * `add_lesson n/Alice Chan d/17-09-2025 t/15:00 s/Math`
@@ -284,11 +287,19 @@ Edits the details of an existing lesson
 
 `edit_lesson LESSON_INDEX [n/STUDENT_NAME] [d/DATE] [t/TIME] [s/SUBJECT]`
 
-**Constraints**
-- Values >31 always rejected (e.g., **`32-01-2023`** fails)
-- Invalid months (>12) always rejected
-- Must be a future date (after today)
-- Must be a valid date (e.g 29 Feb for leap years)
+* `LESSON_INDEX` corresponds to the index of the lesson on the displayed lesson list
+  * Has to be a **positive integer**
+* `STUDENT_NAME` is the name of the student.
+    * It must be a valid name of a student in the student list.
+    * Names are case-insensitive
+        * **`alice chan`** matches **`Alice Chan`**
+* `SUBJECT` is the subject of the lesson.
+    * It must be a valid subject of the student in the student list.
+* `DATE` is the date of the lesson.
+    * It must be in the format `d-M-yyyy` and must be in the future.
+* `TIME` is the time of the lesson.
+    * It must be in the format `HH:mm`.
+    * Two lessons cannot be scheduled at the same time (e.g. 15:00 and 15:01 are considered different)
 
 **Examples**:
 * `edit_lesson 1 d/16-02-2026`
@@ -302,9 +313,8 @@ Deletes the specified lesson from the lesson list.
 
 `delete_lesson LESSON_INDEX`
 
-* Deletes the lesson at the specified `LESSON_INDEX`.
-* The index refers to the index number shown in the displayed lesson list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* `LESSON_INDEX` corresponds to the index of the lesson on the displayed lesson list.
+  * Has to be a **positive integer**.
 
 **Examples:**
 * `list_lessons` followed by `delete_lesson 2` deletes the 2nd lesson in the lesson list.
