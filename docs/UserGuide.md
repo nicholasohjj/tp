@@ -10,8 +10,7 @@ TutorTrack uses a **dual-list system** to manage students and lessons. Users can
 ---
 ## Table of Contents
 
-* Table of Contents
-  {:toc}
+{:toc}
 
 ---
 
