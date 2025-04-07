@@ -289,7 +289,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | tutor           | assign tasks to students                                       | track student's workload and assignments                                                  |
 | `* * *`  | tutor           | view list of all students                                      | view all students that I am teaching                                                      |
 | `* * *`  | tutor           | delete a student                                               | remove students that I am no longer tutoring                                              |
-| `* * *`  | tutor           | track completion status of assignments                         | know if my students have completed them and their past performances                       |
+| `* * *`  | tutor           | track completion status of assignments                         | know if my students have completed them                                                   |
 | `* *`    | tutor           | reschedule lessons                                             | make changes to lesson plans to better fit mine or my student's schedule                  |
 | `* *`    | tutor           | mark lessons as complete                                       | review session history and track my students' lesson progress                             |
 | `* *`    | tutor           | set personalized reminders for students                        | address individual needs effectively                                                      |
@@ -300,7 +300,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | tutor           | search for a student by name                                   | quickly find their records                                                                |
 | `* *`    | tutor           | update student details                                         | keep their information accurate                                                           |
 | `* *`    | new user        | view help documentation                                        | understand how to interact with the application effectively                               |
-| `* *`    | long-time user  | add shortcuts to commands                                      | studentalize my use of the app                                                             |
+| `* *`    | long-time user  | add shortcuts to commands                                      | personalize my use of the app                                                               |
 | `*`      | tutor           | export schedules to my personal calendar                       | manage the tutoring schedule with my other commitments                                    |
 | `*`      | new user        | import data from a spreadsheet                                 | start to keep track of my students                                                        |
 | `*`      | first time user | use commands with contextual help                              | learn proper command syntax and options without having to refer to external documentation |
