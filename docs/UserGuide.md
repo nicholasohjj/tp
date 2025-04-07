@@ -252,6 +252,7 @@ Adds a lesson to the lesson list.
 
 - All lessons must be scheduled for future dates/times
 - Prevents accidental double-booking at identical times
+
 **Validation Rules:**
 
 ✓ **Tutor time slot management**:
@@ -286,10 +287,10 @@ Example:
 
 ✓ **Validation**:
 
-- Days beyond month length auto-correct to last day (e.g., **`31-04-2023`** → **`30-04-2023`**)
 - Values >31 always rejected (e.g., **`32-01-2023`** fails)
-- Must be a future date (after today)
 - Invalid months (>12) always rejected
+- Must be a future date (after today)
+- Must be a valid date (e.g. leap years)
 
 **Examples**:
 * `edit_lesson 1 d/16-02-2026`
