@@ -3,6 +3,9 @@ package seedu.address.model.subject;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 /**
  * Represents a Subject in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidSubjectName(String)}
@@ -25,7 +28,10 @@ public class Subject {
     public Subject(String subjectName) {
         requireNonNull(subjectName);
         checkArgument(isValidSubjectName(subjectName), MESSAGE_CONSTRAINTS);
-        this.subjectName = subjectName;
+        this.subjectName = Arrays.stream(subjectName.trim().split("\\s+"))
+                .map(word -> word.isEmpty() ? word
+                        : Character.toUpperCase(word.charAt(0)) + word.substring(1).toLowerCase())
+                .collect(Collectors.joining(" "));
     }
 
     /**

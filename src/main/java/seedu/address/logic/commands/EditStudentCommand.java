@@ -89,6 +89,18 @@ public class EditStudentCommand extends Command {
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
         assert editedStudent != null : "Edited student should not be null";
 
+        if (editStudentDescriptor.getName().isPresent()) {
+            String newName = editStudentDescriptor.getName().get().fullName.toLowerCase();
+            boolean hasDuplicateName = model.getFilteredStudentList().stream()
+                    .filter(student -> !student.equals(studentToEdit)) // exclude the student being edited
+                    .anyMatch(student -> student.getName().fullName.toLowerCase().equals(newName));
+
+            if (hasDuplicateName) {
+                logger.warning("Duplicate student name detected: " + newName);
+                throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+            }
+        }
+
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
             logger.warning("Duplicate student detected: " + editedStudent.getName());
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
