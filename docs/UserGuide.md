@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-TutorTrack is a **desktop application designed for freelance tutors** to efficiently manage their students, lessons, and assignments. It combines the speed of a **Command Line Interface (CLI)** with the convenience of a **Graphical User Interface (GUI)**, making it ideal for tutors who prefer typing over mouse interactions. If you can type fast, TutorTrack will help you manage your tutoring tasks faster than traditional GUI apps.
+TutorTrack is a **desktop application designed for Singaporean freelance tutors** to efficiently manage their students, lessons, and assignments. It combines the speed of a **Command Line Interface (CLI)** with the convenience of a **Graphical User Interface (GUI)**, making it ideal for tutors who prefer typing over mouse interactions. If you can type fast, TutorTrack will help you manage your tutoring tasks faster than traditional GUI apps.
 
 TutorTrack uses a **dual-list system** to manage students and lessons. Users can easily modify the student list and lesson list, allowing for quick access to student information and lesson schedules with their unique indexes. The application also supports assignment management, enabling tutors to keep track of their students' assignments and their completion status uniquely identified by the name of the assignment. Users can easily toggle between the lists with simple CLI-based commands.
 
@@ -16,7 +16,7 @@ TutorTrack uses a **dual-list system** to manage students and lessons. Users can
 
 ## Target Users
 
-Freelance tutors who:
+Singaporean freelance tutors who:
 
 - Juggle multiple students/lessons and need centralized tracking
 - Prefer keyboard-driven efficiency over mouse navigation
