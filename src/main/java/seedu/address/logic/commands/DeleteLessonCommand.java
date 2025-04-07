@@ -48,6 +48,9 @@ public class DeleteLessonCommand extends Command {
         logger.info("Executing DeleteLessonCommand for index: " + targetIndex.getOneBased());
 
         List<Lesson> lastShownList = model.getFilteredLessonList();
+        if (model.isStudentView()) {
+            throw new CommandException(Messages.MESSAGE_LESSON_VIEW_REQUIRED);
+        }
 
         if (lastShownList.isEmpty()) {
             logger.warning("Attempted to delete from empty lesson list");
