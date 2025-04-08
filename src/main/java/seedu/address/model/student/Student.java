@@ -138,8 +138,8 @@ public class Student {
             return true;
         }
 
-        return otherStudent != null && (otherStudent.getName().equals(this.getName())
-                || otherStudent.getPhone().equals(this.getPhone()) || otherStudent.getEmail().equals(this.getEmail()));
+        return otherStudent != null && ((otherStudent.getName().equals(this.getName())
+                || otherStudent.getPhone().equals(this.getPhone()) || otherStudent.getEmail().equals(this.getEmail())));
     }
 
     /**

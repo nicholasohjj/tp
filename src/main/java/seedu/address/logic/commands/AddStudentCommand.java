@@ -28,7 +28,7 @@ public class AddStudentCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_SUBJECT + "SUBJECT\n"
+            + "[" + PREFIX_SUBJECT + "SUBJECT]\n"
             + "Example: " + COMMAND_WORD + " "
             + "n/ John Doe "
             + "p/ 98765432 "
