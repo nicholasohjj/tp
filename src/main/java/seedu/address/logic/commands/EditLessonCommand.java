@@ -44,11 +44,11 @@ public class EditLessonCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the lesson identified "
             + "by the index number used in the displayed lesson list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: LESSON INDEX (must be a positive integer) "
             + "[" + PREFIX_SUBJECT + "SUBJECT] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DATE + "DATE] "
-            + "[" + PREFIX_TIME + "TIME]...\n"
+            + "[" + PREFIX_TIME + "TIME]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DATE + "20-7-2026 "
             + PREFIX_TIME + "19:00";

@@ -82,8 +82,9 @@ public class Messages {
      */
     public static String format(Student student, Assignment assignment) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(assignment.getAssignmentName())
-                .append(" for student: ")
+        builder.append("\"")
+                .append(assignment.getAssignmentName())
+                .append("\" for ")
                 .append(student.getName());
         return builder.toString();
     }
