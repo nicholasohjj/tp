@@ -162,7 +162,7 @@ public class EditAssignmentCommand extends Command {
                 .orElse(assignmentToEdit.getAssignmentName());
         Date updatedDate = editAssignmentDescriptor.getDate().orElse(assignmentToEdit.getDueDate());
 
-        return new Assignment(updatedAssignmentName, updatedDate);
+        return new Assignment(updatedAssignmentName, updatedDate, assignmentToEdit.isDone());
     }
 
     /**
