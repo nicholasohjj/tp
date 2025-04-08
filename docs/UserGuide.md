@@ -155,7 +155,7 @@ You can add multiple subjects by using the subject prefix  `s/` for each subjec
 `add_student n/STUDENT_NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL [s/SUBJECTS]…`
 
 - `STUDENT_NAME` is the student's name displayed on the student list.
-  - Alphabetic characters and spaces (e.g., **`Alex Yeoh`**)
+  - Alphanumerical characters and spaces (e.g., **`Alex Yeoh`**, **`John Doe 2`**)
   - Auto-converted to Title Case (e.g., **`alex yeoh`** → **`Alex Yeoh`**)
   - Special constructs (**`d/o`**, **`s/o`**) and Symbols/hyphens (**`-`**, **`'`**) or numerals (**`0-9`**) not allowed
 - `PHONE_NUMBER` is the student's contact number
@@ -466,7 +466,7 @@ Install the app on the new computer and replace the empty data file with the one
 
 **A:** The system will accept names that: Differ by at least one character (e.g., "John Doe" vs "Jon Doe")
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:** For students who share names naturally (e.g., siblings), consider adding identifiers: Middle initials (e.g., "John A Doe" vs "John B Doe")</div>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** For students who share names naturally, consider adding identifiers: middle initials (e.g., "John A Doe" vs "John B Doe"), numerals (e.g., "John Doe 1" vs "John Doe 2")</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -502,13 +502,13 @@ Install the app on the new computer and replace the empty data file with the one
 
 ### 📝 Assignment Management
 
-| Action                | Format, Examples |
-|------------------------|------------------|
-| **Add Assignment**     | `add_assignment STUDENT_INDEX as/ASSIGNMENT d/DATE`<br>e.g., `add_assignment 1 as/Math Homework d/23-07-2025` |
-| **Edit Assignment**    | `edit_assignment STUDENT_INDEX as/ASSIGNMENT_NAME [as/NEW_NAME] [d/NEW_DATE]`<br>e.g., `edit_assignment 1 as/Assignment1 as/UpdatedAssignment d/25-12-2025` |
-| **Delete Assignment**  | `delete_assignment STUDENT_INDEX as/ASSIGNMENT_NAME`<br>e.g., `delete_assignment 1 as/Assignment 1` |
-| **Mark Assignment**    | `mark_assignment STUDENT_INDEX as/ASSIGNMENT_NAME`<br>e.g., `mark_assignment 1 as/Assignment 1` |
-| **Unmark Assignment**  | `unmark_assignment STUDENT_INDEX as/ASSIGNMENT_NAME`<br>e.g., `unmark_assignment 1 as/Assignment 1` |
+| Action                | Format, Examples                                                                                                                                              |
+|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Assignment**     | `add_assignment STUDENT_INDEX as/ASSIGNMENT d/DATE`<br>e.g., `add_assignment 1 as/Math Homework d/23-07-2025`                                                 |
+| **Edit Assignment**    | `edit_assignment STUDENT_INDEX as/ASSIGNMENT_NAME [nas/NEW_NAME] [d/NEW_DATE]`<br>e.g., `edit_assignment 1 as/Assignment1 nas/UpdatedAssignment d/25-12-2025` |
+| **Delete Assignment**  | `delete_assignment STUDENT_INDEX as/ASSIGNMENT_NAME`<br>e.g., `delete_assignment 1 as/Assignment 1`                                                           |
+| **Mark Assignment**    | `mark_assignment STUDENT_INDEX as/ASSIGNMENT_NAME`<br>e.g., `mark_assignment 1 as/Assignment 1`                                                               |
+| **Unmark Assignment**  | `unmark_assignment STUDENT_INDEX as/ASSIGNMENT_NAME`<br>e.g., `unmark_assignment 1 as/Assignment 1`                                                           |
 
 
 ### 🧹 General Utility
